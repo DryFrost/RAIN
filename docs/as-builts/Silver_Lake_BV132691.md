@@ -83,8 +83,10 @@ Layers are in `GIS/AsBuilts.gpkg`: `SilverLake_Culvert`, `SilverLake_SunsetChann
    * B&V routed only the lake outflow (about 130 cfs) through the culvert. That
      suggests their SL-9 (282 ac) drains into the lake, or joins below the
      culvert.
-   * **Open question:** does the area west of the lake (model `SB-EAG030`,
-     FEMA crossings EAG010–030) reach Silver Lake through a storm sewer?
+   * **Resolved with the city's storm GIS** (`docs/as-builts/Raymore_city_data.md`):
+     the western (Eagle Glen) trunk ends at the western creek, which joins the
+     lake outlet channel below the culvert. B&V's SL-9 joins downstream of the
+     lake, as the model has it.
 5. **The Sunset Channel area is under-represented by the terrain.** It drains
    about 40 ac in the model vs 127 ac in B&V's tables. The 350 ft RCB
    517 → 518 and street sewers carry SS-1 and SS-2 to the channel, which lidar

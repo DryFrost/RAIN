@@ -31,12 +31,13 @@ watershed draining to the point the analysis is centered on:
    burned all 97 FEMA culvert barrels (surveyed inverts) into the 1 m terrain.
    With that, 33 of 37 FEMA reference lines reproduce their names' drainage
    areas within ±4 %.
-3. **About 0.75 sq mi of upper Trib 12 drains north to "TribNort" in both the
-   terrain and the FEMA 2D results.** FEMA's reference-line names say
-   otherwise: `Trib12Ea_0.7sqmi` carries only 22 cfs in the FEMA 100-yr, and
-   `TribNort_2.0sqmi` really drains 2.74 sq mi. A storm sewer or culvert not
-   in the FEMA model probably sends this area south. The HMS model follows the
-   terrain (same as FEMA's 2D model). **Field-verify.**
+3. **FEMA's `Trib12Ea_0.7sqmi` / `TribNort_2.0sqmi` labels assume Silver Lake
+   drains south to Trib 12.** The 0.7 sq mi is the lake's own drainage area.
+   The terrain, FEMA's 2D results, the Black & Veatch as-builts (spillway at
+   Silvertop Ln) and the city's storm GIS (no pipe leaving the lake to the
+   south) all have it draining west. The model follows that. Only a private
+   principal-spillway pipe through the south dam would change this; see
+   [`docs/as-builts/Raymore_city_data.md`](docs/as-builts/Raymore_city_data.md).
 4. **Two on-stream lakes** (LK1 52.5 ac, normal pool 1025.47 ft; LK2 8.3 ac,
    1032.78 ft) have no outlet structures in the FEMA model, so they spill over
    the terrain. HMS routes them as level pools whose terrain-derived curves
@@ -133,9 +134,11 @@ HMS/Results/              HEC-HMS peaks for every element and run, HMS vs FEMA, 
 HMS/parameters/           subbasin / reach / lake parameter tables
 HMS/QAQC/                 QA-engine peaks, lake routing, Muskingum-Cunge parameters
 docs/figures/             figures used here
-docs/as-builts/           as-built reviews (Silver Lake)
+docs/as-builts/           as-built reviews (Silver Lake), Raymore plan-library index, city data notes
 Resources/AsBuilts/       as-built plan sets (LFS)
 GIS/AsBuilts.gpkg         features transcribed from as-builts (Silver Lake culvert, Sunset Channel, control)
+GIS/Raymore_StormGIS.gpkg City of Raymore storm GIS: 131 detention basins, 2,368 pipes, 3,238 inlets (scripts/12)
+GIS/Raymore_Asbuilt_Index.gpkg  City plan library, 170 documents in the watershed with public links (scripts/11)
 scripts/                  everything above is reproducible from these
 .claude/settings.json     lets Claude Code run HEC-HMS headless in cloud sessions
 ```
@@ -169,18 +172,21 @@ the HMS results.
    terrain. This is the main thing the 2D model has that HMS lacks.
 2. **Subdivision detention.** Collect as-builts (City of Raymore / Cass County
    MS4 records) and screen with lidar (`GIS/rasters/fill_depth_10ft.tif`).
-   The inventory starts in `HMS/parameters/detention_inventory.csv`; the first
-   entry is Raymore City Hall, held to 1.8 cfs/ac in the 100-yr, from the
-   Silver Lake plans.
+   The city's storm GIS lists **131 detention, pond and retention basins** in the
+   watershed (`HMS/parameters/detention_city_gis.csv`). 64 of them sit inside
+   an as-built from the city plan library, which should hold the outlet details.
+   Raymore City Hall is held to 1.8 cfs/ac in the 100-yr
+   (`HMS/parameters/detention_inventory.csv`).
    Each basin becomes a reservoir with its real outlet (orifice, weir, riser).
    25 open-water bodies ≥ 0.25 ac lie inside the watershed; 23 of them
    (21 ac total) are inside subbasins and not yet modeled.
 3. **8-point cross sections** for wide floodplain reaches, starting with
    `R-CNF07`.
 4. **Lake outlets.** LK1 (Silver Lake) as-builts are reviewed. Remaining for
-   LK1: survey the sill (±0.5 ft changes its 100-yr outflow by about 40 %), and
-   confirm whether the area west of the lake (`SB-EAG030`) reaches it by storm
-   sewer. LK2 still needs as-builts.
-5. **The Trib 12 / TribNort diversion** (finding 3): check the storm sewer.
+   LK1: survey the sill (±0.5 ft changes its 100-yr outflow by about 40 %).
+   City storm GIS confirms the area west of the lake (`SB-EAG030`) does not
+   drain into it. LK2 still needs as-builts.
+5. **Storm sewer.** Use the city's pipes and inlet inverts to correct subbasin
+   boundaries where sewers cross terrain divides.
 6. **Rainfall decision**: FEMA 0.782 ARF, Atlas 14 point, or an ARF sized to
    the 8.3 sq mi watershed.
