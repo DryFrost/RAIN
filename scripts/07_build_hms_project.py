@@ -213,6 +213,13 @@ def lake_table(name):
     keep = [0] + [i for i in range(1, len(q)) if q[i] > q[:i].max() + 1e-9]
     s, q = s[keep], q[keep]
     q = np.maximum.accumulate(q + np.arange(len(q)) * 1e-3)
+    q[0] = 0.0                      # zero storage must mean zero outflow (HMS starts at Q = 0)
+    # safety row: extend the table to twice its storage along the last segment's slope,
+    # so a storm larger than the rating does not stop HMS (check results if it is reached)
+    if len(s) >= 2:
+        slope = (q[-1] - q[-2]) / max(s[-1] - s[-2], 1e-6)
+        s = np.append(s, 2.0 * s[-1])
+        q = np.append(q, q[-1] + slope * (s[-1] - s[-2]))
     return np.column_stack([s, q])
 
 

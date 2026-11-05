@@ -182,7 +182,7 @@ def main():
         s_rim = float(np.interp(rim, E, sto))
         # ---- outflow
         q_rim = RELEASE_CFS_PER_AC * da
-        zr_eff = np.maximum(zr, bottom) if wet else zr   # a pond does not drain below its pool
+        zr_eff = np.maximum(zr, bottom)   # nothing drains below the pool / basin bottom
         q_ring = np.array([np.nansum(C_WEIR * t1.a * np.clip(e - zr_eff, 0, None) ** 1.5) for e in E])
         mine = ab[ab.Basin == bid] if len(ab) else ab
         shallow_pond = wet and depth < 1.0
