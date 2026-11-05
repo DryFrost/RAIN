@@ -1,0 +1,50 @@
+Proj Title=Raymore
+Current Plan=p01
+Default Exp/Contr=0.3,0.1
+English Units
+Geom File=g01
+Geom File=g02
+Unsteady File=u01
+Unsteady File=u02
+Unsteady File=u03
+Unsteady File=u04
+Unsteady File=u05
+Unsteady File=u06
+Plan File=p01
+Plan File=p02
+Plan File=p03
+Plan File=p04
+Plan File=p05
+Plan File=p06
+Plan File=p07
+Y Axis Title=Elevation
+X Axis Title(PF)=Main Channel Distance
+X Axis Title(XS)=Station
+BEGIN DESCRIPTION:
+Model Details:
+Non-reduced areal reduction precip data used
+
+Overland Mannings used
+
+Structure Details:
+29037TRB050 - Bridge converted to a culvert because stream alignment made for impractical bridge modeling
+29037WT1010 - Bridge converted to a culvert because stream alignment made for impractical bridge modeling
+29037NFE030 - Bridge converted to a culvert because stream alignment made for impractical bridge modeling
+29037WFE060 - Bridge converted to a culvert because stream alignment made for impractical bridge modeling
+END DESCRIPTION:
+DSS Start Date=
+DSS Start Time=
+DSS End Date=
+DSS End Time=
+DSS File=.\Precip Data\78% AR\Rainfall.dss
+DSS File=dss
+DSS Export Filename=
+DSS Export Rating Curves= 0 
+DSS Export Rating Curve Sorted= 0 
+DSS Export Volume Flow Curves= 0 
+DXF Filename=
+DXF OffsetX= 0 
+DXF OffsetY= 0 
+DXF ScaleX= 1 
+DXF ScaleY= 10 
+GIS Export Profiles= 0 

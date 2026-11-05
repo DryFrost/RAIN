@@ -1,0 +1,75 @@
+ 
+                                              HEC-RAS - River Analysis System
+ 
+ 
+Project File:  d:\1_Osage West+Vernon\1_Cass County\Raymore\RAS\Raymore.prj
+ 
+Project Name:  Raymore
+ 
+ 
+Plan Name:     Floodway
+ 
+Short ID:      Floodway
+ 
+
+Starting Time:   31Dec2029 2400
+
+Ending Time:     02Jan2030 2400
+
+
+                ################################################
+                #                                              #
+                #                                              #
+                #       1D and 2D Unsteady Flow Module         #
+                #                                              #
+                #                                              #
+                #          HEC-RAS 6.3.1 October 2022          #
+                #                                              #
+                #             20MAY24 at 10:59:17              #
+                #                                              #
+                ################################################
+                
+ 
+ 
+ 
+
+         US Inflow      DS Outflow       Lat Hydro        SA Hydro     Groundwater      Diversions   Precip Excess   Precip Excess
+                                                                                                       (Acre Feet)        (Inches)
+         *********      **********       *********        ********     ***********      **********   *************   *************
+                                                                                                                          0.000000
+
+    Start 1D Reach  Final 1D Reach   Starting SA's      Final SA's
+    **************  **************   *************      **********
+                                                                  
+
+
+
+                 ***   Volume Accounting for 2D Flow Area in Acre Feet   ***
+
+           2D Area    Starting Vol      Ending Vol      Cum Inflow     Cum Outflow           Error   Percent Error   Precip Excess   Precip Excess
+                                                    (incl. precip)                                                     (Acre Feet)        (Inches)
+           *******    ************      **********      **********     ***********           *****   *************   *************   *************
+ 
+ 
+           Raymore                           892.9          12003.          11119.           8.240         0.06865          12003.           4.954
+
+
+
+                 ***   Total Volume Accounting (for the entire model) in Acre Feet   ***
+
+Total Boundary Flux of Water In           12003.
+Total Boundary Flux of Water Out          11119.
+
+Starting Volume                         0.000000
+Ending Volume                              892.9
+
+Precipitation Excess (Acre Feet)          12003.
+Precipitation Excess (inches)              4.954
+
+
+                             Error   Percent Error
+                             *****   *************
+                             8.240         0.06865
+
+
+
