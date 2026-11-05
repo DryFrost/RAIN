@@ -35,9 +35,10 @@ Source polygons: City of Raymore storm GIS layer strm_detetion
       overflow  Size = crest length, Invert = crest (emergency spillway, C = 2.6)
       barrel    Size = diameter, Invert = invert: caps the flow of the
                 orifices, weirs and V-notches that discharge through it
-      pool      Invert = design normal (permanent) pool.  Below a lidar water
-                surface the storage is extended with the pool area; the rating
-                then starts at the design pool.
+      pool      Invert = design normal (permanent) pool, or the outlet flowline
+                of a dry basin whose lidar bottom lies above it.  Below the
+                lidar water surface / bottom the storage is extended with the
+                area of the pool (or lowest) cells; the rating then starts there.
     The rim term is always added.
 
 Wet ponds shallower than 1 ft (pool at about the rim) get no assumed
@@ -88,7 +89,7 @@ C_ORIFICE = 0.6
 RINGS_FT = (10.0, 20.0, 30.0)
 STORAGE_REACH_FT = 60.0
 DE = 0.25
-ABOVE_RIM_FT = 3.0
+ABOVE_RIM_FT = 5.0
 AB_COLS = ["Basin", "Kind", "Size_ft", "Invert_ft", "Top_ft", "Source", "Note"]
 MIN_STORAGE_IN = 0.05        # dry basins storing less runoff than this over their DA are ignored
 TYPE_RANK = {"Detention": 0, "Retention": 1, "Pond": 2, "Lake": 3, "Stream/Pond": 4, "Treatment": 5, "Wet Soil": 6}
