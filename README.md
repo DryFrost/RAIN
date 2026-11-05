@@ -226,9 +226,9 @@ links each one on the city's public file share.
 1. **As-built detention outlets.**
    * Done: DET006 (Good Ranch), DET011 (Raymore Galleria) and DET021
      (Le'Mor Estates).
-   * Read, not yet entered: DET050 / DET061 (Municipal Complex). The plan
-     spillways sit above the lidar rim because the city polygons cover only
-     the pond bottoms; this needs a spillway-crest rim override.
+   * Read, not yet entered: DET050 / DET061 (Municipal Complex). The lidar
+     rims sit 2–4.5 ft below the 2001 plan spillways, so the ponds need a
+     field check before their outlets are entered.
    * Next: the other modelled basins with plan sets (`docs/Detention.md`).
      The Foxwood Plaza file (DET032 / DET060) is a water-main plan, so those
      need another source.

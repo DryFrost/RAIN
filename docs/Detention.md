@@ -100,11 +100,12 @@ Not entered:
   * **East pond (DET061):** a principal spillway pipe at about 1070.0, and a SE
     emergency spillway 48.92 ft wide at **1075.5**.
 
-  The city polygons cover only the pond bottoms (0.37 and 0.23 ac). The lidar
-  rings, at most 30 ft out, therefore stop on the side slopes, and the lidar
-  spills (1074.0 and 1073.6) sit 4.5 and 1.9 ft below the plan spillways.
-  Entering these needs an override that uses the spillway crest as the
-  minimum rim, plus a larger storage reach. This is the next code step.
+  The lidar disagrees with the plan spillways. DET050 spills at about 1074.0
+  through a saddle at its east end, toward the low ground below DET061.
+  DET061 spills at about 1073.6 over its SE side. These are 4.5 and 1.9 ft
+  below the plan spillways, so the ponds as built (or as regraded since 2001)
+  crest lower than drawn. The model keeps the lidar rims and the assumed
+  outlets. Field-check the principal spillway pipes before entering them.
 * **DET032 / DET060** (Foxwood Plaza at the Legends): the library file is the
   3-sheet *Legends at Raymore Public Water Main Improvements* plan, with no
   detention sheets.
@@ -197,10 +198,10 @@ Plan sets covering the modelled basins (largest storage first):
 | DET021 | 6.0 | 46 | Lemor Estates Phase 1 | **entered** |
 | DET012 | 3.2 | 5 | Matlock Johnson (Walmart) | assumed (outlet not detailed) |
 | DET060 | 3.1 | 4 | Foxwood Plaza at the Legends | assumed (file is a water-main plan) |
-| DET050 | 1.5 | 6 | Municipal Complex Phase 1 | read, needs rim override (above) |
+| DET050 | 1.5 | 6 | Municipal Complex Phase 1 | read; lidar rim below plan spillway (above) |
 | DET044 | 1.2 | 14 | Centerview Phase II / Town Center Ph 1, 4 | assumed |
 | DET030 | 0.6 | 54 | Shadowood Phase 1 | assumed |
-| DET061 | 0.6 | 4 | Centerview Phase II / Municipal Complex Ph 1 | read, needs rim override (above) |
+| DET061 | 0.6 | 4 | Centerview Phase II / Municipal Complex Ph 1 | read; lidar rim below plan spillway (above) |
 | DET072 | 0.4 | 19 | The Prairie View of the Good Ranch | assumed |
 | DET053 | 0.3 | 5 | Silver Lake (1986) | assumed |
 
@@ -213,9 +214,9 @@ and 078.
 * The 65 unmodelled polygons are mostly shallow. A few may have real storage
   that the lidar misses (below a water surface, or a closed-pipe outlet with
   an underground vault).
-* Where a city polygon covers only the pond bottom (e.g. DET050, DET061), the
-  spill and the storage are underestimated. Rings and storage reach extend
-  only 30 / 60 ft from the polygon.
+* Spills come from the lidar (rings out to 30 ft, storage within 60 ft). Where
+  a pond was regraded after its plans (e.g. DET050, DET061), the lidar rim is
+  used, not the plan spillway.
 * There is no tailwater: outlets discharge freely. The barrel is an orifice,
   with no friction or outlet control; at DET006 that puts the 100-yr release
   7 % above the design value.
