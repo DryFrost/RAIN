@@ -41,7 +41,12 @@ watershed draining to the point the analysis is centered on:
    1032.78 ft) have no outlet structures in the FEMA model, so they spill over
    the terrain. HMS routes them as level pools whose terrain-derived curves
    reproduce FEMA's 2D peak lake stages within +0.3 to +0.4 ft (LK1) and
-   −0.4 to −0.8 ft (LK2) for all six storms.
+   −0.4 to −0.8 ft (LK2) for all six storms. **LK1 is Silver Lake.** Its
+   as-builts (Black & Veatch 132691, conformed 2003) confirm the lake spills
+   through the existing open channel and triple 12 × 4.3 ft box under
+   Silvertop Ln. The culvert doesn't control below about 1,400 cfs, and the
+   2002 survey puts the sill about 0.5 ft below the lidar. See
+   [`docs/as-builts/Silver_Lake_BV132691.md`](docs/as-builts/Silver_Lake_BV132691.md).
 5. FEMA's `Rainfall.dss` stores incremental precipitation with data type
    **INST-VAL**. HEC-RAS accepts that, but HEC-HMS rejects it for a
    precipitation gage. The HMS project uses a re-written copy with identical
@@ -128,6 +133,9 @@ HMS/Results/              HEC-HMS peaks for every element and run, HMS vs FEMA, 
 HMS/parameters/           subbasin / reach / lake parameter tables
 HMS/QAQC/                 QA-engine peaks, lake routing, Muskingum-Cunge parameters
 docs/figures/             figures used here
+docs/as-builts/           as-built reviews (Silver Lake)
+Resources/AsBuilts/       as-built plan sets (LFS)
+GIS/AsBuilts.gpkg         features transcribed from as-builts (Silver Lake culvert, Sunset Channel, control)
 scripts/                  everything above is reproducible from these
 .claude/settings.json     lets Claude Code run HEC-HMS headless in cloud sessions
 ```
@@ -161,13 +169,18 @@ the HMS results.
    terrain. This is the main thing the 2D model has that HMS lacks.
 2. **Subdivision detention.** Collect as-builts (City of Raymore / Cass County
    MS4 records) and screen with lidar (`GIS/rasters/fill_depth_10ft.tif`).
+   The inventory starts in `HMS/parameters/detention_inventory.csv`; the first
+   entry is Raymore City Hall, held to 1.8 cfs/ac in the 100-yr, from the
+   Silver Lake plans.
    Each basin becomes a reservoir with its real outlet (orifice, weir, riser).
    25 open-water bodies ≥ 0.25 ac lie inside the watershed; 23 of them
    (21 ac total) are inside subbasins and not yet modeled.
 3. **8-point cross sections** for wide floodplain reaches, starting with
    `R-CNF07`.
-4. **Lake outlets.** Get dam and spillway as-builts for LK1 and LK2 and
-   replace the terrain-only curves (neither has a principal-spillway pipe).
+4. **Lake outlets.** LK1 (Silver Lake) as-builts are reviewed. Remaining for
+   LK1: survey the sill (±0.5 ft changes its 100-yr outflow by about 40 %), and
+   confirm whether the area west of the lake (`SB-EAG030`) reaches it by storm
+   sewer. LK2 still needs as-builts.
 5. **The Trib 12 / TribNort diversion** (finding 3): check the storm sewer.
 6. **Rainfall decision**: FEMA 0.782 ARF, Atlas 14 point, or an ARF sized to
    the 8.3 sq mi watershed.

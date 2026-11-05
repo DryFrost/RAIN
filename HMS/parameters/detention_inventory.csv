@@ -1,0 +1,4 @@
+ID,Name,Type,Drainage_ac,Control_or_release,Location_note,Source,In_HMS_model
+LK1,Silver Lake,On-stream lake (level pool),444,"Terrain sill ~1025.6 ft (2002 survey grade 1025.1 at STA 1+60); spills through existing triple 12x4.3 ft box under Silvertop Ln; no principal-spillway pipe shown","West outlet at Silvertop Ln, N 959250 E 2795522 (MO West ft)","B&V 132691 sheets 2, 13 (spillway rebuild NOT USED); FEMA terrain",Yes (L-LK1 Modified Puls)
+LK2,Unnamed lake,On-stream lake (level pool),142,"Terrain only; no as-built yet","N 953910 E 2804857 (outlet)",FEMA terrain,Yes (L-LK2 Modified Puls)
+DET-001,Raymore City Hall detention,Detention basin,35,"100-yr release limited to 1.8 cfs/ac (63 cfs)","Sunset Channel subarea SS-1, NE of Silver Lake; drains to LK1",B&V 132691 sheet 2 table footnote,No

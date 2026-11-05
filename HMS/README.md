@@ -137,7 +137,18 @@ Check against FEMA 2D maximum lake stage, all six events
 * LK1: +0.29 to +0.41 ft
 * LK2: −0.41 to −0.76 ft
 
-These curves stand in until real dam and spillway data exist.
+**LK1 is Silver Lake.** The Black & Veatch 2002 as-builts (conformed 2003;
+review in `docs/as-builts/Silver_Lake_BV132691.md`) confirm the existing outlet
+is an open channel through a triple 12 × 4.3 ft cast-in-place box under
+Silvertop Ln. The planned spillway rebuild was not constructed.
+
+* The culvert doesn't control below about 1,400 cfs; LK1's maximum modeled
+  outflow is 648 cfs.
+* The 2002 survey puts the sill about 0.5 ft below the lidar.
+* Lowering the rating 0.5 ft raises LK1's 100-yr outflow by 34–44 % and the
+  outlet peak by under 1 %.
+
+The LK1 curve is therefore kept as is. LK2's curve is still terrain-only.
 
 ## QA/QC engine (`scripts/hms_check.py`)
 
