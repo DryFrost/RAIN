@@ -8,7 +8,8 @@ watershed draining to the point the analysis is centered on:
 |---|---|
 | Outlet | 38.770832, −94.492901 → FEMA bridge **29037ECT030** on East Creek Trib 12 (Missouri State Plane West ft: 2,790,727 E, 948,173 N) |
 | Drainage area | **8.28 sq mi** (5,296 ac), entirely inside the FEMA 2D area (45.4 sq mi) |
-| HMS elements | 62 subbasins (3–270 ac, mean 85 ac), 55 Muskingum-Cunge reaches, 2 lakes (level-pool), 64 junctions |
+| HMS elements | 61 subbasins (0.4–273 ac, mean 87 ac), 56 Muskingum-Cunge reaches, 2 lakes (level-pool), 63 junctions |
+| Subbasins | Terrain (culverts burned) **plus the city storm sewer**: inlets route to their pipe outfalls, moving 274 ac between subbasins ([details](docs/StormSewer_Delineation.md)) |
 | Land cover | 44 % lawn, 22 % trees, 13 % roads, 8 % crops, 5 % buildings, 5 % bare ground, 2 % water |
 | Soils | 51 % C/D, 33 % C, 9 % D, 5 % B (SSURGO via FEMA `Soils.hdf`) |
 | Loss | SCS CN from FEMA's own CN table: 20.5 % impervious, pervious CN 80.8 (composite 84.3) |
@@ -72,15 +73,15 @@ Peak flow at the outlet (cfs):
 
 | Event | FEMA RoG @ `Trib12Ea_8.6sqmi` (839 ft downstream) | HMS, FEMA rainfall | HMS, Atlas 14 point rainfall |
 |---|---:|---:|---:|
-| 10-yr | 2,899 | 3,769 | 5,536 |
-| 25-yr | 4,383 | 5,223 | 7,526 |
-| 50-yr | 5,837 | 6,476 | 9,224 |
-| 100-yr | 7,310 | 7,822 | 11,045 |
-| 100-yr+ | 8,970 | 9,526 | 13,350 |
-| 500-yr | 11,023 | 11,418 | 15,899 |
+| 10-yr | 2,899 | 3,724 | 5,466 |
+| 25-yr | 4,383 | 5,157 | 7,427 |
+| 50-yr | 5,837 | 6,392 | 9,102 |
+| 100-yr | 7,310 | 7,719 | 10,897 |
+| 100-yr+ | 8,970 | 9,399 | 13,169 |
+| 500-yr | 11,023 | 11,264 | 15,682 |
 
 Across the 11 reference lines inside the watershed, the median HMS/FEMA peak
-ratio is 1.31 (10-yr), 1.10 (100-yr) and 1.00 (500-yr). HMS runs high in
+ratio is 1.28 (10-yr), 1.10 (100-yr) and 1.01 (500-yr). HMS runs high in
 frequent storms because the 2D model stores water in every lidar depression
 and behind every road embankment. HMS has none of that yet, and that is
 exactly the detail the next phases add (below).
@@ -137,7 +138,8 @@ docs/figures/             figures used here
 docs/as-builts/           as-built reviews (Silver Lake), Raymore plan-library index, city data notes
 Resources/AsBuilts/       as-built plan sets (LFS)
 GIS/AsBuilts.gpkg         features transcribed from as-builts (Silver Lake culvert, Sunset Channel, control)
-GIS/Raymore_StormGIS.gpkg City of Raymore storm GIS: 131 detention basins, 2,368 pipes, 3,238 inlets (scripts/12)
+GIS/Raymore_StormGIS.gpkg City of Raymore storm GIS: 131 detention basins, 2,385 pipes, 3,253 inlets (scripts/12)
+GIS/StormSewer_Links.gpkg pipe systems, inlet -> outfall links, area the sewer moves (scripts/02b, 13)
 GIS/Raymore_Asbuilt_Index.gpkg  City plan library, 170 documents in the watershed with public links (scripts/11)
 scripts/                  everything above is reproducible from these
 .claude/settings.json     lets Claude Code run HEC-HMS headless in cloud sessions
@@ -156,12 +158,19 @@ pip install -r requirements.txt
 ```
 
 ```bash
-for s in 01_extract_fema_geometry 02_condition_dem 04_delineate_subbasins 05_hydrologic_parameters 06_lake_storage_outflow 03_extract_fema_results 07_build_hms_project 08_figures; do python scripts/$s.py; done
+for s in 01_extract_fema_geometry 02_condition_dem 12_raymore_storm_gis 02b_storm_sewer_links 04_delineate_subbasins 05_hydrologic_parameters 06_lake_storage_outflow 03_extract_fema_results 07_build_hms_project; do python scripts/$s.py; done
 ```
 
-`03` runs after `06` because its lake-stage table needs the lake polygons from
-`04`. Then run HMS and `09` as shown above, and re-run `08` so the figure uses
-the HMS results.
+Then run HMS and `09` as shown above, then:
+
+```bash
+for s in 08_figures 10_asbuilt_silver_lake 11_asbuilt_index 12_raymore_storm_gis 13_storm_sewer_delineation; do python scripts/$s.py; done
+```
+
+* `12` (city storm GIS) runs before `02b`, which needs the pipes, and again at
+  the end to tag features with the final subbasins.
+* `03` runs after `06` because its lake-stage table needs the lake polygons
+  from `04`.
 
 ## Recommended next phases
 
@@ -186,7 +195,9 @@ the HMS results.
    LK1: survey the sill (±0.5 ft changes its 100-yr outflow by about 40 %).
    City storm GIS confirms the area west of the lake (`SB-EAG030`) does not
    drain into it. LK2 still needs as-builts.
-5. **Storm sewer.** Use the city's pipes and inlet inverts to correct subbasin
-   boundaries where sewers cross terrain divides.
+5. **Storm sewer capacity.** Subbasins already follow the city storm sewer
+   ("full capture"). Where a transfer feeds a culvert or detention basin, add
+   an HMS Diversion sized from pipe capacity so flow above the pipe design
+   event stays on the surface.
 6. **Rainfall decision**: FEMA 0.782 ARF, Atlas 14 point, or an ARF sized to
    the 8.3 sq mi watershed.

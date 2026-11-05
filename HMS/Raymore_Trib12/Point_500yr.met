@@ -1,7 +1,7 @@
 Meteorology: Point_500yr
      Description: Atlas 14 point precipitation (no ARF) - 500yr
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Version: 4.14
      Unit System: English
      Set Missing Data to Default: Yes
@@ -19,379 +19,373 @@ End:
 
 Precip Method Parameters: Specified Average
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Allow Depth Override: No
 End:
 
 Subbasin: SB-ECT030
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Gage: Point_500yr
 End:
 
 Subbasin: SB-ECT050
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Gage: Point_500yr
 End:
 
 Subbasin: SB-ECT060
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Gage: Point_500yr
 End:
 
 Subbasin: SB-CNF01
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Gage: Point_500yr
 End:
 
 Subbasin: SB-RL_Trib12Ea_4.2
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Gage: Point_500yr
 End:
 
 Subbasin: SB-CNF02
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Gage: Point_500yr
 End:
 
 Subbasin: SB-UEP010
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Gage: Point_500yr
 End:
 
 Subbasin: SB-RL_TribUppe_3.4
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Gage: Point_500yr
 End:
 
 Subbasin: SB-CNF05
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Gage: Point_500yr
 End:
 
 Subbasin: SB-CNF06
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Gage: Point_500yr
 End:
 
 Subbasin: SB-CNF07
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Gage: Point_500yr
 End:
 
 Subbasin: SB-CNF08
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Gage: Point_500yr
 End:
 
 Subbasin: SB-NFE010
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Gage: Point_500yr
 End:
 
 Subbasin: SB-CNF09
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Gage: Point_500yr
 End:
 
 Subbasin: SB-RL_TribNort_2.0
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Gage: Point_500yr
 End:
 
 Subbasin: SB-RL_TribUppe_2.5
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Gage: Point_500yr
 End:
 
 Subbasin: SB-CNF11
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Gage: Point_500yr
 End:
 
 Subbasin: SB-NFE020
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Gage: Point_500yr
 End:
 
 Subbasin: SB-NFE030
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Gage: Point_500yr
 End:
 
 Subbasin: SB-NFE040
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Gage: Point_500yr
 End:
 
 Subbasin: SB-CNF12
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Gage: Point_500yr
 End:
 
 Subbasin: SB-RL_TribUppe_1.4
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Gage: Point_500yr
 End:
 
 Subbasin: SB-UEP030
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Gage: Point_500yr
 End:
 
 Subbasin: SB-CNF13
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Gage: Point_500yr
 End:
 
 Subbasin: SB-EAG010
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Gage: Point_500yr
 End:
 
 Subbasin: SB-EAG020
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Gage: Point_500yr
 End:
 
 Subbasin: SB-CNF14
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Gage: Point_500yr
 End:
 
 Subbasin: SB-RL_TribNort_1.1
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Gage: Point_500yr
 End:
 
 Subbasin: SB-UEP040
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Gage: Point_500yr
 End:
 
 Subbasin: SB-RL_TribUppe_1.0
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Gage: Point_500yr
 End:
 
 Subbasin: SB-MEA010
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
-     Gage: Point_500yr
-End:
-
-Subbasin: SB-ECT070
-     Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Gage: Point_500yr
 End:
 
 Subbasin: SB-CNF17
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
+     Gage: Point_500yr
+End:
+
+Subbasin: SB-ECT070
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 04:54:52
      Gage: Point_500yr
 End:
 
 Subbasin: SB-RL_Trib12Ea_1.6
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
-     Gage: Point_500yr
-End:
-
-Subbasin: SB-CNF19
-     Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
-     Gage: Point_500yr
-End:
-
-Subbasin: SB-LK1
-     Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Gage: Point_500yr
 End:
 
 Subbasin: SB-MEA020
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
+     Gage: Point_500yr
+End:
+
+Subbasin: SB-CNF19
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 04:54:52
+     Gage: Point_500yr
+End:
+
+Subbasin: SB-LK1
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 04:54:52
      Gage: Point_500yr
 End:
 
 Subbasin: SB-NBU010
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Gage: Point_500yr
 End:
 
 Subbasin: SB-NBU040
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Gage: Point_500yr
 End:
 
 Subbasin: SB-CNF25
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Gage: Point_500yr
 End:
 
 Subbasin: SB-ECT080
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Gage: Point_500yr
 End:
 
 Subbasin: SB-NBU050
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Gage: Point_500yr
 End:
 
 Subbasin: SB-NBU020
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
+     Gage: Point_500yr
+End:
+
+Subbasin: SB-CNF28
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 04:54:52
      Gage: Point_500yr
 End:
 
 Subbasin: SB-LK1-IN1
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Gage: Point_500yr
 End:
 
 Subbasin: SB-NBU060
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Gage: Point_500yr
 End:
 
 Subbasin: SB-EAG030
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Gage: Point_500yr
 End:
 
 Subbasin: SB-GRA010
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Gage: Point_500yr
 End:
 
 Subbasin: SB-MEA030
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Gage: Point_500yr
 End:
 
 Subbasin: SB-RL_TribTrib_0.3
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
-     Gage: Point_500yr
-End:
-
-Subbasin: SB-CNF27
-     Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
-     Gage: Point_500yr
-End:
-
-Subbasin: SB-NBU030
-     Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
-     Gage: Point_500yr
-End:
-
-Subbasin: SB-LK2
-     Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
-     Gage: Point_500yr
-End:
-
-Subbasin: SB-RL_TribNort_0.2
-     Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Gage: Point_500yr
 End:
 
 Subbasin: SB-MCT010
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
+     Gage: Point_500yr
+End:
+
+Subbasin: SB-NBU030
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 04:54:52
      Gage: Point_500yr
 End:
 
 Subbasin: SB-LK1-IN2
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
+     Gage: Point_500yr
+End:
+
+Subbasin: SB-LK2
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 04:54:52
+     Gage: Point_500yr
+End:
+
+Subbasin: SB-CNF27
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 04:54:52
+     Gage: Point_500yr
+End:
+
+Subbasin: SB-RL_TribNort_0.2
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 04:54:52
      Gage: Point_500yr
 End:
 
 Subbasin: SB-NBU070
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Gage: Point_500yr
 End:
 
 Subbasin: SB-RL_TribTrib_0.1
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Gage: Point_500yr
 End:
 
 Subbasin: SB-LK2-IN1
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Gage: Point_500yr
 End:
 
 Subbasin: SB-LK1-IN3
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
-     Gage: Point_500yr
-End:
-
-Subbasin: SB-LK1-IN4
-     Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
-     Gage: Point_500yr
-End:
-
-Subbasin: SB-LK1-IN5
-     Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Gage: Point_500yr
 End:
 
 Subbasin: SB-ECT090
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Gage: Point_500yr
 End:
 

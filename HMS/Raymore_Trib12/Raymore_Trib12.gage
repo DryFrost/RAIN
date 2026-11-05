@@ -9,7 +9,7 @@ Gage: FEMA_10yr
      Gage Type: Precipitation
      Description: FEMA RoG hyetograph 10YR (Atlas 14 point x 0.782 areal reduction)
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Reference Height Units: Feet
      Reference Height: 32808
      Data Source Type: External DSS
@@ -26,7 +26,7 @@ Gage: FEMA_25yr
      Gage Type: Precipitation
      Description: FEMA RoG hyetograph 25YR (Atlas 14 point x 0.782 areal reduction)
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Reference Height Units: Feet
      Reference Height: 32808
      Data Source Type: External DSS
@@ -43,7 +43,7 @@ Gage: FEMA_50yr
      Gage Type: Precipitation
      Description: FEMA RoG hyetograph 50YR (Atlas 14 point x 0.782 areal reduction)
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Reference Height Units: Feet
      Reference Height: 32808
      Data Source Type: External DSS
@@ -60,7 +60,7 @@ Gage: FEMA_100yr
      Gage Type: Precipitation
      Description: FEMA RoG hyetograph 100YR (Atlas 14 point x 0.782 areal reduction)
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Reference Height Units: Feet
      Reference Height: 32808
      Data Source Type: External DSS
@@ -77,7 +77,7 @@ Gage: FEMA_100yr_plus
      Gage Type: Precipitation
      Description: FEMA RoG hyetograph 100PLUS (Atlas 14 point x 0.782 areal reduction)
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Reference Height Units: Feet
      Reference Height: 32808
      Data Source Type: External DSS
@@ -94,7 +94,7 @@ Gage: FEMA_500yr
      Gage Type: Precipitation
      Description: FEMA RoG hyetograph 500YR (Atlas 14 point x 0.782 areal reduction)
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Reference Height Units: Feet
      Reference Height: 32808
      Data Source Type: External DSS
@@ -111,7 +111,7 @@ Gage: Point_10yr
      Gage Type: Precipitation
      Description: FEMA RoG 10YR pattern scaled to Atlas 14 point depth 5.55 in (no areal reduction)
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Reference Height Units: Feet
      Reference Height: 32808
      Data Source Type: External DSS
@@ -128,7 +128,7 @@ Gage: Point_25yr
      Gage Type: Precipitation
      Description: FEMA RoG 25YR pattern scaled to Atlas 14 point depth 6.83 in (no areal reduction)
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Reference Height Units: Feet
      Reference Height: 32808
      Data Source Type: External DSS
@@ -145,7 +145,7 @@ Gage: Point_50yr
      Gage Type: Precipitation
      Description: FEMA RoG 50YR pattern scaled to Atlas 14 point depth 7.88 in (no areal reduction)
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Reference Height Units: Feet
      Reference Height: 32808
      Data Source Type: External DSS
@@ -162,7 +162,7 @@ Gage: Point_100yr
      Gage Type: Precipitation
      Description: FEMA RoG 100YR pattern scaled to Atlas 14 point depth 8.97 in (no areal reduction)
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Reference Height Units: Feet
      Reference Height: 32808
      Data Source Type: External DSS
@@ -179,7 +179,7 @@ Gage: Point_100yr_plus
      Gage Type: Precipitation
      Description: FEMA RoG 100PLUS pattern scaled to Atlas 14 point depth 10.31 in (no areal reduction)
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Reference Height Units: Feet
      Reference Height: 32808
      Data Source Type: External DSS
@@ -196,7 +196,7 @@ Gage: Point_500yr
      Gage Type: Precipitation
      Description: FEMA RoG 500YR pattern scaled to Atlas 14 point depth 11.75 in (no areal reduction)
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:01:05
+     Last Modified Time: 04:54:52
      Reference Height Units: Feet
      Reference Height: 32808
      Data Source Type: External DSS

@@ -8,7 +8,7 @@ NAD83 Missouri State Plane West, US ft). Every number below is produced by
 
 | Component | Name(s) | Notes |
 |---|---|---|
-| Basin model | `Existing FEMA-Consistent` | 62 subbasins, 55 Muskingum-Cunge reaches, 2 lake reaches (Modified Puls), 64 junctions |
+| Basin model | `Existing FEMA-Consistent` | 61 subbasins, 56 Muskingum-Cunge reaches, 2 lake reaches (Modified Puls), 63 junctions |
 | Met models | `FEMA_<event>` (6) | FEMA RoG hyetographs, values unchanged, in `data/FEMA_Rainfall_ARF78.dss`. Re-written from `Resources/.../78% AR/Rainfall.dss` as PER-CUM, because FEMA's INST-VAL data type is rejected by HMS for precipitation gages |
 | | `Point_<event>` (6) | same hyetographs × (Atlas 14 point depth / FEMA depth) = 1.2787, in `data/Atlas14_PointRainfall.dss` |
 | Control | `48hr_1min` | 01 Jan 2030 00:00 – 03 Jan 2030 00:00, 1 min (same window as the FEMA plans) |
@@ -50,7 +50,10 @@ The FEMA temporal pattern is a nested, centre-peaked storm: about 92 % of the de
    falls away outside, and there is no artificial wall (median spike
    0.4 ft). The terrain extends about 2,700 ft beyond the perimeter, so the
    divide is terrain-defined, not truncated.
-5. Break points: all 27 FEMA crossings and 11 FEMA reference lines in the
+5. **Storm sewer** (`02b`, `scripts/sewer.py`): the city's 1,897 inlet-capture
+   links send runoff reaching an inlet to its pipe outfall. 274 ac (5.2 %)
+   moves between subbasins; see `docs/StormSewer_Delineation.md`.
+6. Break points: all 27 FEMA crossings and 11 FEMA reference lines in the
    watershed (≥ 15 ac), confluences where both branches drain ≥ 60 ac, lake
    outlets, and tributaries ≥ 40 ac entering a lake. Points within 250 ft
    (flow distance) of a more important point are merged. Subbasins > 260 ac
@@ -81,7 +84,9 @@ segmented along each subbasin's longest D8 flow path:
 | Channel | from DA ≥ 30 ac, or sustained FEMA "channel" land cover. Manning n = 0.045, R = DA(sq mi)^0.3 ft (0.4–4 ft), s over ±100 ft ≥ 0.001, V ≤ 12 ft/s |
 
 Minimum Tc is 5 min. Lake subbasins measure Tc only to the water's edge,
-because the pool is routed separately. Results: lag 5.7–73 min (median 22.6).
+because the pool is routed separately. Storm-sewer steps of the flow path
+(inlet → outfall) travel at 5 ft/s; 18 subbasins have one. Results: lag
+3.9–73 min (median 21.0).
 The NRCS lag equation (reported as `Lag_NRCSeq_min`) gives about 40 % shorter
 lags. TR-55 was kept as the primary method because it is the segmented method
 local criteria most often reference; switch to the lag equation if your
@@ -113,13 +118,13 @@ No baseflow and no canopy or surface storage, consistent with FEMA's RoG.
 slope of 0.0005 is confirmed by the 1 m thalweg, and the fitted valley is
 570–850 ft wide. Its single trapezoid (121 ft bottom, 60:1 sides) gives very
 high Muskingum-Cunge diffusion, and HMS attenuates the 100-yr peak from 4,563
-to 2,585 cfs there. That puts `TribUppe_3.4` 27–34 % below FEMA's 2D model at
+to 2,584 cfs there (inflow 4,574 cfs). That puts `TribUppe_3.4` 27–34 % below FEMA's 2D model at
 the 100- and 500-yr, while every other reference line is at or above FEMA. It
 needs an 8-point (channel + overbank) section.
 
 ## Lakes (`06`)
 
-LK1 (52.5 ac, normal pool 1025.47 ft, 0.69 sq mi) and LK2 (8.3 ac, 1032.78 ft,
+LK1 (52.5 ac, normal pool 1025.47 ft, 0.68 sq mi) and LK2 (8.3 ac, 1032.78 ft,
 0.22 sq mi) are hydro-flattened in the lidar and have no outlet structures in
 the FEMA model. Each is a **Modified Puls reach with a storage–outflow table**,
 which is mathematically a level-pool reservoir:
@@ -134,7 +139,7 @@ which is mathematically a level-pool reservoir:
 Check against FEMA 2D maximum lake stage, all six events
 (`QAQC/engine_lake_routing.csv`):
 
-* LK1: +0.29 to +0.41 ft
+* LK1: +0.26 to +0.37 ft
 * LK2: −0.41 to −0.76 ft
 
 **LK1 is Silver Lake.** The Black & Veatch 2002 as-builts (conformed 2003;
@@ -143,9 +148,9 @@ is an open channel through a triple 12 × 4.3 ft cast-in-place box under
 Silvertop Ln. The planned spillway rebuild was not constructed.
 
 * The culvert doesn't control below about 1,400 cfs; LK1's maximum modeled
-  outflow is 648 cfs.
+  outflow is 620 cfs.
 * The 2002 survey puts the sill about 0.5 ft below the lidar.
-* Lowering the rating 0.5 ft raises LK1's 100-yr outflow by 34–44 % and the
+* Lowering the rating 0.5 ft raises LK1's 100-yr outflow by 35–45 % and the
   outlet peak by under 1 %.
 
 The LK1 curve is therefore kept as is. LK2's curve is still terrain-only.
@@ -194,10 +199,10 @@ hydrographs are smooth.
 
 * No storage at road crossings (27 culverts) or in subdivision detention, so
   HMS is high in frequent storms relative to FEMA's 2D model (HMS/FEMA median
-  ratio at reference lines: 1.31 at 10-yr, 1.10 at 100-yr, 1.00 at 500-yr).
+  ratio at reference lines: 1.28 at 10-yr, 1.10 at 100-yr, 1.01 at 500-yr).
 * Single-trapezoid reaches over-attenuate on wide flat floodplains
   (`R-CNF07`, see above).
 * Ponds inside subbasins (23 open-water bodies ≥ 0.25 ac, 21 ac total) are not routed.
-* No storm sewer network; flow paths follow the terrain, like FEMA's model.
+* Storm sewer is "full capture": inlet catchments go to the pipe outfall in every storm (no capacity limit yet).
 * Channel R for Tc is a regional power law, not surveyed.
 * The lake curves are terrain-only, with no principal spillways.

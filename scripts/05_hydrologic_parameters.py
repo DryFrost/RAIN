@@ -8,7 +8,9 @@ Subbasins
     remaining classes give an area-weighted pervious CN.  Composite CN is also
     reported.
   * Transform (SCS UH): lag = 0.6 Tc, Tc by TR-55 segments along the longest
-    flow path (sheet <=100 ft, shallow concentrated, channel).  The NRCS lag
+    flow path (sheet <=100 ft, shallow concentrated, channel), on the same
+    terrain + storm-sewer flow graph as script 04; storm-sewer steps of the
+    path (inlet -> outfall) travel at 5 ft/s.  The NRCS lag
     equation is reported as a check.  Minimum Tc = 5 min.
 Reaches (Muskingum-Cunge, trapezoid)
   * length = D8 path, slope = regression of burned-DEM elevation vs distance
@@ -33,6 +35,7 @@ from shapely.geometry import LineString, Point
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import hydro  # noqa: E402
+import sewer  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 RAS = ROOT / "Resources/2D_Raymore"
@@ -46,6 +49,7 @@ SHEET_MAX = 100.0     # ft (TR-55, 2009 revision)
 CH_START_AC = 30.0    # channel flow assumed once drainage area exceeds this
 TC_MIN_HR = 5.0 / 60.0
 N_CHANNEL_TC = 0.045  # Manning's n for TR-55 channel segments
+PIPE_V_FPS = 5.0      # storm-sewer travel velocity for sewer-link steps of the flow path
 LC_IMPERV = {0, 1, 2, 3, 4, 6, 11}       # FEMA classes with CN 98 for every soil
 CHANNEL_LC = {1, 2, 3}
 PAVED_LC = {4, 6}
@@ -93,13 +97,13 @@ def main():
         tr10 = s.transform
         crs = s.crs
     Z10 = rasterio.open(R10 / "dem_burn_10ft.tif").read(1)
-    A10 = rasterio.open(R10 / "acc_10ft.tif").read(1).ravel().astype(np.float64)
     F10 = rasterio.open(R10 / "fdir_10ft.tif").read(1).astype(np.int64)
     nr, nc = lab10.shape
     cs10 = tr10.a
     ac10 = cs10 ** 2 / 43560.0
-    down, step = hydro.downstream_index(F10)
-    order = hydro.topo_order(down)
+    # terrain D8 + storm-sewer inlet links (scripts/02b) -- same graph as script 04
+    down, step, order, A10 = sewer.flow_graph(F10, cs10, use_sewer=True)
+    up_ptr, up_idx = hydro.upstream_csr(down)
     labf = lab10.ravel()
 
     # ---------------- 1 m window over the watershed
@@ -172,7 +176,7 @@ def main():
     lfp_rows, tc_rows = [], []
     for _, s in S.iterrows():
         o = int(s.outlet_cell)
-        path = hydro.longest_path_from(o, down, step, uplen, labf, nr, nc, cs10, 200000)
+        path = hydro.longest_path_csr(o, up_ptr, up_idx, step, uplen, labf, cs10, 200000)
         if s.Subbasin in lake_of_sub:
             # runoff only has to reach the pool; storage routing handles the lake
             lk = lake_of_sub[s.Subbasin].buffer(10)
@@ -186,6 +190,7 @@ def main():
         lcp = np.array([lc_at(x, y) for x, y in xy])
         da = A10[path] * ac10
         n = len(path)
+        is_pipe = np.array([step[p] >= 1.5 for p in path])   # sewer-link step (inlet -> outfall)
 
         def seg_slope(i0, i1, smin):
             i0, i1 = max(0, i0), min(n - 1, i1)
@@ -211,9 +216,13 @@ def main():
                 i_ch = min(i_ch, int(cand[0]))
         i_ch = max(i_ch, i_sh)
         # shallow concentrated
-        t_sc = 0.0
+        t_sc = t_pipe = L_pipe = 0.0
         for i in range(i_sh, i_ch):
             dx = dist[i + 1] - dist[i]
+            if is_pipe[i]:
+                t_pipe += dx / PIPE_V_FPS / 3600.0
+                L_pipe += dx
+                continue
             s_ = seg_slope(i - 5, i + 5, 0.005)
             v = (20.3282 if lcp[i] in PAVED_LC else 16.1345) * np.sqrt(s_)
             t_sc += dx / v / 3600.0
@@ -221,11 +230,15 @@ def main():
         t_chn = 0.0
         for i in range(i_ch, n - 1):
             dx = dist[i + 1] - dist[i]
+            if is_pipe[i]:
+                t_pipe += dx / PIPE_V_FPS / 3600.0
+                L_pipe += dx
+                continue
             s_ = seg_slope(i - 10, i + 10, 0.001)
             Rh = float(np.clip(1.0 * (da[i] / 640.0) ** 0.3, 0.4, 4.0))
             v = min(1.49 / N_CHANNEL_TC * Rh ** (2 / 3) * np.sqrt(s_), 12.0)
             t_chn += dx / v / 3600.0
-        tc = max(t_sh + t_sc + t_chn, TC_MIN_HR)
+        tc = max(t_sh + t_sc + t_chn + t_pipe, TC_MIN_HR)
         # NRCS lag equation check
         mask = labf == s.label
         Y = float(np.nanmean(slope10[mask])) * 100.0
@@ -235,7 +248,8 @@ def main():
         tc_rows.append(dict(Subbasin=s.Subbasin, LFP_ft=L, LFP_Slope=(z[0] - z[-1]) / max(L, 1),
                             Sheet_ft=Lsh, Sheet_n=nsh, Sheet_s=ssh, Sheet_min=t_sh * 60,
                             Shallow_ft=dist[i_ch] - Lsh, Shallow_min=t_sc * 60,
-                            Channel_ft=L - dist[i_ch], Channel_min=t_chn * 60,
+                            Channel_ft=L - dist[i_ch] - L_pipe, Channel_min=t_chn * 60,
+                            Pipe_ft=L_pipe, Pipe_min=t_pipe * 60,
                             Tc_TR55_min=tc * 60, Lag_TR55_min=0.6 * tc * 60,
                             AvgLandSlope_pct=Y, Lag_NRCSeq_min=lag_eq * 60))
         lfp_rows.append(dict(Subbasin=s.Subbasin, Length_ft=L, geometry=LineString(xy)))

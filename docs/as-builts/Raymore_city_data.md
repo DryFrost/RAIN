@@ -31,14 +31,14 @@
 
 * Source: `RaymoreGIS2386_S1/FeatureServer` and `outfall/FeatureServer`, in NAD83
   MO West ft, the model's CRS.
-* `scripts/12_raymore_storm_gis.py` clips to the watershed plus 500 ft and
-  writes `GIS/Raymore_StormGIS.gpkg`:
+* `scripts/12_raymore_storm_gis.py` downloads everything within 2,000 ft of
+  the FEMA 2D area and writes `GIS/Raymore_StormGIS.gpkg`:
 
 | Layer | Inside the watershed | Notes |
 |---|---|---|
 | `detention` (strm_detetion) | **131 basins** | 59 detention, 45 pond, 7 retention, 3 lake, 13 untyped, and others; median 0.46 ac. The layer has a few duplicate polygons (Silver Lake appears twice). |
-| `pipes` (strm_swr) | 2,368 pipes, 48 mi | diameter / material labels, average slope, subdivision / as-built IDs |
-| `inlets` (strm_inlet) | 3,238 structures | 2,002 curb inlets, 324 outfalls, 281 end sections, 183 junction boxes; 833 have a top elevation and 723 an outflow invert |
+| `pipes` (strm_swr) | 2,385 pipes, 48 mi | diameter / material labels, average slope, subdivision / as-built IDs |
+| `inlets` (strm_inlet) | 3,253 structures | 2,002 curb inlets, 324 outfalls, 281 end sections, 183 junction boxes; 833 have a top elevation and 723 an outflow invert |
 | `outfalls` | 3 | MS4 outfall points |
 
 `HMS/parameters/detention_city_gis.csv` lists each basin with its type, area,
@@ -80,6 +80,5 @@ basin.
    unrouted ponds come first: a 12.7 ac pond in `SB-CNF05` and an 11.9 ac pond
    in `SB-RL_Trib12Ea_1.6`, plus the Good Ranch retention and detention basins
    (5.2–5.5 ac).
-2. **Storm sewer routing.** Pipes plus inlet inverts can correct subbasin
-   boundaries where sewers cross the terrain divides (e.g. the Sunset Channel
-   RCB).
+2. **Storm sewer routing: done.** The subbasins now follow the city storm
+   sewer; see `docs/StormSewer_Delineation.md`.

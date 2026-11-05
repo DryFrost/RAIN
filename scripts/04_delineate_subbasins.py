@@ -9,6 +9,8 @@ Trib 12).  Subbasin break points:
 Points that land within MERGE_FT (flow distance) of a higher-priority point are
 merged into it.
 
+Flow follows the terrain plus the city storm sewer (inlet capture, scripts/02b).
+
 Outputs: GIS/HMS_Raymore.gpkg  (layers: Watershed, Subbasins, Junctions,
 Reaches, Streams, LongestFlowPaths) and GIS/rasters/subbasins_10ft.tif
 """
@@ -25,6 +27,7 @@ from pyproj import Transformer
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import hydro  # noqa: E402
+import sewer  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 FEMA = ROOT / "GIS/FEMA_RoG_geometry.gpkg"
@@ -39,6 +42,7 @@ MIN_PT_AC = 15.0     # ignore structure/ref points draining less than this
 MERGE_FT = 250.0     # merge points closer than this along the flow path
 MAX_AC = 260.0       # split subbasins larger than this along the main stem
 MIN_LOCAL_AC = 8.0   # drop confluence/split points whose local area is smaller
+USE_SEWER = True     # route inlet capture through the city storm sewer (scripts/02b)
 LAKE_MIN_AC = 5.0    # open-water bodies on the stream network at least this big become lakes
 LAKE_TRIB_AC = 40.0  # tributaries entering a lake with at least this area get their own subbasin
 LAKE_BUF_FT = 25.0   # dissolve distance for water polygons split by causeways / bridges
@@ -77,16 +81,51 @@ def find_lakes(tr, crs, inws2d, acc2d, cell_ac):
     return sorted(out, key=lambda d: -d["geometry"].area)
 
 
+def stable_names(pts, ids, xy, tol_ft=30.0):
+    """Rename Confluence / Split points to the name of the previous model's
+    junction of the same kind within tol_ft (GIS/HMS_Raymore.gpkg before it is
+    overwritten); unmatched points get the next unused number."""
+    if not OUT.exists():
+        return
+    try:
+        prev = gpd.read_file(OUT, layer="Junctions")
+    except Exception:
+        return
+    prefix = {"Confluence": "CNF", "Split": "SPL"}
+    for kind, pre in prefix.items():
+        pv = prev[prev.PointKind == kind]
+        mine = [i for i in ids if pts[i]["kind"] == kind]
+        used, unmatched = set(), []
+        for i in mine:
+            x, y = xy(i)
+            d = pv.distance(Point(x, y)) if len(pv) else pd.Series(dtype=float)
+            if len(d) and d.min() <= tol_ft and pv.Junction[d.idxmin()] not in used:
+                nm = pv.Junction[d.idxmin()][2:]
+                used.add(pv.Junction[d.idxmin()])
+                pts[i]["name"] = nm
+            else:
+                unmatched.append(i)
+        nums = [int(n[len(pre):]) for n in list(pv.Junction.str[2:]) if n[len(pre):].isdigit()]
+        nxt = max(nums, default=0) + 1
+        taken = {pts[i]["name"] for i in mine if i not in unmatched}
+        for i in unmatched:
+            while f"{pre}{nxt:02d}" in taken:
+                nxt += 1
+            pts[i]["name"] = f"{pre}{nxt:02d}"
+            taken.add(pts[i]["name"])
+            nxt += 1
+
+
 def main():
     with rasterio.open(RAS / "fdir_10ft.tif") as src:
         F = src.read(1).astype(np.int64)
         tr, crs = src.transform, src.crs
-    A = rasterio.open(RAS / "acc_10ft.tif").read(1).ravel().astype(np.float64)
+
     nr, nc = F.shape
     cs = tr.a
     cell_ac = cs * cs / 43560.0
-    down, step = hydro.downstream_index(F)
-    order = hydro.topo_order(down)
+    # terrain D8 + City of Raymore storm-sewer inlet links (scripts/02b, sewer.py)
+    down, step, order, A = sewer.flow_graph(F, tr.a, use_sewer=USE_SEWER)
 
     def xy(i):
         return tr * ((i % nc) + 0.5, (i // nc) + 0.5)
@@ -265,6 +304,10 @@ def main():
     ids, lab = relabel()
     areas = np.bincount(lab, minlength=len(ids) + 1) * cell_ac
 
+    # ---- keep confluence / split names stable across model versions: re-use the
+    # previous model's name for a point at the same place, number new ones after
+    stable_names(pts, ids, xy)
+
     # ---- topology: downstream point of each point
     idset = set(ids)
     dn_of, reach_path = {}, {}
@@ -321,7 +364,8 @@ def main():
                               Outlet_Lat=[USER_LATLON[0]], Outlet_Lon=[USER_LATLON[1]]), geometry=[wsg], crs=crs)
     stream = inws & (A >= STREAM_AC / cell_ac)
     sidx = np.flatnonzero(stream)
-    segs = [LineString([xy(i), xy(down[i])]) for i in sidx if down[i] >= 0 and stream[down[i]]]
+    segs = [LineString([xy(i), xy(down[i])]) for i in sidx
+            if down[i] >= 0 and stream[down[i]] and step[i] < 1.5]   # skip sewer-link jumps
     from shapely.ops import linemerge
     merged = linemerge(segs)
     lines = list(merged.geoms) if hasattr(merged, "geoms") else [merged]

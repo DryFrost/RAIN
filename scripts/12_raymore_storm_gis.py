@@ -5,8 +5,9 @@ Service: services5.arcgis.com/Xl0cAd6WMhA7fHTz/.../RaymoreGIS2386_S1/FeatureServ
   10 strm_swr (storm pipes, lines)               + outfall/FeatureServer/0
 All in NAD83 MO West ft (WKID 102698 = the model's CRS) except outfalls (3857).
 
-Features within 500 ft of the watershed are kept and tagged with the HMS
-subbasin they fall in.
+Downloads everything within 2,000 ft of the FEMA 2D area (so it can run before
+the HMS delineation), and tags features with the HMS subbasin they fall in when
+GIS/HMS_Raymore.gpkg exists -- run it again after scripts/04 to refresh tags.
 Output: GIS/Raymore_StormGIS.gpkg (layers detention, inlets, pipes, outfalls)
 """
 from pathlib import Path
@@ -24,7 +25,6 @@ LAYERS = {"detention": "RaymoreGIS2386_S1/FeatureServer/4", "inlets": "RaymoreGI
           "pipes": "RaymoreGIS2386_S1/FeatureServer/10", "outfalls": "outfall/FeatureServer/0"}
 CRS = (ROOT / "Resources/2D_Raymore/Projection/Projection.prj").read_text()
 OUT = ROOT / "GIS/Raymore_StormGIS.gpkg"
-BUFFER_FT = 500.0
 
 
 def to_geom(g):
@@ -65,20 +65,30 @@ def fetch(path, envelope):
 
 
 def main():
-    ws = gpd.read_file(ROOT / "GIS/HMS_Raymore.gpkg", layer="Watershed").geometry.iloc[0]
-    sb = gpd.read_file(ROOT / "GIS/HMS_Raymore.gpkg", layer="Subbasins")[["Subbasin", "geometry"]]
-    area = ws.buffer(BUFFER_FT)
+    # download extent: the FEMA 2D area (a superset of the study watershed) + 2,000 ft,
+    # so this script can run before the HMS delineation (scripts/02b needs it)
+    per = gpd.read_file(ROOT / "GIS/FEMA_RoG_geometry.gpkg", layer="FlowArea2D_Perimeter").geometry.iloc[0]
+    area = per.buffer(2000.0)
+    hms = ROOT / "GIS/HMS_Raymore.gpkg"
+    ws = sb = None
+    if hms.exists():
+        ws = gpd.read_file(hms, layer="Watershed").geometry.iloc[0]
+        sb = gpd.read_file(hms, layer="Subbasins")[["Subbasin", "geometry"]]
     OUT.unlink(missing_ok=True)
     for name, path in LAYERS.items():
         g = fetch(path, area.bounds)
         g = g[g.intersects(area)].copy()
-        rep = g.geometry.representative_point() if name in ("detention", "pipes") else g.geometry
-        tag = gpd.sjoin(gpd.GeoDataFrame(geometry=rep, crs=CRS), sb, how="left", predicate="within")
-        g["Subbasin"] = tag.groupby(level=0).Subbasin.first().reindex(g.index).values
-        g["InWatershed"] = g.intersects(ws)
+        if sb is not None:
+            rep = g.geometry.representative_point() if name in ("detention", "pipes") else g.geometry
+            tag = gpd.sjoin(gpd.GeoDataFrame(geometry=rep, crs=CRS), sb, how="left", predicate="within")
+            g["Subbasin"] = tag.groupby(level=0).Subbasin.first().reindex(g.index).values
+            g["InWatershed"] = g.intersects(ws)
+        else:
+            g["Subbasin"], g["InWatershed"] = None, False
         g.to_file(OUT, layer=name)
         print(f"{name}: {len(g)} features ({int(g.InWatershed.sum())} inside the watershed)")
-    detention_table()
+    if sb is not None:
+        detention_table()
 
 
 def detention_table():

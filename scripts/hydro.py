@@ -155,3 +155,91 @@ def upstream_length_lab(down, step, order, cellsize, lab):
             if L > up[d]:
                 up[d] = L
     return up
+
+
+@njit(cache=True)
+def on_downstream_path(start, target, down, maxn):
+    """True if `target` lies on the D8 path downstream of `start`."""
+    cur = start
+    for _ in range(maxn):
+        if cur == target:
+            return True
+        cur = down[cur]
+        if cur < 0:
+            return False
+    return False
+
+
+# ---------------------------------------------------------------------------
+# Storm-sewer links: a link sends an inlet cell's flow to a (non-adjacent)
+# outfall cell.  `down` stays a single-successor graph, so labelling and
+# ordering work unchanged; only neighbour-based upstream searches need the
+# CSR helpers below.
+def apply_links(down, step, links_ic, links_oc, cellsize, nc):
+    """Return (down2, step2) with inlet cells redirected to outfall cells.
+    step2 of a link = straight-line inlet->outfall distance in cell units."""
+    down2 = down.copy()
+    step2 = step.copy()
+    for ic, oc in zip(links_ic, links_oc):
+        down2[ic] = oc
+        r1, c1 = divmod(int(ic), nc)
+        r2, c2 = divmod(int(oc), nc)
+        step2[ic] = np.hypot(r1 - r2, c1 - c2)
+    return down2, step2
+
+
+@njit(cache=True)
+def accumulate(down, order):
+    """Number of cells draining through each cell (including itself)."""
+    acc = np.ones(down.size)
+    for k in range(order.size):
+        i = order[k]
+        d = down[i]
+        if d >= 0:
+            acc[d] += acc[i]
+    return acc
+
+
+@njit(cache=True)
+def upstream_csr(down):
+    n = down.size
+    cnt = np.zeros(n + 1, dtype=np.int64)
+    for i in range(n):
+        if down[i] >= 0:
+            cnt[down[i] + 1] += 1
+    for i in range(n):
+        cnt[i + 1] += cnt[i]
+    idx = np.empty(cnt[n], dtype=np.int64)
+    fill = cnt[:-1].copy()
+    for i in range(n):
+        d = down[i]
+        if d >= 0:
+            idx[fill[d]] = i
+            fill[d] += 1
+    return cnt, idx
+
+
+@njit(cache=True)
+def longest_path_csr(outlet, ptr, idx, step, uplen, lab, cellsize, maxn):
+    """Longest flow path upstream from `outlet` within its label, following
+    any upstream cell (including storm-sewer link inlets)."""
+    path = np.empty(maxn, dtype=np.int64)
+    m = 0
+    cur = outlet
+    target = lab[outlet]
+    while m < maxn:
+        path[m] = cur
+        m += 1
+        best = -1
+        bestv = -1.0
+        for k in range(ptr[cur], ptr[cur + 1]):
+            j = idx[k]
+            if lab[j] == target:
+                v = uplen[j] + step[j] * cellsize
+                if v > bestv:
+                    bestv = v
+                    best = j
+        if best < 0:
+            break
+        cur = best
+    return path[:m][::-1]

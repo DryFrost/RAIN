@@ -7,7 +7,7 @@
 Veatch, 2002. The title block reads **"Conformed to construction records
 07/02/03"**. Designed by RCB, sealed by Roland Christian Brockway (MO E-20935).
 
-**Silver Lake = model lake `LK1`** (52.5 ac, 0.69 sq mi to the outlet; centroid
+**Silver Lake = model lake `LK1`** (52.5 ac, 0.68 sq mi to the outlet; centroid
 38.8006, −94.4723, south of Hwy 58 and west of Madison). The outlet is at its
 west end under Silvertop Lane.
 
@@ -64,15 +64,15 @@ Layers are in `GIS/AsBuilts.gpkg`: `SilverLake_Culvert`, `SilverLake_SunsetChann
      Survey the sill to settle it.
 2. **The Silvertop Ln culvert never controls in the modeled storms.** HDS-5
    inlet control gives a headwater below the sill-controlled lake stage up to
-   about 1,400 cfs, while the largest LK1 outflow is 648 cfs (Point 500-yr).
+   about 1,400 cfs, while the largest LK1 outflow is 620 cfs (Point 500-yr).
    See `HMS/QAQC/silverlake_culvert_check.csv`. No model change is needed.
 3. **Sensitivity to the sill elevation** (QA engine, which matches HMS within 1 %):
 
    | Storm | LK1 outflow | J-CNF14 | Outlet |
    |---|---|---|---|
-   | FEMA 100-yr | 146 → 210 cfs | +4 % | +0.5 % |
-   | Point 100-yr | 306 → 409 cfs | +7 % | +0.7 % |
-   | Point 10-yr | 71 → 109 cfs | +3 % | +0.4 % |
+   | FEMA 100-yr | 139 → 201 cfs | +3 % | +0.5 % |
+   | Point 100-yr | 292 → 392 cfs | +6 % | +0.6 % |
+   | Point 10-yr | 68 → 104 cfs | +2 % | +0.4 % |
 
    A sill 0.5 ft lower matters for anything designed just downstream of the
    lake, not for the watershed outlet.
@@ -92,8 +92,8 @@ Layers are in `GIS/AsBuilts.gpkg`: `SilverLake_Culvert`, `SilverLake_SunsetChann
    517 → 518 and street sewers carry SS-1 and SS-2 to the channel, which lidar
    can't see. All of it still reaches LK1, so lake inflow volume is right; only
    the timing inside the LK1 subbasins is affected.
-6. B&V's 100-yr design outflow (131 cfs, 7.94 in) and the model's (146 cfs at
-   7.02 in; about 220 cfs interpolated to 7.94 in) are the same order. Both
+6. B&V's 100-yr design outflow (131 cfs, 7.94 in) and the model's (139 cfs at
+   7.02 in; about 210 cfs interpolated to 7.94 in) are the same order. Both
    show Silver Lake cutting a 2,000+ cfs inflow to a few hundred cfs. They
    aren't directly comparable, because B&V designed a lowered outlet that was
    never built.
