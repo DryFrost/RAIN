@@ -93,6 +93,21 @@ Not entered:
 * **DET012** (Walmart): the plans show two cells joined by a 56 ft 12 in pipe,
   but not the north cell's outlet into the 48 in system. It stays on the
   assumed outlet.
+* **DET050 / DET061** (Municipal Complex Phase 1, sheet 17 "Pond Plan &
+  Details", 105-page set). The plans show two ponds:
+  * **West pond (DET050):** an 18 in RCP principal spillway with a headwall at
+    about 1067.0, and a SW emergency spillway 114.35 ft wide at **1078.5**.
+  * **East pond (DET061):** a principal spillway pipe at about 1070.0, and a SE
+    emergency spillway 48.92 ft wide at **1075.5**.
+
+  The city polygons cover only the pond bottoms (0.37 and 0.23 ac). The lidar
+  rings, at most 30 ft out, therefore stop on the side slopes, and the lidar
+  spills (1074.0 and 1073.6) sit 4.5 and 1.9 ft below the plan spillways.
+  Entering these needs an override that uses the spillway crest as the
+  minimum rim, plus a larger storage reach. This is the next code step.
+* **DET032 / DET060** (Foxwood Plaza at the Legends): the library file is the
+  3-sheet *Legends at Raymore Public Water Main Improvements* plan, with no
+  detention sheets.
 * **DET006 drainage area:** the plans give **119.5 ac** (78.8 ac commercial +
   40.7 ac residential). Terrain + city sewer give **48 ac** today. If the
   commercial tract is built and piped to the pond (private pipes are not in
@@ -178,14 +193,14 @@ Plan sets covering the modelled basins (largest storage first):
 |---|---:|---:|---|---|
 | DET006 | 27.9 ac-ft | 48 ac | Good Ranch – Storm Water Detention Plans for S Dean Ave | **entered** |
 | DET011 | 9.5 | 33 | Raymore Galleria Phase 1 | **entered** |
-| DET032 | 7.4 | 5.6 | Foxwood Plaza at the Legends | assumed |
+| DET032 | 7.4 | 5.6 | Foxwood Plaza at the Legends | assumed (file is a water-main plan) |
 | DET021 | 6.0 | 46 | Lemor Estates Phase 1 | **entered** |
 | DET012 | 3.2 | 5 | Matlock Johnson (Walmart) | assumed (outlet not detailed) |
-| DET060 | 3.1 | 4 | Foxwood Plaza at the Legends | assumed |
-| DET050 | 1.5 | 6 | Municipal Complex Phase 1 | assumed |
+| DET060 | 3.1 | 4 | Foxwood Plaza at the Legends | assumed (file is a water-main plan) |
+| DET050 | 1.5 | 6 | Municipal Complex Phase 1 | read, needs rim override (above) |
 | DET044 | 1.2 | 14 | Centerview Phase II / Town Center Ph 1, 4 | assumed |
 | DET030 | 0.6 | 54 | Shadowood Phase 1 | assumed |
-| DET061 | 0.6 | 4 | Centerview Phase II / Municipal Complex Ph 1 | assumed |
+| DET061 | 0.6 | 4 | Centerview Phase II / Municipal Complex Ph 1 | read, needs rim override (above) |
 | DET072 | 0.4 | 19 | The Prairie View of the Good Ranch | assumed |
 | DET053 | 0.3 | 5 | Silver Lake (1986) | assumed |
 
@@ -198,6 +213,9 @@ and 078.
 * The 65 unmodelled polygons are mostly shallow. A few may have real storage
   that the lidar misses (below a water surface, or a closed-pipe outlet with
   an underground vault).
+* Where a city polygon covers only the pond bottom (e.g. DET050, DET061), the
+  spill and the storage are underestimated. Rings and storage reach extend
+  only 30 / 60 ft from the polygon.
 * There is no tailwater: outlets discharge freely. The barrel is an orifice,
   with no friction or outlet control; at DET006 that puts the 100-yr release
   7 % above the design value.

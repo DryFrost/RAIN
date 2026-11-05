@@ -226,8 +226,12 @@ links each one on the city's public file share.
 1. **As-built detention outlets.**
    * Done: DET006 (Good Ranch), DET011 (Raymore Galleria) and DET021
      (Le'Mor Estates).
-   * Next: the 9 other modelled basins with plan sets (`docs/Detention.md`),
-     starting with DET032 / DET060 (Foxwood Plaza, 10 ac-ft together).
+   * Read, not yet entered: DET050 / DET061 (Municipal Complex). The plan
+     spillways sit above the lidar rim because the city polygons cover only
+     the pond bottoms; this needs a spillway-crest rim override.
+   * Next: the other modelled basins with plan sets (`docs/Detention.md`).
+     The Foxwood Plaza file (DET032 / DET060) is a water-main plan, so those
+     need another source.
    * Check DET006's drainage area: the plans give 119.5 ac, the model 48 ac.
 2. **Road-crossing storage.** Turn the 27 FEMA culvert crossings into HMS
    reservoirs (culvert + overtopping weir, storage from lidar). The culvert
