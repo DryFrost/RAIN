@@ -170,6 +170,18 @@ def on_downstream_path(start, target, down, maxn):
     return False
 
 
+@njit(cache=True)
+def drains_into(down, order, mask):
+    """Boolean array: cells inside `mask` or whose downstream path enters it."""
+    out = mask.copy()
+    for k in range(order.size - 1, -1, -1):
+        i = order[k]
+        d = down[i]
+        if d >= 0 and out[d]:
+            out[i] = True
+    return out
+
+
 # ---------------------------------------------------------------------------
 # Storm-sewer links: a link sends an inlet cell's flow to a (non-adjacent)
 # outfall cell.  `down` stays a single-successor graph, so labelling and

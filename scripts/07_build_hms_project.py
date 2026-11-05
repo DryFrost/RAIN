@@ -15,6 +15,7 @@ peak inflow, as the HMS Technical Reference recommends (pass 2 of 2).
 Also writes HMS/QAQC/*.csv (engine peaks, comparison with FEMA RoG).
 """
 from pathlib import Path
+import os
 import sys
 import json
 import datetime as dt
@@ -205,9 +206,17 @@ def rating_file(name):
     return PAR / f"lake_{name}_rating.csv" if name.startswith("LK") else PAR / "detention_ratings" / f"{name}.csv"
 
 
+# DET_STORAGE_FACTOR=0.001 scales detention storage so the basins pass flow straight
+# through: same elements and subbasins, no attenuation -> the clean detention baseline
+# (HMS/Results/hms_peaks_detention_passthrough.csv).  Lakes LK1/LK2 are not scaled.
+DET_STORAGE_FACTOR = float(os.environ.get("DET_STORAGE_FACTOR", "1"))
+
+
 def lake_table(name):
     df = pd.read_csv(rating_file(name))
     s, q = df.Storage_acft.values, df.Outflow_cfs.values
+    if not name.startswith("LK"):
+        s = s * DET_STORAGE_FACTOR
     # HMS needs strictly increasing outflow: keep the first zero-flow row, then
     # give dead storage up to the sill a tiny flow so the table stays monotonic
     keep = [0] + [i for i in range(1, len(q)) if q[i] > q[:i].max() + 1e-9]

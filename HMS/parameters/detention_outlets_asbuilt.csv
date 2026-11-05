@@ -1,1 +1,11 @@
-Basin,Kind,Size_ft,Invert_ft,Source,Note
+Basin,Kind,Size_ft,Invert_ft,Top_ft,Source,Note
+DET006,pool,,1008.0,,Good Ranch Dean Ave and Regional Detention No. 1 (S Dean Ave) sheet 13,wet basin elevation 1008.0 = V-notch vertex (lidar water surface 1009.2)
+DET006,vnotch,45,1008.0,1012.5,Good Ranch Dean Ave and Regional Detention No. 1 (S Dean Ave) sheet 13,45-deg V-notch in the 7 x 7 ft outlet box; 44.7 in wide at the box top 1012.50
+DET006,weir,12.0,1010.0,,Good Ranch Dean Ave and Regional Detention No. 1 (S Dean Ave) sheet 13,two 72-in windows with debris bars in the box side walls; crest 1010.00
+DET006,weir,12.3,1012.5,,Good Ranch Dean Ave and Regional Detention No. 1 (S Dean Ave) sheet 13,grate on the box top 1012.50 (perimeter not taken by the notch and windows)
+DET006,barrel,4.0,1002.23,,Good Ranch Dean Ave and Regional Detention No. 1 (S Dean Ave) sheet 13,outlet pipe invert 1002.23; 48 in scaled from the structure detail
+DET011,pool,,1035.38,,Raymore Galleria storm sewer (as-built 2006) sheets 5-6,rating starts at the outlet flowline; storage below the lidar bottom 1038.6 from the lowest lidar cells
+DET011,orifice,2.5,1035.38,,Raymore Galleria storm sewer (as-built 2006) sheets 5-6,30-in CMP Line 3 with flared end section; FL in 1035.38 out 1033.85; 93.47 ft at 1.64 %; top of berm 1048.00; design 100-yr WSE 1046.87
+DET021,pool,,993.82,,Le'Mor Estates supplemental plans (as-built) sheet 10,rating starts at the 54-in outlet flowline (FES 7-2)
+DET021,orifice,4.5,993.82,,Le'Mor Estates supplemental plans (as-built) sheet 10,54-in RCP FES 7-2 to FES 7-1 (In 993.82 Out 993.11; 105.08 ft); plan labels the basin 'D.E. for proposed detention basin'; no control structure shown
+DET021,orifice,2.0,1001.25,,Le'Mor Estates supplemental plans (as-built) sheet 10,24-in RCP through the east berm (In 1001.25 Out 1000.46; 48.74 ft)
