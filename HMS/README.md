@@ -8,12 +8,12 @@ NAD83 Missouri State Plane West, US ft). Every number below is produced by
 
 | Component | Name(s) | Notes |
 |---|---|---|
-| Basin model | `Existing FEMA-Consistent` | 61 subbasins, 56 Muskingum-Cunge reaches, 2 lake reaches (Modified Puls), 63 junctions |
+| Basin model | `Existing FEMA-Consistent` | 84 subbasins, 79 Muskingum-Cunge reaches, 2 lakes + 23 detention basins (Modified Puls level pools), 109 junctions |
 | Met models | `FEMA_<event>` (6) | FEMA RoG hyetographs, values unchanged, in `data/FEMA_Rainfall_ARF78.dss`. Re-written from `Resources/.../78% AR/Rainfall.dss` as PER-CUM, because FEMA's INST-VAL data type is rejected by HMS for precipitation gages |
 | | `Point_<event>` (6) | same hyetographs × (Atlas 14 point depth / FEMA depth) = 1.2787, in `data/Atlas14_PointRainfall.dss` |
 | Control | `48hr_1min` | 01 Jan 2030 00:00 – 03 Jan 2030 00:00, 1 min (same window as the FEMA plans) |
 | Runs | 12 | one per met model, results to `results/<run>.dss` |
-| Paired data | `LK1 Storage-Outflow`, `LK2 Storage-Outflow` | in the project DSS `Raymore_Trib12.dss` |
+| Paired data | `LK1 Storage-Outflow`, `LK2 Storage-Outflow`, `DET### Storage-Outflow` (23) | in the project DSS `Raymore_Trib12.dss` |
 | Maps | `maps/*.shp` | watershed, subbasins, streams, lakes |
 
 Events: 10, 25, 50, 100, `100yr_plus` (Atlas 14 upper 90 % CI; FEMA's "101yr" plan p07) and 500-yr.
@@ -191,18 +191,22 @@ parameter change before trusting a new HMS result.
 * `hms_vs_fema_reflines.csv`: HMS vs FEMA RoG at the 11 reference lines and the outlet
 * `hms_vs_engine.csv`: HMS vs the QA engine
 
-HMS log: no errors. The only warning, 41074 ("very short reach … may cause
-numeric instabilities"), appears for 14 reaches of 283–604 ft; their
-hydrographs are smooth.
+HMS log: no errors. Warnings: 41074 ("very short reach … may cause
+numeric instabilities") for 18 short reaches, whose hydrographs are smooth;
+41084 for the 91 ft reach `R-DET021` (diffusivity would ask for 2 subreaches);
+and 41784 for the two smallest detention subbasins (lag under 0.29 × the
+1-min step).
 
 ## Known limitations of this phase
 
-* No storage at road crossings (27 culverts) or in subdivision detention, so
-  HMS is high in frequent storms relative to FEMA's 2D model (HMS/FEMA median
-  ratio at reference lines: 1.28 at 10-yr, 1.10 at 100-yr, 1.01 at 500-yr).
+* No storage at road crossings (27 culverts), so HMS is high in frequent
+  storms relative to FEMA's 2D model (HMS/FEMA median ratio at reference
+  lines: 1.30 at 10-yr, 1.11 at 100-yr, 1.03 at 500-yr). Subdivision
+  detention is routed for the 23 basins that store meaningful water; their
+  outlets are assumed until as-built data is entered (`docs/Detention.md`).
 * Single-trapezoid reaches over-attenuate on wide flat floodplains
   (`R-CNF07`, see above).
-* Ponds inside subbasins (23 open-water bodies ≥ 0.25 ac, 21 ac total) are not routed.
+* Ponds inside subbasins are routed only where the city detention layer has them and they store meaningful water (`docs/Detention.md`).
 * Storm sewer is "full capture": inlet catchments go to the pipe outfall in every storm (no capacity limit yet).
 * Channel R for Tc is a regional power law, not surveyed.
 * The lake curves are terrain-only, with no principal spillways.

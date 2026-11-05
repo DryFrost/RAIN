@@ -8,8 +8,9 @@ watershed draining to the point the analysis is centered on:
 |---|---|
 | Outlet | 38.770832, −94.492901 → FEMA bridge **29037ECT030** on East Creek Trib 12 (Missouri State Plane West ft: 2,790,727 E, 948,173 N) |
 | Drainage area | **8.28 sq mi** (5,296 ac), entirely inside the FEMA 2D area (45.4 sq mi) |
-| HMS elements | 61 subbasins (0.4–273 ac, mean 87 ac), 56 Muskingum-Cunge reaches, 2 lakes (level-pool), 63 junctions |
+| HMS elements | 84 subbasins, 79 Muskingum-Cunge reaches, 2 lakes + 23 detention basins (level-pool), 109 junctions |
 | Subbasins | Terrain (culverts burned) **plus the city storm sewer**: inlets route to their pipe outfalls, moving 274 ac between subbasins ([details](docs/StormSewer_Delineation.md)) |
+| Detention | **23 basins** from the city storm GIS as level-pool elements (58.6 ac-ft); most subdivisions do not detain ([details](docs/Detention.md)) |
 | Land cover | 44 % lawn, 22 % trees, 13 % roads, 8 % crops, 5 % buildings, 5 % bare ground, 2 % water |
 | Soils | 51 % C/D, 33 % C, 9 % D, 5 % B (SSURGO via FEMA `Soils.hdf`) |
 | Loss | SCS CN from FEMA's own CN table: 20.5 % impervious, pervious CN 80.8 (composite 84.3) |
@@ -59,8 +60,10 @@ watershed draining to the point the analysis is centered on:
 ## Results (HEC-HMS 4.14)
 
 All 12 runs were computed with HEC-HMS 4.14 (Linux, headless) and finished
-with no errors. The only warning is that 14 short reaches "may cause numeric
-instabilities"; the hydrographs show none. An independent Python
+with no errors. The warnings are that 18 short reaches "may cause numeric
+instabilities" (the hydrographs show none), that the 91 ft reach below DET021
+would need 2 subreaches at high index flows, and that two tiny detention
+subbasins have a lag under the time-step criterion. An independent Python
 re-implementation of the same methods (`scripts/hms_check.py`) reproduces the
 HMS peaks at every junction within 0–1.2 % and the time of peak within about
 1 min, which confirms HMS is computing what was intended.
@@ -73,18 +76,19 @@ Peak flow at the outlet (cfs):
 
 | Event | FEMA RoG @ `Trib12Ea_8.6sqmi` (839 ft downstream) | HMS, FEMA rainfall | HMS, Atlas 14 point rainfall |
 |---|---:|---:|---:|
-| 10-yr | 2,899 | 3,724 | 5,466 |
-| 25-yr | 4,383 | 5,157 | 7,427 |
-| 50-yr | 5,837 | 6,392 | 9,102 |
-| 100-yr | 7,310 | 7,719 | 10,897 |
-| 100-yr+ | 8,970 | 9,399 | 13,169 |
-| 500-yr | 11,023 | 11,264 | 15,682 |
+| 10-yr | 2,899 | 3,754 | 5,490 |
+| 25-yr | 4,383 | 5,183 | 7,437 |
+| 50-yr | 5,837 | 6,410 | 9,091 |
+| 100-yr | 7,310 | 7,725 | 10,859 |
+| 100-yr+ | 8,970 | 9,384 | 13,108 |
+| 500-yr | 11,023 | 11,220 | 15,613 |
 
 Across the 11 reference lines inside the watershed, the median HMS/FEMA peak
-ratio is 1.28 (10-yr), 1.10 (100-yr) and 1.01 (500-yr). HMS runs high in
+ratio is 1.30 (10-yr), 1.11 (100-yr) and 1.03 (500-yr). HMS runs high in
 frequent storms because the 2D model stores water in every lidar depression
-and behind every road embankment. HMS has none of that yet, and that is
-exactly the detail the next phases add (below).
+and behind every road embankment. HMS now routes the 23 detention basins that
+store meaningful water (`docs/Detention.md`), but not road-embankment storage;
+that is one of the next phases (below).
 
 One location runs the other way: at `TribUppe_3.4` HMS is 27 % (100-yr) to
 34 % (500-yr) **below** FEMA. Reach `R-CNF07` upstream of it is a 4,200 ft
@@ -172,32 +176,53 @@ for s in 08_figures 10_asbuilt_silver_lake 11_asbuilt_index 12_raymore_storm_gis
 * `03` runs after `06` because its lake-stage table needs the lake polygons
   from `04`.
 
+## Continuing locally (Windows)
+
+1. Clone the repo and pull the large files:
+
+   ```bash
+   git clone https://github.com/DryFrost/RAIN.git
+   ```
+
+   ```bash
+   cd RAIN && git checkout claude/practical-knuth-jpucay && git lfs pull
+   ```
+
+2. Open `HMS/Raymore_Trib12/Raymore_Trib12.hms` in **HEC-HMS 4.14** and compute
+   any run. Results land in `HMS/Raymore_Trib12/results/`. On close, HMS
+   re-saves the project in its own format; that's fine.
+3. To rebuild after changing inputs (e.g. as-built detention outlets), use
+   Python 3.11+:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+   then run the scripts in the order under *Reproducing*. Most edits only need
+   `14` and then `07`.
+4. To extract HMS results after computing in the GUI:
+
+   ```bash
+   python scripts/09_hms_results.py HMS/Raymore_Trib12
+   ```
+
+The as-built PDFs are not in the repo. `docs/as-builts/raymore_asbuilt_index.csv`
+links each one on the city's public file share.
+
 ## Recommended next phases
 
-1. **Road-crossing storage.** Turn the 27 FEMA culvert crossings into HMS
-   reservoirs (Controlled Outflow + Culvert + overtopping weir). The culvert
-   shape, size, inverts, length and entrance loss are all in
-   `GIS/FEMA_RoG_geometry.gpkg`, and the upstream storage comes from the 1 m
-   terrain. This is the main thing the 2D model has that HMS lacks.
-2. **Subdivision detention.** Collect as-builts (City of Raymore / Cass County
-   MS4 records) and screen with lidar (`GIS/rasters/fill_depth_10ft.tif`).
-   The city's storm GIS lists **131 detention, pond and retention basins** in the
-   watershed (`HMS/parameters/detention_city_gis.csv`). 64 of them sit inside
-   an as-built from the city plan library, which should hold the outlet details.
-   Raymore City Hall is held to 1.8 cfs/ac in the 100-yr
-   (`HMS/parameters/detention_inventory.csv`).
-   Each basin becomes a reservoir with its real outlet (orifice, weir, riser).
-   25 open-water bodies ≥ 0.25 ac lie inside the watershed; 23 of them
-   (21 ac total) are inside subbasins and not yet modeled.
+1. **As-built detention outlets.** Enter the 12 modelled basins that have plan
+   sets (`docs/Detention.md`) in `HMS/parameters/detention_outlets_asbuilt.csv`,
+   starting with DET006 (Good Ranch, 15 ac-ft) and DET011 (Raymore Galleria,
+   9 ac-ft).
+2. **Road-crossing storage.** Turn the 27 FEMA culvert crossings into HMS
+   reservoirs (culvert + overtopping weir, storage from lidar). The culvert
+   data is already in `GIS/FEMA_RoG_geometry.gpkg`. This is the largest
+   remaining difference from FEMA's 2D model.
 3. **8-point cross sections** for wide floodplain reaches, starting with
    `R-CNF07`.
-4. **Lake outlets.** LK1 (Silver Lake) as-builts are reviewed. Remaining for
-   LK1: survey the sill (±0.5 ft changes its 100-yr outflow by about 40 %).
-   City storm GIS confirms the area west of the lake (`SB-EAG030`) does not
-   drain into it. LK2 still needs as-builts.
-5. **Storm sewer capacity.** Subbasins already follow the city storm sewer
-   ("full capture"). Where a transfer feeds a culvert or detention basin, add
-   an HMS Diversion sized from pipe capacity so flow above the pipe design
-   event stays on the surface.
+4. **Lake outlets.** Survey the Silver Lake sill; get LK2 as-builts.
+5. **Storm sewer capacity.** Add HMS Diversions where a sewer transfer feeds a
+   culvert or detention basin.
 6. **Rainfall decision**: FEMA 0.782 ARF, Atlas 14 point, or an ARF sized to
    the 8.3 sq mi watershed.
