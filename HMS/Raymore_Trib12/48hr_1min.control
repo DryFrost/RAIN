@@ -1,0 +1,11 @@
+Control: 48hr_1min
+     Description: Matches FEMA RoG simulation window; 1-minute step
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 03:46:23
+     Version: 4.14
+     Start Date: 1 January 2030
+     Start Time: 00:00
+     End Date: 3 January 2030
+     End Time: 00:00
+     Time Interval: 1
+End:

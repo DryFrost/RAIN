@@ -1,0 +1,163 @@
+# HEC-HMS model – methodology
+
+Project: `HMS/Raymore_Trib12/Raymore_Trib12.hms` (HEC-HMS **4.14**, English units,
+NAD83 Missouri State Plane West, US ft). Every number below is produced by
+`scripts/01`–`07`; nothing was hand-entered.
+
+## Model components
+
+| Component | Name(s) | Notes |
+|---|---|---|
+| Basin model | `Existing FEMA-Consistent` | 62 subbasins, 55 Muskingum-Cunge reaches, 2 lake reaches (Modified Puls), 64 junctions |
+| Met models | `FEMA_<event>` (6) | FEMA RoG hyetographs, unchanged (`data/FEMA_Rainfall_ARF78.dss`, copied from `Resources/.../78% AR/Rainfall.dss`) |
+| | `Point_<event>` (6) | same hyetographs × (Atlas 14 point depth / FEMA depth) = 1.2787, in `data/Atlas14_PointRainfall.dss` |
+| Control | `48hr_1min` | 01 Jan 2030 00:00 – 03 Jan 2030 00:00, 1 min (same window as the FEMA plans) |
+| Runs | 12 | one per met model, results to `results/<run>.dss` |
+| Paired data | `LK1 Storage-Outflow`, `LK2 Storage-Outflow` | in the project DSS `Raymore_Trib12.dss` |
+| Maps | `maps/*.shp` | watershed, subbasins, streams, lakes |
+
+Events: 10, 25, 50, 100, `100yr_plus` (Atlas 14 upper 90 % CI; FEMA's "101yr" plan p07) and 500-yr.
+24-hr point depths (FEMA `Precip.gdb` / Atlas 14): 5.55, 6.83, 7.88, 8.97, 10.31, 11.75 in.
+The FEMA temporal pattern is a nested, centre-peaked storm: about 92 % of the depth falls in 6 hr, with the peak at 12:06 on 1 Jan.
+
+### Element naming
+
+* `J-<id>`: junction at a subbasin outlet. The `<id>` is the FEMA structure
+  ID without the `29037` county prefix (e.g. `J-ECT030` = bridge 29037ECT030),
+  `RL_<FEMA reference line>`, `CNF##` (confluence), `SPL##` (main-stem break),
+  `LK#` (lake outlet sill) or `LK#-IN#` (tributary entering a lake).
+* `SB-<id>`: the subbasin draining to `J-<id>`. `R-<id>`: the reach leaving
+  `J-<id>`. `L-LK#`: the lake (level pool). `J-LK#-Pool`: where tributaries
+  and the lake subbasin enter the pool.
+* Junction descriptions name the FEMA structure / reference line they match,
+  so HMS results can be compared one-to-one with `FEMA_Results/*.csv`.
+
+## Delineation (`02`, `04`)
+
+1. FEMA terrain `FinalTerrain.hydroDEM.tif` (1 m). This is **not**
+   hydro-enforced, so all 97 FEMA culvert barrels were burned along their
+   centerlines from the surveyed upstream to downstream invert (3-cell-wide
+   burn). Bridges are already open in the bare-earth terrain.
+2. Aggregated 3×3 by **block minimum** to 9.84 ft cells (keeps burned
+   channels connected). pysheds: fill pits → fill depressions → resolve flats
+   → D8.
+3. Check: 33 of 37 FEMA reference lines reproduce their named drainage areas
+   within ±4 %. The other three (`Trib12Ea_0.7`, `Trib12Ea_1.6`,
+   `TribNort_2.0`) involve the same ~0.75 sq mi diversion, which FEMA's own 2D
+   results also show (see the root README).
+4. Watershed divide check: the subject watershed follows the FEMA 2D
+   perimeter for about 41,000 ft. At 93 % of transects across it the terrain
+   falls away outside, and there is no artificial wall (median spike
+   0.4 ft). The terrain extends about 2,700 ft beyond the perimeter, so the
+   divide is terrain-defined, not truncated.
+5. Break points: all 27 FEMA crossings and 11 FEMA reference lines in the
+   watershed (≥ 15 ac), confluences where both branches drain ≥ 60 ac, lake
+   outlets, and tributaries ≥ 40 ac entering a lake. Points within 250 ft
+   (flow distance) of a more important point are merged. Subbasins > 260 ac
+   are split on the main stem where possible.
+
+## Subbasin parameters (`05`)
+
+**Loss: SCS Curve Number**, reproducing FEMA `Land Classification/Infiltration.hdf`.
+That is FEMA's land-cover × soils CN table (lawn B/C/D = 69/79/84, prairie
+61/74/80, trees 60/73/79, bare ground 85/89/91, crops 78/83/87; dual groups
+use the D value; buildings, roads, water and channels = 98), evaluated on the
+1 m land cover and the 10 ft SSURGO soils grid.
+
+* FEMA's CN-98 classes (buildings, roads, open water, channels, no-data) are
+  entered as **Percent Impervious** (100 % runoff in HMS).
+* **Curve Number** = area-weighted CN of the remaining (pervious) cells.
+* Ia = 0.2 S (HMS default when Initial Abstraction is blank, and FEMA's
+  abstraction ratio). Composite CN is in the subbasin description and
+  `parameters/subbasin_parameters.csv`.
+
+**Transform: SCS UH (standard, PRF 484)**, lag = 0.6 Tc. Tc is TR-55,
+segmented along each subbasin's longest D8 flow path:
+
+| Segment | Rule |
+|---|---|
+| Sheet | first 100 ft. n by land cover (TR-55 Table 3-1: impervious 0.011, lawn/prairie 0.24, bare 0.05, crops 0.17, trees 0.40). P₂ = 3.66 in (Atlas 14 2-yr 24-hr). s ≥ 0.005 |
+| Shallow concentrated | to channel start. Paved V = 20.33 √s on roads and buildings, unpaved V = 16.13 √s elsewhere. s over ±50 ft, ≥ 0.005 |
+| Channel | from DA ≥ 30 ac, or sustained FEMA "channel" land cover. Manning n = 0.045, R = DA(sq mi)^0.3 ft (0.4–4 ft), s over ±100 ft ≥ 0.001, V ≤ 12 ft/s |
+
+Minimum Tc is 5 min. Lake subbasins measure Tc only to the water's edge,
+because the pool is routed separately. Results: lag 5.7–73 min (median 22.6).
+The NRCS lag equation (reported as `Lag_NRCSeq_min`) gives about 40 % shorter
+lags. TR-55 was kept as the primary method because it is the segmented method
+local criteria most often reference; switch to the lag equation if your
+governing criteria call for it.
+
+No baseflow and no canopy or surface storage, consistent with FEMA's RoG.
+
+## Reach parameters (`05`)
+
+**Muskingum-Cunge, trapezoid, automatic Δx/Δt, index flow**
+
+* Length = D8 path between junctions. Slope = regression of the burned-DEM
+  profile (minimum 0.0005).
+* Trapezoid: least-squares fit of A(h) = b·h + z·h² to the flow area from
+  three 1 m terrain cross sections per reach (25/50/75 %), for depths up to
+  h_ref = 2.5 + 2·DA^0.35 ft (3–10 ft, roughly the 100-yr depth). Bottom
+  width and side slope are the medians of the three fits.
+* Manning n: the conveyance-weighted value of FEMA's Manning's n raster across
+  the wetted section at h_ref, n_eff = Σd^{5/3} / Σ(d^{5/3}/n_i), limited to
+  0.03–0.12. Median 0.064.
+* Index flow = 0.5 × the QA engine's 100-yr (FEMA rainfall) peak inflow to
+  the reach, following the HMS Technical Reference.
+* Reaches that would cross a lake are replaced by a direct junction link into
+  that lake's pool.
+
+`R-CNF07` is a real 4,200 ft wooded floodplain with about 2 ft of fall (fitted
+valley 570–850 ft wide), so its large attenuation is physical.
+
+## Lakes (`06`)
+
+LK1 (52.5 ac, normal pool 1025.47 ft, 0.69 sq mi) and LK2 (8.3 ac, 1032.78 ft,
+0.22 sq mi) are hydro-flattened in the lidar and have no outlet structures in
+the FEMA model. Each is a **Modified Puls reach with a storage–outflow table**,
+which is mathematically a level-pool reservoir:
+
+* **Storage:** volume above normal pool in the 1 m terrain cells connected to
+  the lake, within its contributing subbasins.
+* **Outflow:** a broad-crested weir (C = 2.6, FEMA's coefficient),
+  strip-integrated across a 1 m transect at the **sill**. The sill is the
+  location on the outflow path whose cross-section low point is highest.
+* **Start:** the lake begins at normal pool, as in FEMA's model.
+
+Check against FEMA 2D maximum lake stage, all six events
+(`QAQC/engine_lake_routing.csv`):
+
+* LK1: +0.29 to +0.41 ft
+* LK2: −0.41 to −0.76 ft
+
+These curves stand in until real dam and spillway data exist.
+
+## QA/QC engine (`scripts/hms_check.py`)
+
+The engine re-implements the methods above independently: SCS CN
+(incremental), NRCS dimensionless UH with Tp = Δt/2 + lag, constant-parameter
+Muskingum-Cunge with Ponce Δx criteria, and storage-indication Modified Puls.
+Outputs are in `QAQC/`:
+
+* `engine_peaks_all_elements.csv`: peak and time-to-peak for every junction
+  and subbasin, all 12 runs
+* `comparison_with_FEMA_RoG.csv`: against FEMA reference lines (total flow)
+  and structures (through-structure flow only; road overtopping excluded, so
+  these are not directly comparable)
+* `engine_muskingum_cunge.csv`: celerity, normal depth, subreaches, K, X per reach
+* `engine_lake_routing.csv`: lake inflow and outflow, storage, stage, FEMA stage
+
+**HEC-HMS was not run in the build environment.** Open the project in HMS
+4.14, compute, and compare. Peaks should agree within a few percent; HMS's own
+Muskingum-Cunge sub-stepping and UH interpolation differ slightly from the
+engine.
+
+## Known limitations of this phase
+
+* No storage at road crossings (27 culverts) or in subdivision detention, so
+  HMS is high in frequent storms relative to FEMA's 2D model (median ratio
+  1.36 at 10-yr, 1.11 at 100-yr, 0.98 at 500-yr).
+* Ponds inside subbasins (23 open-water bodies ≥ 0.25 ac, 21 ac total) are not routed.
+* No storm sewer network; flow paths follow the terrain, like FEMA's model.
+* Channel R for Tc is a regional power law, not surveyed.
+* The lake curves are terrain-only, with no principal spillways.
