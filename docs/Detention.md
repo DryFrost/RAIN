@@ -232,6 +232,22 @@ and 078.
 * Spills come from the lidar (rings out to 30 ft, storage within 60 ft). Where
   a pond was regraded after its plans (e.g. DET050, DET061), the lidar rim is
   used, not the plan spillway.
+* **Pipe branches that end in a pond.** A branch whose last pipe ends inside
+  a basin may discharge into it, or may be the pond's outlet pipe. The city
+  layer cannot tell which: digitizing direction is only 69 % reliable, and
+  end sections sit at both kinds of pipe end. These branches keep their
+  inlet-capture outfall. Check these on the plans or in the field:
+
+  | Basin | City system | Inlets | Outfall distance |
+  |---|---:|---:|---:|
+  | DET012 | 79 | 33 | 425 ft |
+  | DET030 | 68 | 8 | 680 ft |
+  | DET031 / DET032 | 46 | 35 | 1.9 / 1.1 k ft |
+  | DET049 | 320 | 21 | 697 ft |
+  | DET050 | 43 | 15 | 1,130 ft |
+
+  If a branch does discharge into the pond, its inlets bypass the pond in the
+  model, so the pond's drainage area (and its attenuation) is understated.
 * There is no tailwater: outlets discharge freely. The barrel is an orifice,
   with no friction or outlet control; at DET006 that puts the 100-yr release
   7 % above the design value.
