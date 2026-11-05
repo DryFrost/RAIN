@@ -50,6 +50,19 @@ and it is why the outlet peak moves only a few percent.
   every footprint cell that leaves the footprint to the basin outlet (201
   links; used by delineation `04` and parameters `05`). Basins in series
   (DET007 → DET027, DET032 → DET060) are routed in series.
+* **Pipes through and out of a basin:** a city pipe system can run through a
+  pond. It reaches the pond, leaves by the outlet structure and continues
+  downstream, all digitized as one network. Inlet capture (`02b`) sends every
+  inlet to the system's final outfall, so inlets upstream of the pond would
+  skip it. `14` finds these systems: a pipe node inside the basin, with the
+  outfall beyond it.
+  * Inlets whose pipe path passes the basin go to the basin outlet (25 links;
+    the 20 Foxwood Plaza inlets above DET060 lift its drainage area from 4 to
+    13 ac).
+  * The basin outlet then follows the outlet pipe to its outfall (24 links).
+    DET006's 48 in outlet runs SE under **Dean Ave**, so the pond now
+    discharges east of Dean, joining the creek at J-CNF30 instead of crossing
+    the road on the surface.
 * **Wet or dry:** a basin is wet when 25 % or more of its 1 m lidar cells lie
   within 0.1 ft of one elevation (hydro-flattened water). Storage is then
   counted above that pool.
@@ -110,10 +123,12 @@ Not entered:
   3-sheet *Legends at Raymore Public Water Main Improvements* plan, with no
   detention sheets.
 * **DET006 drainage area:** the plans give **119.5 ac** (78.8 ac commercial +
-  40.7 ac residential). Terrain + city sewer give **48 ac** today. If the
-  commercial tract is built and piped to the pond (private pipes are not in
-  the city layer), DET006 receives about 2.5 times the modelled inflow. Check
-  this on aerials or in the field.
+  40.7 ac residential). Terrain + city sewer give **48 ac** today: the Dean
+  Ave system from the north (city system 416) and the slope west of the pond.
+  The unplatted land between the pond and the highway is still open ground in
+  the lidar. If a commercial tract is built there, or elsewhere and piped to
+  the pond (private pipes are not in the city layer), DET006 will receive
+  about 2.5 times the modelled inflow. Check this on aerials or in the field.
 
 ## Results (HEC-HMS 4.14, all 12 runs, no errors)
 
@@ -124,22 +139,22 @@ not the subbasins.
 
 * **At the basins** (FEMA 100-yr): the median peak reduction is 41 %.
   * DET006 −83 % (260 → 44 cfs; water surface 1010.9);
-  * DET011 −74 % (267 → 68 cfs);
-  * DET012 −79 %, DET032 −79 %, DET044 −63 %, DET031 −61 %;
+  * DET011 −75 % (275 → 70 cfs);
+  * DET012 −79 %, DET032 −79 %, DET060 −60 % (87 → 35 cfs), DET050 −49 %;
   * DET021 −16 % (54 in floor pipe);
   * shallow ponds −1 % to −51 %.
 * **At junctions** (FEMA 100-yr):
-  * median −3.3 %; 24 of 63 junctions drop 5 % or more;
-  * J-CNF27 −38 %, J-GRA010 −29 %, J-MCT010 −21 %, J-LK1-IN2 −16 %, J-ECT070
-    −13 %, J-RL_Trib12Ea_1.6 −13 %, J-MEA020 −11 %, J-CNF17 −11 %;
+  * median −1.9 %; 23 of 63 junctions drop 5 % or more;
+  * J-CNF30 −31 %, J-GRA010 −30 %, J-LK1-IN2 −18 %, J-MCT010 −17 %, J-ECT070
+    −13 %, J-RL_Trib12Ea_1.6 −13 %, J-MEA010 / MEA020 / CNF17 −11 %;
   * no junction rises more than 2 %.
 * **At the outlet** J-ECT030:
 
   | Event | FEMA rain: pass-through → detention | Atlas 14 point rain |
   |---|---|---|
-  | 10-yr | 3,738 → 3,557 cfs (−4.9 %) | 5,509 → 5,276 (−4.2 %) |
-  | 100-yr | 7,806 → 7,545 (−3.3 %) | 11,050 → 10,730 (−2.9 %) |
-  | 500-yr | 11,426 → 11,097 (−2.9 %) | 15,938 → 15,550 (−2.4 %) |
+  | 10-yr | 3,692 → 3,522 cfs (−4.6 %) | 5,437 → 5,222 (−4.0 %) |
+  | 100-yr | 7,700 → 7,456 (−3.2 %) | 10,896 → 10,588 (−2.8 %) |
+  | 500-yr | 11,266 → 10,949 (−2.8 %) | 15,713 → 15,336 (−2.4 %) |
 
 * **Rating check:** no basin exceeds 53 % of its rating table (the largest is
   DET007 in the Point 500-yr).
@@ -193,12 +208,12 @@ Plan sets covering the modelled basins (largest storage first):
 | Basin | Storage at spill | Drainage area | As-built plan set | Outlet |
 |---|---:|---:|---|---|
 | DET006 | 27.9 ac-ft | 48 ac | Good Ranch – Storm Water Detention Plans for S Dean Ave | **entered** |
-| DET011 | 9.5 | 33 | Raymore Galleria Phase 1 | **entered** |
+| DET011 | 9.5 | 38 | Raymore Galleria Phase 1 | **entered** |
 | DET032 | 7.4 | 5.6 | Foxwood Plaza at the Legends | assumed (file is a water-main plan) |
 | DET021 | 6.0 | 46 | Lemor Estates Phase 1 | **entered** |
 | DET012 | 3.2 | 5 | Matlock Johnson (Walmart) | assumed (outlet not detailed) |
-| DET060 | 3.1 | 4 | Foxwood Plaza at the Legends | assumed (file is a water-main plan) |
-| DET050 | 1.5 | 6 | Municipal Complex Phase 1 | read; lidar rim below plan spillway (above) |
+| DET060 | 3.1 | 13 | Foxwood Plaza at the Legends | assumed (file is a water-main plan) |
+| DET050 | 1.5 | 10 | Municipal Complex Phase 1 | read; lidar rim below plan spillway (above) |
 | DET044 | 1.2 | 14 | Centerview Phase II / Town Center Ph 1, 4 | assumed |
 | DET030 | 0.6 | 54 | Shadowood Phase 1 | assumed |
 | DET061 | 0.6 | 4 | Centerview Phase II / Municipal Complex Ph 1 | read; lidar rim below plan spillway (above) |

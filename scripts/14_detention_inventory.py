@@ -155,6 +155,82 @@ def asbuilt_outflow(rows, E):
     return q + over
 
 
+def passthrough_links(polys, outlet):
+    """Storm pipe systems that run THROUGH a basin (a pipe node inside it, the
+    system outfall beyond it), e.g. inflow pipe -> pond -> outlet pipe under Dean
+    Ave digitized as one network.  scripts/02b links every inlet of a system to
+    its outfall, so inlets upstream of the pond would skip it.  Returns
+    {basin: [(ic, oc, kind)]}: 'pipe_in' sends an inlet whose pipe path passes
+    the basin to the basin outlet; 'pipe_out' sends the basin outlet to the
+    system outfall (the outlet pipe)."""
+    links_csv = PAR / "sewer_links.csv"
+    sys_gpkg = ROOT / "GIS/StormSewer_Links.gpkg"
+    if not links_csv.exists() or not sys_gpkg.exists():
+        return {}
+    P, G, xy = sewer.pipe_network()
+    comps = [sorted(c) for c in nx.connected_components(G)]
+    sy = gpd.read_file(sys_gpkg, layer="systems").set_index("System")
+    lk = pd.read_csv(links_csv)
+    ends_of_pipe = {dd["pipe"]: (u, v) for u, v, dd in G.edges(data=True)}
+    tree = gpd.GeoSeries(P.geometry).sindex
+    nodes = np.array(sorted(xy))
+    nxy = np.array([xy[nd] for nd in nodes])
+    out = {}
+    for bid, poly in polys.items():
+        zone = poly.buffer(15.0)
+        b = zone.bounds
+        near = nodes[(nxy[:, 0] >= b[0]) & (nxy[:, 0] <= b[2]) & (nxy[:, 1] >= b[1]) & (nxy[:, 1] <= b[3])]
+        inside = {int(nd) for nd in near if zone.contains(Point(xy[nd]))}
+        if not inside:
+            continue
+        res, outs = [], []
+        for k in {next(i for i, c in enumerate(comps) if nd in c) for nd in inside}:
+            if k not in sy.index:
+                continue
+            o_pt = Point(sy.loc[k, "Outfall_x"], sy.loc[k, "Outfall_y"])
+            if o_pt.within(poly.buffer(40.0)):
+                continue                      # the system already discharges into the basin
+            n_out = min(comps[k], key=lambda nd: np.hypot(xy[nd][0] - o_pt.x, xy[nd][1] - o_pt.y))
+            mine = lk[lk.System == k]
+            if not len(mine):
+                continue
+            n_in_links = 0
+            for _, L in mine.iterrows():
+                pt = Point(L.x, L.y)
+                cand = tree.query(pt.buffer(15.0))
+                if not len(cand):
+                    continue
+                j = min(cand, key=lambda c: P.geometry[c].distance(pt))
+                u, v = ends_of_pipe[j]
+                n_in = u if np.hypot(xy[u][0] - pt.x, xy[u][1] - pt.y) <= np.hypot(xy[v][0] - pt.x, xy[v][1] - pt.y) else v
+                if n_in in inside:
+                    continue                  # the pond's own outlet structure
+                path = nx.shortest_path(G, n_in, n_out)
+                if inside.intersection(path) and int(L.ic) != outlet[bid]:
+                    res.append((int(L.ic), int(outlet[bid]), "pipe_in"))
+                    n_in_links += 1
+            outs.append((n_in_links == 0, o_pt.distance(poly), int(mine.oc.iloc[0])))
+        # one outlet pipe per basin: the system carrying re-routed inlets, else the
+        # one whose outfall is nearest (a short outlet pipe, not a trunk passing by)
+        if outs:
+            res.append((int(outlet[bid]), min(outs)[2], "pipe_out"))
+        if res:
+            out[bid] = res
+    return out
+
+
+def apply_checked(down, links):
+    """Set down[ic] = oc for each link unless it would close a cycle; returns kept links."""
+    kept = []
+    for L in links:
+        ic, oc = L[0], L[1]
+        if ic == oc or hydro.on_downstream_path(oc, ic, down, down.size):
+            continue
+        down[ic] = oc
+        kept.append(L)
+    return kept
+
+
 def main():
     RAT.mkdir(parents=True, exist_ok=True)
     d = gpd.read_file(STORM, layer="detention")
@@ -177,6 +253,24 @@ def main():
 
     d["Area_ac"] = d.area / 43560.0
     d = d.sort_values("Area_ac", ascending=False).reset_index(drop=True)
+    # pipe systems passing through basins (see passthrough_links); applied for every
+    # basin when computing drainage areas, written for the modelled ones only
+    polys, outl = {}, {}
+    for k, r in d.iterrows():
+        bid = f"DET{k + 1:03d}"
+        m10 = rasterize([(r.geometry, 1)], out_shape=A.shape, transform=tr10, all_touched=True).astype(bool)
+        if not m10.any():
+            m10 = rasterize([(r.geometry.buffer(10), 1)], out_shape=A.shape, transform=tr10, all_touched=True).astype(bool)
+        ix = np.flatnonzero(m10.ravel())
+        polys[bid], outl[bid] = r.geometry, int(ix[np.argmax(A.ravel()[ix])])
+    pthru = passthrough_links(polys, outl)
+    down_r = down.copy()
+    for bid in pthru:
+        apply_checked(down_r, pthru[bid])
+    order_r = hydro.topo_order(down_r)
+    if order_r.size != down_r.size:
+        down_r, order_r = down, order
+    print(f"pipe systems through basins: {sum(len(v) for v in pthru.values())} links at {len(pthru)} basins")
     rows = []
     for k, r in d.iterrows():
         bid = f"DET{k + 1:03d}"
@@ -191,7 +285,7 @@ def main():
         ox, oy = tr10 * ((oc % A.shape[1]) + 0.5, (oc // A.shape[1]) + 0.5)
         # drainage area = everything that enters the footprint: on a flat pool
         # D8 can leave by a second cell, but in reality all of it passes the outlet
-        da = float(hydro.drains_into(down, order, m10.ravel()).sum() * ac10)
+        da = float(hydro.drains_into(down_r, order_r, m10.ravel()).sum() * ac10)
         capture[bid] = (idx, oc)
         # ---- 1 m terrain window
         xmin, ymin, xmax, ymax = poly.buffer(STORAGE_REACH_FT + 20).bounds
@@ -290,6 +384,10 @@ def main():
     # footprint go to the basin outlet (read by sewer.flow_graph in scripts 04/05)
     down2 = down.copy()
     lk = []
+    # pipe links for every basin (keeps the drainage areas above consistent); for an
+    # unmodelled basin they only pass its outlet cell on the way to the same outfall
+    for bid in g.Basin:
+        lk += [(bid, ic, oc, kind) for ic, oc, kind in apply_checked(down2, pthru.get(bid, []))]
     inside = np.zeros(down.size, bool)
     for bid in g.Basin[g.Modelled]:
         idx, oc = capture[bid]
@@ -302,9 +400,13 @@ def main():
             if hydro.on_downstream_path(oc, int(j), down2, down.size):
                 continue            # would close a cycle through the outlet
             down2[j] = oc
-            lk.append((bid, int(j), int(oc)))
-    pd.DataFrame(lk, columns=["Basin", "ic", "oc"]).to_csv(sewer.DET_LINKS_CSV, index=False)
-    print(f"detention capture links: {len(lk)} -> {sewer.DET_LINKS_CSV.relative_to(ROOT)}")
+            lk.append((bid, int(j), int(oc), "footprint"))
+    lk = pd.DataFrame(lk, columns=["Basin", "ic", "oc", "Kind"])
+    lk.to_csv(sewer.DET_LINKS_CSV, index=False)
+    print(f"detention links: {lk.Kind.value_counts().to_dict()} -> {sewer.DET_LINKS_CSV.relative_to(ROOT)}")
+    for bid, grp in lk[lk.Kind != "footprint"].groupby("Basin"):
+        print(f"   {bid}: {int((grp.Kind == 'pipe_in').sum())} inlets re-routed into the basin, "
+              f"outlet pipe link {'yes' if (grp.Kind == 'pipe_out').any() else 'no'}")
     OUT.unlink(missing_ok=True)
     g.to_file(OUT, layer="basins")
     g.drop(columns="geometry").round(3).to_csv(PAR / "detention_basins.csv", index=False)

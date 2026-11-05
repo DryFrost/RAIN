@@ -7,7 +7,7 @@ Table: LK1 Storage-Outflow
      Table Type: Storage-Outflow
      Description: LK1 terrain-derived level pool above normal pool (see HMS/parameters)
      Last Modified Date: 5 November 2026
-     Last Modified Time: 05:42:24
+     Last Modified Time: 06:13:23
      X-Units: ACRE-FT
      Y-Units: CFS
      Use External DSS File: NO
@@ -20,7 +20,7 @@ Table: LK2 Storage-Outflow
      Table Type: Storage-Outflow
      Description: LK2 terrain-derived level pool above normal pool (see HMS/parameters)
      Last Modified Date: 5 November 2026
-     Last Modified Time: 05:42:24
+     Last Modified Time: 06:13:23
      X-Units: ACRE-FT
      Y-Units: CFS
      Use External DSS File: NO
@@ -33,7 +33,7 @@ Table: DET003 Storage-Outflow
      Table Type: Storage-Outflow
      Description: DET003 terrain-derived level pool above normal pool (see HMS/parameters)
      Last Modified Date: 5 November 2026
-     Last Modified Time: 05:42:24
+     Last Modified Time: 06:13:23
      X-Units: ACRE-FT
      Y-Units: CFS
      Use External DSS File: NO
@@ -46,7 +46,7 @@ Table: DET006 Storage-Outflow
      Table Type: Storage-Outflow
      Description: DET006 terrain-derived level pool above normal pool (see HMS/parameters)
      Last Modified Date: 5 November 2026
-     Last Modified Time: 05:42:24
+     Last Modified Time: 06:13:23
      X-Units: ACRE-FT
      Y-Units: CFS
      Use External DSS File: NO
@@ -59,7 +59,7 @@ Table: DET007 Storage-Outflow
      Table Type: Storage-Outflow
      Description: DET007 terrain-derived level pool above normal pool (see HMS/parameters)
      Last Modified Date: 5 November 2026
-     Last Modified Time: 05:42:24
+     Last Modified Time: 06:13:23
      X-Units: ACRE-FT
      Y-Units: CFS
      Use External DSS File: NO
@@ -72,7 +72,7 @@ Table: DET008 Storage-Outflow
      Table Type: Storage-Outflow
      Description: DET008 terrain-derived level pool above normal pool (see HMS/parameters)
      Last Modified Date: 5 November 2026
-     Last Modified Time: 05:42:24
+     Last Modified Time: 06:13:23
      X-Units: ACRE-FT
      Y-Units: CFS
      Use External DSS File: NO
@@ -85,7 +85,7 @@ Table: DET011 Storage-Outflow
      Table Type: Storage-Outflow
      Description: DET011 terrain-derived level pool above normal pool (see HMS/parameters)
      Last Modified Date: 5 November 2026
-     Last Modified Time: 05:42:24
+     Last Modified Time: 06:13:23
      X-Units: ACRE-FT
      Y-Units: CFS
      Use External DSS File: NO
@@ -98,7 +98,7 @@ Table: DET012 Storage-Outflow
      Table Type: Storage-Outflow
      Description: DET012 terrain-derived level pool above normal pool (see HMS/parameters)
      Last Modified Date: 5 November 2026
-     Last Modified Time: 05:42:24
+     Last Modified Time: 06:13:23
      X-Units: ACRE-FT
      Y-Units: CFS
      Use External DSS File: NO
@@ -111,7 +111,7 @@ Table: DET016 Storage-Outflow
      Table Type: Storage-Outflow
      Description: DET016 terrain-derived level pool above normal pool (see HMS/parameters)
      Last Modified Date: 5 November 2026
-     Last Modified Time: 05:42:24
+     Last Modified Time: 06:13:23
      X-Units: ACRE-FT
      Y-Units: CFS
      Use External DSS File: NO
@@ -124,7 +124,7 @@ Table: DET017 Storage-Outflow
      Table Type: Storage-Outflow
      Description: DET017 terrain-derived level pool above normal pool (see HMS/parameters)
      Last Modified Date: 5 November 2026
-     Last Modified Time: 05:42:24
+     Last Modified Time: 06:13:23
      X-Units: ACRE-FT
      Y-Units: CFS
      Use External DSS File: NO
@@ -137,7 +137,7 @@ Table: DET021 Storage-Outflow
      Table Type: Storage-Outflow
      Description: DET021 terrain-derived level pool above normal pool (see HMS/parameters)
      Last Modified Date: 5 November 2026
-     Last Modified Time: 05:42:24
+     Last Modified Time: 06:13:23
      X-Units: ACRE-FT
      Y-Units: CFS
      Use External DSS File: NO
@@ -150,7 +150,7 @@ Table: DET023 Storage-Outflow
      Table Type: Storage-Outflow
      Description: DET023 terrain-derived level pool above normal pool (see HMS/parameters)
      Last Modified Date: 5 November 2026
-     Last Modified Time: 05:42:24
+     Last Modified Time: 06:13:23
      X-Units: ACRE-FT
      Y-Units: CFS
      Use External DSS File: NO
@@ -163,7 +163,7 @@ Table: DET025 Storage-Outflow
      Table Type: Storage-Outflow
      Description: DET025 terrain-derived level pool above normal pool (see HMS/parameters)
      Last Modified Date: 5 November 2026
-     Last Modified Time: 05:42:24
+     Last Modified Time: 06:13:23
      X-Units: ACRE-FT
      Y-Units: CFS
      Use External DSS File: NO
@@ -176,7 +176,7 @@ Table: DET027 Storage-Outflow
      Table Type: Storage-Outflow
      Description: DET027 terrain-derived level pool above normal pool (see HMS/parameters)
      Last Modified Date: 5 November 2026
-     Last Modified Time: 05:42:24
+     Last Modified Time: 06:13:23
      X-Units: ACRE-FT
      Y-Units: CFS
      Use External DSS File: NO
@@ -189,7 +189,7 @@ Table: DET030 Storage-Outflow
      Table Type: Storage-Outflow
      Description: DET030 terrain-derived level pool above normal pool (see HMS/parameters)
      Last Modified Date: 5 November 2026
-     Last Modified Time: 05:42:24
+     Last Modified Time: 06:13:23
      X-Units: ACRE-FT
      Y-Units: CFS
      Use External DSS File: NO
@@ -202,7 +202,7 @@ Table: DET031 Storage-Outflow
      Table Type: Storage-Outflow
      Description: DET031 terrain-derived level pool above normal pool (see HMS/parameters)
      Last Modified Date: 5 November 2026
-     Last Modified Time: 05:42:24
+     Last Modified Time: 06:13:23
      X-Units: ACRE-FT
      Y-Units: CFS
      Use External DSS File: NO
@@ -215,7 +215,7 @@ Table: DET032 Storage-Outflow
      Table Type: Storage-Outflow
      Description: DET032 terrain-derived level pool above normal pool (see HMS/parameters)
      Last Modified Date: 5 November 2026
-     Last Modified Time: 05:42:24
+     Last Modified Time: 06:13:23
      X-Units: ACRE-FT
      Y-Units: CFS
      Use External DSS File: NO
@@ -228,7 +228,7 @@ Table: DET033 Storage-Outflow
      Table Type: Storage-Outflow
      Description: DET033 terrain-derived level pool above normal pool (see HMS/parameters)
      Last Modified Date: 5 November 2026
-     Last Modified Time: 05:42:24
+     Last Modified Time: 06:13:23
      X-Units: ACRE-FT
      Y-Units: CFS
      Use External DSS File: NO
@@ -241,7 +241,7 @@ Table: DET044 Storage-Outflow
      Table Type: Storage-Outflow
      Description: DET044 terrain-derived level pool above normal pool (see HMS/parameters)
      Last Modified Date: 5 November 2026
-     Last Modified Time: 05:42:24
+     Last Modified Time: 06:13:23
      X-Units: ACRE-FT
      Y-Units: CFS
      Use External DSS File: NO
@@ -254,7 +254,7 @@ Table: DET049 Storage-Outflow
      Table Type: Storage-Outflow
      Description: DET049 terrain-derived level pool above normal pool (see HMS/parameters)
      Last Modified Date: 5 November 2026
-     Last Modified Time: 05:42:24
+     Last Modified Time: 06:13:23
      X-Units: ACRE-FT
      Y-Units: CFS
      Use External DSS File: NO
@@ -267,7 +267,7 @@ Table: DET050 Storage-Outflow
      Table Type: Storage-Outflow
      Description: DET050 terrain-derived level pool above normal pool (see HMS/parameters)
      Last Modified Date: 5 November 2026
-     Last Modified Time: 05:42:24
+     Last Modified Time: 06:13:23
      X-Units: ACRE-FT
      Y-Units: CFS
      Use External DSS File: NO
@@ -280,7 +280,7 @@ Table: DET051 Storage-Outflow
      Table Type: Storage-Outflow
      Description: DET051 terrain-derived level pool above normal pool (see HMS/parameters)
      Last Modified Date: 5 November 2026
-     Last Modified Time: 05:42:24
+     Last Modified Time: 06:13:23
      X-Units: ACRE-FT
      Y-Units: CFS
      Use External DSS File: NO
@@ -293,7 +293,7 @@ Table: DET053 Storage-Outflow
      Table Type: Storage-Outflow
      Description: DET053 terrain-derived level pool above normal pool (see HMS/parameters)
      Last Modified Date: 5 November 2026
-     Last Modified Time: 05:42:24
+     Last Modified Time: 06:13:23
      X-Units: ACRE-FT
      Y-Units: CFS
      Use External DSS File: NO
@@ -306,7 +306,7 @@ Table: DET060 Storage-Outflow
      Table Type: Storage-Outflow
      Description: DET060 terrain-derived level pool above normal pool (see HMS/parameters)
      Last Modified Date: 5 November 2026
-     Last Modified Time: 05:42:24
+     Last Modified Time: 06:13:23
      X-Units: ACRE-FT
      Y-Units: CFS
      Use External DSS File: NO
@@ -319,7 +319,7 @@ Table: DET061 Storage-Outflow
      Table Type: Storage-Outflow
      Description: DET061 terrain-derived level pool above normal pool (see HMS/parameters)
      Last Modified Date: 5 November 2026
-     Last Modified Time: 05:42:24
+     Last Modified Time: 06:13:23
      X-Units: ACRE-FT
      Y-Units: CFS
      Use External DSS File: NO
@@ -332,7 +332,7 @@ Table: DET068 Storage-Outflow
      Table Type: Storage-Outflow
      Description: DET068 terrain-derived level pool above normal pool (see HMS/parameters)
      Last Modified Date: 5 November 2026
-     Last Modified Time: 05:42:24
+     Last Modified Time: 06:13:23
      X-Units: ACRE-FT
      Y-Units: CFS
      Use External DSS File: NO
@@ -345,7 +345,7 @@ Table: DET072 Storage-Outflow
      Table Type: Storage-Outflow
      Description: DET072 terrain-derived level pool above normal pool (see HMS/parameters)
      Last Modified Date: 5 November 2026
-     Last Modified Time: 05:42:24
+     Last Modified Time: 06:13:23
      X-Units: ACRE-FT
      Y-Units: CFS
      Use External DSS File: NO
@@ -358,7 +358,7 @@ Table: DET078 Storage-Outflow
      Table Type: Storage-Outflow
      Description: DET078 terrain-derived level pool above normal pool (see HMS/parameters)
      Last Modified Date: 5 November 2026
-     Last Modified Time: 05:42:24
+     Last Modified Time: 06:13:23
      X-Units: ACRE-FT
      Y-Units: CFS
      Use External DSS File: NO

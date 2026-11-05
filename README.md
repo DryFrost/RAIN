@@ -10,7 +10,7 @@ watershed draining to the point the analysis is centered on:
 | Drainage area | **8.28 sq mi** (5,296 ac), entirely inside the FEMA 2D area (45.4 sq mi) |
 | HMS elements | 87 subbasins, 82 Muskingum-Cunge reaches, 2 lakes + 26 detention basins (level-pool), 115 junctions |
 | Subbasins | Terrain (culverts burned) **plus the city storm sewer**: inlets route to their pipe outfalls, moving 274 ac between subbasins ([details](docs/StormSewer_Delineation.md)) |
-| Detention | **26 basins** from the city storm GIS as level-pool elements (76.9 ac-ft), 3 with as-built outlets; most subdivisions do not detain. Outlet peak −3.3 % (FEMA 100-yr) ([details](docs/Detention.md)) |
+| Detention | **26 basins** from the city storm GIS as level-pool elements (76.9 ac-ft), 3 with as-built outlets; most subdivisions do not detain. Outlet peak −3.2 % (FEMA 100-yr) ([details](docs/Detention.md)) |
 | Land cover | 44 % lawn, 22 % trees, 13 % roads, 8 % crops, 5 % buildings, 5 % bare ground, 2 % water |
 | Soils | 51 % C/D, 33 % C, 9 % D, 5 % B (SSURGO via FEMA `Soils.hdf`) |
 | Loss | SCS CN from FEMA's own CN table: 20.5 % impervious, pervious CN 80.8 (composite 84.3) |
@@ -62,10 +62,10 @@ watershed draining to the point the analysis is centered on:
 All 12 runs were computed with HEC-HMS 4.14 (Linux, headless) and finished
 with no errors. The warnings are:
 
-* 18 short reaches "may cause numeric instabilities" (the hydrographs show
+* 20 short reaches "may cause numeric instabilities" (the hydrographs show
   none);
-* two reaches below detention basins would need one more subreach at high
-  index flows;
+* one reach below a detention basin (R-DET051) would need one more subreach
+  at high index flows;
 * one tiny detention subbasin (SB-DET012) has a lag under the time-step
   criterion.
 
@@ -82,15 +82,15 @@ Peak flow at the outlet (cfs):
 
 | Event | FEMA RoG @ `Trib12Ea_8.6sqmi` (839 ft downstream) | HMS, FEMA rainfall | HMS, Atlas 14 point rainfall |
 |---|---:|---:|---:|
-| 10-yr | 2,899 | 3,557 | 5,276 |
-| 25-yr | 4,383 | 4,965 | 7,251 |
-| 50-yr | 5,837 | 6,210 | 8,934 |
-| 100-yr | 7,310 | 7,545 | 10,730 |
-| 100-yr+ | 8,970 | 9,232 | 13,005 |
-| 500-yr | 11,023 | 11,097 | 15,550 |
+| 10-yr | 2,899 | 3,522 | 5,222 |
+| 25-yr | 4,383 | 4,914 | 7,168 |
+| 50-yr | 5,837 | 6,142 | 8,822 |
+| 100-yr | 7,310 | 7,456 | 10,588 |
+| 100-yr+ | 8,970 | 9,115 | 12,826 |
+| 500-yr | 11,023 | 10,949 | 15,336 |
 
 Across the 11 reference lines inside the watershed, the median HMS/FEMA peak
-ratio is 1.18 (10-yr), 1.09 (100-yr) and 1.01 (500-yr). HMS runs high in
+ratio is 1.16 (10-yr), 1.08 (100-yr) and 1.01 (500-yr). HMS runs high in
 frequent storms because the 2D model stores water in every lidar depression
 and behind every road embankment. HMS now routes the 26 detention basins that
 store meaningful water (`docs/Detention.md`), but not road-embankment storage;

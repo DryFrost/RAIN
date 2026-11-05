@@ -47,6 +47,29 @@ MAX_CAPTURE_AC = {"CI": 10.0, "FI": 10.0, "CB": 10.0, "GUTTER": 10.0, "PD": 10.0
 OUTLET_TYPES = {"OUTFALL", "ES", "FES"}
 
 
+def pipe_network():
+    """City storm pipes as a graph: pipe endpoints snapped within SNAP_NODE_FT.
+    Returns (P, G, xy): exploded pipes, MultiGraph (edge attr pipe, length) and
+    node -> (x, y).  System k = k-th connected component of G (as in build_links)."""
+    P = gpd.read_file(STORM, layer="pipes").explode(index_parts=False).reset_index(drop=True)
+    n = len(P)
+    ends = np.array([l.coords[0][:2] for l in P.geometry] + [l.coords[-1][:2] for l in P.geometry])
+    G0 = nx.Graph()
+    G0.add_nodes_from(range(2 * n))
+    G0.add_edges_from(cKDTree(ends).query_pairs(SNAP_NODE_FT))
+    node_of = {}
+    for k, comp in enumerate(nx.connected_components(G0)):
+        for i in comp:
+            node_of[i] = k
+    xy = {}
+    for i, k in node_of.items():
+        xy.setdefault(k, ends[i])
+    G = nx.MultiGraph()
+    for i in range(n):
+        G.add_edge(node_of[i], node_of[i + n], pipe=i, length=P.geometry[i].length)
+    return P, G, xy
+
+
 def build_links(F, A, Z, tr, crs):
     """F: D8 codes (2D), A: terrain accumulation (flat), Z: 10 ft DEM (2D).
     Returns (systems GeoDataFrame, links DataFrame[ic, oc, System, InletType, x, y])."""
@@ -75,23 +98,8 @@ def build_links(F, A, Z, tr, crs):
         w = w[w > -9000]
         return float(w.min()) if w.size else np.inf
 
-    P = gpd.read_file(STORM, layer="pipes").explode(index_parts=False).reset_index(drop=True)
+    P, G, xy = pipe_network()
     I = gpd.read_file(STORM, layer="inlets").reset_index(drop=True)
-    n = len(P)
-    ends = np.array([l.coords[0][:2] for l in P.geometry] + [l.coords[-1][:2] for l in P.geometry])
-    G0 = nx.Graph()
-    G0.add_nodes_from(range(2 * n))
-    G0.add_edges_from(cKDTree(ends).query_pairs(SNAP_NODE_FT))
-    node_of = {}
-    for k, comp in enumerate(nx.connected_components(G0)):
-        for i in comp:
-            node_of[i] = k
-    xy = {}
-    for i, k in node_of.items():
-        xy.setdefault(k, ends[i])
-    G = nx.MultiGraph()
-    for i in range(n):
-        G.add_edge(node_of[i], node_of[i + n], pipe=i, length=P.geometry[i].length)
     st_out = STRtree(list(I[I.TYPE.isin(OUTLET_TYPES)].geometry))
 
     sys_rows, comp_of_pipe, outlet_of_comp = [], {}, {}

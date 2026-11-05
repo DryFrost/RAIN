@@ -193,16 +193,16 @@ parameter change before trusting a new HMS result.
 * `hms_peaks_detention_passthrough.csv`: the same model with detention storage × 0.001 (basins pass flow through); the baseline for the detention effect
 
 HMS log: no errors. Warnings: 41074 ("very short reach … may cause
-numeric instabilities") for 18 short reaches, whose hydrographs are smooth;
-41084 for `R-DET006` and `R-DET051` at high index flows (diffusivity would ask
-for one more subreach); and 41784 for `SB-DET012` (lag under 0.29 × the 1-min
+numeric instabilities") for 20 short reaches, whose hydrographs are smooth;
+41084 for `R-DET051` at high index flows (diffusivity would ask for one more
+subreach); and 41784 for `SB-DET012` (lag under 0.29 × the 1-min
 step).
 
 ## Known limitations of this phase
 
 * No storage at road crossings (27 culverts), so HMS is high in frequent
   storms relative to FEMA's 2D model (HMS/FEMA median ratio at reference
-  lines: 1.18 at 10-yr, 1.09 at 100-yr, 1.01 at 500-yr). Subdivision
+  lines: 1.16 at 10-yr, 1.08 at 100-yr, 1.01 at 500-yr). Subdivision
   detention is routed for the 26 basins that store meaningful water. Three
   outlets come from as-builts; the rest are assumed (`docs/Detention.md`).
 * Single-trapezoid reaches over-attenuate on wide flat floodplains
