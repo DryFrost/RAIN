@@ -7,7 +7,7 @@ Table: LK1 Storage-Outflow
      Table Type: Storage-Outflow
      Description: LK1 terrain-derived level pool above normal pool (see HMS/parameters)
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      X-Units: ACRE-FT
      Y-Units: CFS
      Use External DSS File: NO
@@ -20,7 +20,7 @@ Table: LK2 Storage-Outflow
      Table Type: Storage-Outflow
      Description: LK2 terrain-derived level pool above normal pool (see HMS/parameters)
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      X-Units: ACRE-FT
      Y-Units: CFS
      Use External DSS File: NO

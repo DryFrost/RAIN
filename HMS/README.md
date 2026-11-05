@@ -9,7 +9,7 @@ NAD83 Missouri State Plane West, US ft). Every number below is produced by
 | Component | Name(s) | Notes |
 |---|---|---|
 | Basin model | `Existing FEMA-Consistent` | 62 subbasins, 55 Muskingum-Cunge reaches, 2 lake reaches (Modified Puls), 64 junctions |
-| Met models | `FEMA_<event>` (6) | FEMA RoG hyetographs, unchanged (`data/FEMA_Rainfall_ARF78.dss`, copied from `Resources/.../78% AR/Rainfall.dss`) |
+| Met models | `FEMA_<event>` (6) | FEMA RoG hyetographs, values unchanged, in `data/FEMA_Rainfall_ARF78.dss`. Re-written from `Resources/.../78% AR/Rainfall.dss` as PER-CUM, because FEMA's INST-VAL data type is rejected by HMS for precipitation gages |
 | | `Point_<event>` (6) | same hyetographs × (Atlas 14 point depth / FEMA depth) = 1.2787, in `data/Atlas14_PointRainfall.dss` |
 | Control | `48hr_1min` | 01 Jan 2030 00:00 – 03 Jan 2030 00:00, 1 min (same window as the FEMA plans) |
 | Runs | 12 | one per met model, results to `results/<run>.dss` |
@@ -103,12 +103,19 @@ No baseflow and no canopy or surface storage, consistent with FEMA's RoG.
   the wetted section at h_ref, n_eff = Σd^{5/3} / Σ(d^{5/3}/n_i), limited to
   0.03–0.12. Median 0.064.
 * Index flow = 0.5 × the QA engine's 100-yr (FEMA rainfall) peak inflow to
-  the reach, following the HMS Technical Reference.
+  the reach, following the HMS Technical Reference. HMS uses it only to set
+  Δx and Δt. HMS's Muskingum-Cunge is variable-parameter: celerity and X are
+  recomputed every step from the current flow.
 * Reaches that would cross a lake are replaced by a direct junction link into
   that lake's pool.
 
-`R-CNF07` is a real 4,200 ft wooded floodplain with about 2 ft of fall (fitted
-valley 570–850 ft wide), so its large attenuation is physical.
+`R-CNF07` is a real 4,200 ft wooded floodplain with about 2 ft of fall: the
+slope of 0.0005 is confirmed by the 1 m thalweg, and the fitted valley is
+570–850 ft wide. Its single trapezoid (121 ft bottom, 60:1 sides) gives very
+high Muskingum-Cunge diffusion, and HMS attenuates the 100-yr peak from 4,563
+to 2,585 cfs there. That puts `TribUppe_3.4` 27–34 % below FEMA's 2D model at
+the 100- and 500-yr, while every other reference line is at or above FEMA. It
+needs an 8-point (channel + overbank) section.
 
 ## Lakes (`06`)
 
@@ -134,9 +141,15 @@ These curves stand in until real dam and spillway data exist.
 
 ## QA/QC engine (`scripts/hms_check.py`)
 
-The engine re-implements the methods above independently: SCS CN
-(incremental), NRCS dimensionless UH with Tp = Δt/2 + lag, constant-parameter
-Muskingum-Cunge with Ponce Δx criteria, and storage-indication Modified Puls.
+The engine re-implements the methods above independently:
+
+* SCS CN (incremental)
+* NRCS dimensionless UH with Tp = Δt/2 + lag
+* variable-parameter Muskingum-Cunge, with HMS's automatic scheme inferred
+  from its log notes 41089/41102 (n = ceil(L / c·Δt), Δx = L/n, X not clipped
+  at zero)
+* storage-indication Modified Puls
+
 Outputs are in `QAQC/`:
 
 * `engine_peaks_all_elements.csv`: peak and time-to-peak for every junction
@@ -147,16 +160,32 @@ Outputs are in `QAQC/`:
 * `engine_muskingum_cunge.csv`: celerity, normal depth, subreaches, K, X per reach
 * `engine_lake_routing.csv`: lake inflow and outflow, storage, stage, FEMA stage
 
-**HEC-HMS was not run in the build environment.** Open the project in HMS
-4.14, compute, and compare. Peaks should agree within a few percent; HMS's own
-Muskingum-Cunge sub-stepping and UH interpolation differ slightly from the
-engine.
+**Check against HEC-HMS 4.14** (all 12 runs, `Results/hms_vs_engine.csv`):
+
+* junction peaks: HMS/engine 1.000–1.012 (median 1.002)
+* subbasin peaks: 1.001–1.008
+* time of peak: within about 1 min
+
+The engine is therefore a valid check on the HMS model. Re-run it after any
+parameter change before trusting a new HMS result.
+
+`Results/` (from `scripts/09_hms_results.py`) holds:
+
+* `hms_peaks_all_elements.csv`: HMS peak, time of peak and volume for every element and run
+* `hms_vs_fema_reflines.csv`: HMS vs FEMA RoG at the 11 reference lines and the outlet
+* `hms_vs_engine.csv`: HMS vs the QA engine
+
+HMS log: no errors. The only warning, 41074 ("very short reach … may cause
+numeric instabilities"), appears for 14 reaches of 283–604 ft; their
+hydrographs are smooth.
 
 ## Known limitations of this phase
 
 * No storage at road crossings (27 culverts) or in subdivision detention, so
-  HMS is high in frequent storms relative to FEMA's 2D model (median ratio
-  1.36 at 10-yr, 1.11 at 100-yr, 0.98 at 500-yr).
+  HMS is high in frequent storms relative to FEMA's 2D model (HMS/FEMA median
+  ratio at reference lines: 1.31 at 10-yr, 1.10 at 100-yr, 1.00 at 500-yr).
+* Single-trapezoid reaches over-attenuate on wide flat floodplains
+  (`R-CNF07`, see above).
 * Ponds inside subbasins (23 open-water bodies ≥ 0.25 ac, 21 ac total) are not routed.
 * No storm sewer network; flow paths follow the terrain, like FEMA's model.
 * Channel R for Tc is a regional power law, not surveyed.

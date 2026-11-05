@@ -1,7 +1,7 @@
 # RAIN – East Creek Trib 12 watershed analysis (Raymore, Cass County, MO)
 
 A detailed watershed analysis built from FEMA's preliminary Rain-on-Grid (RoG)
-HEC-RAS model. **Phase 1 (this commit) builds a HEC-HMS 4.14 model** of the
+HEC-RAS model. **Phase 1 builds and runs a HEC-HMS 4.14 model** of the
 watershed draining to the point the analysis is centered on:
 
 | | |
@@ -42,45 +42,77 @@ watershed draining to the point the analysis is centered on:
    the terrain. HMS routes them as level pools whose terrain-derived curves
    reproduce FEMA's 2D peak lake stages within +0.3 to +0.4 ft (LK1) and
    −0.4 to −0.8 ft (LK2) for all six storms.
-5. The FEMA structure "Stage HW" output is not usable (values like 1 ft at a
+5. FEMA's `Rainfall.dss` stores incremental precipitation with data type
+   **INST-VAL**. HEC-RAS accepts that, but HEC-HMS rejects it for a
+   precipitation gage. The HMS project uses a re-written copy with identical
+   values stored as PER-CUM.
+6. The FEMA structure "Stage HW" output is not usable (values like 1 ft at a
    987 ft invert), so only structure flows were extracted.
 
-## Results (Python QA engine; see "Status" below)
+## Results (HEC-HMS 4.14)
+
+All 12 runs were computed with HEC-HMS 4.14 (Linux, headless) and finished
+with no errors. The only warning is that 14 short reaches "may cause numeric
+instabilities"; the hydrographs show none. An independent Python
+re-implementation of the same methods (`scripts/hms_check.py`) reproduces the
+HMS peaks at every junction within 0–1.2 % and the time of peak within about
+1 min, which confirms HMS is computing what was intended.
 
 100-yr peaks at the FEMA reference lines, using the same FEMA rainfall and CN layer:
 
 ![HMS vs FEMA](docs/figures/hms_vs_fema_100yr.png)
 
-| Event | FEMA RoG @ `Trib12Ea_8.6sqmi` (839 ft downstream) | HMS, FEMA rainfall @ outlet | HMS, Atlas 14 point rainfall @ outlet |
+Peak flow at the outlet (cfs):
+
+| Event | FEMA RoG @ `Trib12Ea_8.6sqmi` (839 ft downstream) | HMS, FEMA rainfall | HMS, Atlas 14 point rainfall |
 |---|---:|---:|---:|
-| 10-yr | 2,899 | 4,733 | 6,605 |
-| 25-yr | 4,383 | 6,279 | 8,638 |
-| 50-yr | 5,837 | 7,574 | 10,331 |
-| 100-yr | 7,310 | 8,935 | 12,110 |
-| 100-yr+ | 8,970 | 10,629 | 14,326 |
-| 500-yr | 11,023 | 12,471 | 16,742 |
+| 10-yr | 2,899 | 3,769 | 5,536 |
+| 25-yr | 4,383 | 5,223 | 7,526 |
+| 50-yr | 5,837 | 6,476 | 9,224 |
+| 100-yr | 7,310 | 7,822 | 11,045 |
+| 100-yr+ | 8,970 | 9,526 | 13,350 |
+| 500-yr | 11,023 | 11,418 | 15,899 |
 
 Across the 11 reference lines inside the watershed, the median HMS/FEMA peak
-ratio is 1.36 (10-yr), 1.11 (100-yr) and 0.98 (500-yr). HMS runs high in
+ratio is 1.31 (10-yr), 1.10 (100-yr) and 1.00 (500-yr). HMS runs high in
 frequent storms because the 2D model stores water in every lidar depression
 and behind every road embankment. HMS has none of that yet, and that is
-exactly the detail the next phases add (below). Full tables are in
-`HMS/QAQC/`.
+exactly the detail the next phases add (below).
 
-## Status: what has and hasn't been run
+One location runs the other way: at `TribUppe_3.4` HMS is 27 % (100-yr) to
+34 % (500-yr) **below** FEMA. Reach `R-CNF07` upstream of it is a 4,200 ft
+wooded floodplain with about 2 ft of fall, and its single fitted trapezoid
+(121 ft bottom, 60:1 sides) over-attenuates in Muskingum-Cunge. An 8-point
+(channel + overbank) section would fix this; it's on the list below.
 
-* The HMS 4.14 project files were written by `scripts/07_build_hms_project.py`
-  using keywords taken from HEC's own HMS 4.14 sample projects and the HMS
-  4.14 program.
-* **HEC-HMS itself was not executed here.** The cloud session's safety policy
-  blocked running the downloaded HMS program. All numbers above come from
-  `scripts/hms_check.py`, an independent re-implementation of the same
-  methods (SCS CN, SCS UH, Muskingum-Cunge, Modified Puls). HMS results should
-  land within a few percent of it.
-* **Next step for you:** open `HMS/Raymore_Trib12/Raymore_Trib12.hms` in
-  HEC-HMS 4.14 (Windows), compute the 12 runs, and compare
-  `J-ECT030` against the table above. If HMS flags any parameter on load, tell
-  me the message and I'll fix the writer.
+Full tables are in `HMS/Results/`; QA-engine detail is in `HMS/QAQC/`.
+
+## Running HEC-HMS
+
+* **On your PC:** open `HMS/Raymore_Trib12/Raymore_Trib12.hms` in HEC-HMS
+  4.14 and compute any run.
+* **In a Claude Code cloud session:** `.claude/settings.json` allows one
+  command, a headless HMS run from `/root/hec-hms`. HMS isn't kept between
+  sessions, so it is downloaded first, then all 12 runs are computed and
+  summarized:
+
+```bash
+mkdir -p /root/hec-hms && curl -sSL https://www.hec.usace.army.mil/software/hec-hms/downloads/HEC-HMS-4.14-linux64.tar.gz | tar xz -C /root/hec-hms
+```
+
+```bash
+xvfb-run -a bash /root/hec-hms/HEC-HMS-4.14/hec-hms.sh -s /home/user/RAIN/scripts/hms_compute_all.py
+```
+
+```bash
+python scripts/09_hms_results.py
+```
+
+`hms_compute_all.py` computes `HMS/Raymore_Trib12` in place. To run a
+scratch copy instead, write the copy's `.hms` path into
+`scripts/HMS_PROJECT` (that file is git-ignored). HMS re-saves project files
+in its own format when it closes, so a scratch copy keeps the generated files
+clean.
 
 ## Repository layout
 
@@ -92,10 +124,12 @@ GIS/HMS_Raymore.gpkg      Watershed, Subbasins (with parameters), Junctions, Rea
                           LongestFlowPaths, ReachXS (cross-section fits)
 GIS/rasters/              10 ft burned DEM, D8 flow direction/accumulation, fill depth, subbasin grid (LFS)
 HMS/Raymore_Trib12/       HEC-HMS 4.14 project (open Raymore_Trib12.hms)
+HMS/Results/              HEC-HMS peaks for every element and run, HMS vs FEMA, HMS vs QA engine
 HMS/parameters/           subbasin / reach / lake parameter tables
-HMS/QAQC/                 QA-engine peaks, comparison with FEMA RoG, lake routing
+HMS/QAQC/                 QA-engine peaks, lake routing, Muskingum-Cunge parameters
 docs/figures/             figures used here
-scripts/                  everything above is reproducible from these (run in order 01→08)
+scripts/                  everything above is reproducible from these
+.claude/settings.json     lets Claude Code run HEC-HMS headless in cloud sessions
 ```
 
 Methodology, assumptions and parameter sources: **[`HMS/README.md`](HMS/README.md)**.
@@ -114,21 +148,24 @@ pip install -r requirements.txt
 for s in 01_extract_fema_geometry 02_condition_dem 04_delineate_subbasins 05_hydrologic_parameters 06_lake_storage_outflow 03_extract_fema_results 07_build_hms_project 08_figures; do python scripts/$s.py; done
 ```
 
-`03` runs after `06` because its lake-stage table needs the lake polygons from `04`.
+`03` runs after `06` because its lake-stage table needs the lake polygons from
+`04`. Then run HMS and `09` as shown above, and re-run `08` so the figure uses
+the HMS results.
 
 ## Recommended next phases
 
-1. **Run HMS 4.14** and reconcile with the QA engine.
-2. **Road-crossing storage.** Turn the 27 FEMA culvert crossings into HMS
+1. **Road-crossing storage.** Turn the 27 FEMA culvert crossings into HMS
    reservoirs (Controlled Outflow + Culvert + overtopping weir). The culvert
    shape, size, inverts, length and entrance loss are all in
    `GIS/FEMA_RoG_geometry.gpkg`, and the upstream storage comes from the 1 m
    terrain. This is the main thing the 2D model has that HMS lacks.
-3. **Subdivision detention.** Collect as-builts (City of Raymore / Cass County
+2. **Subdivision detention.** Collect as-builts (City of Raymore / Cass County
    MS4 records) and screen with lidar (`GIS/rasters/fill_depth_10ft.tif`).
    Each basin becomes a reservoir with its real outlet (orifice, weir, riser).
    25 open-water bodies ≥ 0.25 ac lie inside the watershed; 23 of them
    (21 ac total) are inside subbasins and not yet modeled.
+3. **8-point cross sections** for wide floodplain reaches, starting with
+   `R-CNF07`.
 4. **Lake outlets.** Get dam and spillway as-builts for LK1 and LK2 and
    replace the terrain-only curves (neither has a principal-spillway pipe).
 5. **The Trib 12 / TribNort diversion** (finding 3): check the storm sewer.

@@ -57,20 +57,28 @@ def model_map():
 
 
 def comparison():
-    c = pd.read_csv(ROOT / "HMS/QAQC/comparison_with_FEMA_RoG.csv")
-    c = c[c.FEMA_RL_100yr.notna()].copy()
-    # outlet vs the FEMA line 839 ft downstream
-    fr = pd.read_csv(ROOT / "FEMA_Results/FEMA_RefLine_Peaks.csv", index_col=0)
-    out = c.iloc[0:0]
-    pk = pd.read_csv(ROOT / "HMS/QAQC/engine_peaks_all_elements.csv")
-    q_out = float(pk.loc[pk.Element == "J-ECT030", "Q_FEMA_100yr"].iloc[0])
-    pts = [(r.FEMA_RefLine.replace("sqmi", " sq mi"), r.FEMA_RL_100yr, r.HMSchk_100yr) for _, r in c.iterrows()]
-    pts.append(("Outlet vs Trib12Ea_8.6 sq mi", fr.loc["Trib12Ea_8.6sqmi", "Q_100yr"], q_out))
+    """HEC-HMS 4.14 100-yr peaks (HMS/Results, from scripts/09) vs FEMA RoG;
+    falls back to the QA engine if HMS results have not been extracted."""
+    hf = ROOT / "HMS/Results/hms_vs_fema_reflines.csv"
+    if hf.exists():
+        h = pd.read_csv(hf)
+        pts = [(("Outlet vs Trib12Ea_8.6 sq mi" if "outlet" in r.Junction else r.FEMA_RefLine.replace("sqmi", " sq mi")),
+                r.FEMA_100yr, r.HMS_100yr) for _, r in h.iterrows()]
+        ylab, src = "HEC-HMS 4.14 100-yr peak (cfs)", "HEC-HMS 4.14"
+    else:
+        c = pd.read_csv(ROOT / "HMS/QAQC/comparison_with_FEMA_RoG.csv")
+        c = c[c.FEMA_RL_100yr.notna()]
+        fr = pd.read_csv(ROOT / "FEMA_Results/FEMA_RefLine_Peaks.csv", index_col=0)
+        pk = pd.read_csv(ROOT / "HMS/QAQC/engine_peaks_all_elements.csv")
+        q_out = float(pk.loc[pk.Element == "J-ECT030", "Q_FEMA_100yr"].iloc[0])
+        pts = [(r.FEMA_RefLine.replace("sqmi", " sq mi"), r.FEMA_RL_100yr, r.HMSchk_100yr) for _, r in c.iterrows()]
+        pts.append(("Outlet vs Trib12Ea_8.6 sq mi", fr.loc["Trib12Ea_8.6sqmi", "Q_100yr"], q_out))
+        ylab, src = "HMS model, Python QA engine, 100-yr peak (cfs)", "QA engine"
     x = np.array([p[1] for p in pts])
     y = np.array([p[2] for p in pts])
     fig, ax = plt.subplots(figsize=(7.5, 7))
     lim = np.array([200, 12000])
-    ax.fill_between(lim, lim * 0.75, lim * 1.25, color="#eeedea", zorder=0, label="±25%")
+    ax.fill_between(lim, lim * 0.75, lim * 1.25, color="#eeedea", zorder=0)
     ax.plot(lim, lim, color=INK2, linewidth=1.2, zorder=1)
     ax.scatter(x, y, s=60, c=S1, edgecolors=SURF, linewidths=2, zorder=3)
     for (lab, xi, yi) in pts:
@@ -82,13 +90,13 @@ def comparison():
     ax.set_xlim(*lim)
     ax.set_ylim(*lim)
     ax.set_xlabel("FEMA preliminary RoG 100-yr peak (cfs)")
-    ax.set_ylabel("HMS model, Python QA engine, 100-yr peak (cfs)")
-    ax.set_title("100-yr peak flow at FEMA reference lines\nsame FEMA rainfall (78% ARF), same CN layer",
-                 color=INK, loc="left", fontsize=11)
+    ax.set_ylabel(ylab)
+    ax.set_title(f"100-yr peak flow at FEMA reference lines - {src} vs FEMA RoG\n"
+                 "same FEMA rainfall (78% ARF), same CN layer", color=INK, loc="left", fontsize=11)
     ax.grid(True, which="major", color=GRID, linewidth=0.6)
     ax.text(250, 9000, "1:1 line; shaded band = ±25%", fontsize=8, color=INK2)
-    for s in ax.spines.values():
-        s.set_visible(False)
+    for s_ in ax.spines.values():
+        s_.set_visible(False)
     fig.savefig(FIG / "hms_vs_fema_100yr.png", dpi=150, bbox_inches="tight")
 
 

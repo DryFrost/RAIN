@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(xvfb-run -a bash /root/hec-hms/HEC-HMS-4.14/hec-hms.sh:*)"
+    ]
+  }
+}

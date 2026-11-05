@@ -16,7 +16,6 @@ Also writes HMS/QAQC/*.csv (engine peaks, comparison with FEMA RoG).
 from pathlib import Path
 import sys
 import json
-import shutil
 import datetime as dt
 import numpy as np
 import pandas as pd
@@ -334,7 +333,7 @@ def write_met_gage_control_run(el):
         for src, lab, b, pt in mets:
             g = f"{src}_{lab}"
             if src == "FEMA":
-                fn, path = "data\\FEMA_Rainfall_ARF78.dss", f"/Raymore/{b}/PRECIP-INC//6Minute//"
+                fn, path = "data\\FEMA_Rainfall_ARF78.dss", f"/Raymore/{b}/PRECIP-INC//6Minute/FEMA-ARF78/"
                 d = f"FEMA RoG hyetograph {b} (Atlas 14 point x 0.782 areal reduction)"
             else:
                 fn, path = "data\\Atlas14_PointRainfall.dss", f"/Raymore/{b}/PRECIP-INC//6Minute/ATLAS14-POINT/"
@@ -393,18 +392,22 @@ def write_pdata_and_dss(el, lake_tables, storms):
     from hecdss import HecDss, PairedData, RegularTimeSeries
     (PRJ / "data").mkdir(exist_ok=True)
     (PRJ / "results").mkdir(exist_ok=True)
-    shutil.copyfile(FEMA_DSS, PRJ / "data/FEMA_Rainfall_ARF78.dss")
-    pfile = PRJ / "data/Atlas14_PointRainfall.dss"
-    pfile.unlink(missing_ok=True)
-    d = HecDss(str(pfile))
-    for lab, b, pt in STORMS:
-        t, v, _ = storms[lab]
-        ratio = pt / v.sum()
-        ts = RegularTimeSeries.create((v * ratio).astype(float), units="INCH", data_type="PER-CUM",
-                                      interval="6Minute", start_date=t[0].to_pydatetime(),
-                                      path=f"/Raymore/{b}/PRECIP-INC//6Minute/ATLAS14-POINT/")
-        d.put(ts)
-    d.close()
+    # FEMA's Rainfall.dss stores PRECIP-INC as INST-VAL, which HEC-RAS accepts but
+    # HEC-HMS rejects for a precipitation gage (WARNING 10614 / ERROR 20660).  Both
+    # files are therefore written fresh as PER-CUM; the FEMA values are unchanged.
+    for fname, fpart, scale in (("FEMA_Rainfall_ARF78.dss", "FEMA-ARF78", False),
+                                ("Atlas14_PointRainfall.dss", "ATLAS14-POINT", True)):
+        pfile = PRJ / "data" / fname
+        pfile.unlink(missing_ok=True)
+        d = HecDss(str(pfile))
+        for lab, b, pt in STORMS:
+            t, v, _ = storms[lab]
+            ratio = pt / v.sum() if scale else 1.0
+            ts = RegularTimeSeries.create((v * ratio).astype(float), units="INCH", data_type="PER-CUM",
+                                          interval="6Minute", start_date=t[0].to_pydatetime(),
+                                          path=f"/Raymore/{b}/PRECIP-INC//6Minute/{fpart}/")
+            d.put(ts)
+        d.close()
     pdss = PRJ / f"{PRJ_NAME}.dss"
     pdss.unlink(missing_ok=True)
     d = HecDss(str(pdss))

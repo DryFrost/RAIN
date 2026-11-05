@@ -1,7 +1,7 @@
 Basin: Existing FEMA-Consistent
      Description: East Creek Trib 12 to FEMA bridge 29037ECT030. Loss/precip consistent with FEMA preliminary RoG model; no subdivision detention yet.
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Version: 4.14
      Filepath Separator: \
      Unit System: English
@@ -16,7 +16,7 @@ End:
 Subbasin: SB-LK1-IN1
      Description: 14.1 ac; composite CN 88.1; Tc 30.5 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2797580.520
      Canvas Y: 959961.272
      Label X: 16.0
@@ -46,7 +46,7 @@ End:
 Junction: J-LK1-IN1
      Description: Tributary inflow to lake
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2797487.040
      Canvas Y: 959498.792
      Label X: 16.0
@@ -57,7 +57,7 @@ End:
 Subbasin: SB-LK1-IN2
      Description: 108.0 ac; composite CN 85.9; Tc 27.0 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2799243.480
      Canvas Y: 961717.712
      Label X: 16.0
@@ -87,7 +87,7 @@ End:
 Junction: J-LK1-IN2
      Description: Tributary inflow to lake
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2798008.560
      Canvas Y: 960384.392
      Label X: 16.0
@@ -98,7 +98,7 @@ End:
 Subbasin: SB-LK1-IN3
      Description: 71.8 ac; composite CN 87.2; Tc 27.4 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2796626.040
      Canvas Y: 961752.152
      Label X: 16.0
@@ -128,7 +128,7 @@ End:
 Junction: J-LK1-IN3
      Description: Tributary inflow to lake
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2796109.440
      Canvas Y: 960364.712
      Label X: 16.0
@@ -139,7 +139,7 @@ End:
 Subbasin: SB-LK1-IN4
      Description: 53.6 ac; composite CN 88.0; Tc 34.6 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2797772.400
      Canvas Y: 961442.192
      Label X: 16.0
@@ -169,7 +169,7 @@ End:
 Junction: J-LK1-IN4
      Description: Tributary inflow to lake
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2797979.040
      Canvas Y: 960394.232
      Label X: 16.0
@@ -180,7 +180,7 @@ End:
 Subbasin: SB-LK1-IN5
      Description: 43.6 ac; composite CN 87.1; Tc 25.1 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2798785.920
      Canvas Y: 959685.752
      Label X: 16.0
@@ -210,7 +210,7 @@ End:
 Junction: J-LK1-IN5
      Description: Tributary inflow to lake
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2797939.680
      Canvas Y: 959892.392
      Label X: 16.0
@@ -221,7 +221,7 @@ End:
 Subbasin: SB-LK1
      Description: 152.5 ac; composite CN 91.0; Tc 23.1 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2796370.200
      Canvas Y: 959656.232
      Label X: 16.0
@@ -251,7 +251,7 @@ End:
 Junction: J-LK1-Pool
      Description: LK1 pool inflow point (52.5 ac lake, normal pool 1025.47 ft)
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2797319.766
      Canvas Y: 959215.072
      Label X: 16.0
@@ -262,7 +262,7 @@ End:
 Reach: L-LK1
      Description: Level-pool (Modified Puls) routing through LK1; terrain-derived storage-outflow, sill 1025.75 ft
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2795656.800
      Canvas Y: 959213.432
      From Canvas X: 2797319.766
@@ -281,7 +281,7 @@ End:
 Subbasin: SB-LK2-IN1
      Description: 77.5 ac; composite CN 80.2; Tc 41.5 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2806549.680
      Canvas Y: 954032.672
      Label X: 16.0
@@ -311,7 +311,7 @@ End:
 Junction: J-LK2-IN1
      Description: Tributary inflow to lake
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2805851.040
      Canvas Y: 954244.232
      Label X: 16.0
@@ -322,7 +322,7 @@ End:
 Subbasin: SB-LK2
      Description: 64.4 ac; composite CN 83.8; Tc 23.5 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2805368.880
      Canvas Y: 955001.912
      Label X: 16.0
@@ -352,7 +352,7 @@ End:
 Junction: J-LK2-Pool
      Description: LK2 pool inflow point (8.3 ac lake, normal pool 1032.78 ft)
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2805252.943
      Canvas Y: 954011.523
      Label X: 16.0
@@ -363,7 +363,7 @@ End:
 Reach: L-LK2
      Description: Level-pool (Modified Puls) routing through LK2; terrain-derived storage-outflow, sill 1032.78 ft
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2804857.200
      Canvas Y: 953909.672
      From Canvas X: 2805252.943
@@ -382,7 +382,7 @@ End:
 Junction: J-LK1
      Description: Lake outlet (spill sill)
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2795656.800
      Canvas Y: 959213.432
      Label X: 16.0
@@ -393,7 +393,7 @@ End:
 Reach: R-LK1
      Description: J-LK1 to J-CNF14
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2794603.920
      Canvas Y: 959262.632
      From Canvas X: 2795656.800
@@ -419,7 +419,7 @@ End:
 Subbasin: SB-EAG030
      Description: 211.0 ac; composite CN 88.7; Tc 51.8 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2794781.040
      Canvas Y: 962391.752
      Label X: 16.0
@@ -449,7 +449,7 @@ End:
 Junction: J-EAG030
      Description: FEMA crossing 29037EAG030
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2794535.040
      Canvas Y: 960571.352
      Label X: 16.0
@@ -460,7 +460,7 @@ End:
 Reach: R-EAG030
      Description: J-EAG030 to J-CNF14
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2794603.920
      Canvas Y: 959262.632
      From Canvas X: 2794535.040
@@ -486,7 +486,7 @@ End:
 Subbasin: SB-CNF14
      Description: 64.0 ac; composite CN 87.5; Tc 33.8 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2794712.160
      Canvas Y: 960197.432
      Label X: 16.0
@@ -516,7 +516,7 @@ End:
 Junction: J-CNF14
      Description: Stream confluence
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2794603.920
      Canvas Y: 959262.632
      Label X: 16.0
@@ -527,7 +527,7 @@ End:
 Reach: R-CNF14
      Description: J-CNF14 to J-EAG020
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2793580.560
      Canvas Y: 958209.752
      From Canvas X: 2794603.920
@@ -545,7 +545,7 @@ Reach: R-CNF14
      Bottom Width: 2.29
      Side Slope: 2.62
      Index Parameter Type: Index Flow
-     Index Flow: 514.0
+     Index Flow: 515.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
@@ -553,7 +553,7 @@ End:
 Subbasin: SB-EAG020
      Description: 34.4 ac; composite CN 81.6; Tc 29.8 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2794490.760
      Canvas Y: 958770.632
      Label X: 16.0
@@ -583,7 +583,7 @@ End:
 Junction: J-EAG020
      Description: FEMA crossing 29037EAG020
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2793580.560
      Canvas Y: 958209.752
      Label X: 16.0
@@ -594,7 +594,7 @@ End:
 Reach: R-EAG020
      Description: J-EAG020 to J-EAG010
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2793413.280
      Canvas Y: 958012.952
      From Canvas X: 2793580.560
@@ -612,7 +612,7 @@ Reach: R-EAG020
      Bottom Width: 2.00
      Side Slope: 10.37
      Index Parameter Type: Index Flow
-     Index Flow: 553.0
+     Index Flow: 555.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
@@ -620,7 +620,7 @@ End:
 Subbasin: SB-EAG010
      Description: 8.5 ac; composite CN 87.7; Tc 12.5 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2793492.000
      Canvas Y: 958534.472
      Label X: 16.0
@@ -650,7 +650,7 @@ End:
 Junction: J-EAG010
      Description: FEMA crossing 29037EAG010
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2793413.280
      Canvas Y: 958012.952
      Label X: 16.0
@@ -661,7 +661,7 @@ End:
 Reach: R-EAG010
      Description: J-EAG010 to J-CNF12
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2793127.920
      Canvas Y: 957727.592
      From Canvas X: 2793413.280
@@ -679,7 +679,7 @@ Reach: R-EAG010
      Bottom Width: 2.00
      Side Slope: 13.01
      Index Parameter Type: Index Flow
-     Index Flow: 558.0
+     Index Flow: 561.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
@@ -687,7 +687,7 @@ End:
 Subbasin: SB-RL_TribTrib_0.3
      Description: 173.3 ac; composite CN 89.9; Tc 44.2 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2790111.960
      Canvas Y: 962003.072
      Label X: 16.0
@@ -717,7 +717,7 @@ End:
 Junction: J-RL_TribTrib_0.3
      Description: FEMA reference line TribTrib_0.3sqmi
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2791002.480
      Canvas Y: 960443.432
      Label X: 16.0
@@ -728,7 +728,7 @@ End:
 Reach: R-RL_TribTrib_0.3
      Description: J-RL_TribTrib_0.3 to J-MEA030
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2791327.200
      Canvas Y: 959921.912
      From Canvas X: 2791002.480
@@ -754,7 +754,7 @@ End:
 Subbasin: SB-MEA030
      Description: 10.4 ac; composite CN 82.0; Tc 18.2 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2790913.920
      Canvas Y: 960138.392
      Label X: 16.0
@@ -784,7 +784,7 @@ End:
 Junction: J-MEA030
      Description: FEMA crossing 29037MEA030
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2791327.200
      Canvas Y: 959921.912
      Label X: 16.0
@@ -795,7 +795,7 @@ End:
 Reach: R-MEA030
      Description: J-MEA030 to J-MEA020
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2792114.400
      Canvas Y: 959095.352
      From Canvas X: 2791327.200
@@ -813,7 +813,7 @@ Reach: R-MEA030
      Bottom Width: 4.77
      Side Slope: 3.89
      Index Parameter Type: Index Flow
-     Index Flow: 362.0
+     Index Flow: 359.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
@@ -821,7 +821,7 @@ End:
 Subbasin: SB-MCT010
      Description: 129.3 ac; composite CN 86.7; Tc 51.6 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2791893.000
      Canvas Y: 962568.872
      Label X: 16.0
@@ -851,7 +851,7 @@ End:
 Junction: J-MCT010
      Description: FEMA crossing 29037MCT010
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2792104.560
      Canvas Y: 960443.432
      Label X: 16.0
@@ -862,7 +862,7 @@ End:
 Reach: R-MCT010
      Description: J-MCT010 to J-MEA020
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2792114.400
      Canvas Y: 959095.352
      From Canvas X: 2792104.560
@@ -888,7 +888,7 @@ End:
 Subbasin: SB-MEA020
      Description: 118.3 ac; composite CN 85.3; Tc 52.1 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2790899.160
      Canvas Y: 959405.312
      Label X: 16.0
@@ -918,7 +918,7 @@ End:
 Junction: J-MEA020
      Description: FEMA crossing 29037MEA020
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2792114.400
      Canvas Y: 959095.352
      Label X: 16.0
@@ -929,7 +929,7 @@ End:
 Reach: R-MEA020
      Description: J-MEA020 to J-CNF17
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2792448.960
      Canvas Y: 958632.872
      From Canvas X: 2792114.400
@@ -947,7 +947,7 @@ Reach: R-MEA020
      Bottom Width: 5.74
      Side Slope: 2.83
      Index Parameter Type: Index Flow
-     Index Flow: 799.0
+     Index Flow: 797.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
@@ -955,7 +955,7 @@ End:
 Subbasin: SB-CNF17
      Description: 130.9 ac; composite CN 87.7; Tc 48.1 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2792729.400
      Canvas Y: 961043.672
      Label X: 16.0
@@ -985,7 +985,7 @@ End:
 Junction: J-CNF17
      Description: Stream confluence
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2792448.960
      Canvas Y: 958632.872
      Label X: 16.0
@@ -996,7 +996,7 @@ End:
 Reach: R-CNF17
      Description: J-CNF17 to J-MEA010
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2792852.400
      Canvas Y: 958042.472
      From Canvas X: 2792448.960
@@ -1014,7 +1014,7 @@ Reach: R-CNF17
      Bottom Width: 3.80
      Side Slope: 3.38
      Index Parameter Type: Index Flow
-     Index Flow: 1032.0
+     Index Flow: 1031.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
@@ -1022,7 +1022,7 @@ End:
 Subbasin: SB-MEA010
      Description: 14.7 ac; composite CN 84.4; Tc 27.5 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2792311.200
      Canvas Y: 958416.392
      Label X: 16.0
@@ -1052,7 +1052,7 @@ End:
 Junction: J-MEA010
      Description: FEMA crossing 29037MEA010
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2792852.400
      Canvas Y: 958042.472
      Label X: 16.0
@@ -1063,7 +1063,7 @@ End:
 Reach: R-MEA010
      Description: J-MEA010 to J-CNF12
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2793127.920
      Canvas Y: 957727.592
      From Canvas X: 2792852.400
@@ -1081,7 +1081,7 @@ Reach: R-MEA010
      Bottom Width: 2.00
      Side Slope: 30.88
      Index Parameter Type: Index Flow
-     Index Flow: 1045.0
+     Index Flow: 1043.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
@@ -1089,7 +1089,7 @@ End:
 Subbasin: SB-CNF12
      Description: 20.0 ac; composite CN 83.8; Tc 13.1 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2793177.120
      Canvas Y: 958190.072
      Label X: 16.0
@@ -1119,7 +1119,7 @@ End:
 Junction: J-CNF12
      Description: Stream confluence
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2793127.920
      Canvas Y: 957727.592
      Label X: 16.0
@@ -1130,7 +1130,7 @@ End:
 Reach: R-CNF12
      Description: J-CNF12 to J-NFE040
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2793000.000
      Canvas Y: 956655.032
      From Canvas X: 2793127.920
@@ -1148,7 +1148,7 @@ Reach: R-CNF12
      Bottom Width: 3.91
      Side Slope: 2.71
      Index Parameter Type: Index Flow
-     Index Flow: 1564.0
+     Index Flow: 1505.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
@@ -1156,7 +1156,7 @@ End:
 Subbasin: SB-NFE040
      Description: 43.4 ac; composite CN 81.8; Tc 26.5 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2793093.480
      Canvas Y: 957245.432
      Label X: 16.0
@@ -1186,7 +1186,7 @@ End:
 Junction: J-NFE040
      Description: FEMA crossing 29037NFE040
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2793000.000
      Canvas Y: 956655.032
      Label X: 16.0
@@ -1197,7 +1197,7 @@ End:
 Reach: R-NFE040
      Description: J-NFE040 to J-NFE030
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2793177.120
      Canvas Y: 955188.872
      From Canvas X: 2793000.000
@@ -1215,7 +1215,7 @@ Reach: R-NFE040
      Bottom Width: 2.33
      Side Slope: 5.81
      Index Parameter Type: Index Flow
-     Index Flow: 1585.0
+     Index Flow: 1528.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
@@ -1223,7 +1223,7 @@ End:
 Subbasin: SB-NFE030
      Description: 50.4 ac; composite CN 80.8; Tc 35.0 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2793309.960
      Canvas Y: 956172.872
      Label X: 16.0
@@ -1253,7 +1253,7 @@ End:
 Junction: J-NFE030
      Description: FEMA crossing 29037NFE030
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2793177.120
      Canvas Y: 955188.872
      Label X: 16.0
@@ -1264,7 +1264,7 @@ End:
 Reach: R-NFE030
      Description: J-NFE030 to J-NFE020
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2792931.120
      Canvas Y: 953693.192
      From Canvas X: 2793177.120
@@ -1282,7 +1282,7 @@ Reach: R-NFE030
      Bottom Width: 2.00
      Side Slope: 13.39
      Index Parameter Type: Index Flow
-     Index Flow: 1596.0
+     Index Flow: 1533.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
@@ -1290,7 +1290,7 @@ End:
 Subbasin: SB-NFE020
      Description: 51.8 ac; composite CN 82.3; Tc 50.0 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2793447.720
      Canvas Y: 954726.392
      Label X: 16.0
@@ -1320,7 +1320,7 @@ End:
 Junction: J-NFE020
      Description: FEMA crossing 29037NFE020
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2792931.120
      Canvas Y: 953693.192
      Label X: 16.0
@@ -1331,7 +1331,7 @@ End:
 Reach: R-NFE020
      Description: J-NFE020 to J-RL_TribNort_2.0
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2792744.160
      Canvas Y: 953358.632
      From Canvas X: 2792931.120
@@ -1349,7 +1349,7 @@ Reach: R-NFE020
      Bottom Width: 2.00
      Side Slope: 4.33
      Index Parameter Type: Index Flow
-     Index Flow: 1566.0
+     Index Flow: 1451.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
@@ -1357,7 +1357,7 @@ End:
 Subbasin: SB-CNF27
      Description: 147.4 ac; composite CN 86.3; Tc 63.4 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2790771.240
      Canvas Y: 957889.952
      Label X: 16.0
@@ -1387,7 +1387,7 @@ End:
 Junction: J-CNF27
      Description: Stream confluence
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2791838.880
      Canvas Y: 956084.312
      Label X: 16.0
@@ -1398,7 +1398,7 @@ End:
 Reach: R-CNF27
      Description: J-CNF27 to J-GRA010
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2792340.720
      Canvas Y: 955021.592
      From Canvas X: 2791838.880
@@ -1424,7 +1424,7 @@ End:
 Subbasin: SB-GRA010
      Description: 45.2 ac; composite CN 85.0; Tc 46.8 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2790972.960
      Canvas Y: 955602.152
      Label X: 16.0
@@ -1454,7 +1454,7 @@ End:
 Junction: J-GRA010
      Description: FEMA crossing 29037GRA010
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2792340.720
      Canvas Y: 955021.592
      Label X: 16.0
@@ -1465,7 +1465,7 @@ End:
 Reach: R-GRA010
      Description: J-GRA010 to J-RL_TribNort_2.0
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2792744.160
      Canvas Y: 953358.632
      From Canvas X: 2792340.720
@@ -1483,7 +1483,7 @@ Reach: R-GRA010
      Bottom Width: 2.00
      Side Slope: 4.54
      Index Parameter Type: Index Flow
-     Index Flow: 303.0
+     Index Flow: 304.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
@@ -1491,7 +1491,7 @@ End:
 Subbasin: SB-RL_TribNort_2.0
      Description: 57.0 ac; composite CN 81.9; Tc 58.0 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2792178.360
      Canvas Y: 954578.792
      Label X: 16.0
@@ -1521,7 +1521,7 @@ End:
 Junction: J-RL_TribNort_2.0
      Description: FEMA reference line TribNort_2.0sqmi
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2792744.160
      Canvas Y: 953358.632
      Label X: 16.0
@@ -1532,7 +1532,7 @@ End:
 Reach: R-RL_TribNort_2.0
      Description: J-RL_TribNort_2.0 to J-NFE010
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2792517.840
      Canvas Y: 953033.912
      From Canvas X: 2792744.160
@@ -1550,7 +1550,7 @@ Reach: R-RL_TribNort_2.0
      Bottom Width: 2.00
      Side Slope: 9.39
      Index Parameter Type: Index Flow
-     Index Flow: 1824.0
+     Index Flow: 1732.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
@@ -1558,7 +1558,7 @@ End:
 Subbasin: SB-NFE010
      Description: 20.7 ac; composite CN 84.1; Tc 16.5 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2792645.760
      Canvas Y: 953299.592
      Label X: 16.0
@@ -1588,7 +1588,7 @@ End:
 Junction: J-NFE010
      Description: FEMA crossing 29037NFE010
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2792517.840
      Canvas Y: 953033.912
      Label X: 16.0
@@ -1599,7 +1599,7 @@ End:
 Reach: R-NFE010
      Description: J-NFE010 to J-CNF06
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2792448.960
      Canvas Y: 952246.712
      From Canvas X: 2792517.840
@@ -1617,7 +1617,7 @@ Reach: R-NFE010
      Bottom Width: 4.75
      Side Slope: 3.41
      Index Parameter Type: Index Flow
-     Index Flow: 1826.0
+     Index Flow: 1728.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
@@ -1625,7 +1625,7 @@ End:
 Subbasin: SB-CNF06
      Description: 233.5 ac; composite CN 85.4; Tc 122.1 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2789467.440
      Canvas Y: 956536.952
      Label X: 16.0
@@ -1655,7 +1655,7 @@ End:
 Junction: J-CNF06
      Description: Stream confluence
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2792448.960
      Canvas Y: 952246.712
      Label X: 16.0
@@ -1666,7 +1666,7 @@ End:
 Reach: R-CNF06
      Description: J-CNF06 to J-CNF02
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2793029.520
      Canvas Y: 951292.232
      From Canvas X: 2792448.960
@@ -1684,7 +1684,7 @@ Reach: R-CNF06
      Bottom Width: 2.00
      Side Slope: 6.80
      Index Parameter Type: Index Flow
-     Index Flow: 2057.0
+     Index Flow: 1949.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
@@ -1692,7 +1692,7 @@ End:
 Subbasin: SB-ECT090
      Description: 27.2 ac; composite CN 84.1; Tc 30.7 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2795337.000
      Canvas Y: 958436.072
      Label X: 16.0
@@ -1722,7 +1722,7 @@ End:
 Junction: J-ECT090
      Description: FEMA crossing 29037ECT090
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2795833.920
      Canvas Y: 957894.872
      Label X: 16.0
@@ -1733,7 +1733,7 @@ End:
 Reach: R-ECT090
      Description: J-ECT090 to J-ECT080
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2794348.080
      Canvas Y: 952659.992
      From Canvas X: 2795833.920
@@ -1759,7 +1759,7 @@ End:
 Subbasin: SB-ECT080
      Description: 235.5 ac; composite CN 85.3; Tc 106.6 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2794963.080
      Canvas Y: 955375.832
      Label X: 16.0
@@ -1789,7 +1789,7 @@ End:
 Junction: J-ECT080
      Description: FEMA crossing 29037ECT080
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2794348.080
      Canvas Y: 952659.992
      Label X: 16.0
@@ -1800,7 +1800,7 @@ End:
 Reach: R-ECT080
      Description: J-ECT080 to J-RL_Trib12Ea_1.6
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2794151.280
      Canvas Y: 952325.432
      From Canvas X: 2794348.080
@@ -1818,7 +1818,7 @@ Reach: R-ECT080
      Bottom Width: 2.00
      Side Slope: 13.38
      Index Parameter Type: Index Flow
-     Index Flow: 319.0
+     Index Flow: 317.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
@@ -1826,7 +1826,7 @@ End:
 Subbasin: SB-RL_Trib12Ea_1.6
      Description: 269.5 ac; composite CN 84.2; Tc 101.9 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2796921.240
      Canvas Y: 954918.272
      Label X: 16.0
@@ -1856,7 +1856,7 @@ End:
 Junction: J-RL_Trib12Ea_1.6
      Description: FEMA reference line Trib12Ea_1.6sqmi
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2794151.280
      Canvas Y: 952325.432
      Label X: 16.0
@@ -1867,7 +1867,7 @@ End:
 Reach: R-RL_Trib12Ea_1.6
      Description: J-RL_Trib12Ea_1.6 to J-ECT070
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2793944.640
      Canvas Y: 952099.112
      From Canvas X: 2794151.280
@@ -1893,7 +1893,7 @@ End:
 Subbasin: SB-ECT070
      Description: 32.1 ac; composite CN 86.0; Tc 33.4 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2793688.800
      Canvas Y: 952753.472
      Label X: 16.0
@@ -1923,7 +1923,7 @@ End:
 Junction: J-ECT070
      Description: FEMA crossing 29037ECT070
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2793944.640
      Canvas Y: 952099.112
      Label X: 16.0
@@ -1934,7 +1934,7 @@ End:
 Reach: R-ECT070
      Description: J-ECT070 to J-CNF02
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2793029.520
      Canvas Y: 951292.232
      From Canvas X: 2793944.640
@@ -1960,7 +1960,7 @@ End:
 Subbasin: SB-CNF02
      Description: 65.0 ac; composite CN 78.1; Tc 22.4 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2792896.680
      Canvas Y: 951705.512
      Label X: 16.0
@@ -1990,7 +1990,7 @@ End:
 Junction: J-CNF02
      Description: Stream confluence
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2793029.520
      Canvas Y: 951292.232
      Label X: 16.0
@@ -2001,7 +2001,7 @@ End:
 Reach: R-CNF02
      Description: J-CNF02 to J-RL_Trib12Ea_4.2
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2792694.960
      Canvas Y: 950573.912
      From Canvas X: 2793029.520
@@ -2019,7 +2019,7 @@ Reach: R-CNF02
      Bottom Width: 7.53
      Side Slope: 4.90
      Index Parameter Type: Index Flow
-     Index Flow: 2689.0
+     Index Flow: 2559.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
@@ -2027,7 +2027,7 @@ End:
 Subbasin: SB-RL_Trib12Ea_4.2
      Description: 25.4 ac; composite CN 76.1; Tc 29.0 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2792803.200
      Canvas Y: 951036.392
      Label X: 16.0
@@ -2057,7 +2057,7 @@ End:
 Junction: J-RL_Trib12Ea_4.2
      Description: FEMA reference line Trib12Ea_4.2sqmi
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2792694.960
      Canvas Y: 950573.912
      Label X: 16.0
@@ -2068,7 +2068,7 @@ End:
 Reach: R-RL_Trib12Ea_4.2
      Description: J-RL_Trib12Ea_4.2 to J-CNF01
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2791671.600
      Canvas Y: 948409.112
      From Canvas X: 2792694.960
@@ -2086,7 +2086,7 @@ Reach: R-RL_Trib12Ea_4.2
      Bottom Width: 10.52
      Side Slope: 5.44
      Index Parameter Type: Index Flow
-     Index Flow: 2635.0
+     Index Flow: 2453.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
@@ -2094,7 +2094,7 @@ End:
 Junction: J-LK2
      Description: Lake outlet (spill sill)
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2804857.200
      Canvas Y: 953909.672
      Label X: 16.0
@@ -2105,7 +2105,7 @@ End:
 Reach: R-LK2
      Description: J-LK2 to J-CNF25
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2804581.680
      Canvas Y: 953811.272
      From Canvas X: 2804857.200
@@ -2131,7 +2131,7 @@ End:
 Subbasin: SB-CNF25
      Description: 126.3 ac; composite CN 80.8; Tc 44.1 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2805619.800
      Canvas Y: 952758.392
      Label X: 16.0
@@ -2161,7 +2161,7 @@ End:
 Junction: J-CNF25
      Description: Stream confluence
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2804581.680
      Canvas Y: 953811.272
      Label X: 16.0
@@ -2172,7 +2172,7 @@ End:
 Reach: R-CNF25
      Description: J-CNF25 to J-CNF19
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2802534.960
      Canvas Y: 953397.992
      From Canvas X: 2804581.680
@@ -2198,7 +2198,7 @@ End:
 Subbasin: SB-CNF19
      Description: 213.1 ac; composite CN 83.6; Tc 58.3 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2803282.800
      Canvas Y: 954406.592
      Label X: 16.0
@@ -2228,7 +2228,7 @@ End:
 Junction: J-CNF19
      Description: Stream confluence
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2802534.960
      Canvas Y: 953397.992
      Label X: 16.0
@@ -2239,7 +2239,7 @@ End:
 Reach: R-CNF19
      Description: J-CNF19 to J-RL_TribUppe_1.0
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2801993.760
      Canvas Y: 952817.432
      From Canvas X: 2802534.960
@@ -2257,7 +2257,7 @@ Reach: R-CNF19
      Bottom Width: 2.00
      Side Slope: 60.00
      Index Parameter Type: Index Flow
-     Index Flow: 640.0
+     Index Flow: 643.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
@@ -2265,7 +2265,7 @@ End:
 Subbasin: SB-RL_TribUppe_1.0
      Description: 169.4 ac; composite CN 81.7; Tc 56.6 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2803440.240
      Canvas Y: 951902.312
      Label X: 16.0
@@ -2295,7 +2295,7 @@ End:
 Junction: J-RL_TribUppe_1.0
      Description: FEMA reference line TribUppe_1.0sqmi
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2801993.760
      Canvas Y: 952817.432
      Label X: 16.0
@@ -2306,7 +2306,7 @@ End:
 Reach: R-RL_TribUppe_1.0
      Description: J-RL_TribUppe_1.0 to J-UEP040
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2801344.320
      Canvas Y: 952335.272
      From Canvas X: 2801993.760
@@ -2324,7 +2324,7 @@ Reach: R-RL_TribUppe_1.0
      Bottom Width: 2.00
      Side Slope: 19.16
      Index Parameter Type: Index Flow
-     Index Flow: 804.0
+     Index Flow: 795.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
@@ -2332,7 +2332,7 @@ End:
 Subbasin: SB-UEP040
      Description: 32.7 ac; composite CN 84.3; Tc 17.8 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2801349.240
      Canvas Y: 952876.472
      Label X: 16.0
@@ -2362,7 +2362,7 @@ End:
 Junction: J-UEP040
      Description: FEMA crossing 29037UEP040
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2801344.320
      Canvas Y: 952335.272
      Label X: 16.0
@@ -2373,7 +2373,7 @@ End:
 Reach: R-UEP040
      Description: J-UEP040 to J-CNF13
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2801245.920
      Canvas Y: 952099.112
      From Canvas X: 2801344.320
@@ -2391,7 +2391,7 @@ Reach: R-UEP040
      Bottom Width: 7.93
      Side Slope: 0.50
      Index Parameter Type: Index Flow
-     Index Flow: 817.0
+     Index Flow: 809.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
@@ -2399,7 +2399,7 @@ End:
 Subbasin: SB-CNF13
      Description: 153.7 ac; composite CN 82.3; Tc 60.9 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2802057.720
      Canvas Y: 950416.472
      Label X: 16.0
@@ -2429,7 +2429,7 @@ End:
 Junction: J-CNF13
      Description: Stream confluence
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2801245.920
      Canvas Y: 952099.112
      Label X: 16.0
@@ -2440,7 +2440,7 @@ End:
 Reach: R-CNF13
      Description: J-CNF13 to J-UEP030
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2800586.640
      Canvas Y: 951784.232
      From Canvas X: 2801245.920
@@ -2458,7 +2458,7 @@ Reach: R-CNF13
      Bottom Width: 5.69
      Side Slope: 0.50
      Index Parameter Type: Index Flow
-     Index Flow: 1003.0
+     Index Flow: 1008.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
@@ -2466,7 +2466,7 @@ End:
 Subbasin: SB-UEP030
      Description: 18.1 ac; composite CN 83.3; Tc 22.0 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2800749.000
      Canvas Y: 951528.392
      Label X: 16.0
@@ -2496,7 +2496,7 @@ End:
 Junction: J-UEP030
      Description: FEMA crossing 29037UEP030
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2800586.640
      Canvas Y: 951784.232
      Label X: 16.0
@@ -2507,7 +2507,7 @@ End:
 Reach: R-UEP030
      Description: J-UEP030 to J-RL_TribUppe_1.4
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2799986.400
      Canvas Y: 951479.192
      From Canvas X: 2800586.640
@@ -2525,7 +2525,7 @@ Reach: R-UEP030
      Bottom Width: 2.00
      Side Slope: 13.40
      Index Parameter Type: Index Flow
-     Index Flow: 1011.0
+     Index Flow: 1015.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
@@ -2533,7 +2533,7 @@ End:
 Subbasin: SB-RL_TribUppe_1.4
      Description: 19.7 ac; composite CN 80.9; Tc 35.1 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2800512.840
      Canvas Y: 952015.472
      Label X: 16.0
@@ -2563,7 +2563,7 @@ End:
 Junction: J-RL_TribUppe_1.4
      Description: FEMA reference line TribUppe_1.4sqmi
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2799986.400
      Canvas Y: 951479.192
      Label X: 16.0
@@ -2574,7 +2574,7 @@ End:
 Reach: R-RL_TribUppe_1.4
      Description: J-RL_TribUppe_1.4 to J-CNF11
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2799090.960
      Canvas Y: 951183.992
      From Canvas X: 2799986.400
@@ -2592,7 +2592,7 @@ Reach: R-RL_TribUppe_1.4
      Bottom Width: 2.00
      Side Slope: 36.69
      Index Parameter Type: Index Flow
-     Index Flow: 1022.0
+     Index Flow: 1026.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
@@ -2600,7 +2600,7 @@ End:
 Subbasin: SB-RL_TribNort_0.2
      Description: 138.7 ac; composite CN 84.0; Tc 49.9 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2802013.440
      Canvas Y: 958317.992
      Label X: 16.0
@@ -2630,7 +2630,7 @@ End:
 Junction: J-RL_TribNort_0.2
      Description: FEMA reference line TribNort_0.2sqmi
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2801049.120
      Canvas Y: 956556.632
      Label X: 16.0
@@ -2641,7 +2641,7 @@ End:
 Reach: R-RL_TribNort_0.2
      Description: J-RL_TribNort_0.2 to J-NBU060
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2800734.240
      Canvas Y: 955671.032
      From Canvas X: 2801049.120
@@ -2667,7 +2667,7 @@ End:
 Subbasin: SB-NBU060
      Description: 80.3 ac; composite CN 85.2; Tc 49.4 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2801595.240
      Canvas Y: 956379.512
      Label X: 16.0
@@ -2697,7 +2697,7 @@ End:
 Junction: J-NBU060
      Description: FEMA crossing 29037NBU060
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2800734.240
      Canvas Y: 955671.032
      Label X: 16.0
@@ -2708,7 +2708,7 @@ End:
 Reach: R-NBU060
      Description: J-NBU060 to J-NBU050
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2800389.840
      Canvas Y: 954431.192
      From Canvas X: 2800734.240
@@ -2726,7 +2726,7 @@ Reach: R-NBU060
      Bottom Width: 2.00
      Side Slope: 6.87
      Index Parameter Type: Index Flow
-     Index Flow: 381.0
+     Index Flow: 382.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
@@ -2734,7 +2734,7 @@ End:
 Subbasin: SB-NBU050
      Description: 38.5 ac; composite CN 82.2; Tc 29.0 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2800311.120
      Canvas Y: 955715.312
      Label X: 16.0
@@ -2764,7 +2764,7 @@ End:
 Junction: J-NBU050
      Description: FEMA crossing 29037NBU050
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2800389.840
      Canvas Y: 954431.192
      Label X: 16.0
@@ -2775,7 +2775,7 @@ End:
 Reach: R-NBU050
      Description: J-NBU050 to J-NBU040
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2800232.400
      Canvas Y: 953732.552
      From Canvas X: 2800389.840
@@ -2793,7 +2793,7 @@ Reach: R-NBU050
      Bottom Width: 2.00
      Side Slope: 13.95
      Index Parameter Type: Index Flow
-     Index Flow: 423.0
+     Index Flow: 426.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
@@ -2801,7 +2801,7 @@ End:
 Subbasin: SB-NBU040
      Description: 81.8 ac; composite CN 84.4; Tc 42.9 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2801423.040
      Canvas Y: 954795.272
      Label X: 16.0
@@ -2831,7 +2831,7 @@ End:
 Junction: J-NBU040
      Description: FEMA crossing 29037NBU040
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2800232.400
      Canvas Y: 953732.552
      Label X: 16.0
@@ -2842,7 +2842,7 @@ End:
 Reach: R-NBU040
      Description: J-NBU040 to J-NBU010
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2799189.360
      Canvas Y: 952433.672
      From Canvas X: 2800232.400
@@ -2860,7 +2860,7 @@ Reach: R-NBU040
      Bottom Width: 2.00
      Side Slope: 11.18
      Index Parameter Type: Index Flow
-     Index Flow: 551.0
+     Index Flow: 560.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
@@ -2868,7 +2868,7 @@ End:
 Subbasin: SB-NBU010
      Description: 44.9 ac; composite CN 79.9; Tc 40.9 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2799971.640
      Canvas Y: 953437.352
      Label X: 16.0
@@ -2898,7 +2898,7 @@ End:
 Junction: J-NBU010
      Description: FEMA crossing 29037NBU010
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2799189.360
      Canvas Y: 952433.672
      Label X: 16.0
@@ -2909,7 +2909,7 @@ End:
 Reach: R-NBU010
      Description: J-NBU010 to J-RL_TribNort_1.1
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2798992.560
      Canvas Y: 952010.552
      From Canvas X: 2799189.360
@@ -2927,7 +2927,7 @@ Reach: R-NBU010
      Bottom Width: 2.00
      Side Slope: 6.70
      Index Parameter Type: Index Flow
-     Index Flow: 603.0
+     Index Flow: 617.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
@@ -2935,7 +2935,7 @@ End:
 Subbasin: SB-RL_TribTrib_0.1
      Description: 93.6 ac; composite CN 83.4; Tc 27.5 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2800001.160
      Canvas Y: 959129.792
      Label X: 16.0
@@ -2965,7 +2965,7 @@ End:
 Junction: J-RL_TribTrib_0.1
      Description: FEMA reference line TribTrib_0.1sqmi
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2799651.840
      Canvas Y: 957707.912
      Label X: 16.0
@@ -2976,7 +2976,7 @@ End:
 Reach: R-RL_TribTrib_0.1
      Description: J-RL_TribTrib_0.1 to J-NBU070
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2799514.080
      Canvas Y: 956940.392
      From Canvas X: 2799651.840
@@ -3002,7 +3002,7 @@ End:
 Subbasin: SB-NBU070
      Description: 5.7 ac; composite CN 84.6; Tc 9.6 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2799592.800
      Canvas Y: 957373.352
      Label X: 16.0
@@ -3032,7 +3032,7 @@ End:
 Junction: J-NBU070
      Description: FEMA crossing 29037NBU070
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2799514.080
      Canvas Y: 956940.392
      Label X: 16.0
@@ -3043,7 +3043,7 @@ End:
 Reach: R-NBU070
      Description: J-NBU070 to J-NBU030
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2799494.400
      Canvas Y: 956015.432
      From Canvas X: 2799514.080
@@ -3069,7 +3069,7 @@ End:
 Subbasin: SB-NBU030
      Description: 44.5 ac; composite CN 86.8; Tc 17.9 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2799558.360
      Canvas Y: 956841.992
      Label X: 16.0
@@ -3099,7 +3099,7 @@ End:
 Junction: J-NBU030
      Description: FEMA crossing 29037NBU030
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2799494.400
      Canvas Y: 956015.432
      Label X: 16.0
@@ -3110,7 +3110,7 @@ End:
 Reach: R-NBU030
      Description: J-NBU030 to J-NBU020
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2798766.240
      Canvas Y: 954401.672
      From Canvas X: 2799494.400
@@ -3128,7 +3128,7 @@ Reach: R-NBU030
      Bottom Width: 3.12
      Side Slope: 2.15
      Index Parameter Type: Index Flow
-     Index Flow: 318.0
+     Index Flow: 323.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
@@ -3136,7 +3136,7 @@ End:
 Subbasin: SB-NBU020
      Description: 99.1 ac; composite CN 84.8; Tc 47.1 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2798746.560
      Canvas Y: 956532.032
      Label X: 16.0
@@ -3166,7 +3166,7 @@ End:
 Junction: J-NBU020
      Description: FEMA crossing 29037NBU020
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2798766.240
      Canvas Y: 954401.672
      Label X: 16.0
@@ -3177,7 +3177,7 @@ End:
 Reach: R-NBU020
      Description: J-NBU020 to J-RL_TribNort_1.1
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2798992.560
      Canvas Y: 952010.552
      From Canvas X: 2798766.240
@@ -3195,7 +3195,7 @@ Reach: R-NBU020
      Bottom Width: 11.12
      Side Slope: 4.77
      Index Parameter Type: Index Flow
-     Index Flow: 493.0
+     Index Flow: 495.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
@@ -3203,7 +3203,7 @@ End:
 Subbasin: SB-RL_TribNort_1.1
      Description: 68.5 ac; composite CN 83.0; Tc 44.1 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2798372.640
      Canvas Y: 953230.712
      Label X: 16.0
@@ -3233,7 +3233,7 @@ End:
 Junction: J-RL_TribNort_1.1
      Description: FEMA reference line TribNort_1.1sqmi
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2798992.560
      Canvas Y: 952010.552
      Label X: 16.0
@@ -3244,7 +3244,7 @@ End:
 Reach: R-RL_TribNort_1.1
      Description: J-RL_TribNort_1.1 to J-CNF11
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2799090.960
      Canvas Y: 951183.992
      From Canvas X: 2798992.560
@@ -3262,7 +3262,7 @@ Reach: R-RL_TribNort_1.1
      Bottom Width: 4.37
      Side Slope: 3.65
      Index Parameter Type: Index Flow
-     Index Flow: 1170.0
+     Index Flow: 1183.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
@@ -3270,7 +3270,7 @@ End:
 Subbasin: SB-CNF11
      Description: 44.1 ac; composite CN 79.9; Tc 26.5 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2799391.080
      Canvas Y: 951705.512
      Label X: 16.0
@@ -3300,7 +3300,7 @@ End:
 Junction: J-CNF11
      Description: Stream confluence
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2799090.960
      Canvas Y: 951183.992
      Label X: 16.0
@@ -3311,7 +3311,7 @@ End:
 Reach: R-CNF11
      Description: J-CNF11 to J-RL_TribUppe_2.5
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2798677.680
      Canvas Y: 950928.152
      From Canvas X: 2799090.960
@@ -3329,7 +3329,7 @@ Reach: R-CNF11
      Bottom Width: 6.04
      Side Slope: 6.81
      Index Parameter Type: Index Flow
-     Index Flow: 2018.0
+     Index Flow: 2033.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
@@ -3337,7 +3337,7 @@ End:
 Subbasin: SB-RL_TribUppe_2.5
      Description: 5.6 ac; composite CN 77.1; Tc 25.1 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2798564.520
      Canvas Y: 951321.752
      Label X: 16.0
@@ -3367,7 +3367,7 @@ End:
 Junction: J-RL_TribUppe_2.5
      Description: FEMA reference line TribUppe_2.5sqmi
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2798677.680
      Canvas Y: 950928.152
      Label X: 16.0
@@ -3378,7 +3378,7 @@ End:
 Reach: R-RL_TribUppe_2.5
      Description: J-RL_TribUppe_2.5 to J-CNF09
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2798539.920
      Canvas Y: 950554.232
      From Canvas X: 2798677.680
@@ -3396,7 +3396,7 @@ Reach: R-RL_TribUppe_2.5
      Bottom Width: 2.00
      Side Slope: 13.30
      Index Parameter Type: Index Flow
-     Index Flow: 2022.0
+     Index Flow: 2036.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
@@ -3404,7 +3404,7 @@ End:
 Subbasin: SB-CNF09
      Description: 136.9 ac; composite CN 81.9; Tc 61.6 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2800212.720
      Canvas Y: 949929.392
      Label X: 16.0
@@ -3434,7 +3434,7 @@ End:
 Junction: J-CNF09
      Description: Stream confluence
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2798539.920
      Canvas Y: 950554.232
      Label X: 16.0
@@ -3445,7 +3445,7 @@ End:
 Reach: R-CNF09
      Description: J-CNF09 to J-CNF08
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2798156.160
      Canvas Y: 950160.632
      From Canvas X: 2798539.920
@@ -3463,7 +3463,7 @@ Reach: R-CNF09
      Bottom Width: 2.00
      Side Slope: 24.08
      Index Parameter Type: Index Flow
-     Index Flow: 2208.0
+     Index Flow: 2203.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
@@ -3471,7 +3471,7 @@ End:
 Subbasin: SB-CNF08
      Description: 79.7 ac; composite CN 83.0; Tc 59.1 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2798520.240
      Canvas Y: 949580.072
      Label X: 16.0
@@ -3501,7 +3501,7 @@ End:
 Junction: J-CNF08
      Description: Stream confluence
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2798156.160
      Canvas Y: 950160.632
      Label X: 16.0
@@ -3512,7 +3512,7 @@ End:
 Reach: R-CNF08
      Description: J-CNF08 to J-CNF07
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2797605.120
      Canvas Y: 950337.752
      From Canvas X: 2798156.160
@@ -3530,7 +3530,7 @@ Reach: R-CNF08
      Bottom Width: 2.00
      Side Slope: 31.98
      Index Parameter Type: Index Flow
-     Index Flow: 2290.0
+     Index Flow: 2264.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
@@ -3538,7 +3538,7 @@ End:
 Subbasin: SB-CNF07
      Description: 70.4 ac; composite CN 82.3; Tc 58.9 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2797728.120
      Canvas Y: 951498.872
      Label X: 16.0
@@ -3568,7 +3568,7 @@ End:
 Junction: J-CNF07
      Description: Stream confluence
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2797605.120
      Canvas Y: 950337.752
      Label X: 16.0
@@ -3579,7 +3579,7 @@ End:
 Reach: R-CNF07
      Description: J-CNF07 to J-CNF05
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2794987.680
      Canvas Y: 949029.032
      From Canvas X: 2797605.120
@@ -3597,7 +3597,7 @@ Reach: R-CNF07
      Bottom Width: 120.92
      Side Slope: 60.00
      Index Parameter Type: Index Flow
-     Index Flow: 2348.0
+     Index Flow: 2278.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
@@ -3605,7 +3605,7 @@ End:
 Subbasin: SB-CNF05
      Description: 235.4 ac; composite CN 81.8; Tc 71.5 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2796345.600
      Canvas Y: 949826.072
      Label X: 16.0
@@ -3635,7 +3635,7 @@ End:
 Junction: J-CNF05
      Description: Stream confluence
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2794987.680
      Canvas Y: 949029.032
      Label X: 16.0
@@ -3646,7 +3646,7 @@ End:
 Reach: R-CNF05
      Description: J-CNF05 to J-RL_TribUppe_3.4
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2794289.040
      Canvas Y: 948999.512
      From Canvas X: 2794987.680
@@ -3664,7 +3664,7 @@ Reach: R-CNF05
      Bottom Width: 2.00
      Side Slope: 17.28
      Index Parameter Type: Index Flow
-     Index Flow: 1830.0
+     Index Flow: 1419.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
@@ -3672,7 +3672,7 @@ End:
 Subbasin: SB-RL_TribUppe_3.4
      Description: 25.8 ac; composite CN 78.1; Tc 27.0 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2794662.960
      Canvas Y: 949009.352
      Label X: 16.0
@@ -3702,7 +3702,7 @@ End:
 Junction: J-RL_TribUppe_3.4
      Description: FEMA reference line TribUppe_3.4sqmi
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2794289.040
      Canvas Y: 948999.512
      Label X: 16.0
@@ -3713,7 +3713,7 @@ End:
 Reach: R-RL_TribUppe_3.4
      Description: J-RL_TribUppe_3.4 to J-UEP010
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2793354.240
      Canvas Y: 948704.312
      From Canvas X: 2794289.040
@@ -3731,7 +3731,7 @@ Reach: R-RL_TribUppe_3.4
      Bottom Width: 11.31
      Side Slope: 6.58
      Index Parameter Type: Index Flow
-     Index Flow: 1835.0
+     Index Flow: 1426.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
@@ -3739,7 +3739,7 @@ End:
 Subbasin: SB-UEP010
      Description: 157.1 ac; composite CN 81.9; Tc 74.7 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2793895.440
      Canvas Y: 949835.912
      Label X: 16.0
@@ -3769,7 +3769,7 @@ End:
 Junction: J-UEP010
      Description: FEMA crossing 29037UEP010
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2793354.240
      Canvas Y: 948704.312
      Label X: 16.0
@@ -3780,7 +3780,7 @@ End:
 Reach: R-UEP010
      Description: J-UEP010 to J-CNF01
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2791671.600
      Canvas Y: 948409.112
      From Canvas X: 2793354.240
@@ -3798,7 +3798,7 @@ Reach: R-UEP010
      Bottom Width: 11.02
      Side Slope: 4.76
      Index Parameter Type: Index Flow
-     Index Flow: 1898.0
+     Index Flow: 1503.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
@@ -3806,7 +3806,7 @@ End:
 Subbasin: SB-CNF01
      Description: 238.7 ac; composite CN 82.4; Tc 62.5 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2792335.800
      Canvas Y: 948999.512
      Label X: 16.0
@@ -3836,7 +3836,7 @@ End:
 Junction: J-CNF01
      Description: Stream confluence
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2791671.600
      Canvas Y: 948409.112
      Label X: 16.0
@@ -3847,7 +3847,7 @@ End:
 Reach: R-CNF01
      Description: J-CNF01 to J-ECT060
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2791425.600
      Canvas Y: 948182.792
      From Canvas X: 2791671.600
@@ -3865,7 +3865,7 @@ Reach: R-CNF01
      Bottom Width: 15.00
      Side Slope: 3.22
      Index Parameter Type: Index Flow
-     Index Flow: 4452.0
+     Index Flow: 3879.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
@@ -3873,7 +3873,7 @@ End:
 Subbasin: SB-ECT060
      Description: 3.2 ac; composite CN 73.4; Tc 18.9 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2791607.640
      Canvas Y: 948276.272
      Label X: 16.0
@@ -3903,7 +3903,7 @@ End:
 Junction: J-ECT060
      Description: FEMA crossing 29037ECT060
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2791425.600
      Canvas Y: 948182.792
      Label X: 16.0
@@ -3914,7 +3914,7 @@ End:
 Reach: R-ECT060
      Description: J-ECT060 to J-ECT050
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2791051.680
      Canvas Y: 948182.792
      From Canvas X: 2791425.600
@@ -3932,7 +3932,7 @@ Reach: R-ECT060
      Bottom Width: 16.55
      Side Slope: 2.42
      Index Parameter Type: Index Flow
-     Index Flow: 4452.0
+     Index Flow: 3877.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
@@ -3940,7 +3940,7 @@ End:
 Subbasin: SB-ECT050
      Description: 45.6 ac; composite CN 81.6; Tc 41.1 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2791774.920
      Canvas Y: 947735.072
      Label X: 16.0
@@ -3970,7 +3970,7 @@ End:
 Junction: J-ECT050
      Description: FEMA crossing 29037ECT050
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2791051.680
      Canvas Y: 948182.792
      Label X: 16.0
@@ -3981,7 +3981,7 @@ End:
 Reach: R-ECT050
      Description: J-ECT050 to J-ECT030
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2790726.960
      Canvas Y: 948172.952
      From Canvas X: 2791051.680
@@ -3999,7 +3999,7 @@ Reach: R-ECT050
      Bottom Width: 14.65
      Side Slope: 4.73
      Index Parameter Type: Index Flow
-     Index Flow: 4463.0
+     Index Flow: 3890.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
@@ -4007,7 +4007,7 @@ End:
 Subbasin: SB-ECT030
      Description: 20.7 ac; composite CN 86.2; Tc 40.3 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2791159.920
      Canvas Y: 947631.752
      Label X: 16.0
@@ -4037,7 +4037,7 @@ End:
 Junction: J-ECT030
      Description: Watershed outlet - FEMA bridge 29037ECT030
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 04:01:05
      Canvas X: 2790726.960
      Canvas Y: 948172.952
      Label X: 16.0
