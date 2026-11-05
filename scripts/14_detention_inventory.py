@@ -1,0 +1,230 @@
+"""Detention basin inventory and stage-storage-outflow for HMS.
+
+Source polygons: City of Raymore storm GIS layer strm_detetion
+(GIS/Raymore_StormGIS.gpkg, scripts/12).  For each basin in the watershed:
+
+  * duplicates (two vintages of the same basin, > 50 % overlap) are merged;
+  * outlet = highest-accumulation cell within 15 ft of the basin on the
+    terrain + storm-sewer flow graph (GIS/rasters/acc_sewer_10ft.tif);
+    drainage area (DA) is the accumulation there (includes upstream basins);
+  * wet vs dry: lidar water surfaces are flat -- if >= 25 % of the basin's 1 m
+    cells lie within 0.1 ft of the most common elevation, the basin is WET
+    with a permanent pool at that elevation (storage counted above it);
+  * bottom = pool (wet) or the 2nd percentile ground elevation (dry);
+  * spill (rim) = lowest ground on a ring 10 ft outside the basin;
+  * storage(E) = volume of 1 m cells below E, connected to the basin, within
+    60 ft of it, above the pool / bottom;
+  * outflow(E), ASSUMED unless an as-built outlet is entered in
+    HMS/parameters/detention_outlets_asbuilt.csv:
+      - principal outlet sized to KC APWA 5600 comprehensive control:
+        3.0 cfs per acre of drainage area at the spill elevation, rising as an
+        orifice (Q ~ sqrt(head)) from the bottom / pool;
+      - plus overtopping of the rim: broad-crested weir (C = 2.6) integrated
+        along the 10 ft ring wherever ground < E.
+    As-built outlets: orifices (diameter, invert), rectangular weirs (length,
+    crest) and an optional overflow weir; the rim term is always added.
+
+Wet ponds shallower than 1 ft (pool at about the rim) get no assumed
+structure: they spill over their natural outlet (rim weir only), as the lakes do.
+
+A basin is MODELLED when DA >= 2 ac, it is not one of the on-stream lakes, its
+type is not Wet Soil / Treatment / Lake, a dry basin stores at least 0.05 in
+of runoff over its DA (rules out small polygons on big creeks), and either storage at spill >= 0.1
+ac-ft with depth >= 1 ft, or it is a wet pond of >= 1 ac.  (LK1/LK2 are
+routed separately.)
+
+Outputs: GIS/Detention.gpkg (layer basins)
+         HMS/parameters/detention_basins.csv
+         HMS/parameters/detention_ratings/DET###.csv (Elev_ft, Storage_acft, Outflow_cfs)
+"""
+from pathlib import Path
+import json
+import numpy as np
+import pandas as pd
+import geopandas as gpd
+import networkx as nx
+import rasterio
+from rasterio.features import rasterize
+from scipy import ndimage
+from shapely.geometry import Point
+
+ROOT = Path(__file__).resolve().parents[1]
+STORM = ROOT / "GIS/Raymore_StormGIS.gpkg"
+HMSG = ROOT / "GIS/HMS_Raymore.gpkg"
+DEM1M = ROOT / "Resources/2D_Raymore/Terrain/FinalTerrain.hydroDEM.tif"
+ACC = ROOT / "GIS/rasters/acc_sewer_10ft.tif"
+PAR = ROOT / "HMS/parameters"
+RAT = PAR / "detention_ratings"
+ASBUILT = PAR / "detention_outlets_asbuilt.csv"
+OUT = ROOT / "GIS/Detention.gpkg"
+CRS = (ROOT / "Resources/2D_Raymore/Projection/Projection.prj").read_text()
+
+RELEASE_CFS_PER_AC = 3.0     # KC APWA 5600 100-yr comprehensive control
+C_WEIR = 2.6
+C_ORIFICE = 0.6
+RING_FT = 10.0
+STORAGE_REACH_FT = 60.0
+DE = 0.25
+ABOVE_RIM_FT = 3.0
+MIN_STORAGE_IN = 0.05        # dry basins storing less runoff than this over their DA are ignored
+TYPE_RANK = {"Detention": 0, "Retention": 1, "Pond": 2, "Lake": 3, "Stream/Pond": 4, "Treatment": 5, "Wet Soil": 6}
+NOT_MODELLED_TYPES = {"Wet Soil", "Treatment", "Lake"}
+
+
+def merge_duplicates(d):
+    d = d.reset_index(drop=True)
+    g = nx.Graph()
+    g.add_nodes_from(d.index)
+    sj = gpd.sjoin(d[["geometry"]], d[["geometry"]], predicate="intersects")
+    for i, j in zip(sj.index, sj.index_right):
+        if i < j:
+            a, b = d.geometry[i], d.geometry[j]
+            if a.intersection(b).area / max(min(a.area, b.area), 1.0) > 0.5:
+                g.add_edge(i, j)
+    rows = []
+    for comp in nx.connected_components(g):
+        sub = d.loc[sorted(comp)]
+        types = [t for t in sub.Type if isinstance(t, str)]
+        t = min(types, key=lambda x: TYPE_RANK.get(x, 9)) if types else None
+        rows.append(dict(City_OBJECTIDs=";".join(str(int(o)) for o in sub.OBJECTID), Type=t,
+                         geometry=sub.geometry.union_all().buffer(0)))
+    return gpd.GeoDataFrame(rows, crs=d.crs)
+
+
+def orifice(Q_design, head_design, head):
+    """Orifice-like rating scaled so Q(head_design) = Q_design."""
+    h = np.clip(head, 0, None)
+    return Q_design * np.sqrt(h / max(head_design, 0.1))
+
+
+def asbuilt_outflow(rows, E):
+    q = np.zeros_like(E)
+    for _, r in rows.iterrows():
+        if r.Kind == "orifice":
+            a = np.pi * (r.Size_ft / 2) ** 2
+            hc = E - (r.Invert_ft + r.Size_ft / 2)
+            full = C_ORIFICE * a * np.sqrt(2 * 32.2 * np.clip(hc, 0, None))
+            # partially submerged: weir over the opening below its crown
+            part = C_WEIR * r.Size_ft * np.clip(E - r.Invert_ft, 0, None) ** 1.5
+            q += np.where(E >= r.Invert_ft + r.Size_ft, full, np.minimum(part, full + 1e9))
+        elif r.Kind in ("weir", "overflow"):
+            q += C_WEIR * r.Size_ft * np.clip(E - r.Invert_ft, 0, None) ** 1.5
+    return q
+
+
+def main():
+    RAT.mkdir(parents=True, exist_ok=True)
+    d = gpd.read_file(STORM, layer="detention")
+    d = merge_duplicates(d[d.InWatershed].copy())
+    lakes = gpd.read_file(HMSG, layer="Lakes")
+    lake_u = lakes.geometry.union_all()
+    sb = gpd.read_file(HMSG, layer="Subbasins")[["Subbasin", "geometry"]]
+    ab = pd.read_csv(ASBUILT) if ASBUILT.exists() else pd.DataFrame(columns=["Basin", "Kind", "Size_ft", "Invert_ft", "Source"])
+
+    acc = rasterio.open(ACC)
+    A = acc.read(1)
+    tr10 = acc.transform
+    ac10 = tr10.a ** 2 / 43560.0
+    dem = rasterio.open(DEM1M)
+
+    d["Area_ac"] = d.area / 43560.0
+    d = d.sort_values("Area_ac", ascending=False).reset_index(drop=True)
+    rows = []
+    for k, r in d.iterrows():
+        bid = f"DET{k + 1:03d}"
+        poly = r.geometry
+        # ---- outlet & drainage area (10 ft sewer graph)
+        # outlet inside the footprint only: a basin beside a creek must not take the creek
+        m10 = rasterize([(poly, 1)], out_shape=A.shape, transform=tr10, all_touched=True).astype(bool)
+        if not m10.any():
+            m10 = rasterize([(poly.buffer(10), 1)], out_shape=A.shape, transform=tr10, all_touched=True).astype(bool)
+        idx = np.flatnonzero(m10.ravel())
+        oc = int(idx[np.argmax(A.ravel()[idx])])
+        ox, oy = tr10 * ((oc % A.shape[1]) + 0.5, (oc // A.shape[1]) + 0.5)
+        da = float(A.ravel()[oc] * ac10)
+        # ---- 1 m terrain window
+        xmin, ymin, xmax, ymax = poly.buffer(STORAGE_REACH_FT + 20).bounds
+        win = rasterio.windows.from_bounds(xmin, ymin, xmax, ymax, transform=dem.transform).round_offsets().round_lengths()
+        Z = dem.read(1, window=win).astype(float)
+        t1 = dem.window_transform(win)
+        a1 = t1.a ** 2
+        inside = rasterize([(poly, 1)], out_shape=Z.shape, transform=t1, all_touched=True).astype(bool)
+        reach = rasterize([(poly.buffer(STORAGE_REACH_FT), 1)], out_shape=Z.shape, transform=t1).astype(bool)
+        zi = Z[inside & (Z > -9000)]
+        if zi.size < 4:
+            continue
+        vals, cnt = np.unique(np.round(zi, 1), return_counts=True)
+        mode = float(vals[np.argmax(cnt)])
+        flat_frac = float(np.mean(np.abs(zi - mode) <= 0.1))
+        wet = flat_frac >= 0.25
+        bottom = mode if wet else float(np.percentile(zi, 2))
+        ring = poly.buffer(RING_FT).exterior if poly.geom_type == "Polygon" else poly.buffer(RING_FT).boundary
+        dist = np.arange(0, ring.length, t1.a)
+        rp = [ring.interpolate(s_) for s_ in dist]
+        zr = np.array([v[0] for v in dem.sample([(p.x, p.y) for p in rp])], float)
+        zr = np.where(zr > -9000, zr, np.nan)
+        rim = float(np.nanmin(zr))
+        if not np.isfinite(rim) or rim <= bottom + 0.3:
+            rim = bottom + 0.3
+        depth = rim - bottom
+        E = np.round(np.arange(bottom, rim + ABOVE_RIM_FT + 1e-6, DE), 3)
+        sto = []
+        seed = inside & (Z < bottom + 0.05) if not wet else inside & (np.abs(Z - mode) <= 0.1)
+        if not seed.any():
+            seed = inside
+        for e in E:
+            wetm = ((Z < e) & reach) | seed
+            lab, _ = ndimage.label(wetm, structure=np.ones((3, 3)))
+            ids = np.unique(lab[seed])
+            comp = np.isin(lab, ids[ids > 0])
+            sto.append(float(np.clip(e - np.maximum(Z[comp], bottom), 0, None).sum() * a1 / 43560.0))
+        sto = np.array(sto)
+        s_rim = float(np.interp(rim, E, sto))
+        # ---- outflow
+        q_rim = RELEASE_CFS_PER_AC * da
+        zr_eff = np.maximum(zr, bottom)   # nothing drains below the pool / basin bottom
+        q_ring = np.array([np.nansum(C_WEIR * t1.a * np.clip(e - zr_eff, 0, None) ** 1.5) for e in E])
+        mine = ab[ab.Basin == bid] if len(ab) else ab
+        shallow_pond = wet and depth < 1.0
+        if len(mine):
+            q_out = asbuilt_outflow(mine, E)
+            source = "as-built: " + "; ".join(sorted(set(mine.Source.astype(str))))
+        elif shallow_pond:
+            q_out = np.zeros_like(E)          # spills over its natural outlet (rim weir only)
+            source = "terrain: wet pond spilling over its rim (no structure assumed)"
+        else:
+            q_out = np.minimum(orifice(q_rim, depth, E - bottom), q_rim)
+            source = "assumed: APWA 5600 3.0 cfs/ac at spill"
+        q = q_out + q_ring
+        hit = poly.representative_point()
+        sbn = sb[sb.contains(hit)].Subbasin
+        overlaps_lake = poly.intersection(lake_u).area > 0.3 * poly.area
+        big_pond = wet and r.Area_ac >= 1.0
+        negligible = (not wet) and s_rim < da * MIN_STORAGE_IN / 12.0   # e.g. a small polygon on a big creek
+        modelled = (da >= 2.0 and not overlaps_lake and (r.Type not in NOT_MODELLED_TYPES) and not negligible
+                    and ((s_rim >= 0.1 and depth >= 1.0) or big_pond))
+        why = [] if modelled else [w for w, c in (("DA<2ac", da < 2.0), ("storage<0.1acft", s_rim < 0.1 and not big_pond),
+                                                  ("depth<1ft", depth < 1.0 and not big_pond), ("lake LK1/LK2", overlaps_lake),
+                                                  ("storage<0.05in over DA", negligible),
+                                                  (f"type {r.Type}", r.Type in NOT_MODELLED_TYPES)) if c]
+        rows.append(dict(Basin=bid, City_OBJECTIDs=r.City_OBJECTIDs, Type=r.Type, Area_ac=r.Area_ac,
+                         Subbasin=sbn.iloc[0] if len(sbn) else "", DA_ac=da, Wet=wet, Pool_or_Bottom_ft=bottom,
+                         Spill_ft=rim, Depth_ft=depth, Storage_at_spill_acft=s_rim, Q_at_spill_cfs=float(np.interp(rim, E, q)),
+                         Outlet=source, Modelled=modelled, Not_modelled_because=";".join(why),
+                         Outlet_x=ox, Outlet_y=oy, outlet_cell=oc, geometry=poly))
+        pd.DataFrame(dict(Elev_ft=E, Storage_acft=sto, Outflow_cfs=q)).round(4).to_csv(RAT / f"{bid}.csv", index=False)
+    g = gpd.GeoDataFrame(rows, crs=CRS)
+    OUT.unlink(missing_ok=True)
+    g.to_file(OUT, layer="basins")
+    g.drop(columns="geometry").round(3).to_csv(PAR / "detention_basins.csv", index=False)
+    if not ASBUILT.exists():
+        pd.DataFrame(columns=["Basin", "Kind", "Size_ft", "Invert_ft", "Source", "Note"]).to_csv(ASBUILT, index=False)
+    mod = g[g.Modelled]
+    print(f"{len(g)} basins after merging duplicates; {len(mod)} modelled "
+          f"(wet {int(mod.Wet.sum())}, dry {int((~mod.Wet).sum())})")
+    print(f"modelled storage at spill: {mod.Storage_at_spill_acft.sum():.1f} ac-ft; DA range {mod.DA_ac.min():.0f}-{mod.DA_ac.max():.0f} ac")
+    print(g.Not_modelled_because[~g.Modelled].str.split(";").explode().value_counts().to_string())
+
+
+if __name__ == "__main__":
+    main()

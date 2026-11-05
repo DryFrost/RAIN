@@ -1,14 +1,16 @@
 # RAIN – East Creek Trib 12 watershed analysis (Raymore, Cass County, MO)
 
 A detailed watershed analysis built from FEMA's preliminary Rain-on-Grid (RoG)
-HEC-RAS model. **Phase 1 (this commit) builds a HEC-HMS 4.14 model** of the
+HEC-RAS model. **Phase 1 builds and runs a HEC-HMS 4.14 model** of the
 watershed draining to the point the analysis is centered on:
 
 | | |
 |---|---|
 | Outlet | 38.770832, −94.492901 → FEMA bridge **29037ECT030** on East Creek Trib 12 (Missouri State Plane West ft: 2,790,727 E, 948,173 N) |
 | Drainage area | **8.28 sq mi** (5,296 ac), entirely inside the FEMA 2D area (45.4 sq mi) |
-| HMS elements | 62 subbasins (3–270 ac, mean 85 ac), 55 Muskingum-Cunge reaches, 2 lakes (level-pool), 64 junctions |
+| HMS elements | 84 subbasins, 79 Muskingum-Cunge reaches, 2 lakes + 23 detention basins (level-pool), 109 junctions |
+| Subbasins | Terrain (culverts burned) **plus the city storm sewer**: inlets route to their pipe outfalls, moving 274 ac between subbasins ([details](docs/StormSewer_Delineation.md)) |
+| Detention | **23 basins** from the city storm GIS as level-pool elements (58.6 ac-ft); most subdivisions do not detain ([details](docs/Detention.md)) |
 | Land cover | 44 % lawn, 22 % trees, 13 % roads, 8 % crops, 5 % buildings, 5 % bare ground, 2 % water |
 | Soils | 51 % C/D, 33 % C, 9 % D, 5 % B (SSURGO via FEMA `Soils.hdf`) |
 | Loss | SCS CN from FEMA's own CN table: 20.5 % impervious, pervious CN 80.8 (composite 84.3) |
@@ -31,56 +33,97 @@ watershed draining to the point the analysis is centered on:
    burned all 97 FEMA culvert barrels (surveyed inverts) into the 1 m terrain.
    With that, 33 of 37 FEMA reference lines reproduce their names' drainage
    areas within ±4 %.
-3. **About 0.75 sq mi of upper Trib 12 drains north to "TribNort" in both the
-   terrain and the FEMA 2D results.** FEMA's reference-line names say
-   otherwise: `Trib12Ea_0.7sqmi` carries only 22 cfs in the FEMA 100-yr, and
-   `TribNort_2.0sqmi` really drains 2.74 sq mi. A storm sewer or culvert not
-   in the FEMA model probably sends this area south. The HMS model follows the
-   terrain (same as FEMA's 2D model). **Field-verify.**
+3. **FEMA's `Trib12Ea_0.7sqmi` / `TribNort_2.0sqmi` labels assume Silver Lake
+   drains south to Trib 12.** The 0.7 sq mi is the lake's own drainage area.
+   The terrain, FEMA's 2D results, the Black & Veatch as-builts (spillway at
+   Silvertop Ln) and the city's storm GIS (no pipe leaving the lake to the
+   south) all have it draining west. The model follows that. Only a private
+   principal-spillway pipe through the south dam would change this; see
+   [`docs/as-builts/Raymore_city_data.md`](docs/as-builts/Raymore_city_data.md).
 4. **Two on-stream lakes** (LK1 52.5 ac, normal pool 1025.47 ft; LK2 8.3 ac,
    1032.78 ft) have no outlet structures in the FEMA model, so they spill over
    the terrain. HMS routes them as level pools whose terrain-derived curves
    reproduce FEMA's 2D peak lake stages within +0.3 to +0.4 ft (LK1) and
-   −0.4 to −0.8 ft (LK2) for all six storms.
-5. The FEMA structure "Stage HW" output is not usable (values like 1 ft at a
+   −0.4 to −0.8 ft (LK2) for all six storms. **LK1 is Silver Lake.** Its
+   as-builts (Black & Veatch 132691, conformed 2003) confirm the lake spills
+   through the existing open channel and triple 12 × 4.3 ft box under
+   Silvertop Ln. The culvert doesn't control below about 1,400 cfs, and the
+   2002 survey puts the sill about 0.5 ft below the lidar. See
+   [`docs/as-builts/Silver_Lake_BV132691.md`](docs/as-builts/Silver_Lake_BV132691.md).
+5. FEMA's `Rainfall.dss` stores incremental precipitation with data type
+   **INST-VAL**. HEC-RAS accepts that, but HEC-HMS rejects it for a
+   precipitation gage. The HMS project uses a re-written copy with identical
+   values stored as PER-CUM.
+6. The FEMA structure "Stage HW" output is not usable (values like 1 ft at a
    987 ft invert), so only structure flows were extracted.
 
-## Results (Python QA engine; see "Status" below)
+## Results (HEC-HMS 4.14)
+
+All 12 runs were computed with HEC-HMS 4.14 (Linux, headless) and finished
+with no errors. The warnings are that 18 short reaches "may cause numeric
+instabilities" (the hydrographs show none), that the 91 ft reach below DET021
+would need 2 subreaches at high index flows, and that two tiny detention
+subbasins have a lag under the time-step criterion. An independent Python
+re-implementation of the same methods (`scripts/hms_check.py`) reproduces the
+HMS peaks at every junction within 0–1.2 % and the time of peak within about
+1 min, which confirms HMS is computing what was intended.
 
 100-yr peaks at the FEMA reference lines, using the same FEMA rainfall and CN layer:
 
 ![HMS vs FEMA](docs/figures/hms_vs_fema_100yr.png)
 
-| Event | FEMA RoG @ `Trib12Ea_8.6sqmi` (839 ft downstream) | HMS, FEMA rainfall @ outlet | HMS, Atlas 14 point rainfall @ outlet |
+Peak flow at the outlet (cfs):
+
+| Event | FEMA RoG @ `Trib12Ea_8.6sqmi` (839 ft downstream) | HMS, FEMA rainfall | HMS, Atlas 14 point rainfall |
 |---|---:|---:|---:|
-| 10-yr | 2,899 | 4,733 | 6,605 |
-| 25-yr | 4,383 | 6,279 | 8,638 |
-| 50-yr | 5,837 | 7,574 | 10,331 |
-| 100-yr | 7,310 | 8,935 | 12,110 |
-| 100-yr+ | 8,970 | 10,629 | 14,326 |
-| 500-yr | 11,023 | 12,471 | 16,742 |
+| 10-yr | 2,899 | 3,754 | 5,490 |
+| 25-yr | 4,383 | 5,183 | 7,437 |
+| 50-yr | 5,837 | 6,410 | 9,091 |
+| 100-yr | 7,310 | 7,725 | 10,859 |
+| 100-yr+ | 8,970 | 9,384 | 13,108 |
+| 500-yr | 11,023 | 11,220 | 15,613 |
 
 Across the 11 reference lines inside the watershed, the median HMS/FEMA peak
-ratio is 1.36 (10-yr), 1.11 (100-yr) and 0.98 (500-yr). HMS runs high in
+ratio is 1.30 (10-yr), 1.11 (100-yr) and 1.03 (500-yr). HMS runs high in
 frequent storms because the 2D model stores water in every lidar depression
-and behind every road embankment. HMS has none of that yet, and that is
-exactly the detail the next phases add (below). Full tables are in
-`HMS/QAQC/`.
+and behind every road embankment. HMS now routes the 23 detention basins that
+store meaningful water (`docs/Detention.md`), but not road-embankment storage;
+that is one of the next phases (below).
 
-## Status: what has and hasn't been run
+One location runs the other way: at `TribUppe_3.4` HMS is 27 % (100-yr) to
+34 % (500-yr) **below** FEMA. Reach `R-CNF07` upstream of it is a 4,200 ft
+wooded floodplain with about 2 ft of fall, and its single fitted trapezoid
+(121 ft bottom, 60:1 sides) over-attenuates in Muskingum-Cunge. An 8-point
+(channel + overbank) section would fix this; it's on the list below.
 
-* The HMS 4.14 project files were written by `scripts/07_build_hms_project.py`
-  using keywords taken from HEC's own HMS 4.14 sample projects and the HMS
-  4.14 program.
-* **HEC-HMS itself was not executed here.** The cloud session's safety policy
-  blocked running the downloaded HMS program. All numbers above come from
-  `scripts/hms_check.py`, an independent re-implementation of the same
-  methods (SCS CN, SCS UH, Muskingum-Cunge, Modified Puls). HMS results should
-  land within a few percent of it.
-* **Next step for you:** open `HMS/Raymore_Trib12/Raymore_Trib12.hms` in
-  HEC-HMS 4.14 (Windows), compute the 12 runs, and compare
-  `J-ECT030` against the table above. If HMS flags any parameter on load, tell
-  me the message and I'll fix the writer.
+Full tables are in `HMS/Results/`; QA-engine detail is in `HMS/QAQC/`.
+
+## Running HEC-HMS
+
+* **On your PC:** open `HMS/Raymore_Trib12/Raymore_Trib12.hms` in HEC-HMS
+  4.14 and compute any run.
+* **In a Claude Code cloud session:** `.claude/settings.json` allows one
+  command, a headless HMS run from `/root/hec-hms`. HMS isn't kept between
+  sessions, so it is downloaded first, then all 12 runs are computed and
+  summarized:
+
+```bash
+mkdir -p /root/hec-hms && curl -sSL https://www.hec.usace.army.mil/software/hec-hms/downloads/HEC-HMS-4.14-linux64.tar.gz | tar xz -C /root/hec-hms
+```
+
+```bash
+xvfb-run -a bash /root/hec-hms/HEC-HMS-4.14/hec-hms.sh -s /home/user/RAIN/scripts/hms_compute_all.py
+```
+
+```bash
+python scripts/09_hms_results.py
+```
+
+`hms_compute_all.py` computes `HMS/Raymore_Trib12` in place. To run a
+scratch copy instead, write the copy's `.hms` path into
+`scripts/HMS_PROJECT` (that file is git-ignored). HMS re-saves project files
+in its own format when it closes, so a scratch copy keeps the generated files
+clean.
 
 ## Repository layout
 
@@ -92,10 +135,18 @@ GIS/HMS_Raymore.gpkg      Watershed, Subbasins (with parameters), Junctions, Rea
                           LongestFlowPaths, ReachXS (cross-section fits)
 GIS/rasters/              10 ft burned DEM, D8 flow direction/accumulation, fill depth, subbasin grid (LFS)
 HMS/Raymore_Trib12/       HEC-HMS 4.14 project (open Raymore_Trib12.hms)
+HMS/Results/              HEC-HMS peaks for every element and run, HMS vs FEMA, HMS vs QA engine
 HMS/parameters/           subbasin / reach / lake parameter tables
-HMS/QAQC/                 QA-engine peaks, comparison with FEMA RoG, lake routing
+HMS/QAQC/                 QA-engine peaks, lake routing, Muskingum-Cunge parameters
 docs/figures/             figures used here
-scripts/                  everything above is reproducible from these (run in order 01→08)
+docs/as-builts/           as-built reviews (Silver Lake), Raymore plan-library index, city data notes
+Resources/AsBuilts/       as-built plan sets (LFS)
+GIS/AsBuilts.gpkg         features transcribed from as-builts (Silver Lake culvert, Sunset Channel, control)
+GIS/Raymore_StormGIS.gpkg City of Raymore storm GIS: 131 detention basins, 2,385 pipes, 3,253 inlets (scripts/12)
+GIS/StormSewer_Links.gpkg pipe systems, inlet -> outfall links, area the sewer moves (scripts/02b, 13)
+GIS/Raymore_Asbuilt_Index.gpkg  City plan library, 170 documents in the watershed with public links (scripts/11)
+scripts/                  everything above is reproducible from these
+.claude/settings.json     lets Claude Code run HEC-HMS headless in cloud sessions
 ```
 
 Methodology, assumptions and parameter sources: **[`HMS/README.md`](HMS/README.md)**.
@@ -111,26 +162,67 @@ pip install -r requirements.txt
 ```
 
 ```bash
-for s in 01_extract_fema_geometry 02_condition_dem 04_delineate_subbasins 05_hydrologic_parameters 06_lake_storage_outflow 03_extract_fema_results 07_build_hms_project 08_figures; do python scripts/$s.py; done
+for s in 01_extract_fema_geometry 02_condition_dem 12_raymore_storm_gis 02b_storm_sewer_links 04_delineate_subbasins 05_hydrologic_parameters 06_lake_storage_outflow 03_extract_fema_results 07_build_hms_project; do python scripts/$s.py; done
 ```
 
-`03` runs after `06` because its lake-stage table needs the lake polygons from `04`.
+Then run HMS and `09` as shown above, then:
+
+```bash
+for s in 08_figures 10_asbuilt_silver_lake 11_asbuilt_index 12_raymore_storm_gis 13_storm_sewer_delineation; do python scripts/$s.py; done
+```
+
+* `12` (city storm GIS) runs before `02b`, which needs the pipes, and again at
+  the end to tag features with the final subbasins.
+* `03` runs after `06` because its lake-stage table needs the lake polygons
+  from `04`.
+
+## Continuing locally (Windows)
+
+1. Clone the repo and pull the large files:
+
+   ```bash
+   git clone https://github.com/DryFrost/RAIN.git
+   ```
+
+   ```bash
+   cd RAIN && git checkout claude/practical-knuth-jpucay && git lfs pull
+   ```
+
+2. Open `HMS/Raymore_Trib12/Raymore_Trib12.hms` in **HEC-HMS 4.14** and compute
+   any run. Results land in `HMS/Raymore_Trib12/results/`. On close, HMS
+   re-saves the project in its own format; that's fine.
+3. To rebuild after changing inputs (e.g. as-built detention outlets), use
+   Python 3.11+:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+   then run the scripts in the order under *Reproducing*. Most edits only need
+   `14` and then `07`.
+4. To extract HMS results after computing in the GUI:
+
+   ```bash
+   python scripts/09_hms_results.py HMS/Raymore_Trib12
+   ```
+
+The as-built PDFs are not in the repo. `docs/as-builts/raymore_asbuilt_index.csv`
+links each one on the city's public file share.
 
 ## Recommended next phases
 
-1. **Run HMS 4.14** and reconcile with the QA engine.
+1. **As-built detention outlets.** Enter the 12 modelled basins that have plan
+   sets (`docs/Detention.md`) in `HMS/parameters/detention_outlets_asbuilt.csv`,
+   starting with DET006 (Good Ranch, 15 ac-ft) and DET011 (Raymore Galleria,
+   9 ac-ft).
 2. **Road-crossing storage.** Turn the 27 FEMA culvert crossings into HMS
-   reservoirs (Controlled Outflow + Culvert + overtopping weir). The culvert
-   shape, size, inverts, length and entrance loss are all in
-   `GIS/FEMA_RoG_geometry.gpkg`, and the upstream storage comes from the 1 m
-   terrain. This is the main thing the 2D model has that HMS lacks.
-3. **Subdivision detention.** Collect as-builts (City of Raymore / Cass County
-   MS4 records) and screen with lidar (`GIS/rasters/fill_depth_10ft.tif`).
-   Each basin becomes a reservoir with its real outlet (orifice, weir, riser).
-   25 open-water bodies ≥ 0.25 ac lie inside the watershed; 23 of them
-   (21 ac total) are inside subbasins and not yet modeled.
-4. **Lake outlets.** Get dam and spillway as-builts for LK1 and LK2 and
-   replace the terrain-only curves (neither has a principal-spillway pipe).
-5. **The Trib 12 / TribNort diversion** (finding 3): check the storm sewer.
+   reservoirs (culvert + overtopping weir, storage from lidar). The culvert
+   data is already in `GIS/FEMA_RoG_geometry.gpkg`. This is the largest
+   remaining difference from FEMA's 2D model.
+3. **8-point cross sections** for wide floodplain reaches, starting with
+   `R-CNF07`.
+4. **Lake outlets.** Survey the Silver Lake sill; get LK2 as-builts.
+5. **Storm sewer capacity.** Add HMS Diversions where a sewer transfer feeds a
+   culvert or detention basin.
 6. **Rainfall decision**: FEMA 0.782 ARF, Atlas 14 point, or an ARF sized to
    the 8.3 sq mi watershed.

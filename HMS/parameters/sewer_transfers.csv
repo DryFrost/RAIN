@@ -1,0 +1,78 @@
+From,To,Area_ac,Relation
+SB-CNF17,SB-MCT010,45.38,upstream
+SB-MCT010,SB-DET033,41.85,upstream
+SB-MEA020,SB-DET021,37.41,upstream
+SB-LK1-IN1,SB-LK1-IN2,30.84,upstream
+SB-RL_TribTrib_0.3,SB-DET011,19.36,upstream
+SB-RL_TribNort_0.2,SB-NBU060,16.82,downstream (1 junctions)
+SB-EAG030,SB-CNF14,16.7,downstream (1 junctions)
+SB-NBU030,SB-NBU070,16.01,upstream
+SB-NFE020,SB-NFE030,15.32,upstream
+SB-ECT070,SB-RL_Trib12Ea_1.6,15.23,upstream
+SB-CNF17,SB-MEA020,13.87,upstream
+SB-LK1-IN2,SB-DET044,12.29,upstream
+SB-CNF05,SB-DET017,8.29,upstream
+SB-EAG010,SB-EAG020,8.07,upstream
+SB-CNF19,SB-RL_TribUppe_1.0,7.72,downstream (1 junctions)
+SB-NFE030,SB-NFE040,7.62,upstream
+SB-LK1,SB-CNF14,6.55,downstream (1 junctions)
+SB-CNF27,SB-DET021,6.4,cross-branch
+SB-DET003,SB-CNF28,6.16,cross-branch
+SB-CNF06,SB-NFE010,6.11,upstream
+SB-RL_Trib12Ea_1.6,SB-ECT080,5.31,upstream
+SB-MEA010,SB-CNF17,5.25,upstream
+SB-MCT010,SB-MEA020,4.15,downstream (1 junctions)
+SB-NBU060,SB-NBU050,3.67,downstream (1 junctions)
+SB-LK1-IN3,SB-DET050,3.08,cross-branch
+SB-LK1-IN2,SB-DET061,2.98,upstream
+SB-RL_TribNort_2.0,SB-GRA010,2.67,upstream
+SB-EAG030,SB-DET049,2.63,upstream
+SB-DET011,SB-RL_TribTrib_0.3,2.4,downstream (1 junctions)
+SB-MCT010,SB-DET011,2.39,cross-branch
+SB-CNF14,SB-EAG030,2.18,upstream
+SB-CNF12,SB-MEA010,2.08,upstream
+(outside watershed),SB-CNF06,2.05,watershed boundary
+SB-DET033,SB-RL_TribTrib_0.3,1.98,cross-branch
+SB-EAG030,SB-DET032,1.72,cross-branch
+SB-CNF19,SB-CNF25,1.7,upstream
+SB-LK1,SB-LK1-IN3,1.58,upstream
+SB-CNF07,SB-CNF05,1.5,downstream (1 junctions)
+SB-CNF17,SB-DET060,1.22,upstream
+(outside watershed),SB-RL_TribNort_0.2,1.15,watershed boundary
+SB-LK1-IN1,SB-DET050,0.8,upstream
+SB-CNF28,SB-NBU030,0.78,upstream
+SB-MEA020,SB-MCT010,0.65,upstream
+SB-LK1,SB-ECT080,0.61,cross-branch
+(outside watershed),SB-DET049,0.57,watershed boundary
+SB-ECT050,SB-CNF01,0.52,upstream
+SB-RL_TribNort_0.2,(outside watershed),0.49,watershed boundary
+SB-NFE010,SB-NFE020,0.47,upstream
+SB-ECT070,SB-ECT080,0.37,upstream
+SB-LK1-IN3,SB-DET049,0.36,cross-branch
+SB-EAG020,SB-CNF14,0.31,upstream
+SB-NBU040,SB-NBU050,0.3,upstream
+SB-CNF02,SB-CNF01,0.28,downstream (2 junctions)
+SB-CNF17,SB-DET032,0.24,upstream
+SB-LK1-IN2,(outside watershed),0.23,watershed boundary
+(outside watershed),SB-CNF01,0.22,watershed boundary
+SB-DET007,SB-ECT070,0.2,cross-branch
+SB-RL_TribTrib_0.3,SB-DET012,0.16,upstream
+SB-CNF06,SB-CNF01,0.16,downstream (3 junctions)
+SB-LK2-IN1,(outside watershed),0.15,watershed boundary
+SB-RL_TribTrib_0.3,SB-MEA020,0.15,downstream (2 junctions)
+SB-LK1-IN3,SB-DET053,0.14,upstream
+SB-RL_TribNort_2.0,SB-NFE010,0.12,downstream (1 junctions)
+SB-ECT060,SB-ECT050,0.12,downstream (1 junctions)
+SB-DET025,(outside watershed),0.12,watershed boundary
+SB-CNF06,(outside watershed),0.11,watershed boundary
+SB-RL_TribNort_0.2,SB-DET030,0.09,upstream
+SB-DET007,SB-CNF05,0.07,cross-branch
+SB-DET006,SB-GRA010,0.07,downstream (2 junctions)
+SB-NBU050,SB-NBU060,0.05,upstream
+SB-CNF02,SB-ECT070,0.05,upstream
+SB-NBU020,SB-DET003,0.04,cross-branch
+SB-DET049,SB-EAG030,0.03,downstream (1 junctions)
+SB-DET012,SB-DET011,0.02,cross-branch
+SB-DET049,(outside watershed),0.02,watershed boundary
+SB-DET072,SB-ECT070,0.02,downstream (2 junctions)
+SB-CNF01,(outside watershed),0.0,watershed boundary

@@ -1,7 +1,7 @@
 Basin: Existing FEMA-Consistent
      Description: East Creek Trib 12 to FEMA bridge 29037ECT030. Loss/precip consistent with FEMA preliminary RoG model; no subdivision detention yet.
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Version: 4.14
      Filepath Separator: \
      Unit System: English
@@ -14,14 +14,14 @@ Basin: Existing FEMA-Consistent
 End:
 
 Subbasin: SB-LK1-IN1
-     Description: 14.1 ac; composite CN 88.1; Tc 30.5 min
+     Description: 77.9 ac; composite CN 87.5; Tc 39.3 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
-     Canvas X: 2797580.520
-     Canvas Y: 959961.272
+     Last Modified Time: 05:12:06
+     Canvas X: 2799095.880
+     Canvas Y: 960335.192
      Label X: 16.0
      Label Y: 0.0
-     Area: 0.02210
+     Area: 0.12170
      Downstream: J-LK1-IN1
 
      Discretization: None
@@ -33,11 +33,11 @@ Subbasin: SB-LK1-IN1
      Surface: None
 
      LossRate: SCS
-     Percent Impervious Area: 33.23
-     Curve Number: 83.12
+     Percent Impervious Area: 33.02
+     Curve Number: 82.29
 
      Transform: SCS
-     Lag: 18.31
+     Lag: 23.58
      Unitgraph Type: STANDARD
 
      Baseflow: None
@@ -46,7 +46,7 @@ End:
 Junction: J-LK1-IN1
      Description: Tributary inflow to lake
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2797487.040
      Canvas Y: 959498.792
      Label X: 16.0
@@ -54,15 +54,306 @@ Junction: J-LK1-IN1
      Downstream: J-LK1-Pool
 End:
 
-Subbasin: SB-LK1-IN2
-     Description: 108.0 ac; composite CN 85.9; Tc 27.0 min
+Subbasin: SB-DET044
+     Description: 14.4 ac; composite CN 87.7; Tc 7.7 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
-     Canvas X: 2799243.480
-     Canvas Y: 961717.712
+     Last Modified Time: 05:12:06
+     Canvas X: 2798707.200
+     Canvas Y: 962568.872
      Label X: 16.0
      Label Y: 0.0
-     Area: 0.16870
+     Area: 0.02260
+     Downstream: J-DET044-Pool
+
+     Discretization: None
+
+     Canopy: None
+     Allow Simultaneous Precip Et: No
+     Plant Uptake Method: None
+
+     Surface: None
+
+     LossRate: SCS
+     Percent Impervious Area: 35.37
+     Curve Number: 82.11
+
+     Transform: SCS
+     Lag: 4.61
+     Unitgraph Type: STANDARD
+
+     Baseflow: None
+End:
+
+Junction: J-DET044-Pool
+     Description: DET044 pool inflow point (0.59 ac Detention, dry)
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2798562.040
+     Canvas Y: 962202.446
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: D-DET044
+End:
+
+Reach: D-DET044
+     Description: Detention DET044 (city storm GIS), level pool; outlet assumed: APWA 5600 3.0 cfs/ac at spill
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2798520.240
+     Canvas Y: 962047.352
+     From Canvas X: 2798562.040
+     From Canvas Y: 962202.446
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: J-DET044
+
+     Route: Modified Puls
+     Initial Variable: Combined Inflow
+     Number of Reaches: 1
+     Storage Outflow Table Name: DET044 Storage-Outflow
+     Channel Loss: None
+End:
+
+Junction: J-DET044
+     Description: Detention basin outlet
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2798520.240
+     Canvas Y: 962047.352
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: R-DET044
+End:
+
+Reach: R-DET044
+     Description: J-DET044 to J-LK1-IN2
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2798008.560
+     Canvas Y: 960384.392
+     From Canvas X: 2798520.240
+     From Canvas Y: 962047.352
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: J-LK1-IN2
+
+     Route: Muskingum Cunge
+     Initial Variable: Combined Inflow
+     Channel: Trapezoid
+     Length: 1962.8
+     Energy Slope: 0.02219
+     Mannings n: 0.0781
+     Bottom Width: 2.00
+     Side Slope: 11.14
+     Index Parameter Type: Index Flow
+     Index Flow: 36.0
+     Space-Time Method: Automatic DX and DT
+     Channel Loss: None
+End:
+
+Subbasin: SB-DET050
+     Description: 5.7 ac; composite CN 91.1; Tc 6.6 min
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2798067.600
+     Canvas Y: 962047.352
+     Label X: 16.0
+     Label Y: 0.0
+     Area: 0.00900
+     Downstream: J-DET050-Pool
+
+     Discretization: None
+
+     Canopy: None
+     Allow Simultaneous Precip Et: No
+     Plant Uptake Method: None
+
+     Surface: None
+
+     LossRate: SCS
+     Percent Impervious Area: 57.05
+     Curve Number: 81.99
+
+     Transform: SCS
+     Lag: 3.98
+     Unitgraph Type: STANDARD
+
+     Baseflow: None
+End:
+
+Junction: J-DET050-Pool
+     Description: DET050 pool inflow point (0.37 ac Detention, dry)
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2798017.972
+     Canvas Y: 961929.175
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: D-DET050
+End:
+
+Reach: D-DET050
+     Description: Detention DET050 (city storm GIS), level pool; outlet assumed: APWA 5600 3.0 cfs/ac at spill
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2797959.360
+     Canvas Y: 961899.752
+     From Canvas X: 2798017.972
+     From Canvas Y: 961929.175
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: J-DET050
+
+     Route: Modified Puls
+     Initial Variable: Combined Inflow
+     Number of Reaches: 1
+     Storage Outflow Table Name: DET050 Storage-Outflow
+     Channel Loss: None
+End:
+
+Junction: J-DET050
+     Description: Detention basin outlet
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2797959.360
+     Canvas Y: 961899.752
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: R-DET050
+End:
+
+Reach: R-DET050
+     Description: J-DET050 to J-LK1-IN2
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2798008.560
+     Canvas Y: 960384.392
+     From Canvas X: 2797959.360
+     From Canvas Y: 961899.752
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: J-LK1-IN2
+
+     Route: Muskingum Cunge
+     Initial Variable: Combined Inflow
+     Channel: Trapezoid
+     Length: 1587.5
+     Energy Slope: 0.02441
+     Mannings n: 0.0333
+     Bottom Width: 35.19
+     Side Slope: 22.57
+     Index Parameter Type: Index Flow
+     Index Flow: 10.0
+     Space-Time Method: Automatic DX and DT
+     Channel Loss: None
+End:
+
+Subbasin: SB-DET061
+     Description: 4.3 ac; composite CN 84.5; Tc 5.8 min
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2798254.560
+     Canvas Y: 962657.432
+     Label X: 16.0
+     Label Y: 0.0
+     Area: 0.00680
+     Downstream: J-DET061-Pool
+
+     Discretization: None
+
+     Canopy: None
+     Allow Simultaneous Precip Et: No
+     Plant Uptake Method: None
+
+     Surface: None
+
+     LossRate: SCS
+     Percent Impervious Area: 20.00
+     Curve Number: 81.10
+
+     Transform: SCS
+     Lag: 3.50
+     Unitgraph Type: STANDARD
+
+     Baseflow: None
+End:
+
+Junction: J-DET061-Pool
+     Description: DET061 pool inflow point (0.23 ac Detention, dry)
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2798364.352
+     Canvas Y: 962049.453
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: D-DET061
+End:
+
+Reach: D-DET061
+     Description: Detention DET061 (city storm GIS), level pool; outlet assumed: APWA 5600 3.0 cfs/ac at spill
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2798431.680
+     Canvas Y: 962027.672
+     From Canvas X: 2798364.352
+     From Canvas Y: 962049.453
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: J-DET061
+
+     Route: Modified Puls
+     Initial Variable: Combined Inflow
+     Number of Reaches: 1
+     Storage Outflow Table Name: DET061 Storage-Outflow
+     Channel Loss: None
+End:
+
+Junction: J-DET061
+     Description: Detention basin outlet
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2798431.680
+     Canvas Y: 962027.672
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: R-DET061
+End:
+
+Reach: R-DET061
+     Description: J-DET061 to J-LK1-IN2
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2798008.560
+     Canvas Y: 960384.392
+     From Canvas X: 2798431.680
+     From Canvas Y: 962027.672
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: J-LK1-IN2
+
+     Route: Muskingum Cunge
+     Initial Variable: Combined Inflow
+     Channel: Trapezoid
+     Length: 1970.6
+     Energy Slope: 0.02158
+     Mannings n: 0.0782
+     Bottom Width: 2.00
+     Side Slope: 11.22
+     Index Parameter Type: Index Flow
+     Index Flow: 10.0
+     Space-Time Method: Automatic DX and DT
+     Channel Loss: None
+End:
+
+Subbasin: SB-LK1-IN2
+     Description: 119.8 ac; composite CN 86.3; Tc 26.9 min
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2799169.680
+     Canvas Y: 961560.272
+     Label X: 16.0
+     Label Y: 0.0
+     Area: 0.18720
      Downstream: J-LK1-IN2
 
      Discretization: None
@@ -74,11 +365,11 @@ Subbasin: SB-LK1-IN2
      Surface: None
 
      LossRate: SCS
-     Percent Impervious Area: 29.80
-     Curve Number: 80.76
+     Percent Impervious Area: 32.31
+     Curve Number: 80.68
 
      Transform: SCS
-     Lag: 16.23
+     Lag: 16.16
      Unitgraph Type: STANDARD
 
      Baseflow: None
@@ -87,7 +378,7 @@ End:
 Junction: J-LK1-IN2
      Description: Tributary inflow to lake
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2798008.560
      Canvas Y: 960384.392
      Label X: 16.0
@@ -95,15 +386,112 @@ Junction: J-LK1-IN2
      Downstream: J-LK1-Pool
 End:
 
-Subbasin: SB-LK1-IN3
-     Description: 71.8 ac; composite CN 87.2; Tc 27.4 min
+Subbasin: SB-DET053
+     Description: 5.4 ac; composite CN 88.3; Tc 23.9 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
+     Canvas X: 2796872.040
+     Canvas Y: 962819.792
+     Label X: 16.0
+     Label Y: 0.0
+     Area: 0.00850
+     Downstream: J-DET053-Pool
+
+     Discretization: None
+
+     Canopy: None
+     Allow Simultaneous Precip Et: No
+     Plant Uptake Method: None
+
+     Surface: None
+
+     LossRate: SCS
+     Percent Impervious Area: 43.13
+     Curve Number: 80.99
+
+     Transform: SCS
+     Lag: 14.36
+     Unitgraph Type: STANDARD
+
+     Baseflow: None
+End:
+
+Junction: J-DET053-Pool
+     Description: DET053 pool inflow point (0.31 ac Detention, dry)
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2797028.772
+     Canvas Y: 962573.566
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: D-DET053
+End:
+
+Reach: D-DET053
+     Description: Detention DET053 (city storm GIS), level pool; outlet assumed: APWA 5600 3.0 cfs/ac at spill
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2797083.600
+     Canvas Y: 962519.672
+     From Canvas X: 2797028.772
+     From Canvas Y: 962573.566
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: J-DET053
+
+     Route: Modified Puls
+     Initial Variable: Combined Inflow
+     Number of Reaches: 1
+     Storage Outflow Table Name: DET053 Storage-Outflow
+     Channel Loss: None
+End:
+
+Junction: J-DET053
+     Description: Detention basin outlet
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2797083.600
+     Canvas Y: 962519.672
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: R-DET053
+End:
+
+Reach: R-DET053
+     Description: J-DET053 to J-LK1-IN3
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2796109.440
+     Canvas Y: 960364.712
+     From Canvas X: 2797083.600
+     From Canvas Y: 962519.672
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: J-LK1-IN3
+
+     Route: Muskingum Cunge
+     Initial Variable: Combined Inflow
+     Channel: Trapezoid
+     Length: 2706.8
+     Energy Slope: 0.01870
+     Mannings n: 0.0300
+     Bottom Width: 32.93
+     Side Slope: 21.19
+     Index Parameter Type: Index Flow
+     Index Flow: 10.0
+     Space-Time Method: Automatic DX and DT
+     Channel Loss: None
+End:
+
+Subbasin: SB-LK1-IN3
+     Description: 64.5 ac; composite CN 86.8; Tc 27.4 min
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
      Canvas X: 2796626.040
      Canvas Y: 961752.152
      Label X: 16.0
      Label Y: 0.0
-     Area: 0.11220
+     Area: 0.10080
      Downstream: J-LK1-IN3
 
      Discretization: None
@@ -115,11 +503,11 @@ Subbasin: SB-LK1-IN3
      Surface: None
 
      LossRate: SCS
-     Percent Impervious Area: 35.97
-     Curve Number: 81.15
+     Percent Impervious Area: 32.94
+     Curve Number: 81.23
 
      Transform: SCS
-     Lag: 16.43
+     Lag: 16.42
      Unitgraph Type: STANDARD
 
      Baseflow: None
@@ -128,7 +516,7 @@ End:
 Junction: J-LK1-IN3
      Description: Tributary inflow to lake
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2796109.440
      Canvas Y: 960364.712
      Label X: 16.0
@@ -136,97 +524,15 @@ Junction: J-LK1-IN3
      Downstream: J-LK1-Pool
 End:
 
-Subbasin: SB-LK1-IN4
-     Description: 53.6 ac; composite CN 88.0; Tc 34.6 min
-     Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
-     Canvas X: 2797772.400
-     Canvas Y: 961442.192
-     Label X: 16.0
-     Label Y: 0.0
-     Area: 0.08370
-     Downstream: J-LK1-IN4
-
-     Discretization: None
-
-     Canopy: None
-     Allow Simultaneous Precip Et: No
-     Plant Uptake Method: None
-
-     Surface: None
-
-     LossRate: SCS
-     Percent Impervious Area: 39.33
-     Curve Number: 81.50
-
-     Transform: SCS
-     Lag: 20.78
-     Unitgraph Type: STANDARD
-
-     Baseflow: None
-End:
-
-Junction: J-LK1-IN4
-     Description: Tributary inflow to lake
-     Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
-     Canvas X: 2797979.040
-     Canvas Y: 960394.232
-     Label X: 16.0
-     Label Y: 0.0
-     Downstream: J-LK1-Pool
-End:
-
-Subbasin: SB-LK1-IN5
-     Description: 43.6 ac; composite CN 87.1; Tc 25.1 min
-     Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
-     Canvas X: 2798785.920
-     Canvas Y: 959685.752
-     Label X: 16.0
-     Label Y: 0.0
-     Area: 0.06820
-     Downstream: J-LK1-IN5
-
-     Discretization: None
-
-     Canopy: None
-     Allow Simultaneous Precip Et: No
-     Plant Uptake Method: None
-
-     Surface: None
-
-     LossRate: SCS
-     Percent Impervious Area: 30.81
-     Curve Number: 82.24
-
-     Transform: SCS
-     Lag: 15.06
-     Unitgraph Type: STANDARD
-
-     Baseflow: None
-End:
-
-Junction: J-LK1-IN5
-     Description: Tributary inflow to lake
-     Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
-     Canvas X: 2797939.680
-     Canvas Y: 959892.392
-     Label X: 16.0
-     Label Y: 0.0
-     Downstream: J-LK1-Pool
-End:
-
 Subbasin: SB-LK1
-     Description: 152.5 ac; composite CN 91.0; Tc 23.1 min
+     Description: 143.7 ac; composite CN 91.0; Tc 16.0 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
-     Canvas X: 2796370.200
-     Canvas Y: 959656.232
+     Last Modified Time: 05:12:06
+     Canvas X: 2797004.880
+     Canvas Y: 959356.112
      Label X: 16.0
      Label Y: 0.0
-     Area: 0.23830
+     Area: 0.22460
      Downstream: J-LK1-Pool
 
      Discretization: None
@@ -238,11 +544,11 @@ Subbasin: SB-LK1
      Surface: None
 
      LossRate: SCS
-     Percent Impervious Area: 54.59
-     Curve Number: 82.50
+     Percent Impervious Area: 55.13
+     Curve Number: 82.37
 
      Transform: SCS
-     Lag: 13.88
+     Lag: 9.58
      Unitgraph Type: STANDARD
 
      Baseflow: None
@@ -251,7 +557,7 @@ End:
 Junction: J-LK1-Pool
      Description: LK1 pool inflow point (52.5 ac lake, normal pool 1025.47 ft)
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2797319.766
      Canvas Y: 959215.072
      Label X: 16.0
@@ -262,7 +568,7 @@ End:
 Reach: L-LK1
      Description: Level-pool (Modified Puls) routing through LK1; terrain-derived storage-outflow, sill 1025.75 ft
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2795656.800
      Canvas Y: 959213.432
      From Canvas X: 2797319.766
@@ -279,14 +585,14 @@ Reach: L-LK1
 End:
 
 Subbasin: SB-LK2-IN1
-     Description: 77.5 ac; composite CN 80.2; Tc 41.5 min
+     Description: 77.3 ac; composite CN 80.2; Tc 41.5 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2806549.680
      Canvas Y: 954032.672
      Label X: 16.0
      Label Y: 0.0
-     Area: 0.12110
+     Area: 0.12090
      Downstream: J-LK2-IN1
 
      Discretization: None
@@ -298,7 +604,7 @@ Subbasin: SB-LK2-IN1
      Surface: None
 
      LossRate: SCS
-     Percent Impervious Area: 9.17
+     Percent Impervious Area: 9.10
      Curve Number: 78.44
 
      Transform: SCS
@@ -311,7 +617,7 @@ End:
 Junction: J-LK2-IN1
      Description: Tributary inflow to lake
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2805851.040
      Canvas Y: 954244.232
      Label X: 16.0
@@ -322,7 +628,7 @@ End:
 Subbasin: SB-LK2
      Description: 64.4 ac; composite CN 83.8; Tc 23.5 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2805368.880
      Canvas Y: 955001.912
      Label X: 16.0
@@ -352,7 +658,7 @@ End:
 Junction: J-LK2-Pool
      Description: LK2 pool inflow point (8.3 ac lake, normal pool 1032.78 ft)
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2805252.943
      Canvas Y: 954011.523
      Label X: 16.0
@@ -363,7 +669,7 @@ End:
 Reach: L-LK2
      Description: Level-pool (Modified Puls) routing through LK2; terrain-derived storage-outflow, sill 1032.78 ft
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2804857.200
      Canvas Y: 953909.672
      From Canvas X: 2805252.943
@@ -379,10 +685,1224 @@ Reach: L-LK2
      Channel Loss: None
 End:
 
+Subbasin: SB-DET003
+     Description: 138.8 ac; composite CN 84.8; Tc 58.9 min
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2797644.480
+     Canvas Y: 955380.752
+     Label X: 16.0
+     Label Y: 0.0
+     Area: 0.21690
+     Downstream: J-DET003-Pool
+
+     Discretization: None
+
+     Canopy: None
+     Allow Simultaneous Precip Et: No
+     Plant Uptake Method: None
+
+     Surface: None
+
+     LossRate: SCS
+     Percent Impervious Area: 14.64
+     Curve Number: 82.48
+
+     Transform: SCS
+     Lag: 35.36
+     Unitgraph Type: STANDARD
+
+     Baseflow: None
+End:
+
+Junction: J-DET003-Pool
+     Description: DET003 pool inflow point (11.88 ac Pond, wet)
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2795877.257
+     Canvas Y: 954012.303
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: D-DET003
+End:
+
+Reach: D-DET003
+     Description: Detention DET003 (city storm GIS), level pool; outlet terrain: wet pond spilling over its rim (no structure assumed)
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2795597.760
+     Canvas Y: 953850.632
+     From Canvas X: 2795877.257
+     From Canvas Y: 954012.303
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: J-DET003
+
+     Route: Modified Puls
+     Initial Variable: Combined Inflow
+     Number of Reaches: 1
+     Storage Outflow Table Name: DET003 Storage-Outflow
+     Channel Loss: None
+End:
+
+Subbasin: SB-DET006
+     Description: 27.0 ac; composite CN 86.2; Tc 25.3 min
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2790195.600
+     Canvas Y: 956044.952
+     Label X: 16.0
+     Label Y: 0.0
+     Area: 0.04210
+     Downstream: J-DET006-Pool
+
+     Discretization: None
+
+     Canopy: None
+     Allow Simultaneous Precip Et: No
+     Plant Uptake Method: None
+
+     Surface: None
+
+     LossRate: SCS
+     Percent Impervious Area: 14.83
+     Curve Number: 84.11
+
+     Transform: SCS
+     Lag: 15.19
+     Unitgraph Type: STANDARD
+
+     Baseflow: None
+End:
+
+Junction: J-DET006-Pool
+     Description: DET006 pool inflow point (5.53 ac Detention, wet)
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2790538.404
+     Canvas Y: 956218.521
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: D-DET006
+End:
+
+Reach: D-DET006
+     Description: Detention DET006 (city storm GIS), level pool; outlet assumed: APWA 5600 3.0 cfs/ac at spill
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2790786.000
+     Canvas Y: 956231.912
+     From Canvas X: 2790538.404
+     From Canvas Y: 956218.521
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: J-DET006
+
+     Route: Modified Puls
+     Initial Variable: Combined Inflow
+     Number of Reaches: 1
+     Storage Outflow Table Name: DET006 Storage-Outflow
+     Channel Loss: None
+End:
+
+Subbasin: SB-DET007
+     Description: 62.5 ac; composite CN 84.6; Tc 42.1 min
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2795263.200
+     Canvas Y: 951351.272
+     Label X: 16.0
+     Label Y: 0.0
+     Area: 0.09760
+     Downstream: J-DET007-Pool
+
+     Discretization: None
+
+     Canopy: None
+     Allow Simultaneous Precip Et: No
+     Plant Uptake Method: None
+
+     Surface: None
+
+     LossRate: SCS
+     Percent Impervious Area: 6.84
+     Curve Number: 83.58
+
+     Transform: SCS
+     Lag: 25.29
+     Unitgraph Type: STANDARD
+
+     Baseflow: None
+End:
+
+Junction: J-DET007-Pool
+     Description: DET007 pool inflow point (4.31 ac Pond, wet)
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2794546.338
+     Canvas Y: 950645.887
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: D-DET007
+End:
+
+Reach: D-DET007
+     Description: Detention DET007 (city storm GIS), level pool; outlet terrain: wet pond spilling over its rim (no structure assumed)
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2794397.280
+     Canvas Y: 950426.312
+     From Canvas X: 2794546.338
+     From Canvas Y: 950645.887
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: J-DET007
+
+     Route: Modified Puls
+     Initial Variable: Combined Inflow
+     Number of Reaches: 1
+     Storage Outflow Table Name: DET007 Storage-Outflow
+     Channel Loss: None
+End:
+
+Subbasin: SB-DET008
+     Description: 10.7 ac; composite CN 78.9; Tc 23.4 min
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2792852.400
+     Canvas Y: 948128.672
+     Label X: 16.0
+     Label Y: 0.0
+     Area: 0.01670
+     Downstream: J-DET008-Pool
+
+     Discretization: None
+
+     Canopy: None
+     Allow Simultaneous Precip Et: No
+     Plant Uptake Method: None
+
+     Surface: None
+
+     LossRate: SCS
+     Percent Impervious Area: 0.28
+     Curve Number: 78.85
+
+     Transform: SCS
+     Lag: 14.01
+     Unitgraph Type: STANDARD
+
+     Baseflow: None
+End:
+
+Junction: J-DET008-Pool
+     Description: DET008 pool inflow point (2.60 ac Pond, wet)
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2793117.149
+     Canvas Y: 948240.621
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: D-DET008
+End:
+
+Reach: D-DET008
+     Description: Detention DET008 (city storm GIS), level pool; outlet terrain: wet pond spilling over its rim (no structure assumed)
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2793285.360
+     Canvas Y: 948389.432
+     From Canvas X: 2793117.149
+     From Canvas Y: 948240.621
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: J-DET008
+
+     Route: Modified Puls
+     Initial Variable: Combined Inflow
+     Number of Reaches: 1
+     Storage Outflow Table Name: DET008 Storage-Outflow
+     Channel Loss: None
+End:
+
+Subbasin: SB-DET011
+     Description: 33.2 ac; composite CN 92.2; Tc 10.2 min
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2790102.120
+     Canvas Y: 961821.032
+     Label X: 16.0
+     Label Y: 0.0
+     Area: 0.05180
+     Downstream: J-DET011-Pool
+
+     Discretization: None
+
+     Canopy: None
+     Allow Simultaneous Precip Et: No
+     Plant Uptake Method: None
+
+     Surface: None
+
+     LossRate: SCS
+     Percent Impervious Area: 60.23
+     Curve Number: 83.46
+
+     Transform: SCS
+     Lag: 6.09
+     Unitgraph Type: STANDARD
+
+     Baseflow: None
+End:
+
+Junction: J-DET011-Pool
+     Description: DET011 pool inflow point (2.12 ac Detention, dry)
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2790691.609
+     Canvas Y: 961540.773
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: D-DET011
+End:
+
+Reach: D-DET011
+     Description: Detention DET011 (city storm GIS), level pool; outlet assumed: APWA 5600 3.0 cfs/ac at spill
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2790835.200
+     Canvas Y: 961388.072
+     From Canvas X: 2790691.609
+     From Canvas Y: 961540.773
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: J-DET011
+
+     Route: Modified Puls
+     Initial Variable: Combined Inflow
+     Number of Reaches: 1
+     Storage Outflow Table Name: DET011 Storage-Outflow
+     Channel Loss: None
+End:
+
+Subbasin: SB-DET012
+     Description: 5.2 ac; composite CN 89.9; Tc 5.0 min
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2790033.240
+     Canvas Y: 962204.792
+     Label X: 16.0
+     Label Y: 0.0
+     Area: 0.00810
+     Downstream: J-DET012-Pool
+
+     Discretization: None
+
+     Canopy: None
+     Allow Simultaneous Precip Et: No
+     Plant Uptake Method: None
+
+     Surface: None
+
+     LossRate: SCS
+     Percent Impervious Area: 47.86
+     Curve Number: 82.42
+
+     Transform: SCS
+     Lag: 3.00
+     Unitgraph Type: STANDARD
+
+     Baseflow: None
+End:
+
+Junction: J-DET012-Pool
+     Description: DET012 pool inflow point (1.99 ac Detention, dry)
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2790164.041
+     Canvas Y: 962056.355
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: D-DET012
+End:
+
+Reach: D-DET012
+     Description: Detention DET012 (city storm GIS), level pool; outlet assumed: APWA 5600 3.0 cfs/ac at spill
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2790313.680
+     Canvas Y: 961988.312
+     From Canvas X: 2790164.041
+     From Canvas Y: 962056.355
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: J-DET012
+
+     Route: Modified Puls
+     Initial Variable: Combined Inflow
+     Number of Reaches: 1
+     Storage Outflow Table Name: DET012 Storage-Outflow
+     Channel Loss: None
+End:
+
+Subbasin: SB-DET016
+     Description: 7.5 ac; composite CN 82.3; Tc 14.9 min
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2795410.800
+     Canvas Y: 948310.712
+     Label X: 16.0
+     Label Y: 0.0
+     Area: 0.01170
+     Downstream: J-DET016-Pool
+
+     Discretization: None
+
+     Canopy: None
+     Allow Simultaneous Precip Et: No
+     Plant Uptake Method: None
+
+     Surface: None
+
+     LossRate: SCS
+     Percent Impervious Area: 10.31
+     Curve Number: 80.45
+
+     Transform: SCS
+     Lag: 8.97
+     Unitgraph Type: STANDARD
+
+     Baseflow: None
+End:
+
+Junction: J-DET016-Pool
+     Description: DET016 pool inflow point (1.39 ac Pond, wet)
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2795135.564
+     Canvas Y: 948544.419
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: D-DET016
+End:
+
+Reach: D-DET016
+     Description: Detention DET016 (city storm GIS), level pool; outlet terrain: wet pond spilling over its rim (no structure assumed)
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2795027.040
+     Canvas Y: 948409.112
+     From Canvas X: 2795135.564
+     From Canvas Y: 948544.419
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: J-DET016
+
+     Route: Modified Puls
+     Initial Variable: Combined Inflow
+     Number of Reaches: 1
+     Storage Outflow Table Name: DET016 Storage-Outflow
+     Channel Loss: None
+End:
+
+Subbasin: SB-DET017
+     Description: 34.5 ac; composite CN 82.3; Tc 30.0 min
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2795971.680
+     Canvas Y: 950898.632
+     Label X: 16.0
+     Label Y: 0.0
+     Area: 0.05400
+     Downstream: J-DET017-Pool
+
+     Discretization: None
+
+     Canopy: None
+     Allow Simultaneous Precip Et: No
+     Plant Uptake Method: None
+
+     Surface: None
+
+     LossRate: SCS
+     Percent Impervious Area: 0.00
+     Curve Number: 82.32
+
+     Transform: SCS
+     Lag: 18.02
+     Unitgraph Type: STANDARD
+
+     Baseflow: None
+End:
+
+Junction: J-DET017-Pool
+     Description: DET017 pool inflow point (1.37 ac Pond, wet)
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2795982.299
+     Canvas Y: 949938.605
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: D-DET017
+End:
+
+Reach: D-DET017
+     Description: Detention DET017 (city storm GIS), level pool; outlet terrain: wet pond spilling over its rim (no structure assumed)
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2795706.000
+     Canvas Y: 949845.752
+     From Canvas X: 2795982.299
+     From Canvas Y: 949938.605
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: J-DET017
+
+     Route: Modified Puls
+     Initial Variable: Combined Inflow
+     Number of Reaches: 1
+     Storage Outflow Table Name: DET017 Storage-Outflow
+     Channel Loss: None
+End:
+
+Subbasin: SB-DET021
+     Description: 45.7 ac; composite CN 86.2; Tc 42.6 min
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2790800.760
+     Canvas Y: 958942.832
+     Label X: 16.0
+     Label Y: 0.0
+     Area: 0.07150
+     Downstream: J-DET021-Pool
+
+     Discretization: None
+
+     Canopy: None
+     Allow Simultaneous Precip Et: No
+     Plant Uptake Method: None
+
+     Surface: None
+
+     LossRate: SCS
+     Percent Impervious Area: 23.41
+     Curve Number: 82.62
+
+     Transform: SCS
+     Lag: 25.54
+     Unitgraph Type: STANDARD
+
+     Baseflow: None
+End:
+
+Junction: J-DET021-Pool
+     Description: DET021 pool inflow point (1.16 ac Detention, dry)
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2792036.471
+     Canvas Y: 958940.592
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: D-DET021
+End:
+
+Reach: D-DET021
+     Description: Detention DET021 (city storm GIS), level pool; outlet assumed: APWA 5600 3.0 cfs/ac at spill
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2792055.360
+     Canvas Y: 959085.512
+     From Canvas X: 2792036.471
+     From Canvas Y: 958940.592
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: J-DET021
+
+     Route: Modified Puls
+     Initial Variable: Combined Inflow
+     Number of Reaches: 1
+     Storage Outflow Table Name: DET021 Storage-Outflow
+     Channel Loss: None
+End:
+
+Subbasin: SB-DET023
+     Description: 24.2 ac; composite CN 79.3; Tc 21.8 min
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2804985.120
+     Canvas Y: 950947.832
+     Label X: 16.0
+     Label Y: 0.0
+     Area: 0.03780
+     Downstream: J-DET023-Pool
+
+     Discretization: None
+
+     Canopy: None
+     Allow Simultaneous Precip Et: No
+     Plant Uptake Method: None
+
+     Surface: None
+
+     LossRate: SCS
+     Percent Impervious Area: 6.30
+     Curve Number: 78.08
+
+     Transform: SCS
+     Lag: 13.06
+     Unitgraph Type: STANDARD
+
+     Baseflow: None
+End:
+
+Junction: J-DET023-Pool
+     Description: DET023 pool inflow point (1.09 ac Pond, dry)
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2804302.933
+     Canvas Y: 951038.234
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: D-DET023
+End:
+
+Reach: D-DET023
+     Description: Detention DET023 (city storm GIS), level pool; outlet assumed: APWA 5600 3.0 cfs/ac at spill
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2804345.520
+     Canvas Y: 951154.472
+     From Canvas X: 2804302.933
+     From Canvas Y: 951038.234
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: J-DET023
+
+     Route: Modified Puls
+     Initial Variable: Combined Inflow
+     Number of Reaches: 1
+     Storage Outflow Table Name: DET023 Storage-Outflow
+     Channel Loss: None
+End:
+
+Subbasin: SB-DET025
+     Description: 23.5 ac; composite CN 81.8; Tc 26.7 min
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2792739.240
+     Canvas Y: 947203.712
+     Label X: 16.0
+     Label Y: 0.0
+     Area: 0.03670
+     Downstream: J-DET025-Pool
+
+     Discretization: None
+
+     Canopy: None
+     Allow Simultaneous Precip Et: No
+     Plant Uptake Method: None
+
+     Surface: None
+
+     LossRate: SCS
+     Percent Impervious Area: 2.95
+     Curve Number: 81.29
+
+     Transform: SCS
+     Lag: 16.02
+     Unitgraph Type: STANDARD
+
+     Baseflow: None
+End:
+
+Junction: J-DET025-Pool
+     Description: DET025 pool inflow point (1.01 ac Pond, wet)
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2793104.069
+     Canvas Y: 947758.048
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: D-DET025
+End:
+
+Reach: D-DET025
+     Description: Detention DET025 (city storm GIS), level pool; outlet terrain: wet pond spilling over its rim (no structure assumed)
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2793186.960
+     Canvas Y: 947690.792
+     From Canvas X: 2793104.069
+     From Canvas Y: 947758.048
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: J-DET025
+
+     Route: Modified Puls
+     Initial Variable: Combined Inflow
+     Number of Reaches: 1
+     Storage Outflow Table Name: DET025 Storage-Outflow
+     Channel Loss: None
+End:
+
+Junction: J-DET007
+     Description: Detention basin outlet
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2794397.280
+     Canvas Y: 950426.312
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: R-DET007
+End:
+
+Reach: R-DET007
+     Description: J-DET007 to J-DET027
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2794121.760
+     Canvas Y: 950160.632
+     From Canvas X: 2794397.280
+     From Canvas Y: 950426.312
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: J-DET027-Pool
+
+     Route: Muskingum Cunge
+     Initial Variable: Combined Inflow
+     Channel: Trapezoid
+     Length: 443.2
+     Energy Slope: 0.00791
+     Mannings n: 0.0330
+     Bottom Width: 24.39
+     Side Slope: 24.18
+     Index Parameter Type: Index Flow
+     Index Flow: 80.0
+     Space-Time Method: Automatic DX and DT
+     Channel Loss: None
+End:
+
+Subbasin: SB-DET027
+     Description: 6.6 ac; composite CN 82.6; Tc 22.9 min
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2794126.680
+     Canvas Y: 950495.192
+     Label X: 16.0
+     Label Y: 0.0
+     Area: 0.01040
+     Downstream: J-DET027-Pool
+
+     Discretization: None
+
+     Canopy: None
+     Allow Simultaneous Precip Et: No
+     Plant Uptake Method: None
+
+     Surface: None
+
+     LossRate: SCS
+     Percent Impervious Area: 7.92
+     Curve Number: 81.31
+
+     Transform: SCS
+     Lag: 13.75
+     Unitgraph Type: STANDARD
+
+     Baseflow: None
+End:
+
+Junction: J-DET027-Pool
+     Description: DET027 pool inflow point (1.00 ac Pond, wet)
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2794194.555
+     Canvas Y: 950257.321
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: D-DET027
+End:
+
+Reach: D-DET027
+     Description: Detention DET027 (city storm GIS), level pool; outlet terrain: wet pond spilling over its rim (no structure assumed)
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2794121.760
+     Canvas Y: 950160.632
+     From Canvas X: 2794194.555
+     From Canvas Y: 950257.321
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: J-DET027
+
+     Route: Modified Puls
+     Initial Variable: Combined Inflow
+     Number of Reaches: 1
+     Storage Outflow Table Name: DET027 Storage-Outflow
+     Channel Loss: None
+End:
+
+Subbasin: SB-DET030
+     Description: 53.8 ac; composite CN 83.3; Tc 39.3 min
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2802603.840
+     Canvas Y: 957816.152
+     Label X: 16.0
+     Label Y: 0.0
+     Area: 0.08410
+     Downstream: J-DET030-Pool
+
+     Discretization: None
+
+     Canopy: None
+     Allow Simultaneous Precip Et: No
+     Plant Uptake Method: None
+
+     Surface: None
+
+     LossRate: SCS
+     Percent Impervious Area: 22.53
+     Curve Number: 79.04
+
+     Transform: SCS
+     Lag: 23.60
+     Unitgraph Type: STANDARD
+
+     Baseflow: None
+End:
+
+Junction: J-DET030-Pool
+     Description: DET030 pool inflow point (0.91 ac Retention, dry)
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2801680.008
+     Canvas Y: 957163.669
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: D-DET030
+End:
+
+Reach: D-DET030
+     Description: Detention DET030 (city storm GIS), level pool; outlet assumed: APWA 5600 3.0 cfs/ac at spill
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2801580.480
+     Canvas Y: 957107.672
+     From Canvas X: 2801680.008
+     From Canvas Y: 957163.669
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: J-DET030
+
+     Route: Modified Puls
+     Initial Variable: Combined Inflow
+     Number of Reaches: 1
+     Storage Outflow Table Name: DET030 Storage-Outflow
+     Channel Loss: None
+End:
+
+Subbasin: SB-DET031
+     Description: 13.9 ac; composite CN 87.8; Tc 10.3 min
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2793054.120
+     Canvas Y: 963921.872
+     Label X: 16.0
+     Label Y: 0.0
+     Area: 0.02180
+     Downstream: J-DET031-Pool
+
+     Discretization: None
+
+     Canopy: None
+     Allow Simultaneous Precip Et: No
+     Plant Uptake Method: None
+
+     Surface: None
+
+     LossRate: SCS
+     Percent Impervious Area: 43.44
+     Curve Number: 79.90
+
+     Transform: SCS
+     Lag: 6.17
+     Unitgraph Type: STANDARD
+
+     Baseflow: None
+End:
+
+Junction: J-DET031-Pool
+     Description: DET031 pool inflow point (0.89 ac Detention, wet)
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2792837.144
+     Canvas Y: 963522.771
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: D-DET031
+End:
+
+Reach: D-DET031
+     Description: Detention DET031 (city storm GIS), level pool; outlet assumed: APWA 5600 3.0 cfs/ac at spill
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2792665.440
+     Canvas Y: 963434.792
+     From Canvas X: 2792837.144
+     From Canvas Y: 963522.771
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: J-DET031
+
+     Route: Modified Puls
+     Initial Variable: Combined Inflow
+     Number of Reaches: 1
+     Storage Outflow Table Name: DET031 Storage-Outflow
+     Channel Loss: None
+End:
+
+Subbasin: SB-DET032
+     Description: 2.5 ac; composite CN 91.3; Tc 5.0 min
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2793280.440
+     Canvas Y: 962470.472
+     Label X: 16.0
+     Label Y: 0.0
+     Area: 0.00390
+     Downstream: J-DET032-Pool
+
+     Discretization: None
+
+     Canopy: None
+     Allow Simultaneous Precip Et: No
+     Plant Uptake Method: None
+
+     Surface: None
+
+     LossRate: SCS
+     Percent Impervious Area: 62.63
+     Curve Number: 80.20
+
+     Transform: SCS
+     Lag: 3.00
+     Unitgraph Type: STANDARD
+
+     Baseflow: None
+End:
+
+Junction: J-DET032-Pool
+     Description: DET032 pool inflow point (0.89 ac Detention, dry)
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2793041.186
+     Canvas Y: 962471.862
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: D-DET032
+End:
+
+Reach: D-DET032
+     Description: Detention DET032 (city storm GIS), level pool; outlet assumed: APWA 5600 3.0 cfs/ac at spill
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2793029.520
+     Canvas Y: 962381.912
+     From Canvas X: 2793041.186
+     From Canvas Y: 962471.862
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: J-DET032
+
+     Route: Modified Puls
+     Initial Variable: Combined Inflow
+     Number of Reaches: 1
+     Storage Outflow Table Name: DET032 Storage-Outflow
+     Channel Loss: None
+End:
+
+Subbasin: SB-DET033
+     Description: 47.0 ac; composite CN 85.8; Tc 36.9 min
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2791568.280
+     Canvas Y: 963916.952
+     Label X: 16.0
+     Label Y: 0.0
+     Area: 0.07340
+     Downstream: J-DET033-Pool
+
+     Discretization: None
+
+     Canopy: None
+     Allow Simultaneous Precip Et: No
+     Plant Uptake Method: None
+
+     Surface: None
+
+     LossRate: SCS
+     Percent Impervious Area: 24.77
+     Curve Number: 81.79
+
+     Transform: SCS
+     Lag: 22.14
+     Unitgraph Type: STANDARD
+
+     Baseflow: None
+End:
+
+Junction: J-DET033-Pool
+     Description: DET033 pool inflow point (0.85 ac Detention, dry)
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2791682.361
+     Canvas Y: 962178.266
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: D-DET033
+End:
+
+Reach: D-DET033
+     Description: Detention DET033 (city storm GIS), level pool; outlet assumed: APWA 5600 3.0 cfs/ac at spill
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2791740.480
+     Canvas Y: 961958.792
+     From Canvas X: 2791682.361
+     From Canvas Y: 962178.266
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: J-DET033
+
+     Route: Modified Puls
+     Initial Variable: Combined Inflow
+     Number of Reaches: 1
+     Storage Outflow Table Name: DET033 Storage-Outflow
+     Channel Loss: None
+End:
+
+Subbasin: SB-DET049
+     Description: 35.6 ac; composite CN 89.3; Tc 16.0 min
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2796207.840
+     Canvas Y: 962932.952
+     Label X: 16.0
+     Label Y: 0.0
+     Area: 0.05560
+     Downstream: J-DET049-Pool
+
+     Discretization: None
+
+     Canopy: None
+     Allow Simultaneous Precip Et: No
+     Plant Uptake Method: None
+
+     Surface: None
+
+     LossRate: SCS
+     Percent Impervious Area: 47.90
+     Curve Number: 81.29
+
+     Transform: SCS
+     Lag: 9.59
+     Unitgraph Type: STANDARD
+
+     Baseflow: None
+End:
+
+Junction: J-DET049-Pool
+     Description: DET049 pool inflow point (0.41 ac Detention, wet)
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2795868.348
+     Canvas Y: 962413.939
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: D-DET049
+End:
+
+Reach: D-DET049
+     Description: Detention DET049 (city storm GIS), level pool; outlet assumed: APWA 5600 3.0 cfs/ac at spill
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2795853.600
+     Canvas Y: 962332.712
+     From Canvas X: 2795868.348
+     From Canvas Y: 962413.939
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: J-DET049
+
+     Route: Modified Puls
+     Initial Variable: Combined Inflow
+     Number of Reaches: 1
+     Storage Outflow Table Name: DET049 Storage-Outflow
+     Channel Loss: None
+End:
+
+Junction: J-DET032
+     Description: Detention basin outlet
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2793029.520
+     Canvas Y: 962381.912
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: R-DET032
+End:
+
+Reach: R-DET032
+     Description: J-DET032 to J-DET060
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2792793.360
+     Canvas Y: 962067.032
+     From Canvas X: 2793029.520
+     From Canvas Y: 962381.912
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: J-DET060-Pool
+
+     Route: Muskingum Cunge
+     Initial Variable: Combined Inflow
+     Channel: Trapezoid
+     Length: 400.1
+     Energy Slope: 0.00406
+     Mannings n: 0.0300
+     Bottom Width: 145.02
+     Side Slope: 7.80
+     Index Parameter Type: Index Flow
+     Index Flow: 10.0
+     Space-Time Method: Automatic DX and DT
+     Channel Loss: None
+End:
+
+Subbasin: SB-DET060
+     Description: 1.8 ac; composite CN 90.6; Tc 15.8 min
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2793029.520
+     Canvas Y: 962170.352
+     Label X: 16.0
+     Label Y: 0.0
+     Area: 0.00280
+     Downstream: J-DET060-Pool
+
+     Discretization: None
+
+     Canopy: None
+     Allow Simultaneous Precip Et: No
+     Plant Uptake Method: None
+
+     Surface: None
+
+     LossRate: SCS
+     Percent Impervious Area: 52.46
+     Curve Number: 82.41
+
+     Transform: SCS
+     Lag: 9.49
+     Unitgraph Type: STANDARD
+
+     Baseflow: None
+End:
+
+Junction: J-DET060-Pool
+     Description: DET060 pool inflow point (0.25 ac Detention, dry)
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2792819.530
+     Canvas Y: 962122.860
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: D-DET060
+End:
+
+Reach: D-DET060
+     Description: Detention DET060 (city storm GIS), level pool; outlet assumed: APWA 5600 3.0 cfs/ac at spill
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2792793.360
+     Canvas Y: 962067.032
+     From Canvas X: 2792819.530
+     From Canvas Y: 962122.860
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: J-DET060
+
+     Route: Modified Puls
+     Initial Variable: Combined Inflow
+     Number of Reaches: 1
+     Storage Outflow Table Name: DET060 Storage-Outflow
+     Channel Loss: None
+End:
+
+Subbasin: SB-DET072
+     Description: 18.6 ac; composite CN 87.1; Tc 24.4 min
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2795440.320
+     Canvas Y: 952345.112
+     Label X: 16.0
+     Label Y: 0.0
+     Area: 0.02910
+     Downstream: J-DET072-Pool
+
+     Discretization: None
+
+     Canopy: None
+     Allow Simultaneous Precip Et: No
+     Plant Uptake Method: None
+
+     Surface: None
+
+     LossRate: SCS
+     Percent Impervious Area: 7.99
+     Curve Number: 86.19
+
+     Transform: SCS
+     Lag: 14.66
+     Unitgraph Type: STANDARD
+
+     Baseflow: None
+End:
+
+Junction: J-DET072-Pool
+     Description: DET072 pool inflow point (0.13 ac Detention, dry)
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2794477.873
+     Canvas Y: 952548.899
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: D-DET072
+End:
+
+Reach: D-DET072
+     Description: Detention DET072 (city storm GIS), level pool; outlet assumed: APWA 5600 3.0 cfs/ac at spill
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2794426.800
+     Canvas Y: 952522.232
+     From Canvas X: 2794477.873
+     From Canvas Y: 952548.899
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: J-DET072
+
+     Route: Modified Puls
+     Initial Variable: Combined Inflow
+     Number of Reaches: 1
+     Storage Outflow Table Name: DET072 Storage-Outflow
+     Channel Loss: None
+End:
+
 Junction: J-LK1
      Description: Lake outlet (spill sill)
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2795656.800
      Canvas Y: 959213.432
      Label X: 16.0
@@ -393,7 +1913,7 @@ End:
 Reach: R-LK1
      Description: J-LK1 to J-CNF14
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2794603.920
      Canvas Y: 959262.632
      From Canvas X: 2795656.800
@@ -411,20 +1931,57 @@ Reach: R-LK1
      Bottom Width: 3.15
      Side Slope: 3.56
      Index Parameter Type: Index Flow
-     Index Flow: 73.0
+     Index Flow: 69.0
+     Space-Time Method: Automatic DX and DT
+     Channel Loss: None
+End:
+
+Junction: J-DET049
+     Description: Detention basin outlet
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2795853.600
+     Canvas Y: 962332.712
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: R-DET049
+End:
+
+Reach: R-DET049
+     Description: J-DET049 to J-EAG030
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2794535.040
+     Canvas Y: 960571.352
+     From Canvas X: 2795853.600
+     From Canvas Y: 962332.712
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: J-EAG030
+
+     Route: Muskingum Cunge
+     Initial Variable: Combined Inflow
+     Channel: Trapezoid
+     Length: 2963.5
+     Energy Slope: 0.01620
+     Mannings n: 0.0300
+     Bottom Width: 28.83
+     Side Slope: 21.64
+     Index Parameter Type: Index Flow
+     Index Flow: 111.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
 
 Subbasin: SB-EAG030
-     Description: 211.0 ac; composite CN 88.7; Tc 51.8 min
+     Description: 160.0 ac; composite CN 88.4; Tc 51.8 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
-     Canvas X: 2794781.040
-     Canvas Y: 962391.752
+     Last Modified Time: 05:12:06
+     Canvas X: 2794579.320
+     Canvas Y: 962396.672
      Label X: 16.0
      Label Y: 0.0
-     Area: 0.32960
+     Area: 0.25010
      Downstream: J-EAG030
 
      Discretization: None
@@ -436,11 +1993,11 @@ Subbasin: SB-EAG030
      Surface: None
 
      LossRate: SCS
-     Percent Impervious Area: 33.62
-     Curve Number: 83.97
+     Percent Impervious Area: 29.66
+     Curve Number: 84.34
 
      Transform: SCS
-     Lag: 31.11
+     Lag: 31.05
      Unitgraph Type: STANDARD
 
      Baseflow: None
@@ -449,7 +2006,7 @@ End:
 Junction: J-EAG030
      Description: FEMA crossing 29037EAG030
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2794535.040
      Canvas Y: 960571.352
      Label X: 16.0
@@ -460,7 +2017,7 @@ End:
 Reach: R-EAG030
      Description: J-EAG030 to J-CNF14
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2794603.920
      Canvas Y: 959262.632
      From Canvas X: 2794535.040
@@ -478,20 +2035,20 @@ Reach: R-EAG030
      Bottom Width: 2.00
      Side Slope: 4.53
      Index Parameter Type: Index Flow
-     Index Flow: 391.0
+     Index Flow: 373.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
 
 Subbasin: SB-CNF14
-     Description: 64.0 ac; composite CN 87.5; Tc 33.8 min
+     Description: 85.4 ac; composite CN 88.2; Tc 28.2 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
-     Canvas X: 2794712.160
-     Canvas Y: 960197.432
+     Last Modified Time: 05:12:06
+     Canvas X: 2794539.960
+     Canvas Y: 960325.352
      Label X: 16.0
      Label Y: 0.0
-     Area: 0.10000
+     Area: 0.13340
      Downstream: J-CNF14
 
      Discretization: None
@@ -503,11 +2060,11 @@ Subbasin: SB-CNF14
      Surface: None
 
      LossRate: SCS
-     Percent Impervious Area: 31.96
-     Curve Number: 82.52
+     Percent Impervious Area: 34.50
+     Curve Number: 83.02
 
      Transform: SCS
-     Lag: 20.26
+     Lag: 16.93
      Unitgraph Type: STANDARD
 
      Baseflow: None
@@ -516,7 +2073,7 @@ End:
 Junction: J-CNF14
      Description: Stream confluence
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2794603.920
      Canvas Y: 959262.632
      Label X: 16.0
@@ -527,7 +2084,7 @@ End:
 Reach: R-CNF14
      Description: J-CNF14 to J-EAG020
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2793580.560
      Canvas Y: 958209.752
      From Canvas X: 2794603.920
@@ -541,24 +2098,24 @@ Reach: R-CNF14
      Channel: Trapezoid
      Length: 1938.1
      Energy Slope: 0.00607
-     Mannings n: 0.0553
-     Bottom Width: 2.29
-     Side Slope: 2.62
+     Mannings n: 0.0544
+     Bottom Width: 3.22
+     Side Slope: 2.88
      Index Parameter Type: Index Flow
-     Index Flow: 514.0
+     Index Flow: 549.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
 
 Subbasin: SB-EAG020
-     Description: 34.4 ac; composite CN 81.6; Tc 29.8 min
+     Description: 42.2 ac; composite CN 82.7; Tc 29.8 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
-     Canvas X: 2794490.760
+     Last Modified Time: 05:12:06
+     Canvas X: 2794141.440
      Canvas Y: 958770.632
      Label X: 16.0
      Label Y: 0.0
-     Area: 0.05380
+     Area: 0.06590
      Downstream: J-EAG020
 
      Discretization: None
@@ -570,11 +2127,11 @@ Subbasin: SB-EAG020
      Surface: None
 
      LossRate: SCS
-     Percent Impervious Area: 25.22
-     Curve Number: 76.07
+     Percent Impervious Area: 28.58
+     Curve Number: 76.63
 
      Transform: SCS
-     Lag: 17.89
+     Lag: 17.88
      Unitgraph Type: STANDARD
 
      Baseflow: None
@@ -583,7 +2140,7 @@ End:
 Junction: J-EAG020
      Description: FEMA crossing 29037EAG020
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2793580.560
      Canvas Y: 958209.752
      Label X: 16.0
@@ -594,7 +2151,7 @@ End:
 Reach: R-EAG020
      Description: J-EAG020 to J-EAG010
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2793413.280
      Canvas Y: 958012.952
      From Canvas X: 2793580.560
@@ -608,24 +2165,24 @@ Reach: R-EAG020
      Channel: Trapezoid
      Length: 283.4
      Energy Slope: 0.01041
-     Mannings n: 0.0651
-     Bottom Width: 2.00
-     Side Slope: 10.37
+     Mannings n: 0.0648
+     Bottom Width: 2.53
+     Side Slope: 10.38
      Index Parameter Type: Index Flow
-     Index Flow: 553.0
+     Index Flow: 610.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
 
 Subbasin: SB-EAG010
-     Description: 8.5 ac; composite CN 87.7; Tc 12.5 min
+     Description: 0.4 ac; composite CN 83.8; Tc 6.5 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
-     Canvas X: 2793492.000
-     Canvas Y: 958534.472
+     Last Modified Time: 05:12:06
+     Canvas X: 2793511.680
+     Canvas Y: 958126.112
      Label X: 16.0
      Label Y: 0.0
-     Area: 0.01330
+     Area: 0.00070
      Downstream: J-EAG010
 
      Discretization: None
@@ -637,11 +2194,11 @@ Subbasin: SB-EAG010
      Surface: None
 
      LossRate: SCS
-     Percent Impervious Area: 43.87
-     Curve Number: 79.68
+     Percent Impervious Area: 56.19
+     Curve Number: 65.59
 
      Transform: SCS
-     Lag: 7.47
+     Lag: 3.91
      Unitgraph Type: STANDARD
 
      Baseflow: None
@@ -650,7 +2207,7 @@ End:
 Junction: J-EAG010
      Description: FEMA crossing 29037EAG010
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2793413.280
      Canvas Y: 958012.952
      Label X: 16.0
@@ -661,7 +2218,7 @@ End:
 Reach: R-EAG010
      Description: J-EAG010 to J-CNF12
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2793127.920
      Canvas Y: 957727.592
      From Canvas X: 2793413.280
@@ -675,24 +2232,98 @@ Reach: R-EAG010
      Channel: Trapezoid
      Length: 506.3
      Energy Slope: 0.00360
-     Mannings n: 0.0861
+     Mannings n: 0.0851
      Bottom Width: 2.00
-     Side Slope: 13.01
+     Side Slope: 12.94
      Index Parameter Type: Index Flow
-     Index Flow: 558.0
+     Index Flow: 610.0
+     Space-Time Method: Automatic DX and DT
+     Channel Loss: None
+End:
+
+Junction: J-DET011
+     Description: Detention basin outlet
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2790835.200
+     Canvas Y: 961388.072
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: R-DET011
+End:
+
+Reach: R-DET011
+     Description: J-DET011 to J-RL_TribTrib_0.3
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2791002.480
+     Canvas Y: 960443.432
+     From Canvas X: 2790835.200
+     From Canvas Y: 961388.072
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: J-RL_TribTrib_0.3
+
+     Route: Muskingum Cunge
+     Initial Variable: Combined Inflow
+     Channel: Trapezoid
+     Length: 1110.4
+     Energy Slope: 0.02586
+     Mannings n: 0.1200
+     Bottom Width: 7.87
+     Side Slope: 1.72
+     Index Parameter Type: Index Flow
+     Index Flow: 40.0
+     Space-Time Method: Automatic DX and DT
+     Channel Loss: None
+End:
+
+Junction: J-DET012
+     Description: Detention basin outlet
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2790313.680
+     Canvas Y: 961988.312
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: R-DET012
+End:
+
+Reach: R-DET012
+     Description: J-DET012 to J-RL_TribTrib_0.3
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2791002.480
+     Canvas Y: 960443.432
+     From Canvas X: 2790313.680
+     From Canvas Y: 961988.312
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: J-RL_TribTrib_0.3
+
+     Route: Muskingum Cunge
+     Initial Variable: Combined Inflow
+     Channel: Trapezoid
+     Length: 2074.5
+     Energy Slope: 0.02773
+     Mannings n: 0.1200
+     Bottom Width: 400.00
+     Side Slope: 0.50
+     Index Parameter Type: Index Flow
+     Index Flow: 10.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
 
 Subbasin: SB-RL_TribTrib_0.3
-     Description: 173.3 ac; composite CN 89.9; Tc 44.2 min
+     Description: 139.1 ac; composite CN 89.5; Tc 43.7 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
-     Canvas X: 2790111.960
-     Canvas Y: 962003.072
+     Last Modified Time: 05:12:06
+     Canvas X: 2789398.560
+     Canvas Y: 961929.272
      Label X: 16.0
      Label Y: 0.0
-     Area: 0.27070
+     Area: 0.21740
      Downstream: J-RL_TribTrib_0.3
 
      Discretization: None
@@ -704,11 +2335,11 @@ Subbasin: SB-RL_TribTrib_0.3
      Surface: None
 
      LossRate: SCS
-     Percent Impervious Area: 47.03
-     Curve Number: 82.65
+     Percent Impervious Area: 44.91
+     Curve Number: 82.52
 
      Transform: SCS
-     Lag: 26.52
+     Lag: 26.22
      Unitgraph Type: STANDARD
 
      Baseflow: None
@@ -717,7 +2348,7 @@ End:
 Junction: J-RL_TribTrib_0.3
      Description: FEMA reference line TribTrib_0.3sqmi
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2791002.480
      Canvas Y: 960443.432
      Label X: 16.0
@@ -728,7 +2359,7 @@ End:
 Reach: R-RL_TribTrib_0.3
      Description: J-RL_TribTrib_0.3 to J-MEA030
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2791327.200
      Canvas Y: 959921.912
      From Canvas X: 2791002.480
@@ -742,11 +2373,11 @@ Reach: R-RL_TribTrib_0.3
      Channel: Trapezoid
      Length: 710.3
      Energy Slope: 0.00289
-     Mannings n: 0.0670
+     Mannings n: 0.0656
      Bottom Width: 2.00
-     Side Slope: 15.15
+     Side Slope: 14.82
      Index Parameter Type: Index Flow
-     Index Flow: 355.0
+     Index Flow: 326.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
@@ -754,7 +2385,7 @@ End:
 Subbasin: SB-MEA030
      Description: 10.4 ac; composite CN 82.0; Tc 18.2 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2790913.920
      Canvas Y: 960138.392
      Label X: 16.0
@@ -784,7 +2415,7 @@ End:
 Junction: J-MEA030
      Description: FEMA crossing 29037MEA030
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2791327.200
      Canvas Y: 959921.912
      Label X: 16.0
@@ -795,7 +2426,7 @@ End:
 Reach: R-MEA030
      Description: J-MEA030 to J-MEA020
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2792114.400
      Canvas Y: 959095.352
      From Canvas X: 2791327.200
@@ -809,24 +2440,135 @@ Reach: R-MEA030
      Channel: Trapezoid
      Length: 1411.4
      Energy Slope: 0.01492
-     Mannings n: 0.0617
+     Mannings n: 0.0640
      Bottom Width: 4.77
-     Side Slope: 3.89
+     Side Slope: 3.77
      Index Parameter Type: Index Flow
-     Index Flow: 362.0
+     Index Flow: 332.0
+     Space-Time Method: Automatic DX and DT
+     Channel Loss: None
+End:
+
+Junction: J-DET033
+     Description: Detention basin outlet
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2791740.480
+     Canvas Y: 961958.792
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: R-DET033
+End:
+
+Reach: R-DET033
+     Description: J-DET033 to J-MCT010
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2792104.560
+     Canvas Y: 960443.432
+     From Canvas X: 2791740.480
+     From Canvas Y: 961958.792
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: J-MCT010
+
+     Route: Muskingum Cunge
+     Initial Variable: Combined Inflow
+     Channel: Trapezoid
+     Length: 1833.6
+     Energy Slope: 0.02031
+     Mannings n: 0.1200
+     Bottom Width: 6.35
+     Side Slope: 2.31
+     Index Parameter Type: Index Flow
+     Index Flow: 70.0
+     Space-Time Method: Automatic DX and DT
+     Channel Loss: None
+End:
+
+Junction: J-DET031
+     Description: Detention basin outlet
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2792665.440
+     Canvas Y: 963434.792
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: R-DET031
+End:
+
+Reach: R-DET031
+     Description: J-DET031 to J-MCT010
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2792104.560
+     Canvas Y: 960443.432
+     From Canvas X: 2792665.440
+     From Canvas Y: 963434.792
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: J-MCT010
+
+     Route: Muskingum Cunge
+     Initial Variable: Combined Inflow
+     Channel: Trapezoid
+     Length: 3686.5
+     Energy Slope: 0.02013
+     Mannings n: 0.0998
+     Bottom Width: 6.15
+     Side Slope: 7.89
+     Index Parameter Type: Index Flow
+     Index Flow: 21.0
+     Space-Time Method: Automatic DX and DT
+     Channel Loss: None
+End:
+
+Junction: J-DET060
+     Description: Detention basin outlet
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2792793.360
+     Canvas Y: 962067.032
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: R-DET060
+End:
+
+Reach: R-DET060
+     Description: J-DET060 to J-MCT010
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2792104.560
+     Canvas Y: 960443.432
+     From Canvas X: 2792793.360
+     From Canvas Y: 962067.032
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: J-MCT010
+
+     Route: Muskingum Cunge
+     Initial Variable: Combined Inflow
+     Channel: Trapezoid
+     Length: 2041.9
+     Energy Slope: 0.02196
+     Mannings n: 0.0606
+     Bottom Width: 6.24
+     Side Slope: 4.13
+     Index Parameter Type: Index Flow
+     Index Flow: 10.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
 
 Subbasin: SB-MCT010
-     Description: 129.3 ac; composite CN 86.7; Tc 51.6 min
+     Description: 105.9 ac; composite CN 87.1; Tc 51.4 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
-     Canvas X: 2791893.000
-     Canvas Y: 962568.872
+     Last Modified Time: 05:12:06
+     Canvas X: 2792754.000
+     Canvas Y: 960905.912
      Label X: 16.0
      Label Y: 0.0
-     Area: 0.20210
+     Area: 0.16550
      Downstream: J-MCT010
 
      Discretization: None
@@ -838,11 +2580,11 @@ Subbasin: SB-MCT010
      Surface: None
 
      LossRate: SCS
-     Percent Impervious Area: 30.51
-     Curve Number: 81.71
+     Percent Impervious Area: 33.83
+     Curve Number: 81.58
 
      Transform: SCS
-     Lag: 30.94
+     Lag: 30.83
      Unitgraph Type: STANDARD
 
      Baseflow: None
@@ -851,7 +2593,7 @@ End:
 Junction: J-MCT010
      Description: FEMA crossing 29037MCT010
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2792104.560
      Canvas Y: 960443.432
      Label X: 16.0
@@ -862,7 +2604,7 @@ End:
 Reach: R-MCT010
      Description: J-MCT010 to J-MEA020
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2792114.400
      Canvas Y: 959095.352
      From Canvas X: 2792104.560
@@ -876,24 +2618,61 @@ Reach: R-MCT010
      Channel: Trapezoid
      Length: 1458.1
      Energy Slope: 0.01178
-     Mannings n: 0.0682
+     Mannings n: 0.0687
      Bottom Width: 5.26
      Side Slope: 2.41
      Index Parameter Type: Index Flow
-     Index Flow: 232.0
+     Index Flow: 279.0
+     Space-Time Method: Automatic DX and DT
+     Channel Loss: None
+End:
+
+Junction: J-DET021
+     Description: Detention basin outlet
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2792055.360
+     Canvas Y: 959085.512
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: R-DET021
+End:
+
+Reach: R-DET021
+     Description: J-DET021 to J-MEA020
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2792114.400
+     Canvas Y: 959095.352
+     From Canvas X: 2792055.360
+     From Canvas Y: 959085.512
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: J-MEA020
+
+     Route: Muskingum Cunge
+     Initial Variable: Combined Inflow
+     Channel: Trapezoid
+     Length: 90.9
+     Energy Slope: 0.16233
+     Mannings n: 0.1028
+     Bottom Width: 387.30
+     Side Slope: 0.50
+     Index Parameter Type: Index Flow
+     Index Flow: 58.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
 
 Subbasin: SB-MEA020
-     Description: 118.3 ac; composite CN 85.3; Tc 52.1 min
+     Description: 96.5 ac; composite CN 85.7; Tc 53.0 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
-     Canvas X: 2790899.160
-     Canvas Y: 959405.312
+     Last Modified Time: 05:12:06
+     Canvas X: 2791494.480
+     Canvas Y: 959508.632
      Label X: 16.0
      Label Y: 0.0
-     Area: 0.18480
+     Area: 0.15070
      Downstream: J-MEA020
 
      Discretization: None
@@ -905,11 +2684,11 @@ Subbasin: SB-MEA020
      Surface: None
 
      LossRate: SCS
-     Percent Impervious Area: 19.39
-     Curve Number: 82.26
+     Percent Impervious Area: 21.02
+     Curve Number: 82.45
 
      Transform: SCS
-     Lag: 31.25
+     Lag: 31.83
      Unitgraph Type: STANDARD
 
      Baseflow: None
@@ -918,7 +2697,7 @@ End:
 Junction: J-MEA020
      Description: FEMA crossing 29037MEA020
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2792114.400
      Canvas Y: 959095.352
      Label X: 16.0
@@ -929,7 +2708,7 @@ End:
 Reach: R-MEA020
      Description: J-MEA020 to J-CNF17
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2792448.960
      Canvas Y: 958632.872
      From Canvas X: 2792114.400
@@ -943,24 +2722,24 @@ Reach: R-MEA020
      Channel: Trapezoid
      Length: 726.9
      Energy Slope: 0.00498
-     Mannings n: 0.0701
+     Mannings n: 0.0819
      Bottom Width: 5.74
-     Side Slope: 2.83
+     Side Slope: 2.99
      Index Parameter Type: Index Flow
-     Index Flow: 799.0
+     Index Flow: 828.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
 
 Subbasin: SB-CNF17
-     Description: 130.9 ac; composite CN 87.7; Tc 48.1 min
+     Description: 74.4 ac; composite CN 87.3; Tc 42.5 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
-     Canvas X: 2792729.400
-     Canvas Y: 961043.672
+     Last Modified Time: 05:12:06
+     Canvas X: 2792709.720
+     Canvas Y: 960728.792
      Label X: 16.0
      Label Y: 0.0
-     Area: 0.20450
+     Area: 0.11620
      Downstream: J-CNF17
 
      Discretization: None
@@ -972,11 +2751,11 @@ Subbasin: SB-CNF17
      Surface: None
 
      LossRate: SCS
-     Percent Impervious Area: 36.88
-     Curve Number: 81.71
+     Percent Impervious Area: 34.38
+     Curve Number: 81.68
 
      Transform: SCS
-     Lag: 28.88
+     Lag: 25.50
      Unitgraph Type: STANDARD
 
      Baseflow: None
@@ -985,7 +2764,7 @@ End:
 Junction: J-CNF17
      Description: Stream confluence
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2792448.960
      Canvas Y: 958632.872
      Label X: 16.0
@@ -996,7 +2775,7 @@ End:
 Reach: R-CNF17
      Description: J-CNF17 to J-MEA010
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2792852.400
      Canvas Y: 958042.472
      From Canvas X: 2792448.960
@@ -1010,24 +2789,24 @@ Reach: R-CNF17
      Channel: Trapezoid
      Length: 840.6
      Energy Slope: 0.00440
-     Mannings n: 0.0602
-     Bottom Width: 3.80
-     Side Slope: 3.38
+     Mannings n: 0.0632
+     Bottom Width: 4.20
+     Side Slope: 3.69
      Index Parameter Type: Index Flow
-     Index Flow: 1032.0
+     Index Flow: 952.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
 
 Subbasin: SB-MEA010
-     Description: 14.7 ac; composite CN 84.4; Tc 27.5 min
+     Description: 11.6 ac; composite CN 82.2; Tc 11.9 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
-     Canvas X: 2792311.200
-     Canvas Y: 958416.392
+     Last Modified Time: 05:12:06
+     Canvas X: 2792631.000
+     Canvas Y: 958401.632
      Label X: 16.0
      Label Y: 0.0
-     Area: 0.02300
+     Area: 0.01800
      Downstream: J-MEA010
 
      Discretization: None
@@ -1039,11 +2818,11 @@ Subbasin: SB-MEA010
      Surface: None
 
      LossRate: SCS
-     Percent Impervious Area: 30.79
-     Curve Number: 78.37
+     Percent Impervious Area: 27.29
+     Curve Number: 76.30
 
      Transform: SCS
-     Lag: 16.51
+     Lag: 7.15
      Unitgraph Type: STANDARD
 
      Baseflow: None
@@ -1052,7 +2831,7 @@ End:
 Junction: J-MEA010
      Description: FEMA crossing 29037MEA010
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2792852.400
      Canvas Y: 958042.472
      Label X: 16.0
@@ -1063,7 +2842,7 @@ End:
 Reach: R-MEA010
      Description: J-MEA010 to J-CNF12
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2793127.920
      Canvas Y: 957727.592
      From Canvas X: 2792852.400
@@ -1077,24 +2856,24 @@ Reach: R-MEA010
      Channel: Trapezoid
      Length: 505.3
      Energy Slope: 0.00064
-     Mannings n: 0.0828
+     Mannings n: 0.0835
      Bottom Width: 2.00
-     Side Slope: 30.88
+     Side Slope: 30.90
      Index Parameter Type: Index Flow
-     Index Flow: 1045.0
+     Index Flow: 953.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
 
 Subbasin: SB-CNF12
-     Description: 20.0 ac; composite CN 83.8; Tc 13.1 min
+     Description: 18.0 ac; composite CN 83.4; Tc 13.1 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
-     Canvas X: 2793177.120
-     Canvas Y: 958190.072
+     Last Modified Time: 05:12:06
+     Canvas X: 2793157.440
+     Canvas Y: 958160.552
      Label X: 16.0
      Label Y: 0.0
-     Area: 0.03130
+     Area: 0.02810
      Downstream: J-CNF12
 
      Discretization: None
@@ -1106,8 +2885,8 @@ Subbasin: SB-CNF12
      Surface: None
 
      LossRate: SCS
-     Percent Impervious Area: 34.88
-     Curve Number: 76.20
+     Percent Impervious Area: 33.96
+     Curve Number: 75.85
 
      Transform: SCS
      Lag: 7.87
@@ -1119,7 +2898,7 @@ End:
 Junction: J-CNF12
      Description: Stream confluence
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2793127.920
      Canvas Y: 957727.592
      Label X: 16.0
@@ -1130,7 +2909,7 @@ End:
 Reach: R-CNF12
      Description: J-CNF12 to J-NFE040
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2793000.000
      Canvas Y: 956655.032
      From Canvas X: 2793127.920
@@ -1144,24 +2923,24 @@ Reach: R-CNF12
      Channel: Trapezoid
      Length: 1894.7
      Energy Slope: 0.00448
-     Mannings n: 0.0614
-     Bottom Width: 3.91
-     Side Slope: 2.71
+     Mannings n: 0.0644
+     Bottom Width: 6.44
+     Side Slope: 2.99
      Index Parameter Type: Index Flow
-     Index Flow: 1564.0
+     Index Flow: 1456.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
 
 Subbasin: SB-NFE040
-     Description: 43.4 ac; composite CN 81.8; Tc 26.5 min
+     Description: 51.0 ac; composite CN 82.5; Tc 26.5 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
-     Canvas X: 2793093.480
+     Last Modified Time: 05:12:06
+     Canvas X: 2793182.040
      Canvas Y: 957245.432
      Label X: 16.0
      Label Y: 0.0
-     Area: 0.06780
+     Area: 0.07970
      Downstream: J-NFE040
 
      Discretization: None
@@ -1173,11 +2952,11 @@ Subbasin: SB-NFE040
      Surface: None
 
      LossRate: SCS
-     Percent Impervious Area: 25.45
-     Curve Number: 76.30
+     Percent Impervious Area: 27.01
+     Curve Number: 76.77
 
      Transform: SCS
-     Lag: 15.91
+     Lag: 15.90
      Unitgraph Type: STANDARD
 
      Baseflow: None
@@ -1186,7 +2965,7 @@ End:
 Junction: J-NFE040
      Description: FEMA crossing 29037NFE040
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2793000.000
      Canvas Y: 956655.032
      Label X: 16.0
@@ -1197,7 +2976,7 @@ End:
 Reach: R-NFE040
      Description: J-NFE040 to J-NFE030
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2793177.120
      Canvas Y: 955188.872
      From Canvas X: 2793000.000
@@ -1211,24 +2990,24 @@ Reach: R-NFE040
      Channel: Trapezoid
      Length: 2432.5
      Energy Slope: 0.00420
-     Mannings n: 0.0842
-     Bottom Width: 2.33
-     Side Slope: 5.81
+     Mannings n: 0.0828
+     Bottom Width: 2.00
+     Side Slope: 5.83
      Index Parameter Type: Index Flow
-     Index Flow: 1585.0
+     Index Flow: 1487.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
 
 Subbasin: SB-NFE030
-     Description: 50.4 ac; composite CN 80.8; Tc 35.0 min
+     Description: 58.1 ac; composite CN 82.1; Tc 27.4 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
-     Canvas X: 2793309.960
-     Canvas Y: 956172.872
+     Last Modified Time: 05:12:06
+     Canvas X: 2793349.320
+     Canvas Y: 955976.072
      Label X: 16.0
      Label Y: 0.0
-     Area: 0.07870
+     Area: 0.09070
      Downstream: J-NFE030
 
      Discretization: None
@@ -1240,11 +3019,11 @@ Subbasin: SB-NFE030
      Surface: None
 
      LossRate: SCS
-     Percent Impervious Area: 27.39
-     Curve Number: 74.36
+     Percent Impervious Area: 29.60
+     Curve Number: 75.35
 
      Transform: SCS
-     Lag: 21.00
+     Lag: 16.45
      Unitgraph Type: STANDARD
 
      Baseflow: None
@@ -1253,7 +3032,7 @@ End:
 Junction: J-NFE030
      Description: FEMA crossing 29037NFE030
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2793177.120
      Canvas Y: 955188.872
      Label X: 16.0
@@ -1264,7 +3043,7 @@ End:
 Reach: R-NFE030
      Description: J-NFE030 to J-NFE020
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2792931.120
      Canvas Y: 953693.192
      From Canvas X: 2793177.120
@@ -1278,24 +3057,24 @@ Reach: R-NFE030
      Channel: Trapezoid
      Length: 2511.2
      Energy Slope: 0.00224
-     Mannings n: 0.0871
+     Mannings n: 0.0872
      Bottom Width: 2.00
-     Side Slope: 13.39
+     Side Slope: 13.36
      Index Parameter Type: Index Flow
-     Index Flow: 1596.0
+     Index Flow: 1491.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
 
 Subbasin: SB-NFE020
-     Description: 51.8 ac; composite CN 82.3; Tc 50.0 min
+     Description: 36.9 ac; composite CN 80.0; Tc 25.8 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
-     Canvas X: 2793447.720
-     Canvas Y: 954726.392
+     Last Modified Time: 05:12:06
+     Canvas X: 2793408.360
+     Canvas Y: 954342.632
      Label X: 16.0
      Label Y: 0.0
-     Area: 0.08090
+     Area: 0.05770
      Downstream: J-NFE020
 
      Discretization: None
@@ -1307,11 +3086,11 @@ Subbasin: SB-NFE020
      Surface: None
 
      LossRate: SCS
-     Percent Impervious Area: 31.48
-     Curve Number: 75.11
+     Percent Impervious Area: 28.44
+     Curve Number: 72.82
 
      Transform: SCS
-     Lag: 30.03
+     Lag: 15.47
      Unitgraph Type: STANDARD
 
      Baseflow: None
@@ -1320,7 +3099,7 @@ End:
 Junction: J-NFE020
      Description: FEMA crossing 29037NFE020
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2792931.120
      Canvas Y: 953693.192
      Label X: 16.0
@@ -1331,7 +3110,7 @@ End:
 Reach: R-NFE020
      Description: J-NFE020 to J-RL_TribNort_2.0
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2792744.160
      Canvas Y: 953358.632
      From Canvas X: 2792931.120
@@ -1349,20 +3128,57 @@ Reach: R-NFE020
      Bottom Width: 2.00
      Side Slope: 4.33
      Index Parameter Type: Index Flow
-     Index Flow: 1566.0
+     Index Flow: 1396.0
+     Space-Time Method: Automatic DX and DT
+     Channel Loss: None
+End:
+
+Junction: J-DET006
+     Description: Detention basin outlet
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2790786.000
+     Canvas Y: 956231.912
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: R-DET006
+End:
+
+Reach: R-DET006
+     Description: J-DET006 to J-CNF27
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2791838.880
+     Canvas Y: 956084.312
+     From Canvas X: 2790786.000
+     From Canvas Y: 956231.912
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: J-CNF27
+
+     Route: Muskingum Cunge
+     Initial Variable: Combined Inflow
+     Channel: Trapezoid
+     Length: 1289.6
+     Energy Slope: 0.02012
+     Mannings n: 0.0300
+     Bottom Width: 30.59
+     Side Slope: 41.57
+     Index Parameter Type: Index Flow
+     Index Flow: 23.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
 
 Subbasin: SB-CNF27
-     Description: 147.4 ac; composite CN 86.3; Tc 63.4 min
+     Description: 114.0 ac; composite CN 86.3; Tc 37.8 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
-     Canvas X: 2790771.240
-     Canvas Y: 957889.952
+     Last Modified Time: 05:12:06
+     Canvas X: 2790830.280
+     Canvas Y: 957132.272
      Label X: 16.0
      Label Y: 0.0
-     Area: 0.23030
+     Area: 0.17810
      Downstream: J-CNF27
 
      Discretization: None
@@ -1374,11 +3190,11 @@ Subbasin: SB-CNF27
      Surface: None
 
      LossRate: SCS
-     Percent Impervious Area: 25.01
-     Curve Number: 82.35
+     Percent Impervious Area: 27.26
+     Curve Number: 81.85
 
      Transform: SCS
-     Lag: 38.03
+     Lag: 22.68
      Unitgraph Type: STANDARD
 
      Baseflow: None
@@ -1387,7 +3203,7 @@ End:
 Junction: J-CNF27
      Description: Stream confluence
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2791838.880
      Canvas Y: 956084.312
      Label X: 16.0
@@ -1398,7 +3214,7 @@ End:
 Reach: R-CNF27
      Description: J-CNF27 to J-GRA010
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2792340.720
      Canvas Y: 955021.592
      From Canvas X: 2791838.880
@@ -1412,24 +3228,24 @@ Reach: R-CNF27
      Channel: Trapezoid
      Length: 1545.1
      Energy Slope: 0.00633
-     Mannings n: 0.0495
-     Bottom Width: 2.85
-     Side Slope: 4.63
+     Mannings n: 0.0509
+     Bottom Width: 3.41
+     Side Slope: 4.74
      Index Parameter Type: Index Flow
-     Index Flow: 234.0
+     Index Flow: 260.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
 
 Subbasin: SB-GRA010
-     Description: 45.2 ac; composite CN 85.0; Tc 46.8 min
+     Description: 48.0 ac; composite CN 85.3; Tc 46.8 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
-     Canvas X: 2790972.960
+     Last Modified Time: 05:12:06
+     Canvas X: 2791592.880
      Canvas Y: 955602.152
      Label X: 16.0
      Label Y: 0.0
-     Area: 0.07070
+     Area: 0.07500
      Downstream: J-GRA010
 
      Discretization: None
@@ -1441,11 +3257,11 @@ Subbasin: SB-GRA010
      Surface: None
 
      LossRate: SCS
-     Percent Impervious Area: 16.93
-     Curve Number: 82.33
+     Percent Impervious Area: 17.65
+     Curve Number: 82.52
 
      Transform: SCS
-     Lag: 28.08
+     Lag: 28.10
      Unitgraph Type: STANDARD
 
      Baseflow: None
@@ -1454,7 +3270,7 @@ End:
 Junction: J-GRA010
      Description: FEMA crossing 29037GRA010
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2792340.720
      Canvas Y: 955021.592
      Label X: 16.0
@@ -1465,7 +3281,7 @@ End:
 Reach: R-GRA010
      Description: J-GRA010 to J-RL_TribNort_2.0
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2792744.160
      Canvas Y: 953358.632
      From Canvas X: 2792340.720
@@ -1483,20 +3299,20 @@ Reach: R-GRA010
      Bottom Width: 2.00
      Side Slope: 4.54
      Index Parameter Type: Index Flow
-     Index Flow: 303.0
+     Index Flow: 348.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
 
 Subbasin: SB-RL_TribNort_2.0
-     Description: 57.0 ac; composite CN 81.9; Tc 58.0 min
+     Description: 54.2 ac; composite CN 81.6; Tc 54.8 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
-     Canvas X: 2792178.360
-     Canvas Y: 954578.792
+     Last Modified Time: 05:12:06
+     Canvas X: 2792262.000
+     Canvas Y: 954416.432
      Label X: 16.0
      Label Y: 0.0
-     Area: 0.08900
+     Area: 0.08470
      Downstream: J-RL_TribNort_2.0
 
      Discretization: None
@@ -1508,11 +3324,11 @@ Subbasin: SB-RL_TribNort_2.0
      Surface: None
 
      LossRate: SCS
-     Percent Impervious Area: 11.96
-     Curve Number: 79.76
+     Percent Impervious Area: 11.10
+     Curve Number: 79.51
 
      Transform: SCS
-     Lag: 34.80
+     Lag: 32.88
      Unitgraph Type: STANDARD
 
      Baseflow: None
@@ -1521,7 +3337,7 @@ End:
 Junction: J-RL_TribNort_2.0
      Description: FEMA reference line TribNort_2.0sqmi
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2792744.160
      Canvas Y: 953358.632
      Label X: 16.0
@@ -1532,7 +3348,7 @@ End:
 Reach: R-RL_TribNort_2.0
      Description: J-RL_TribNort_2.0 to J-NFE010
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2792517.840
      Canvas Y: 953033.912
      From Canvas X: 2792744.160
@@ -1548,22 +3364,22 @@ Reach: R-RL_TribNort_2.0
      Energy Slope: 0.00220
      Mannings n: 0.0636
      Bottom Width: 2.00
-     Side Slope: 9.39
+     Side Slope: 9.23
      Index Parameter Type: Index Flow
-     Index Flow: 1824.0
+     Index Flow: 1610.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
 
 Subbasin: SB-NFE010
-     Description: 20.7 ac; composite CN 84.1; Tc 16.5 min
+     Description: 26.5 ac; composite CN 84.9; Tc 18.5 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
-     Canvas X: 2792645.760
-     Canvas Y: 953299.592
+     Last Modified Time: 05:12:06
+     Canvas X: 2792321.040
+     Canvas Y: 953368.472
      Label X: 16.0
      Label Y: 0.0
-     Area: 0.03240
+     Area: 0.04140
      Downstream: J-NFE010
 
      Discretization: None
@@ -1575,11 +3391,11 @@ Subbasin: SB-NFE010
      Surface: None
 
      LossRate: SCS
-     Percent Impervious Area: 15.51
-     Curve Number: 81.50
+     Percent Impervious Area: 17.65
+     Curve Number: 82.12
 
      Transform: SCS
-     Lag: 9.88
+     Lag: 11.08
      Unitgraph Type: STANDARD
 
      Baseflow: None
@@ -1588,7 +3404,7 @@ End:
 Junction: J-NFE010
      Description: FEMA crossing 29037NFE010
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2792517.840
      Canvas Y: 953033.912
      Label X: 16.0
@@ -1599,7 +3415,7 @@ End:
 Reach: R-NFE010
      Description: J-NFE010 to J-CNF06
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2792448.960
      Canvas Y: 952246.712
      From Canvas X: 2792517.840
@@ -1614,23 +3430,23 @@ Reach: R-NFE010
      Length: 1345.9
      Energy Slope: 0.00320
      Mannings n: 0.0720
-     Bottom Width: 4.75
-     Side Slope: 3.41
+     Bottom Width: 4.77
+     Side Slope: 3.34
      Index Parameter Type: Index Flow
-     Index Flow: 1826.0
+     Index Flow: 1611.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
 
 Subbasin: SB-CNF06
-     Description: 233.5 ac; composite CN 85.4; Tc 122.1 min
+     Description: 229.2 ac; composite CN 85.5; Tc 122.2 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2789467.440
      Canvas Y: 956536.952
      Label X: 16.0
      Label Y: 0.0
-     Area: 0.36490
+     Area: 0.35810
      Downstream: J-CNF06
 
      Discretization: None
@@ -1642,11 +3458,11 @@ Subbasin: SB-CNF06
      Surface: None
 
      LossRate: SCS
-     Percent Impervious Area: 21.61
-     Curve Number: 81.99
+     Percent Impervious Area: 22.02
+     Curve Number: 81.93
 
      Transform: SCS
-     Lag: 73.28
+     Lag: 73.29
      Unitgraph Type: STANDARD
 
      Baseflow: None
@@ -1655,7 +3471,7 @@ End:
 Junction: J-CNF06
      Description: Stream confluence
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2792448.960
      Canvas Y: 952246.712
      Label X: 16.0
@@ -1666,7 +3482,7 @@ End:
 Reach: R-CNF06
      Description: J-CNF06 to J-CNF02
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2793029.520
      Canvas Y: 951292.232
      From Canvas X: 2792448.960
@@ -1680,19 +3496,19 @@ Reach: R-CNF06
      Channel: Trapezoid
      Length: 2105.4
      Energy Slope: 0.00249
-     Mannings n: 0.0660
+     Mannings n: 0.0662
      Bottom Width: 2.00
      Side Slope: 6.80
      Index Parameter Type: Index Flow
-     Index Flow: 2057.0
+     Index Flow: 1832.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
 
 Subbasin: SB-ECT090
-     Description: 27.2 ac; composite CN 84.1; Tc 30.7 min
+     Description: 27.2 ac; composite CN 84.1; Tc 11.1 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2795337.000
      Canvas Y: 958436.072
      Label X: 16.0
@@ -1713,7 +3529,7 @@ Subbasin: SB-ECT090
      Curve Number: 80.61
 
      Transform: SCS
-     Lag: 18.45
+     Lag: 6.64
      Unitgraph Type: STANDARD
 
      Baseflow: None
@@ -1722,7 +3538,7 @@ End:
 Junction: J-ECT090
      Description: FEMA crossing 29037ECT090
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2795833.920
      Canvas Y: 957894.872
      Label X: 16.0
@@ -1733,7 +3549,7 @@ End:
 Reach: R-ECT090
      Description: J-ECT090 to J-ECT080
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2794348.080
      Canvas Y: 952659.992
      From Canvas X: 2795833.920
@@ -1747,24 +3563,24 @@ Reach: R-ECT090
      Channel: Trapezoid
      Length: 7603.3
      Energy Slope: 0.00521
-     Mannings n: 0.0643
+     Mannings n: 0.0619
      Bottom Width: 4.99
-     Side Slope: 4.53
+     Side Slope: 3.89
      Index Parameter Type: Index Flow
-     Index Flow: 62.0
+     Index Flow: 96.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
 
 Subbasin: SB-ECT080
-     Description: 235.5 ac; composite CN 85.3; Tc 106.6 min
+     Description: 241.8 ac; composite CN 85.4; Tc 102.3 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2794963.080
      Canvas Y: 955375.832
      Label X: 16.0
      Label Y: 0.0
-     Area: 0.36800
+     Area: 0.37780
      Downstream: J-ECT080
 
      Discretization: None
@@ -1776,11 +3592,11 @@ Subbasin: SB-ECT080
      Surface: None
 
      LossRate: SCS
-     Percent Impervious Area: 23.85
-     Curve Number: 81.27
+     Percent Impervious Area: 24.61
+     Curve Number: 81.24
 
      Transform: SCS
-     Lag: 63.99
+     Lag: 61.39
      Unitgraph Type: STANDARD
 
      Baseflow: None
@@ -1789,7 +3605,7 @@ End:
 Junction: J-ECT080
      Description: FEMA crossing 29037ECT080
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2794348.080
      Canvas Y: 952659.992
      Label X: 16.0
@@ -1800,7 +3616,7 @@ End:
 Reach: R-ECT080
      Description: J-ECT080 to J-RL_Trib12Ea_1.6
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2794151.280
      Canvas Y: 952325.432
      From Canvas X: 2794348.080
@@ -1814,24 +3630,98 @@ Reach: R-ECT080
      Channel: Trapezoid
      Length: 439.1
      Energy Slope: 0.00416
-     Mannings n: 0.1097
+     Mannings n: 0.0990
      Bottom Width: 2.00
-     Side Slope: 13.38
+     Side Slope: 13.50
      Index Parameter Type: Index Flow
-     Index Flow: 319.0
+     Index Flow: 326.0
+     Space-Time Method: Automatic DX and DT
+     Channel Loss: None
+End:
+
+Junction: J-DET003
+     Description: Detention basin outlet
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2795597.760
+     Canvas Y: 953850.632
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: R-DET003
+End:
+
+Reach: R-DET003
+     Description: J-DET003 to J-RL_Trib12Ea_1.6
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2794151.280
+     Canvas Y: 952325.432
+     From Canvas X: 2795597.760
+     From Canvas Y: 953850.632
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: J-RL_Trib12Ea_1.6
+
+     Route: Muskingum Cunge
+     Initial Variable: Combined Inflow
+     Channel: Trapezoid
+     Length: 3433.0
+     Energy Slope: 0.00826
+     Mannings n: 0.0715
+     Bottom Width: 2.00
+     Side Slope: 7.45
+     Index Parameter Type: Index Flow
+     Index Flow: 211.0
+     Space-Time Method: Automatic DX and DT
+     Channel Loss: None
+End:
+
+Junction: J-DET072
+     Description: Detention basin outlet
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2794426.800
+     Canvas Y: 952522.232
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: R-DET072
+End:
+
+Reach: R-DET072
+     Description: J-DET072 to J-RL_Trib12Ea_1.6
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2794151.280
+     Canvas Y: 952325.432
+     From Canvas X: 2794426.800
+     From Canvas Y: 952522.232
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: J-RL_Trib12Ea_1.6
+
+     Route: Muskingum Cunge
+     Initial Variable: Combined Inflow
+     Channel: Trapezoid
+     Length: 475.1
+     Energy Slope: 0.01989
+     Mannings n: 0.1022
+     Bottom Width: 2.00
+     Side Slope: 13.13
+     Index Parameter Type: Index Flow
+     Index Flow: 50.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
 
 Subbasin: SB-RL_Trib12Ea_1.6
-     Description: 269.5 ac; composite CN 84.2; Tc 101.9 min
+     Description: 115.8 ac; composite CN 83.3; Tc 77.6 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
-     Canvas X: 2796921.240
-     Canvas Y: 954918.272
+     Last Modified Time: 05:12:06
+     Canvas X: 2793733.080
+     Canvas Y: 953137.232
      Label X: 16.0
      Label Y: 0.0
-     Area: 0.42110
+     Area: 0.18100
      Downstream: J-RL_Trib12Ea_1.6
 
      Discretization: None
@@ -1843,11 +3733,11 @@ Subbasin: SB-RL_Trib12Ea_1.6
      Surface: None
 
      LossRate: SCS
-     Percent Impervious Area: 14.51
-     Curve Number: 81.90
+     Percent Impervious Area: 15.61
+     Curve Number: 80.54
 
      Transform: SCS
-     Lag: 61.15
+     Lag: 46.55
      Unitgraph Type: STANDARD
 
      Baseflow: None
@@ -1856,7 +3746,7 @@ End:
 Junction: J-RL_Trib12Ea_1.6
      Description: FEMA reference line Trib12Ea_1.6sqmi
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2794151.280
      Canvas Y: 952325.432
      Label X: 16.0
@@ -1867,7 +3757,7 @@ End:
 Reach: R-RL_Trib12Ea_1.6
      Description: J-RL_Trib12Ea_1.6 to J-ECT070
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2793944.640
      Canvas Y: 952099.112
      From Canvas X: 2794151.280
@@ -1881,24 +3771,24 @@ Reach: R-RL_Trib12Ea_1.6
      Channel: Trapezoid
      Length: 405.5
      Energy Slope: 0.00400
-     Mannings n: 0.0638
+     Mannings n: 0.0693
      Bottom Width: 2.00
-     Side Slope: 22.41
+     Side Slope: 21.57
      Index Parameter Type: Index Flow
-     Index Flow: 621.0
+     Index Flow: 696.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
 
 Subbasin: SB-ECT070
-     Description: 32.1 ac; composite CN 86.0; Tc 33.4 min
+     Description: 16.7 ac; composite CN 84.5; Tc 22.3 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
-     Canvas X: 2793688.800
-     Canvas Y: 952753.472
+     Last Modified Time: 05:12:06
+     Canvas X: 2794082.400
+     Canvas Y: 952187.672
      Label X: 16.0
      Label Y: 0.0
-     Area: 0.05010
+     Area: 0.02610
      Downstream: J-ECT070
 
      Discretization: None
@@ -1910,11 +3800,11 @@ Subbasin: SB-ECT070
      Surface: None
 
      LossRate: SCS
-     Percent Impervious Area: 22.00
-     Curve Number: 82.63
+     Percent Impervious Area: 8.13
+     Curve Number: 83.29
 
      Transform: SCS
-     Lag: 20.01
+     Lag: 13.38
      Unitgraph Type: STANDARD
 
      Baseflow: None
@@ -1923,7 +3813,7 @@ End:
 Junction: J-ECT070
      Description: FEMA crossing 29037ECT070
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2793944.640
      Canvas Y: 952099.112
      Label X: 16.0
@@ -1934,7 +3824,7 @@ End:
 Reach: R-ECT070
      Description: J-ECT070 to J-CNF02
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2793029.520
      Canvas Y: 951292.232
      From Canvas X: 2793944.640
@@ -1948,24 +3838,24 @@ Reach: R-ECT070
      Channel: Trapezoid
      Length: 2097.6
      Energy Slope: 0.00471
-     Mannings n: 0.0828
+     Mannings n: 0.0831
      Bottom Width: 2.00
      Side Slope: 60.00
      Index Parameter Type: Index Flow
-     Index Flow: 637.0
+     Index Flow: 703.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
 
 Subbasin: SB-CNF02
-     Description: 65.0 ac; composite CN 78.1; Tc 22.4 min
+     Description: 64.6 ac; composite CN 78.0; Tc 22.4 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2792896.680
      Canvas Y: 951705.512
      Label X: 16.0
      Label Y: 0.0
-     Area: 0.10150
+     Area: 0.10100
      Downstream: J-CNF02
 
      Discretization: None
@@ -1977,7 +3867,7 @@ Subbasin: SB-CNF02
      Surface: None
 
      LossRate: SCS
-     Percent Impervious Area: 3.97
+     Percent Impervious Area: 3.62
      Curve Number: 77.23
 
      Transform: SCS
@@ -1990,7 +3880,7 @@ End:
 Junction: J-CNF02
      Description: Stream confluence
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2793029.520
      Canvas Y: 951292.232
      Label X: 16.0
@@ -2001,7 +3891,7 @@ End:
 Reach: R-CNF02
      Description: J-CNF02 to J-RL_Trib12Ea_4.2
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2792694.960
      Canvas Y: 950573.912
      From Canvas X: 2793029.520
@@ -2015,11 +3905,11 @@ Reach: R-CNF02
      Channel: Trapezoid
      Length: 1756.2
      Energy Slope: 0.00154
-     Mannings n: 0.0783
-     Bottom Width: 7.53
-     Side Slope: 4.90
+     Mannings n: 0.0785
+     Bottom Width: 7.83
+     Side Slope: 4.77
      Index Parameter Type: Index Flow
-     Index Flow: 2689.0
+     Index Flow: 2514.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
@@ -2027,7 +3917,7 @@ End:
 Subbasin: SB-RL_Trib12Ea_4.2
      Description: 25.4 ac; composite CN 76.1; Tc 29.0 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2792803.200
      Canvas Y: 951036.392
      Label X: 16.0
@@ -2048,7 +3938,7 @@ Subbasin: SB-RL_Trib12Ea_4.2
      Curve Number: 75.72
 
      Transform: SCS
-     Lag: 17.40
+     Lag: 17.41
      Unitgraph Type: STANDARD
 
      Baseflow: None
@@ -2057,7 +3947,7 @@ End:
 Junction: J-RL_Trib12Ea_4.2
      Description: FEMA reference line Trib12Ea_4.2sqmi
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2792694.960
      Canvas Y: 950573.912
      Label X: 16.0
@@ -2068,7 +3958,7 @@ End:
 Reach: R-RL_Trib12Ea_4.2
      Description: J-RL_Trib12Ea_4.2 to J-CNF01
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2791671.600
      Canvas Y: 948409.112
      From Canvas X: 2792694.960
@@ -2082,11 +3972,11 @@ Reach: R-RL_Trib12Ea_4.2
      Channel: Trapezoid
      Length: 4654.8
      Energy Slope: 0.00240
-     Mannings n: 0.0740
-     Bottom Width: 10.52
+     Mannings n: 0.0733
+     Bottom Width: 10.49
      Side Slope: 5.44
      Index Parameter Type: Index Flow
-     Index Flow: 2635.0
+     Index Flow: 2412.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
@@ -2094,7 +3984,7 @@ End:
 Junction: J-LK2
      Description: Lake outlet (spill sill)
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2804857.200
      Canvas Y: 953909.672
      Label X: 16.0
@@ -2105,7 +3995,7 @@ End:
 Reach: R-LK2
      Description: J-LK2 to J-CNF25
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2804581.680
      Canvas Y: 953811.272
      From Canvas X: 2804857.200
@@ -2119,7 +4009,7 @@ Reach: R-LK2
      Channel: Trapezoid
      Length: 327.8
      Energy Slope: 0.03079
-     Mannings n: 0.1116
+     Mannings n: 0.1113
      Bottom Width: 6.13
      Side Slope: 0.50
      Index Parameter Type: Index Flow
@@ -2129,14 +4019,14 @@ Reach: R-LK2
 End:
 
 Subbasin: SB-CNF25
-     Description: 126.3 ac; composite CN 80.8; Tc 44.1 min
+     Description: 128.0 ac; composite CN 80.9; Tc 44.2 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
-     Canvas X: 2805619.800
+     Last Modified Time: 05:12:06
+     Canvas X: 2805605.040
      Canvas Y: 952758.392
      Label X: 16.0
      Label Y: 0.0
-     Area: 0.19730
+     Area: 0.20000
      Downstream: J-CNF25
 
      Discretization: None
@@ -2148,11 +4038,11 @@ Subbasin: SB-CNF25
      Surface: None
 
      LossRate: SCS
-     Percent Impervious Area: 5.15
-     Curve Number: 79.90
+     Percent Impervious Area: 5.40
+     Curve Number: 79.89
 
      Transform: SCS
-     Lag: 26.46
+     Lag: 26.52
      Unitgraph Type: STANDARD
 
      Baseflow: None
@@ -2161,7 +4051,7 @@ End:
 Junction: J-CNF25
      Description: Stream confluence
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2804581.680
      Canvas Y: 953811.272
      Label X: 16.0
@@ -2172,7 +4062,7 @@ End:
 Reach: R-CNF25
      Description: J-CNF25 to J-CNF19
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2802534.960
      Canvas Y: 953397.992
      From Canvas X: 2804581.680
@@ -2186,24 +4076,24 @@ Reach: R-CNF25
      Channel: Trapezoid
      Length: 2588.9
      Energy Slope: 0.00811
-     Mannings n: 0.0574
+     Mannings n: 0.0593
      Bottom Width: 2.00
-     Side Slope: 18.07
+     Side Slope: 18.24
      Index Parameter Type: Index Flow
-     Index Flow: 309.0
+     Index Flow: 312.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
 
 Subbasin: SB-CNF19
-     Description: 213.1 ac; composite CN 83.6; Tc 58.3 min
+     Description: 203.6 ac; composite CN 83.5; Tc 58.1 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
-     Canvas X: 2803282.800
-     Canvas Y: 954406.592
+     Last Modified Time: 05:12:06
+     Canvas X: 2803518.960
+     Canvas Y: 954873.992
      Label X: 16.0
      Label Y: 0.0
-     Area: 0.33290
+     Area: 0.31820
      Downstream: J-CNF19
 
      Discretization: None
@@ -2215,11 +4105,11 @@ Subbasin: SB-CNF19
      Surface: None
 
      LossRate: SCS
-     Percent Impervious Area: 18.98
-     Curve Number: 80.20
+     Percent Impervious Area: 18.53
+     Curve Number: 80.26
 
      Transform: SCS
-     Lag: 35.01
+     Lag: 34.87
      Unitgraph Type: STANDARD
 
      Baseflow: None
@@ -2228,7 +4118,7 @@ End:
 Junction: J-CNF19
      Description: Stream confluence
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2802534.960
      Canvas Y: 953397.992
      Label X: 16.0
@@ -2239,7 +4129,7 @@ End:
 Reach: R-CNF19
      Description: J-CNF19 to J-RL_TribUppe_1.0
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2801993.760
      Canvas Y: 952817.432
      From Canvas X: 2802534.960
@@ -2257,20 +4147,57 @@ Reach: R-CNF19
      Bottom Width: 2.00
      Side Slope: 60.00
      Index Parameter Type: Index Flow
-     Index Flow: 640.0
+     Index Flow: 631.0
+     Space-Time Method: Automatic DX and DT
+     Channel Loss: None
+End:
+
+Junction: J-DET023
+     Description: Detention basin outlet
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2804345.520
+     Canvas Y: 951154.472
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: R-DET023
+End:
+
+Reach: R-DET023
+     Description: J-DET023 to J-RL_TribUppe_1.0
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2801993.760
+     Canvas Y: 952817.432
+     From Canvas X: 2804345.520
+     From Canvas Y: 951154.472
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: J-RL_TribUppe_1.0
+
+     Route: Muskingum Cunge
+     Initial Variable: Combined Inflow
+     Channel: Trapezoid
+     Length: 4184.6
+     Energy Slope: 0.01236
+     Mannings n: 0.0544
+     Bottom Width: 2.00
+     Side Slope: 33.30
+     Index Parameter Type: Index Flow
+     Index Flow: 42.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
 
 Subbasin: SB-RL_TribUppe_1.0
-     Description: 169.4 ac; composite CN 81.7; Tc 56.6 min
+     Description: 152.9 ac; composite CN 82.2; Tc 58.7 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
-     Canvas X: 2803440.240
-     Canvas Y: 951902.312
+     Last Modified Time: 05:12:06
+     Canvas X: 2803538.640
+     Canvas Y: 951892.472
      Label X: 16.0
      Label Y: 0.0
-     Area: 0.26460
+     Area: 0.23890
      Downstream: J-RL_TribUppe_1.0
 
      Discretization: None
@@ -2282,11 +4209,11 @@ Subbasin: SB-RL_TribUppe_1.0
      Surface: None
 
      LossRate: SCS
-     Percent Impervious Area: 8.89
-     Curve Number: 80.10
+     Percent Impervious Area: 10.36
+     Curve Number: 80.38
 
      Transform: SCS
-     Lag: 33.95
+     Lag: 35.19
      Unitgraph Type: STANDARD
 
      Baseflow: None
@@ -2295,7 +4222,7 @@ End:
 Junction: J-RL_TribUppe_1.0
      Description: FEMA reference line TribUppe_1.0sqmi
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2801993.760
      Canvas Y: 952817.432
      Label X: 16.0
@@ -2306,7 +4233,7 @@ End:
 Reach: R-RL_TribUppe_1.0
      Description: J-RL_TribUppe_1.0 to J-UEP040
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2801344.320
      Canvas Y: 952335.272
      From Canvas X: 2801993.760
@@ -2324,7 +4251,7 @@ Reach: R-RL_TribUppe_1.0
      Bottom Width: 2.00
      Side Slope: 19.16
      Index Parameter Type: Index Flow
-     Index Flow: 804.0
+     Index Flow: 808.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
@@ -2332,7 +4259,7 @@ End:
 Subbasin: SB-UEP040
      Description: 32.7 ac; composite CN 84.3; Tc 17.8 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2801349.240
      Canvas Y: 952876.472
      Label X: 16.0
@@ -2362,7 +4289,7 @@ End:
 Junction: J-UEP040
      Description: FEMA crossing 29037UEP040
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2801344.320
      Canvas Y: 952335.272
      Label X: 16.0
@@ -2373,7 +4300,7 @@ End:
 Reach: R-UEP040
      Description: J-UEP040 to J-CNF13
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2801245.920
      Canvas Y: 952099.112
      From Canvas X: 2801344.320
@@ -2391,7 +4318,7 @@ Reach: R-UEP040
      Bottom Width: 7.93
      Side Slope: 0.50
      Index Parameter Type: Index Flow
-     Index Flow: 817.0
+     Index Flow: 822.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
@@ -2399,7 +4326,7 @@ End:
 Subbasin: SB-CNF13
      Description: 153.7 ac; composite CN 82.3; Tc 60.9 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2802057.720
      Canvas Y: 950416.472
      Label X: 16.0
@@ -2429,7 +4356,7 @@ End:
 Junction: J-CNF13
      Description: Stream confluence
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2801245.920
      Canvas Y: 952099.112
      Label X: 16.0
@@ -2440,7 +4367,7 @@ End:
 Reach: R-CNF13
      Description: J-CNF13 to J-UEP030
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2800586.640
      Canvas Y: 951784.232
      From Canvas X: 2801245.920
@@ -2458,7 +4385,7 @@ Reach: R-CNF13
      Bottom Width: 5.69
      Side Slope: 0.50
      Index Parameter Type: Index Flow
-     Index Flow: 1003.0
+     Index Flow: 1017.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
@@ -2466,7 +4393,7 @@ End:
 Subbasin: SB-UEP030
      Description: 18.1 ac; composite CN 83.3; Tc 22.0 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2800749.000
      Canvas Y: 951528.392
      Label X: 16.0
@@ -2496,7 +4423,7 @@ End:
 Junction: J-UEP030
      Description: FEMA crossing 29037UEP030
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2800586.640
      Canvas Y: 951784.232
      Label X: 16.0
@@ -2507,7 +4434,7 @@ End:
 Reach: R-UEP030
      Description: J-UEP030 to J-RL_TribUppe_1.4
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2799986.400
      Canvas Y: 951479.192
      From Canvas X: 2800586.640
@@ -2525,7 +4452,7 @@ Reach: R-UEP030
      Bottom Width: 2.00
      Side Slope: 13.40
      Index Parameter Type: Index Flow
-     Index Flow: 1011.0
+     Index Flow: 1024.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
@@ -2533,7 +4460,7 @@ End:
 Subbasin: SB-RL_TribUppe_1.4
      Description: 19.7 ac; composite CN 80.9; Tc 35.1 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2800512.840
      Canvas Y: 952015.472
      Label X: 16.0
@@ -2563,7 +4490,7 @@ End:
 Junction: J-RL_TribUppe_1.4
      Description: FEMA reference line TribUppe_1.4sqmi
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2799986.400
      Canvas Y: 951479.192
      Label X: 16.0
@@ -2574,7 +4501,7 @@ End:
 Reach: R-RL_TribUppe_1.4
      Description: J-RL_TribUppe_1.4 to J-CNF11
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2799090.960
      Canvas Y: 951183.992
      From Canvas X: 2799986.400
@@ -2590,22 +4517,59 @@ Reach: R-RL_TribUppe_1.4
      Energy Slope: 0.00402
      Mannings n: 0.0412
      Bottom Width: 2.00
-     Side Slope: 36.69
+     Side Slope: 37.00
      Index Parameter Type: Index Flow
-     Index Flow: 1022.0
+     Index Flow: 1034.0
+     Space-Time Method: Automatic DX and DT
+     Channel Loss: None
+End:
+
+Junction: J-DET030
+     Description: Detention basin outlet
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2801580.480
+     Canvas Y: 957107.672
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: R-DET030
+End:
+
+Reach: R-DET030
+     Description: J-DET030 to J-RL_TribNort_0.2
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2801049.120
+     Canvas Y: 956556.632
+     From Canvas X: 2801580.480
+     From Canvas Y: 957107.672
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: J-RL_TribNort_0.2
+
+     Route: Muskingum Cunge
+     Initial Variable: Combined Inflow
+     Channel: Trapezoid
+     Length: 879.7
+     Energy Slope: 0.02142
+     Mannings n: 0.0396
+     Bottom Width: 3.55
+     Side Slope: 18.92
+     Index Parameter Type: Index Flow
+     Index Flow: 94.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
 
 Subbasin: SB-RL_TribNort_0.2
-     Description: 138.7 ac; composite CN 84.0; Tc 49.9 min
+     Description: 68.7 ac; composite CN 83.9; Tc 54.9 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
-     Canvas X: 2802013.440
-     Canvas Y: 958317.992
+     Last Modified Time: 05:12:06
+     Canvas X: 2801413.200
+     Canvas Y: 958711.592
      Label X: 16.0
      Label Y: 0.0
-     Area: 0.21680
+     Area: 0.10740
      Downstream: J-RL_TribNort_0.2
 
      Discretization: None
@@ -2617,11 +4581,11 @@ Subbasin: SB-RL_TribNort_0.2
      Surface: None
 
      LossRate: SCS
-     Percent Impervious Area: 27.44
-     Curve Number: 78.73
+     Percent Impervious Area: 28.62
+     Curve Number: 78.26
 
      Transform: SCS
-     Lag: 29.95
+     Lag: 32.92
      Unitgraph Type: STANDARD
 
      Baseflow: None
@@ -2630,7 +4594,7 @@ End:
 Junction: J-RL_TribNort_0.2
      Description: FEMA reference line TribNort_0.2sqmi
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2801049.120
      Canvas Y: 956556.632
      Label X: 16.0
@@ -2641,7 +4605,7 @@ End:
 Reach: R-RL_TribNort_0.2
      Description: J-RL_TribNort_0.2 to J-NBU060
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2800734.240
      Canvas Y: 955671.032
      From Canvas X: 2801049.120
@@ -2655,24 +4619,24 @@ Reach: R-RL_TribNort_0.2
      Channel: Trapezoid
      Length: 1102.9
      Energy Slope: 0.01154
-     Mannings n: 0.0697
+     Mannings n: 0.0667
      Bottom Width: 2.00
-     Side Slope: 10.06
+     Side Slope: 9.52
      Index Parameter Type: Index Flow
-     Index Flow: 241.0
+     Index Flow: 207.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
 
 Subbasin: SB-NBU060
-     Description: 80.3 ac; composite CN 85.2; Tc 49.4 min
+     Description: 93.5 ac; composite CN 85.3; Tc 34.3 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
-     Canvas X: 2801595.240
-     Canvas Y: 956379.512
+     Last Modified Time: 05:12:06
+     Canvas X: 2802092.160
+     Canvas Y: 956595.992
      Label X: 16.0
      Label Y: 0.0
-     Area: 0.12550
+     Area: 0.14610
      Downstream: J-NBU060
 
      Discretization: None
@@ -2684,11 +4648,11 @@ Subbasin: SB-NBU060
      Surface: None
 
      LossRate: SCS
-     Percent Impervious Area: 32.08
-     Curve Number: 79.11
+     Percent Impervious Area: 32.79
+     Curve Number: 79.07
 
      Transform: SCS
-     Lag: 29.61
+     Lag: 20.59
      Unitgraph Type: STANDARD
 
      Baseflow: None
@@ -2697,7 +4661,7 @@ End:
 Junction: J-NBU060
      Description: FEMA crossing 29037NBU060
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2800734.240
      Canvas Y: 955671.032
      Label X: 16.0
@@ -2708,7 +4672,7 @@ End:
 Reach: R-NBU060
      Description: J-NBU060 to J-NBU050
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2800389.840
      Canvas Y: 954431.192
      From Canvas X: 2800734.240
@@ -2724,22 +4688,22 @@ Reach: R-NBU060
      Energy Slope: 0.00532
      Mannings n: 0.0505
      Bottom Width: 2.00
-     Side Slope: 6.87
+     Side Slope: 9.22
      Index Parameter Type: Index Flow
-     Index Flow: 381.0
+     Index Flow: 367.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
 
 Subbasin: SB-NBU050
-     Description: 38.5 ac; composite CN 82.2; Tc 29.0 min
+     Description: 42.4 ac; composite CN 82.9; Tc 32.2 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
-     Canvas X: 2800311.120
-     Canvas Y: 955715.312
+     Last Modified Time: 05:12:06
+     Canvas X: 2800301.280
+     Canvas Y: 955744.832
      Label X: 16.0
      Label Y: 0.0
-     Area: 0.06010
+     Area: 0.06620
      Downstream: J-NBU050
 
      Discretization: None
@@ -2751,11 +4715,11 @@ Subbasin: SB-NBU050
      Surface: None
 
      LossRate: SCS
-     Percent Impervious Area: 24.67
-     Curve Number: 77.00
+     Percent Impervious Area: 26.67
+     Curve Number: 77.43
 
      Transform: SCS
-     Lag: 17.42
+     Lag: 19.33
      Unitgraph Type: STANDARD
 
      Baseflow: None
@@ -2764,7 +4728,7 @@ End:
 Junction: J-NBU050
      Description: FEMA crossing 29037NBU050
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2800389.840
      Canvas Y: 954431.192
      Label X: 16.0
@@ -2775,7 +4739,7 @@ End:
 Reach: R-NBU050
      Description: J-NBU050 to J-NBU040
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2800232.400
      Canvas Y: 953732.552
      From Canvas X: 2800389.840
@@ -2793,20 +4757,20 @@ Reach: R-NBU050
      Bottom Width: 2.00
      Side Slope: 13.95
      Index Parameter Type: Index Flow
-     Index Flow: 423.0
+     Index Flow: 437.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
 
 Subbasin: SB-NBU040
-     Description: 81.8 ac; composite CN 84.4; Tc 42.9 min
+     Description: 81.5 ac; composite CN 84.3; Tc 42.9 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
-     Canvas X: 2801423.040
-     Canvas Y: 954795.272
+     Last Modified Time: 05:12:06
+     Canvas X: 2801452.560
+     Canvas Y: 954790.352
      Label X: 16.0
      Label Y: 0.0
-     Area: 0.12790
+     Area: 0.12740
      Downstream: J-NBU040
 
      Discretization: None
@@ -2818,11 +4782,11 @@ Subbasin: SB-NBU040
      Surface: None
 
      LossRate: SCS
-     Percent Impervious Area: 23.43
+     Percent Impervious Area: 23.21
      Curve Number: 80.19
 
      Transform: SCS
-     Lag: 25.74
+     Lag: 25.75
      Unitgraph Type: STANDARD
 
      Baseflow: None
@@ -2831,7 +4795,7 @@ End:
 Junction: J-NBU040
      Description: FEMA crossing 29037NBU040
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2800232.400
      Canvas Y: 953732.552
      Label X: 16.0
@@ -2842,7 +4806,7 @@ End:
 Reach: R-NBU040
      Description: J-NBU040 to J-NBU010
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2799189.360
      Canvas Y: 952433.672
      From Canvas X: 2800232.400
@@ -2856,11 +4820,11 @@ Reach: R-NBU040
      Channel: Trapezoid
      Length: 2056.9
      Energy Slope: 0.01021
-     Mannings n: 0.0723
+     Mannings n: 0.0718
      Bottom Width: 2.00
-     Side Slope: 11.18
+     Side Slope: 11.42
      Index Parameter Type: Index Flow
-     Index Flow: 551.0
+     Index Flow: 585.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
@@ -2868,7 +4832,7 @@ End:
 Subbasin: SB-NBU010
      Description: 44.9 ac; composite CN 79.9; Tc 40.9 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2799971.640
      Canvas Y: 953437.352
      Label X: 16.0
@@ -2898,7 +4862,7 @@ End:
 Junction: J-NBU010
      Description: FEMA crossing 29037NBU010
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2799189.360
      Canvas Y: 952433.672
      Label X: 16.0
@@ -2909,7 +4873,7 @@ End:
 Reach: R-NBU010
      Description: J-NBU010 to J-RL_TribNort_1.1
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2798992.560
      Canvas Y: 952010.552
      From Canvas X: 2799189.360
@@ -2927,7 +4891,7 @@ Reach: R-NBU010
      Bottom Width: 2.00
      Side Slope: 6.70
      Index Parameter Type: Index Flow
-     Index Flow: 603.0
+     Index Flow: 650.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
@@ -2935,7 +4899,7 @@ End:
 Subbasin: SB-RL_TribTrib_0.1
      Description: 93.6 ac; composite CN 83.4; Tc 27.5 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2800001.160
      Canvas Y: 959129.792
      Label X: 16.0
@@ -2965,7 +4929,7 @@ End:
 Junction: J-RL_TribTrib_0.1
      Description: FEMA reference line TribTrib_0.1sqmi
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2799651.840
      Canvas Y: 957707.912
      Label X: 16.0
@@ -2976,7 +4940,7 @@ End:
 Reach: R-RL_TribTrib_0.1
      Description: J-RL_TribTrib_0.1 to J-NBU070
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2799514.080
      Canvas Y: 956940.392
      From Canvas X: 2799651.840
@@ -2990,9 +4954,9 @@ Reach: R-RL_TribTrib_0.1
      Channel: Trapezoid
      Length: 854.8
      Energy Slope: 0.01285
-     Mannings n: 0.0604
-     Bottom Width: 3.35
-     Side Slope: 2.88
+     Mannings n: 0.0607
+     Bottom Width: 3.45
+     Side Slope: 2.89
      Index Parameter Type: Index Flow
      Index Flow: 221.0
      Space-Time Method: Automatic DX and DT
@@ -3000,14 +4964,14 @@ Reach: R-RL_TribTrib_0.1
 End:
 
 Subbasin: SB-NBU070
-     Description: 5.7 ac; composite CN 84.6; Tc 9.6 min
+     Description: 21.7 ac; composite CN 86.2; Tc 11.0 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
-     Canvas X: 2799592.800
-     Canvas Y: 957373.352
+     Last Modified Time: 05:12:06
+     Canvas X: 2799366.480
+     Canvas Y: 957338.912
      Label X: 16.0
      Label Y: 0.0
-     Area: 0.00890
+     Area: 0.03390
      Downstream: J-NBU070
 
      Discretization: None
@@ -3019,11 +4983,11 @@ Subbasin: SB-NBU070
      Surface: None
 
      LossRate: SCS
-     Percent Impervious Area: 23.41
-     Curve Number: 80.53
+     Percent Impervious Area: 33.90
+     Curve Number: 80.14
 
      Transform: SCS
-     Lag: 5.74
+     Lag: 6.60
      Unitgraph Type: STANDARD
 
      Baseflow: None
@@ -3032,7 +4996,7 @@ End:
 Junction: J-NBU070
      Description: FEMA crossing 29037NBU070
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2799514.080
      Canvas Y: 956940.392
      Label X: 16.0
@@ -3043,7 +5007,7 @@ End:
 Reach: R-NBU070
      Description: J-NBU070 to J-NBU030
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2799494.400
      Canvas Y: 956015.432
      From Canvas X: 2799514.080
@@ -3061,20 +5025,20 @@ Reach: R-NBU070
      Bottom Width: 2.84
      Side Slope: 3.49
      Index Parameter Type: Index Flow
-     Index Flow: 228.0
+     Index Flow: 256.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
 
 Subbasin: SB-NBU030
-     Description: 44.5 ac; composite CN 86.8; Tc 17.9 min
+     Description: 29.3 ac; composite CN 86.9; Tc 14.9 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
-     Canvas X: 2799558.360
-     Canvas Y: 956841.992
+     Last Modified Time: 05:12:06
+     Canvas X: 2799646.920
+     Canvas Y: 956773.112
      Label X: 16.0
      Label Y: 0.0
-     Area: 0.06960
+     Area: 0.04580
      Downstream: J-NBU030
 
      Discretization: None
@@ -3086,11 +5050,11 @@ Subbasin: SB-NBU030
      Surface: None
 
      LossRate: SCS
-     Percent Impervious Area: 36.31
-     Curve Number: 80.40
+     Percent Impervious Area: 35.97
+     Curve Number: 80.73
 
      Transform: SCS
-     Lag: 10.73
+     Lag: 8.93
      Unitgraph Type: STANDARD
 
      Baseflow: None
@@ -3099,7 +5063,7 @@ End:
 Junction: J-NBU030
      Description: FEMA crossing 29037NBU030
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2799494.400
      Canvas Y: 956015.432
      Label X: 16.0
@@ -3108,13 +5072,80 @@ Junction: J-NBU030
 End:
 
 Reach: R-NBU030
-     Description: J-NBU030 to J-NBU020
+     Description: J-NBU030 to J-CNF28
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
-     Canvas X: 2798766.240
-     Canvas Y: 954401.672
+     Last Modified Time: 05:12:06
+     Canvas X: 2798805.600
+     Canvas Y: 955070.792
      From Canvas X: 2799494.400
      From Canvas Y: 956015.432
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: J-CNF28
+
+     Route: Muskingum Cunge
+     Initial Variable: Combined Inflow
+     Channel: Trapezoid
+     Length: 1465.7
+     Energy Slope: 0.00896
+     Mannings n: 0.0633
+     Bottom Width: 2.00
+     Side Slope: 3.68
+     Index Parameter Type: Index Flow
+     Index Flow: 318.0
+     Space-Time Method: Automatic DX and DT
+     Channel Loss: None
+End:
+
+Subbasin: SB-CNF28
+     Description: 86.5 ac; composite CN 85.5; Tc 43.0 min
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2798544.840
+     Canvas Y: 956743.592
+     Label X: 16.0
+     Label Y: 0.0
+     Area: 0.13510
+     Downstream: J-CNF28
+
+     Discretization: None
+
+     Canopy: None
+     Allow Simultaneous Precip Et: No
+     Plant Uptake Method: None
+
+     Surface: None
+
+     LossRate: SCS
+     Percent Impervious Area: 26.91
+     Curve Number: 80.91
+
+     Transform: SCS
+     Lag: 25.77
+     Unitgraph Type: STANDARD
+
+     Baseflow: None
+End:
+
+Junction: J-CNF28
+     Description: Stream confluence
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2798805.600
+     Canvas Y: 955070.792
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: R-CNF28
+End:
+
+Reach: R-CNF28
+     Description: J-CNF28 to J-NBU020
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2798766.240
+     Canvas Y: 954401.672
+     From Canvas X: 2798805.600
+     From Canvas Y: 955070.792
      Label X: 16.0
      Label Y: 0.0
      Downstream: J-NBU020
@@ -3122,26 +5153,26 @@ Reach: R-NBU030
      Route: Muskingum Cunge
      Initial Variable: Combined Inflow
      Channel: Trapezoid
-     Length: 2230.3
-     Energy Slope: 0.00823
-     Mannings n: 0.0735
-     Bottom Width: 3.12
-     Side Slope: 2.15
+     Length: 764.6
+     Energy Slope: 0.00447
+     Mannings n: 0.0566
+     Bottom Width: 5.73
+     Side Slope: 1.81
      Index Parameter Type: Index Flow
-     Index Flow: 318.0
+     Index Flow: 477.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
 
 Subbasin: SB-NBU020
-     Description: 99.1 ac; composite CN 84.8; Tc 47.1 min
+     Description: 17.9 ac; composite CN 81.6; Tc 32.0 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
-     Canvas X: 2798746.560
-     Canvas Y: 956532.032
+     Last Modified Time: 05:12:06
+     Canvas X: 2798854.800
+     Canvas Y: 954721.472
      Label X: 16.0
      Label Y: 0.0
-     Area: 0.15480
+     Area: 0.02800
      Downstream: J-NBU020
 
      Discretization: None
@@ -3153,11 +5184,11 @@ Subbasin: SB-NBU020
      Surface: None
 
      LossRate: SCS
-     Percent Impervious Area: 23.07
-     Curve Number: 80.82
+     Percent Impervious Area: 6.63
+     Curve Number: 80.43
 
      Transform: SCS
-     Lag: 28.29
+     Lag: 19.19
      Unitgraph Type: STANDARD
 
      Baseflow: None
@@ -3166,7 +5197,7 @@ End:
 Junction: J-NBU020
      Description: FEMA crossing 29037NBU020
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2798766.240
      Canvas Y: 954401.672
      Label X: 16.0
@@ -3177,7 +5208,7 @@ End:
 Reach: R-NBU020
      Description: J-NBU020 to J-RL_TribNort_1.1
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2798992.560
      Canvas Y: 952010.552
      From Canvas X: 2798766.240
@@ -3191,19 +5222,19 @@ Reach: R-NBU020
      Channel: Trapezoid
      Length: 3047.7
      Energy Slope: 0.00762
-     Mannings n: 0.0453
-     Bottom Width: 11.12
-     Side Slope: 4.77
+     Mannings n: 0.0443
+     Bottom Width: 8.92
+     Side Slope: 5.22
      Index Parameter Type: Index Flow
-     Index Flow: 493.0
+     Index Flow: 510.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
 
 Subbasin: SB-RL_TribNort_1.1
-     Description: 68.5 ac; composite CN 83.0; Tc 44.1 min
+     Description: 68.5 ac; composite CN 83.0; Tc 44.0 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2798372.640
      Canvas Y: 953230.712
      Label X: 16.0
@@ -3224,7 +5255,7 @@ Subbasin: SB-RL_TribNort_1.1
      Curve Number: 81.70
 
      Transform: SCS
-     Lag: 26.49
+     Lag: 26.42
      Unitgraph Type: STANDARD
 
      Baseflow: None
@@ -3233,7 +5264,7 @@ End:
 Junction: J-RL_TribNort_1.1
      Description: FEMA reference line TribNort_1.1sqmi
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2798992.560
      Canvas Y: 952010.552
      Label X: 16.0
@@ -3244,7 +5275,7 @@ End:
 Reach: R-RL_TribNort_1.1
      Description: J-RL_TribNort_1.1 to J-CNF11
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2799090.960
      Canvas Y: 951183.992
      From Canvas X: 2798992.560
@@ -3258,11 +5289,11 @@ Reach: R-RL_TribNort_1.1
      Channel: Trapezoid
      Length: 1253.6
      Energy Slope: 0.00401
-     Mannings n: 0.0428
-     Bottom Width: 4.37
+     Mannings n: 0.0437
+     Bottom Width: 3.61
      Side Slope: 3.65
      Index Parameter Type: Index Flow
-     Index Flow: 1170.0
+     Index Flow: 1248.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
@@ -3270,7 +5301,7 @@ End:
 Subbasin: SB-CNF11
      Description: 44.1 ac; composite CN 79.9; Tc 26.5 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2799391.080
      Canvas Y: 951705.512
      Label X: 16.0
@@ -3300,7 +5331,7 @@ End:
 Junction: J-CNF11
      Description: Stream confluence
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2799090.960
      Canvas Y: 951183.992
      Label X: 16.0
@@ -3311,7 +5342,7 @@ End:
 Reach: R-CNF11
      Description: J-CNF11 to J-RL_TribUppe_2.5
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2798677.680
      Canvas Y: 950928.152
      From Canvas X: 2799090.960
@@ -3325,11 +5356,11 @@ Reach: R-CNF11
      Channel: Trapezoid
      Length: 525.0
      Energy Slope: 0.00578
-     Mannings n: 0.0432
-     Bottom Width: 6.04
-     Side Slope: 6.81
+     Mannings n: 0.0433
+     Bottom Width: 5.93
+     Side Slope: 6.78
      Index Parameter Type: Index Flow
-     Index Flow: 2018.0
+     Index Flow: 2028.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
@@ -3337,7 +5368,7 @@ End:
 Subbasin: SB-RL_TribUppe_2.5
      Description: 5.6 ac; composite CN 77.1; Tc 25.1 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2798564.520
      Canvas Y: 951321.752
      Label X: 16.0
@@ -3367,7 +5398,7 @@ End:
 Junction: J-RL_TribUppe_2.5
      Description: FEMA reference line TribUppe_2.5sqmi
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2798677.680
      Canvas Y: 950928.152
      Label X: 16.0
@@ -3378,7 +5409,7 @@ End:
 Reach: R-RL_TribUppe_2.5
      Description: J-RL_TribUppe_2.5 to J-CNF09
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2798539.920
      Canvas Y: 950554.232
      From Canvas X: 2798677.680
@@ -3396,7 +5427,7 @@ Reach: R-RL_TribUppe_2.5
      Bottom Width: 2.00
      Side Slope: 13.30
      Index Parameter Type: Index Flow
-     Index Flow: 2022.0
+     Index Flow: 2032.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
@@ -3404,7 +5435,7 @@ End:
 Subbasin: SB-CNF09
      Description: 136.9 ac; composite CN 81.9; Tc 61.6 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2800212.720
      Canvas Y: 949929.392
      Label X: 16.0
@@ -3434,7 +5465,7 @@ End:
 Junction: J-CNF09
      Description: Stream confluence
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2798539.920
      Canvas Y: 950554.232
      Label X: 16.0
@@ -3445,7 +5476,7 @@ End:
 Reach: R-CNF09
      Description: J-CNF09 to J-CNF08
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2798156.160
      Canvas Y: 950160.632
      From Canvas X: 2798539.920
@@ -3459,11 +5490,11 @@ Reach: R-CNF09
      Channel: Trapezoid
      Length: 1007.6
      Energy Slope: 0.00328
-     Mannings n: 0.1085
+     Mannings n: 0.1168
      Bottom Width: 2.00
-     Side Slope: 24.08
+     Side Slope: 24.43
      Index Parameter Type: Index Flow
-     Index Flow: 2208.0
+     Index Flow: 2202.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
@@ -3471,7 +5502,7 @@ End:
 Subbasin: SB-CNF08
      Description: 79.7 ac; composite CN 83.0; Tc 59.1 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2798520.240
      Canvas Y: 949580.072
      Label X: 16.0
@@ -3501,7 +5532,7 @@ End:
 Junction: J-CNF08
      Description: Stream confluence
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2798156.160
      Canvas Y: 950160.632
      Label X: 16.0
@@ -3512,7 +5543,7 @@ End:
 Reach: R-CNF08
      Description: J-CNF08 to J-CNF07
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2797605.120
      Canvas Y: 950337.752
      From Canvas X: 2798156.160
@@ -3528,22 +5559,22 @@ Reach: R-CNF08
      Energy Slope: 0.00223
      Mannings n: 0.1112
      Bottom Width: 2.00
-     Side Slope: 31.98
+     Side Slope: 30.71
      Index Parameter Type: Index Flow
-     Index Flow: 2290.0
+     Index Flow: 2258.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
 
 Subbasin: SB-CNF07
-     Description: 70.4 ac; composite CN 82.3; Tc 58.9 min
+     Description: 68.9 ac; composite CN 82.2; Tc 59.0 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2797728.120
      Canvas Y: 951498.872
      Label X: 16.0
      Label Y: 0.0
-     Area: 0.11010
+     Area: 0.10770
      Downstream: J-CNF07
 
      Discretization: None
@@ -3555,11 +5586,11 @@ Subbasin: SB-CNF07
      Surface: None
 
      LossRate: SCS
-     Percent Impervious Area: 3.07
-     Curve Number: 81.75
+     Percent Impervious Area: 3.14
+     Curve Number: 81.71
 
      Transform: SCS
-     Lag: 35.36
+     Lag: 35.38
      Unitgraph Type: STANDARD
 
      Baseflow: None
@@ -3568,7 +5599,7 @@ End:
 Junction: J-CNF07
      Description: Stream confluence
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2797605.120
      Canvas Y: 950337.752
      Label X: 16.0
@@ -3579,7 +5610,7 @@ End:
 Reach: R-CNF07
      Description: J-CNF07 to J-CNF05
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2794987.680
      Canvas Y: 949029.032
      From Canvas X: 2797605.120
@@ -3593,24 +5624,61 @@ Reach: R-CNF07
      Channel: Trapezoid
      Length: 4226.0
      Energy Slope: 0.00053
-     Mannings n: 0.0735
-     Bottom Width: 120.92
+     Mannings n: 0.0736
+     Bottom Width: 119.86
      Side Slope: 60.00
      Index Parameter Type: Index Flow
-     Index Flow: 2348.0
+     Index Flow: 2273.0
+     Space-Time Method: Automatic DX and DT
+     Channel Loss: None
+End:
+
+Junction: J-DET017
+     Description: Detention basin outlet
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2795706.000
+     Canvas Y: 949845.752
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: R-DET017
+End:
+
+Reach: R-DET017
+     Description: J-DET017 to J-CNF05
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2794987.680
+     Canvas Y: 949029.032
+     From Canvas X: 2795706.000
+     From Canvas Y: 949845.752
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: J-CNF05
+
+     Route: Muskingum Cunge
+     Initial Variable: Combined Inflow
+     Channel: Trapezoid
+     Length: 1667.3
+     Energy Slope: 0.00167
+     Mannings n: 0.0631
+     Bottom Width: 267.89
+     Side Slope: 43.33
+     Index Parameter Type: Index Flow
+     Index Flow: 77.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
 
 Subbasin: SB-CNF05
-     Description: 235.4 ac; composite CN 81.8; Tc 71.5 min
+     Description: 202.4 ac; composite CN 81.7; Tc 70.5 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
-     Canvas X: 2796345.600
+     Last Modified Time: 05:12:06
+     Canvas X: 2797236.120
      Canvas Y: 949826.072
      Label X: 16.0
      Label Y: 0.0
-     Area: 0.36780
+     Area: 0.31630
      Downstream: J-CNF05
 
      Discretization: None
@@ -3622,11 +5690,11 @@ Subbasin: SB-CNF05
      Surface: None
 
      LossRate: SCS
-     Percent Impervious Area: 1.45
-     Curve Number: 81.52
+     Percent Impervious Area: 1.68
+     Curve Number: 81.40
 
      Transform: SCS
-     Lag: 42.92
+     Lag: 42.30
      Unitgraph Type: STANDARD
 
      Baseflow: None
@@ -3635,7 +5703,7 @@ End:
 Junction: J-CNF05
      Description: Stream confluence
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2794987.680
      Canvas Y: 949029.032
      Label X: 16.0
@@ -3646,7 +5714,7 @@ End:
 Reach: R-CNF05
      Description: J-CNF05 to J-RL_TribUppe_3.4
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2794289.040
      Canvas Y: 948999.512
      From Canvas X: 2794987.680
@@ -3660,24 +5728,61 @@ Reach: R-CNF05
      Channel: Trapezoid
      Length: 1151.8
      Energy Slope: 0.01472
-     Mannings n: 0.0903
+     Mannings n: 0.0906
      Bottom Width: 2.00
-     Side Slope: 17.28
+     Side Slope: 17.44
      Index Parameter Type: Index Flow
-     Index Flow: 1830.0
+     Index Flow: 1422.0
+     Space-Time Method: Automatic DX and DT
+     Channel Loss: None
+End:
+
+Junction: J-DET016
+     Description: Detention basin outlet
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2795027.040
+     Canvas Y: 948409.112
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: R-DET016
+End:
+
+Reach: R-DET016
+     Description: J-DET016 to J-RL_TribUppe_3.4
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2794289.040
+     Canvas Y: 948999.512
+     From Canvas X: 2795027.040
+     From Canvas Y: 948409.112
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: J-RL_TribUppe_3.4
+
+     Route: Muskingum Cunge
+     Initial Variable: Combined Inflow
+     Channel: Trapezoid
+     Length: 1250.9
+     Energy Slope: 0.03158
+     Mannings n: 0.1076
+     Bottom Width: 8.38
+     Side Slope: 9.15
+     Index Parameter Type: Index Flow
+     Index Flow: 19.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
 
 Subbasin: SB-RL_TribUppe_3.4
-     Description: 25.8 ac; composite CN 78.1; Tc 27.0 min
+     Description: 18.3 ac; composite CN 76.4; Tc 31.0 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
-     Canvas X: 2794662.960
-     Canvas Y: 949009.352
+     Last Modified Time: 05:12:06
+     Canvas X: 2794579.320
+     Canvas Y: 949186.472
      Label X: 16.0
      Label Y: 0.0
-     Area: 0.04040
+     Area: 0.02860
      Downstream: J-RL_TribUppe_3.4
 
      Discretization: None
@@ -3689,11 +5794,11 @@ Subbasin: SB-RL_TribUppe_3.4
      Surface: None
 
      LossRate: SCS
-     Percent Impervious Area: 3.96
-     Curve Number: 77.31
+     Percent Impervious Area: 1.37
+     Curve Number: 76.14
 
      Transform: SCS
-     Lag: 16.20
+     Lag: 18.58
      Unitgraph Type: STANDARD
 
      Baseflow: None
@@ -3702,7 +5807,7 @@ End:
 Junction: J-RL_TribUppe_3.4
      Description: FEMA reference line TribUppe_3.4sqmi
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2794289.040
      Canvas Y: 948999.512
      Label X: 16.0
@@ -3713,7 +5818,7 @@ End:
 Reach: R-RL_TribUppe_3.4
      Description: J-RL_TribUppe_3.4 to J-UEP010
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2793354.240
      Canvas Y: 948704.312
      From Canvas X: 2794289.040
@@ -3727,24 +5832,61 @@ Reach: R-RL_TribUppe_3.4
      Channel: Trapezoid
      Length: 1900.8
      Energy Slope: 0.00319
-     Mannings n: 0.0930
-     Bottom Width: 11.31
-     Side Slope: 6.58
+     Mannings n: 0.0928
+     Bottom Width: 11.20
+     Side Slope: 6.51
      Index Parameter Type: Index Flow
-     Index Flow: 1835.0
+     Index Flow: 1429.0
+     Space-Time Method: Automatic DX and DT
+     Channel Loss: None
+End:
+
+Junction: J-DET027
+     Description: Detention basin outlet
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2794121.760
+     Canvas Y: 950160.632
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: R-DET027
+End:
+
+Reach: R-DET027
+     Description: J-DET027 to J-UEP010
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2793354.240
+     Canvas Y: 948704.312
+     From Canvas X: 2794121.760
+     From Canvas Y: 950160.632
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: J-UEP010
+
+     Route: Muskingum Cunge
+     Initial Variable: Combined Inflow
+     Channel: Trapezoid
+     Length: 2149.1
+     Energy Slope: 0.01394
+     Mannings n: 0.0996
+     Bottom Width: 2.00
+     Side Slope: 17.83
+     Index Parameter Type: Index Flow
+     Index Flow: 84.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
 
 Subbasin: SB-UEP010
-     Description: 157.1 ac; composite CN 81.9; Tc 74.7 min
+     Description: 87.7 ac; composite CN 80.0; Tc 38.9 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
-     Canvas X: 2793895.440
-     Canvas Y: 949835.912
+     Last Modified Time: 05:12:06
+     Canvas X: 2793851.160
+     Canvas Y: 949053.632
      Label X: 16.0
      Label Y: 0.0
-     Area: 0.24550
+     Area: 0.13710
      Downstream: J-UEP010
 
      Discretization: None
@@ -3756,11 +5898,11 @@ Subbasin: SB-UEP010
      Surface: None
 
      LossRate: SCS
-     Percent Impervious Area: 5.32
-     Curve Number: 81.04
+     Percent Impervious Area: 4.05
+     Curve Number: 79.26
 
      Transform: SCS
-     Lag: 44.82
+     Lag: 23.31
      Unitgraph Type: STANDARD
 
      Baseflow: None
@@ -3769,7 +5911,7 @@ End:
 Junction: J-UEP010
      Description: FEMA crossing 29037UEP010
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2793354.240
      Canvas Y: 948704.312
      Label X: 16.0
@@ -3780,7 +5922,7 @@ End:
 Reach: R-UEP010
      Description: J-UEP010 to J-CNF01
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2791671.600
      Canvas Y: 948409.112
      From Canvas X: 2793354.240
@@ -3796,22 +5938,96 @@ Reach: R-UEP010
      Energy Slope: 0.00147
      Mannings n: 0.0817
      Bottom Width: 11.02
-     Side Slope: 4.76
+     Side Slope: 4.78
      Index Parameter Type: Index Flow
-     Index Flow: 1898.0
+     Index Flow: 1498.0
+     Space-Time Method: Automatic DX and DT
+     Channel Loss: None
+End:
+
+Junction: J-DET025
+     Description: Detention basin outlet
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2793186.960
+     Canvas Y: 947690.792
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: R-DET025
+End:
+
+Reach: R-DET025
+     Description: J-DET025 to J-CNF01
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2791671.600
+     Canvas Y: 948409.112
+     From Canvas X: 2793186.960
+     From Canvas Y: 947690.792
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: J-CNF01
+
+     Route: Muskingum Cunge
+     Initial Variable: Combined Inflow
+     Channel: Trapezoid
+     Length: 3850.7
+     Energy Slope: 0.00928
+     Mannings n: 0.0947
+     Bottom Width: 6.12
+     Side Slope: 4.85
+     Index Parameter Type: Index Flow
+     Index Flow: 55.0
+     Space-Time Method: Automatic DX and DT
+     Channel Loss: None
+End:
+
+Junction: J-DET008
+     Description: Detention basin outlet
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2793285.360
+     Canvas Y: 948389.432
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: R-DET008
+End:
+
+Reach: R-DET008
+     Description: J-DET008 to J-CNF01
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:12:06
+     Canvas X: 2791671.600
+     Canvas Y: 948409.112
+     From Canvas X: 2793285.360
+     From Canvas Y: 948389.432
+     Label X: 16.0
+     Label Y: 0.0
+     Downstream: J-CNF01
+
+     Route: Muskingum Cunge
+     Initial Variable: Combined Inflow
+     Channel: Trapezoid
+     Length: 3067.2
+     Energy Slope: 0.00460
+     Mannings n: 0.0902
+     Bottom Width: 10.87
+     Side Slope: 3.33
+     Index Parameter Type: Index Flow
+     Index Flow: 23.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
 
 Subbasin: SB-CNF01
-     Description: 238.7 ac; composite CN 82.4; Tc 62.5 min
+     Description: 205.6 ac; composite CN 82.6; Tc 62.5 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2792335.800
      Canvas Y: 948999.512
      Label X: 16.0
      Label Y: 0.0
-     Area: 0.37300
+     Area: 0.32130
      Downstream: J-CNF01
 
      Discretization: None
@@ -3823,11 +6039,11 @@ Subbasin: SB-CNF01
      Surface: None
 
      LossRate: SCS
-     Percent Impervious Area: 22.89
-     Curve Number: 77.75
+     Percent Impervious Area: 26.41
+     Curve Number: 77.14
 
      Transform: SCS
-     Lag: 37.50
+     Lag: 37.49
      Unitgraph Type: STANDARD
 
      Baseflow: None
@@ -3836,7 +6052,7 @@ End:
 Junction: J-CNF01
      Description: Stream confluence
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2791671.600
      Canvas Y: 948409.112
      Label X: 16.0
@@ -3847,7 +6063,7 @@ End:
 Reach: R-CNF01
      Description: J-CNF01 to J-ECT060
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2791425.600
      Canvas Y: 948182.792
      From Canvas X: 2791671.600
@@ -3861,24 +6077,24 @@ Reach: R-CNF01
      Channel: Trapezoid
      Length: 380.1
      Energy Slope: 0.00365
-     Mannings n: 0.0537
-     Bottom Width: 15.00
-     Side Slope: 3.22
+     Mannings n: 0.0542
+     Bottom Width: 16.05
+     Side Slope: 3.11
      Index Parameter Type: Index Flow
-     Index Flow: 4452.0
+     Index Flow: 3826.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
 
 Subbasin: SB-ECT060
-     Description: 3.2 ac; composite CN 73.4; Tc 18.9 min
+     Description: 3.1 ac; composite CN 73.2; Tc 18.9 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2791607.640
      Canvas Y: 948276.272
      Label X: 16.0
      Label Y: 0.0
-     Area: 0.00510
+     Area: 0.00490
      Downstream: J-ECT060
 
      Discretization: None
@@ -3890,8 +6106,8 @@ Subbasin: SB-ECT060
      Surface: None
 
      LossRate: SCS
-     Percent Impervious Area: 8.74
-     Curve Number: 70.99
+     Percent Impervious Area: 9.07
+     Curve Number: 70.74
 
      Transform: SCS
      Lag: 11.36
@@ -3903,7 +6119,7 @@ End:
 Junction: J-ECT060
      Description: FEMA crossing 29037ECT060
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2791425.600
      Canvas Y: 948182.792
      Label X: 16.0
@@ -3914,7 +6130,7 @@ End:
 Reach: R-ECT060
      Description: J-ECT060 to J-ECT050
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2791051.680
      Canvas Y: 948182.792
      From Canvas X: 2791425.600
@@ -3932,20 +6148,20 @@ Reach: R-ECT060
      Bottom Width: 16.55
      Side Slope: 2.42
      Index Parameter Type: Index Flow
-     Index Flow: 4452.0
+     Index Flow: 3825.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
 
 Subbasin: SB-ECT050
-     Description: 45.6 ac; composite CN 81.6; Tc 41.1 min
+     Description: 45.2 ac; composite CN 81.7; Tc 40.5 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2791774.920
      Canvas Y: 947735.072
      Label X: 16.0
      Label Y: 0.0
-     Area: 0.07130
+     Area: 0.07060
      Downstream: J-ECT050
 
      Discretization: None
@@ -3957,11 +6173,11 @@ Subbasin: SB-ECT050
      Surface: None
 
      LossRate: SCS
-     Percent Impervious Area: 9.81
-     Curve Number: 79.82
+     Percent Impervious Area: 9.89
+     Curve Number: 79.86
 
      Transform: SCS
-     Lag: 24.64
+     Lag: 24.32
      Unitgraph Type: STANDARD
 
      Baseflow: None
@@ -3970,7 +6186,7 @@ End:
 Junction: J-ECT050
      Description: FEMA crossing 29037ECT050
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2791051.680
      Canvas Y: 948182.792
      Label X: 16.0
@@ -3981,7 +6197,7 @@ End:
 Reach: R-ECT050
      Description: J-ECT050 to J-ECT030
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2790726.960
      Canvas Y: 948172.952
      From Canvas X: 2791051.680
@@ -3999,7 +6215,7 @@ Reach: R-ECT050
      Bottom Width: 14.65
      Side Slope: 4.73
      Index Parameter Type: Index Flow
-     Index Flow: 4463.0
+     Index Flow: 3838.0
      Space-Time Method: Automatic DX and DT
      Channel Loss: None
 End:
@@ -4007,7 +6223,7 @@ End:
 Subbasin: SB-ECT030
      Description: 20.7 ac; composite CN 86.2; Tc 40.3 min
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2791159.920
      Canvas Y: 947631.752
      Label X: 16.0
@@ -4037,7 +6253,7 @@ End:
 Junction: J-ECT030
      Description: Watershed outlet - FEMA bridge 29037ECT030
      Last Modified Date: 5 November 2026
-     Last Modified Time: 03:46:23
+     Last Modified Time: 05:12:06
      Canvas X: 2790726.960
      Canvas Y: 948172.952
      Label X: 16.0
@@ -4093,13 +6309,13 @@ Basin Spatial Properties:
 End:
 
 Basin Schematic Properties:
-     Last View N: 964068.9
-     Last View S: 946131.8
-     Last View W: 2787967.4
+     Last View N: 965421.9
+     Last View S: 945703.7
+     Last View W: 2787898.6
      Last View E: 2808049.7
-     Maximum View N: 964068.9
-     Maximum View S: 946131.8
-     Maximum View W: 2787967.4
+     Maximum View N: 965421.9
+     Maximum View S: 945703.7
+     Maximum View W: 2787898.6
      Maximum View E: 2808049.7
      Extent Method: Elements
      Buffer: 0

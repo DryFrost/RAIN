@@ -1,0 +1,92 @@
+Basin,City_OBJECTIDs,Type,Area_ac,Subbasin,DA_ac,Wet,Pool_or_Bottom_ft,Spill_ft,Depth_ft,Storage_at_spill_acft,Q_at_spill_cfs,Outlet,Modelled,Not_modelled_because,Outlet_x,Outlet_y,outlet_cell
+DET001,35;3851,Lake,54.776,SB-LK1,322.205,True,1025.5,1025.8,0.3,16.198,32.17,terrain: wet pond spilling over its rim (no structure assumed),False,lake LK1/LK2;type Lake,2795735.52,959174.072,5351274
+DET002,3879,Pond,12.65,SB-CNF05,2150.397,False,961.844,962.144,0.3,0.643,6068.289,assumed: APWA 5600 3.0 cfs/ac at spill,False,depth<1ft;storage<0.05in over DA,2794977.84,948901.112,10440697
+DET003,3883,Pond,11.879,SB-DET003,138.848,True,992.0,992.3,0.3,2.864,102.694,terrain: wet pond spilling over its rim (no structure assumed),True,,2795597.76,953850.632,7988635
+DET004,3892,Lake,8.205,SB-LK2,141.664,True,1032.8,1033.1,0.3,2.446,16.396,terrain: wet pond spilling over its rim (no structure assumed),False,lake LK1/LK2;type Lake,2804886.72,953909.672,7960329
+DET005,3972,Pond,5.794,SB-CNF13,23.122,False,1012.219,1012.519,0.3,0.06,105.512,assumed: APWA 5600 3.0 cfs/ac at spill,False,storage<0.1acft;depth<1ft;storage<0.05in over DA,2802082.32,951429.992,9188544
+DET006,4;3845;3873,Detention,5.531,SB-DET006,26.952,True,1009.2,1012.125,2.925,15.017,80.241,assumed: APWA 5600 3.0 cfs/ac at spill,True,,2790786.0,956231.912,6808396
+DET007,3881,Pond,4.314,SB-DET007,62.494,True,979.4,979.7,0.3,0.777,4.367,terrain: wet pond spilling over its rim (no structure assumed),True,,2794397.28,950426.312,9685013
+DET008,3884,Pond,2.599,SB-DET008,10.696,True,961.9,962.2,0.3,0.641,37.052,terrain: wet pond spilling over its rim (no structure assumed),True,,2793285.36,948389.432,10694025
+DET009,3763,Detention,2.178,SB-ECT090,19.681,False,999.0,999.3,0.3,0.03,64.983,assumed: APWA 5600 3.0 cfs/ac at spill,False,storage<0.1acft;depth<1ft;storage<0.05in over DA,2795843.76,957963.752,5950910
+DET010,3992,,2.126,SB-CNF01,9.849,False,972.562,972.862,0.3,0.094,88.112,assumed: APWA 5600 3.0 cfs/ac at spill,False,storage<0.1acft;depth<1ft,2793305.04,947307.032,11230277
+DET011,13;14;3935,Detention,2.121,SB-DET011,33.158,False,1038.558,1047.906,9.348,9.337,99.414,assumed: APWA 5600 3.0 cfs/ac at spill,True,,2790835.2,961388.072,4253901
+DET012,7;8;3832,Detention,1.986,SB-DET012,5.21,False,1066.75,1072.562,5.812,3.232,16.381,assumed: APWA 5600 3.0 cfs/ac at spill,True,,2790313.68,961988.312,3956473
+DET013,3722,Pond,1.515,SB-CNF07,53.754,False,974.781,975.081,0.3,0.062,150.27,assumed: APWA 5600 3.0 cfs/ac at spill,False,storage<0.1acft;depth<1ft;storage<0.05in over DA,2797595.28,950878.952,9461088
+DET014,3990,Detention,1.497,SB-CNF01,0.52,False,961.156,961.456,0.3,0.104,64.548,assumed: APWA 5600 3.0 cfs/ac at spill,False,DA<2ac;depth<1ft,2791976.64,949570.232,10108892
+DET015,3720,Pond,1.407,SB-CNF06,7.924,False,996.625,996.925,0.3,0.105,97.199,assumed: APWA 5600 3.0 cfs/ac at spill,False,depth<1ft,2791218.96,953801.432,8012565
+DET016,3822,Pond,1.39,SB-DET016,7.5,True,983.6,983.9,0.3,0.327,25.855,terrain: wet pond spilling over its rim (no structure assumed),True,,2795027.04,948409.112,10684452
+DET017,3971,Pond,1.366,SB-DET017,34.531,True,963.7,964.0,0.3,0.244,6.753,terrain: wet pond spilling over its rim (no structure assumed),True,,2795706.0,949845.752,9972771
+DET018,3889,Pond,1.264,SB-LK2-IN1,2.041,False,1054.719,1055.019,0.3,0.051,16.198,assumed: APWA 5600 3.0 cfs/ac at spill,False,storage<0.1acft;depth<1ft,2806362.72,953771.912,8028729
+DET019,25;3869,Pond,1.251,SB-NBU040,41.02,False,1013.406,1013.706,0.3,0.153,117.571,assumed: APWA 5600 3.0 cfs/ac at spill,False,depth<1ft;storage<0.05in over DA,2801068.8,954460.712,7686941
+DET020,5;6;3849,Detention,1.19,SB-DET003,38.904,False,1011.906,1012.206,0.3,0.051,109.758,assumed: APWA 5600 3.0 cfs/ac at spill,False,storage<0.1acft;depth<1ft;storage<0.05in over DA,2797674.0,955346.312,7247846
+DET021,1;3836,Detention,1.164,SB-DET021,45.739,False,995.969,1005.469,9.5,5.869,137.215,assumed: APWA 5600 3.0 cfs/ac at spill,True,,2792055.36,959085.512,5394775
+DET022,3906,Detention,1.099,SB-EAG030,195.625,False,1018.562,1018.862,0.3,0.02,557.293,assumed: APWA 5600 3.0 cfs/ac at spill,False,storage<0.1acft;depth<1ft;storage<0.05in over DA,2794535.04,960620.552,4634527
+DET023,3946;3959,Pond,1.086,SB-RL_TribUppe_1.0,24.173,False,1052.562,1053.719,1.156,0.646,70.923,assumed: APWA 5600 3.0 cfs/ac at spill,True,,2804345.52,951154.472,9325274
+DET024,3989,Detention,1.067,SB-ECT050,2.81,False,948.875,949.175,0.3,0.1,73.603,assumed: APWA 5600 3.0 cfs/ac at spill,False,depth<1ft,2791268.16,948822.392,10479320
+DET025,3885,Pond,1.013,SB-DET025,23.493,True,966.1,966.4,0.3,0.333,77.821,terrain: wet pond spilling over its rim (no structure assumed),True,,2793186.96,947690.792,11040140
+DET026,3895,Treatment,1.004,SB-CNF01,5.633,False,935.125,943.688,8.562,5.578,17.223,assumed: APWA 5600 3.0 cfs/ac at spill,False,type Treatment,2791651.92,948566.552,10606109
+DET027,3765,Pond,1.001,SB-DET027,69.129,True,970.0,970.3,0.3,0.2,4.416,terrain: wet pond spilling over its rim (no structure assumed),True,,2794121.76,950160.632,9816610
+DET028,3924,Detention,0.995,SB-RL_TribNort_2.0,1.963,False,967.656,967.956,0.3,0.204,169.965,assumed: APWA 5600 3.0 cfs/ac at spill,False,DA<2ac;depth<1ft,2792616.24,953594.792,8115082
+DET029,3973,Pond,0.968,SB-CNF13,7.626,False,1026.312,1026.612,0.3,0.039,37.383,assumed: APWA 5600 3.0 cfs/ac at spill,False,storage<0.1acft;depth<1ft,2802741.6,951095.432,9354361
+DET030,39;3848,Retention,0.911,SB-DET030,53.834,False,1047.625,1048.75,1.125,0.584,157.262,assumed: APWA 5600 3.0 cfs/ac at spill,True,,2801580.48,957107.672,6375618
+DET031,2;3850,Detention,0.891,SB-DET031,13.944,True,1081.8,1083.438,1.638,1.527,41.361,assumed: APWA 5600 3.0 cfs/ac at spill,True,,2792665.44,963434.792,3240087
+DET032,3694;3901,Detention,0.891,SB-MCT010,2.492,False,1061.438,1074.438,13.0,6.951,7.475,assumed: APWA 5600 3.0 cfs/ac at spill,True,,2793029.52,962381.912,3761749
+DET033,17;3831,Detention,0.853,SB-DET033,46.992,False,1056.156,1060.844,4.688,2.79,140.367,assumed: APWA 5600 3.0 cfs/ac at spill,True,,2791740.48,961958.792,3971243
+DET034,3719,Pond,0.839,SB-RL_TribNort_2.0,3.201,True,984.4,984.7,0.3,0.182,53.469,terrain: wet pond spilling over its rim (no structure assumed),False,depth<1ft,2792202.96,954785.432,7525165
+DET035,3917,Pond,0.837,SB-CNF19,1.934,True,1045.4,1045.812,0.412,0.264,0.143,terrain: wet pond spilling over its rim (no structure assumed),False,DA<2ac;depth<1ft,2804699.76,955110.152,7365560
+DET036,3871,Pond,0.828,SB-ECT080,16.295,True,974.1,974.4,0.3,0.25,4.688,terrain: wet pond spilling over its rim (no structure assumed),False,depth<1ft,2794446.48,954322.952,7754518
+DET037,3932,Pond,0.781,SB-RL_TribTrib_0.3,28.441,True,1050.2,1050.5,0.3,0.116,2.912,terrain: wet pond spilling over its rim (no structure assumed),False,depth<1ft,2790205.44,961122.392,4385462
+DET038,2492;3919,Detention,0.753,SB-EAG030,7.513,False,1031.0,1031.3,0.3,0.14,60.528,assumed: APWA 5600 3.0 cfs/ac at spill,False,depth<1ft,2794308.72,961309.352,4293254
+DET039,3823,Pond,0.73,SB-CNF05,54.365,True,981.7,982.0,0.3,0.263,26.833,terrain: wet pond spilling over its rim (no structure assumed),False,depth<1ft,2796384.96,948674.792,10552965
+DET040,3718,Pond,0.688,SB-DET033,5.108,True,1097.3,1097.6,0.3,0.163,20.292,terrain: wet pond spilling over its rim (no structure assumed),False,depth<1ft,2791464.96,964221.992,2849965
+DET041,3947;3960,Pond,0.662,SB-RL_TribUppe_1.0,11.89,True,1040.8,1041.1,0.3,0.301,4.905,terrain: wet pond spilling over its rim (no structure assumed),False,depth<1ft,2803548.48,950888.792,9456818
+DET042,3766,Pond,0.66,SB-UEP010,77.554,True,964.2,964.5,0.3,0.18,3.561,terrain: wet pond spilling over its rim (no structure assumed),False,depth<1ft,2793934.8,949826.072,9982341
+DET043,3812,Wet Soil,0.642,SB-CNF06,7.4,False,1002.469,1002.769,0.3,0.024,36.489,assumed: APWA 5600 3.0 cfs/ac at spill,False,storage<0.1acft;depth<1ft;storage<0.05in over DA;type Wet Soil,2790471.12,954480.392,7676114
+DET044,9,Detention,0.592,SB-DET044,14.442,False,1070.75,1073.969,3.219,0.808,43.22,assumed: APWA 5600 3.0 cfs/ac at spill,True,,2798520.24,962047.352,3928057
+DET045,3927,Detention,0.579,SB-ECT070,2.452,True,993.7,994.0,0.3,0.199,66.754,terrain: wet pond spilling over its rim (no structure assumed),False,depth<1ft,2794505.52,951803.912,9002524
+DET046,2892;3928,Detention,0.491,SB-CNF06,5.375,False,976.625,976.925,0.3,0.114,84.483,assumed: APWA 5600 3.0 cfs/ac at spill,False,depth<1ft,2791455.12,952719.032,8548839
+DET047,26;3893,Detention,0.486,SB-EAG030,18.745,False,1048.811,1049.111,0.3,0.007,69.985,assumed: APWA 5600 3.0 cfs/ac at spill,False,storage<0.1acft;depth<1ft;storage<0.05in over DA,2794899.12,961978.472,3961814
+DET048,3913,Detention,0.481,SB-CNF28,62.016,False,1003.75,1004.05,0.3,0.017,175.993,assumed: APWA 5600 3.0 cfs/ac at spill,False,storage<0.1acft;depth<1ft;storage<0.05in over DA,2798726.88,955149.512,7345453
+DET049,27;3858,Detention,0.415,SB-DET049,35.603,True,1064.0,1066.719,2.719,1.151,106.301,assumed: APWA 5600 3.0 cfs/ac at spill,True,,2795853.6,962332.712,3786411
+DET050,3842,Detention,0.37,SB-DET050,5.739,False,1068.719,1073.062,4.344,1.05,17.317,assumed: APWA 5600 3.0 cfs/ac at spill,True,,2797959.36,961899.752,4001125
+DET051,3723,Pond,0.36,SB-NBU010,1.654,True,1006.2,1007.812,1.612,0.522,5.193,assumed: APWA 5600 3.0 cfs/ac at spill,False,DA<2ac,2800340.64,953584.952,8120742
+DET052,15;3904,Detention,0.314,SB-EAG010,759.523,False,987.5,994.438,6.938,1.422,2271.018,assumed: APWA 5600 3.0 cfs/ac at spill,False,storage<0.05in over DA,2793442.8,958052.312,5906791
+DET053,11;3902,Detention,0.313,SB-DET053,5.435,False,1081.844,1083.812,1.969,0.344,16.229,assumed: APWA 5600 3.0 cfs/ac at spill,True,,2797083.6,962519.672,3693911
+DET054,3949;3962,Pond,0.304,SB-RL_TribUppe_1.0,4.37,True,1064.2,1064.594,0.394,0.085,0.184,terrain: wet pond spilling over its rim (no structure assumed),False,storage<0.1acft;depth<1ft,2803932.24,950426.312,9685982
+DET055,3936;3937,,0.297,SB-MCT010,0.798,False,1044.156,1044.456,0.3,0.095,57.256,assumed: APWA 5600 3.0 cfs/ac at spill,False,DA<2ac;storage<0.1acft;depth<1ft,2791730.64,961348.712,4273492
+DET056,3779,Pond,0.268,SB-LK2-IN1,0.429,False,1060.823,1061.123,0.3,0.092,42.746,assumed: APWA 5600 3.0 cfs/ac at spill,False,DA<2ac;storage<0.1acft;depth<1ft,2806677.6,953653.832,8087261
+DET057,3939,Detention,0.264,SB-RL_TribNort_2.0,1.158,False,974.209,974.509,0.3,0.14,82.461,assumed: APWA 5600 3.0 cfs/ac at spill,False,DA<2ac;depth<1ft,2792488.32,954637.832,7598319
+DET058,3764,Pond,0.258,SB-ECT080,0.84,True,1042.4,1042.7,0.3,0.063,1.02,terrain: wet pond spilling over its rim (no structure assumed),False,DA<2ac;storage<0.1acft;depth<1ft,2797270.56,957048.632,6404430
+DET059,3778,Pond,0.252,SB-LK2-IN1,3.032,True,1080.2,1080.5,0.3,0.072,62.91,terrain: wet pond spilling over its rim (no structure assumed),False,storage<0.1acft;depth<1ft,2806697.28,953073.272,8374888
+DET060,3695;3900,Detention,0.248,SB-DET060,4.272,False,1055.281,1067.031,11.75,3.106,12.827,assumed: APWA 5600 3.0 cfs/ac at spill,True,,2792793.36,962067.032,3917725
+DET061,3843,Detention,0.232,SB-DET061,4.337,False,1070.0,1072.844,2.844,0.423,13.579,assumed: APWA 5600 3.0 cfs/ac at spill,True,,2798431.68,962027.672,3937798
+DET062,3771,Pond,0.213,SB-CNF19,4.25,True,1035.2,1035.5,0.3,0.1,39.189,terrain: wet pond spilling over its rim (no structure assumed),False,storage<0.1acft;depth<1ft,2803784.64,954933.032,7453217
+DET063,28;3894,Detention,0.204,SB-DET049,0.191,False,1075.375,1075.675,0.3,0.097,87.641,assumed: APWA 5600 3.0 cfs/ac at spill,False,DA<2ac;storage<0.1acft;depth<1ft,2795961.84,962805.032,3552422
+DET064,3905,Detention,0.202,SB-EAG020,751.752,False,989.719,991.219,1.5,0.05,2255.06,assumed: APWA 5600 3.0 cfs/ac at spill,False,storage<0.1acft;storage<0.05in over DA,2793629.76,958229.432,5819060
+DET065,3821,Stream/Pond,0.201,SB-RL_TribTrib_0.3,10.116,False,1039.5,1039.8,0.3,0.004,36.698,assumed: APWA 5600 3.0 cfs/ac at spill,False,storage<0.1acft;depth<1ft;storage<0.05in over DA,2790471.12,960689.432,4599989
+DET066,3866,Pond,0.175,SB-CNF19,0.442,True,1071.2,1072.562,1.362,0.245,1.497,assumed: APWA 5600 3.0 cfs/ac at spill,False,DA<2ac,2804630.88,955936.712,6956053
+DET067,3950;3963,Pond,0.17,SB-RL_TribUppe_1.0,4.41,False,1053.438,1053.738,0.3,0.041,34.46,assumed: APWA 5600 3.0 cfs/ac at spill,False,storage<0.1acft;depth<1ft,2803548.48,950524.712,9637193
+DET068,3898,Detention,0.163,SB-NBU040,1.705,False,1014.625,1017.812,3.188,0.247,5.376,assumed: APWA 5600 3.0 cfs/ac at spill,False,DA<2ac,2800763.76,953643.992,8091535
+DET069,3702,Wet Soil,0.157,SB-NFE030,1.029,False,972.5,974.0,1.5,0.136,3.087,assumed: APWA 5600 3.0 cfs/ac at spill,False,DA<2ac;type Wet Soil,2792881.92,955316.792,7261984
+DET070,3897,Detention,0.146,SB-ECT080,4.137,False,982.656,982.956,0.3,0.089,74.077,assumed: APWA 5600 3.0 cfs/ac at spill,False,storage<0.1acft;depth<1ft,2794712.16,955306.952,7267045
+DET071,3697;3988,Detention,0.14,SB-MEA020,1.918,False,1020.969,1021.269,0.3,0.078,32.037,assumed: APWA 5600 3.0 cfs/ac at spill,False,DA<2ac;storage<0.1acft;depth<1ft,2791720.8,960482.792,4702491
+DET072,3926,Detention,0.13,SB-DET072,18.598,False,961.801,968.625,6.824,0.372,55.98,assumed: APWA 5600 3.0 cfs/ac at spill,True,,2794426.8,952522.232,8646641
+DET073,3918,Pond,0.127,SB-LK2,22.79,True,1044.6,1044.9,0.3,0.086,14.318,terrain: wet pond spilling over its rim (no structure assumed),False,storage<0.1acft;depth<1ft,2804965.44,954942.872,7448462
+DET074,3948;3961,Pond,0.125,SB-RL_TribUppe_1.0,6.022,True,1056.3,1056.6,0.3,0.016,6.841,terrain: wet pond spilling over its rim (no structure assumed),False,storage<0.1acft;depth<1ft,2804286.48,950770.712,9515393
+DET075,3945;3958,Pond,0.111,SB-RL_TribUppe_1.0,1.131,True,1037.5,1037.8,0.3,0.019,0.693,terrain: wet pond spilling over its rim (no structure assumed),False,DA<2ac;storage<0.1acft;depth<1ft,2803597.68,951764.552,9022948
+DET076,3890,Pond,0.109,SB-LK2-IN1,9.311,True,1045.8,1046.156,0.356,0.03,0.344,terrain: wet pond spilling over its rim (no structure assumed),False,storage<0.1acft;depth<1ft,2806451.28,954381.992,7726488
+DET077,3934,,0.104,SB-MCT010,0.22,False,1050.856,1051.156,0.3,0.025,15.416,assumed: APWA 5600 3.0 cfs/ac at spill,False,DA<2ac;storage<0.1acft;depth<1ft,2791701.12,961860.392,4019989
+DET078,3693,Detention,0.104,SB-LK1-IN2,4.346,False,1083.75,1084.05,0.3,0.007,13.563,assumed: APWA 5600 3.0 cfs/ac at spill,False,storage<0.1acft;depth<1ft;storage<0.05in over DA,2798038.08,962283.512,3811008
+DET079,3706,Pond,0.093,SB-LK2-IN1,0.218,True,1055.5,1056.375,0.875,0.062,0.311,terrain: wet pond spilling over its rim (no structure assumed),False,DA<2ac;storage<0.1acft;depth<1ft,2806707.12,953978.552,7926389
+DET080,889;3907,Detention,0.089,SB-DET049,0.885,False,1097.162,1100.031,2.869,0.13,2.89,assumed: APWA 5600 3.0 cfs/ac at spill,False,DA<2ac,2796178.32,963543.032,3186819
+DET081,1287;1288;1289;3844,Detention,0.074,SB-DET049,0.178,False,1094.688,1094.988,0.3,0.002,17.541,assumed: APWA 5600 3.0 cfs/ac at spill,False,DA<2ac;storage<0.1acft;depth<1ft,2796207.84,963267.512,3323322
+DET082,1290;3908,Detention,0.047,SB-DET049,0.547,True,1099.4,1100.469,1.069,0.041,1.843,assumed: APWA 5600 3.0 cfs/ac at spill,False,DA<2ac;storage<0.1acft,2796434.16,963257.672,3328220
+DET083,3940,,0.043,SB-MCT010,0.011,False,1086.439,1086.739,0.3,0.055,20.12,assumed: APWA 5600 3.0 cfs/ac at spill,False,DA<2ac;storage<0.1acft;depth<1ft,2792970.48,963060.872,3425368
+DET084,2092,Detention,0.041,SB-NBU040,0.122,False,1016.969,1017.269,0.3,0.002,1.746,assumed: APWA 5600 3.0 cfs/ac at spill,False,DA<2ac;storage<0.1acft;depth<1ft,2801137.68,954736.232,7550448
+DET085,3780,Pond,0.041,SB-LK2-IN1,0.553,True,1071.3,1072.219,0.919,0.17,0.212,terrain: wet pond spilling over its rim (no structure assumed),False,DA<2ac;depth<1ft,2806716.96,953260.232,8282265
+DET086,3724,Pond,0.035,SB-NBU040,0.509,True,1035.1,1035.906,0.806,0.016,0.35,terrain: wet pond spilling over its rim (no structure assumed),False,DA<2ac;storage<0.1acft;depth<1ft,2801728.08,955208.552,7316508
+DET087,3975;3978,Detention,0.032,SB-CNF27,0.998,False,1042.693,1042.993,0.3,0.045,20.777,assumed: APWA 5600 3.0 cfs/ac at spill,False,DA<2ac;storage<0.1acft;depth<1ft,2789959.44,957520.952,6169687
+DET088,3292;3931,Detention,0.028,SB-DET044,0.267,False,1097.871,1098.171,0.3,0.054,27.701,assumed: APWA 5600 3.0 cfs/ac at spill,False,DA<2ac;storage<0.1acft;depth<1ft,2799022.08,962450.792,3728233
+DET089,3777,Pond,0.027,SB-LK2-IN1,0.107,True,1051.3,1051.6,0.3,0.014,12.009,terrain: wet pond spilling over its rim (no structure assumed),False,DA<2ac;storage<0.1acft;depth<1ft,2806726.8,954352.472,7741141
+DET090,3974;3977,Detention,0.022,SB-CNF27,0.018,False,1057.884,1058.184,0.3,0.063,39.16,assumed: APWA 5600 3.0 cfs/ac at spill,False,DA<2ac;storage<0.1acft;depth<1ft,2789713.44,957511.112,6174537
+DET091,3976;3979,Detention,0.01,SB-CNF27,0.013,False,1055.375,1055.675,0.3,0.048,24.432,assumed: APWA 5600 3.0 cfs/ac at spill,False,DA<2ac;storage<0.1acft;depth<1ft,2789880.72,958111.352,5877179

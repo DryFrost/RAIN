@@ -2,7 +2,8 @@
 29037ECT030 (Raymore, Cass County, MO) and run the Python QA/QC engine.
 
 Project: HMS/Raymore_Trib12/
-  Basin      Existing (FEMA-consistent)   62 subbasins, 2 lakes
+  Basin      Existing (FEMA-consistent): subbasins, 2 lakes, detention basins
+             (scripts/14) as level-pool Modified Puls elements D-DET###
   Met        FEMA_<freq>    FEMA RoG hyetographs as-is (Atlas 14 x 0.782 ARF)
              Point_<freq>   same hyetographs scaled to Atlas 14 point depth
   Control    48hr_1min      01Jan2030 00:00 - 03Jan2030 00:00, 1 min
@@ -16,7 +17,6 @@ Also writes HMS/QAQC/*.csv (engine peaks, comparison with FEMA RoG).
 from pathlib import Path
 import sys
 import json
-import shutil
 import datetime as dt
 import numpy as np
 import pandas as pd
@@ -87,7 +87,11 @@ def build_model():
     rp = pd.read_csv(PAR / "reach_parameters.csv", index_col=0)
     ratings = json.loads((PAR / "lake_ratings.json").read_text())
 
-    lake_j = {f"J-{n}": n for n in LK.Lake}
+    try:
+        DT = gpd.read_file(GPKG, layer="Detention")
+    except Exception:
+        DT = gpd.GeoDataFrame(columns=["Basin", "Junction", "geometry"], geometry="geometry", crs=LK.crs)
+    lake_j = {f"J-{n}": n for n in list(LK.Lake) + list(DT.Basin)}
     kind = dict(zip(J.Junction, J.PointKind))
     jxy = {r.Junction: (r.geometry.x, r.geometry.y) for _, r in J.iterrows()}
     reach_from = {r.FromJ: r for _, r in R.iterrows()}
@@ -102,6 +106,15 @@ def build_model():
                                  lake=l.Lake, table=f"{l.Lake} Storage-Outflow",
                                  desc=f"Level-pool (Modified Puls) routing through {l.Lake}; terrain-derived "
                                       f"storage-outflow, sill {ratings[l.Lake]['crest']:.2f} ft")
+    for _, d in DT.iterrows():
+        c = d.geometry.representative_point()
+        pool = f"J-{d.Basin}-Pool"
+        el[pool] = dict(type="Junction", downstream=f"D-{d.Basin}", xy=(c.x, c.y),
+                        desc=f"{d.Basin} pool inflow point ({d.Area_ac:.2f} ac {d.Type or 'basin'}, "
+                             f"{'wet' if d.Wet else 'dry'})")
+        el[f"D-{d.Basin}"] = dict(type="Lake", downstream=f"J-{d.Basin}", xy=jxy[f"J-{d.Basin}"], from_xy=(c.x, c.y),
+                                  lake=d.Basin, table=f"{d.Basin} Storage-Outflow",
+                                  desc=f"Detention {d.Basin} (city storm GIS), level pool; outlet {d.Outlet}")
     for _, j in J.iterrows():
         name = j.Junction
         k = j.PointKind
@@ -109,7 +122,8 @@ def build_model():
                 "Structure": f"FEMA crossing {j.FEMA_Struct}",
                 "RefLine": f"FEMA reference line {j.FEMA_RefLine}",
                 "Confluence": "Stream confluence", "Split": "Main-stem break",
-                "Lake": "Lake outlet (spill sill)", "LakeInflow": "Tributary inflow to lake"}[k]
+                "Lake": "Lake outlet (spill sill)", "LakeInflow": "Tributary inflow to lake",
+                "Detention": "Detention basin outlet"}[k]
         if j.FEMA_RefLine and k != "RefLine":
             desc += f"; FEMA reference line {j.FEMA_RefLine}"
         if k == "LakeInflow":
@@ -187,14 +201,25 @@ def run_engine(el, ups, order, p_inc, lake_tables):
     return Q
 
 
+def rating_file(name):
+    return PAR / f"lake_{name}_rating.csv" if name.startswith("LK") else PAR / "detention_ratings" / f"{name}.csv"
+
+
 def lake_table(name):
-    df = pd.read_csv(PAR / f"lake_{name}_rating.csv")
+    df = pd.read_csv(rating_file(name))
     s, q = df.Storage_acft.values, df.Outflow_cfs.values
     # HMS needs strictly increasing outflow: keep the first zero-flow row, then
     # give dead storage up to the sill a tiny flow so the table stays monotonic
     keep = [0] + [i for i in range(1, len(q)) if q[i] > q[:i].max() + 1e-9]
     s, q = s[keep], q[keep]
     q = np.maximum.accumulate(q + np.arange(len(q)) * 1e-3)
+    q[0] = 0.0                      # zero storage must mean zero outflow (HMS starts at Q = 0)
+    # safety row: extend the table to twice its storage along the last segment's slope,
+    # so a storm larger than the rating does not stop HMS (check results if it is reached)
+    if len(s) >= 2:
+        slope = (q[-1] - q[-2]) / max(s[-1] - s[-2], 1e-6)
+        s = np.append(s, 2.0 * s[-1])
+        q = np.append(q, q[-1] + slope * (s[-1] - s[-2]))
     return np.column_stack([s, q])
 
 
@@ -334,7 +359,7 @@ def write_met_gage_control_run(el):
         for src, lab, b, pt in mets:
             g = f"{src}_{lab}"
             if src == "FEMA":
-                fn, path = "data\\FEMA_Rainfall_ARF78.dss", f"/Raymore/{b}/PRECIP-INC//6Minute//"
+                fn, path = "data\\FEMA_Rainfall_ARF78.dss", f"/Raymore/{b}/PRECIP-INC//6Minute/FEMA-ARF78/"
                 d = f"FEMA RoG hyetograph {b} (Atlas 14 point x 0.782 areal reduction)"
             else:
                 fn, path = "data\\Atlas14_PointRainfall.dss", f"/Raymore/{b}/PRECIP-INC//6Minute/ATLAS14-POINT/"
@@ -393,18 +418,22 @@ def write_pdata_and_dss(el, lake_tables, storms):
     from hecdss import HecDss, PairedData, RegularTimeSeries
     (PRJ / "data").mkdir(exist_ok=True)
     (PRJ / "results").mkdir(exist_ok=True)
-    shutil.copyfile(FEMA_DSS, PRJ / "data/FEMA_Rainfall_ARF78.dss")
-    pfile = PRJ / "data/Atlas14_PointRainfall.dss"
-    pfile.unlink(missing_ok=True)
-    d = HecDss(str(pfile))
-    for lab, b, pt in STORMS:
-        t, v, _ = storms[lab]
-        ratio = pt / v.sum()
-        ts = RegularTimeSeries.create((v * ratio).astype(float), units="INCH", data_type="PER-CUM",
-                                      interval="6Minute", start_date=t[0].to_pydatetime(),
-                                      path=f"/Raymore/{b}/PRECIP-INC//6Minute/ATLAS14-POINT/")
-        d.put(ts)
-    d.close()
+    # FEMA's Rainfall.dss stores PRECIP-INC as INST-VAL, which HEC-RAS accepts but
+    # HEC-HMS rejects for a precipitation gage (WARNING 10614 / ERROR 20660).  Both
+    # files are therefore written fresh as PER-CUM; the FEMA values are unchanged.
+    for fname, fpart, scale in (("FEMA_Rainfall_ARF78.dss", "FEMA-ARF78", False),
+                                ("Atlas14_PointRainfall.dss", "ATLAS14-POINT", True)):
+        pfile = PRJ / "data" / fname
+        pfile.unlink(missing_ok=True)
+        d = HecDss(str(pfile))
+        for lab, b, pt in STORMS:
+            t, v, _ = storms[lab]
+            ratio = pt / v.sum() if scale else 1.0
+            ts = RegularTimeSeries.create((v * ratio).astype(float), units="INCH", data_type="PER-CUM",
+                                          interval="6Minute", start_date=t[0].to_pydatetime(),
+                                          path=f"/Raymore/{b}/PRECIP-INC//6Minute/{fpart}/")
+            d.put(ts)
+        d.close()
     pdss = PRJ / f"{PRJ_NAME}.dss"
     pdss.unlink(missing_ok=True)
     d = HecDss(str(pdss))
@@ -460,7 +489,7 @@ def main():
         results[run] = Q
         for k, e in el.items():
             if e["type"] == "Lake":
-                rt = pd.read_csv(PAR / f"lake_{e['lake']}_rating.csv")
+                rt = pd.read_csv(rating_file(e["lake"]))
                 smax = float(e["_stor"].max())
                 lrows.append(dict(Run=run, Lake=e["lake"], PeakInflow_cfs=e["_inflow_peak"],
                                   PeakOutflow_cfs=float(Q[k].max()), MaxStorage_acft=smax,

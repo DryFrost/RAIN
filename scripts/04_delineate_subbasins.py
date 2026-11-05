@@ -9,6 +9,8 @@ Trib 12).  Subbasin break points:
 Points that land within MERGE_FT (flow distance) of a higher-priority point are
 merged into it.
 
+Flow follows the terrain plus the city storm sewer (inlet capture, scripts/02b).
+
 Outputs: GIS/HMS_Raymore.gpkg  (layers: Watershed, Subbasins, Junctions,
 Reaches, Streams, LongestFlowPaths) and GIS/rasters/subbasins_10ft.tif
 """
@@ -25,6 +27,7 @@ from pyproj import Transformer
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import hydro  # noqa: E402
+import sewer  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 FEMA = ROOT / "GIS/FEMA_RoG_geometry.gpkg"
@@ -39,6 +42,11 @@ MIN_PT_AC = 15.0     # ignore structure/ref points draining less than this
 MERGE_FT = 250.0     # merge points closer than this along the flow path
 MAX_AC = 260.0       # split subbasins larger than this along the main stem
 MIN_LOCAL_AC = 8.0   # drop confluence/split points whose local area is smaller
+USE_SEWER = True     # route inlet capture through the city storm sewer (scripts/02b)
+USE_DETENTION = True # add modelled detention basins (scripts/14) as level-pool elements
+PINNED = {"Detention"}   # never merged away
+DET_CSV = ROOT / "HMS/parameters/detention_basins.csv"
+DET_GPKG = ROOT / "GIS/Detention.gpkg"
 LAKE_MIN_AC = 5.0    # open-water bodies on the stream network at least this big become lakes
 LAKE_TRIB_AC = 40.0  # tributaries entering a lake with at least this area get their own subbasin
 LAKE_BUF_FT = 25.0   # dissolve distance for water polygons split by causeways / bridges
@@ -77,16 +85,51 @@ def find_lakes(tr, crs, inws2d, acc2d, cell_ac):
     return sorted(out, key=lambda d: -d["geometry"].area)
 
 
+def stable_names(pts, ids, xy, tol_ft=30.0):
+    """Rename Confluence / Split points to the name of the previous model's
+    junction of the same kind within tol_ft (GIS/HMS_Raymore.gpkg before it is
+    overwritten); unmatched points get the next unused number."""
+    if not OUT.exists():
+        return
+    try:
+        prev = gpd.read_file(OUT, layer="Junctions")
+    except Exception:
+        return
+    prefix = {"Confluence": "CNF", "Split": "SPL"}
+    for kind, pre in prefix.items():
+        pv = prev[prev.PointKind == kind]
+        mine = [i for i in ids if pts[i]["kind"] == kind]
+        used, unmatched = set(), []
+        for i in mine:
+            x, y = xy(i)
+            d = pv.distance(Point(x, y)) if len(pv) else pd.Series(dtype=float)
+            if len(d) and d.min() <= tol_ft and pv.Junction[d.idxmin()] not in used:
+                nm = pv.Junction[d.idxmin()][2:]
+                used.add(pv.Junction[d.idxmin()])
+                pts[i]["name"] = nm
+            else:
+                unmatched.append(i)
+        nums = [int(n[len(pre):]) for n in list(pv.Junction.str[2:]) if n[len(pre):].isdigit()]
+        nxt = max(nums, default=0) + 1
+        taken = {pts[i]["name"] for i in mine if i not in unmatched}
+        for i in unmatched:
+            while f"{pre}{nxt:02d}" in taken:
+                nxt += 1
+            pts[i]["name"] = f"{pre}{nxt:02d}"
+            taken.add(pts[i]["name"])
+            nxt += 1
+
+
 def main():
     with rasterio.open(RAS / "fdir_10ft.tif") as src:
         F = src.read(1).astype(np.int64)
         tr, crs = src.transform, src.crs
-    A = rasterio.open(RAS / "acc_10ft.tif").read(1).ravel().astype(np.float64)
+
     nr, nc = F.shape
     cs = tr.a
     cell_ac = cs * cs / 43560.0
-    down, step = hydro.downstream_index(F)
-    order = hydro.topo_order(down)
+    # terrain D8 + City of Raymore storm-sewer inlet links (scripts/02b, sewer.py)
+    down, step, order, A = sewer.flow_graph(F, tr.a, use_sewer=USE_SEWER)
 
     def xy(i):
         return tr * ((i % nc) + 0.5, (i // nc) + 0.5)
@@ -163,6 +206,29 @@ def main():
             pts[i] = dict(name=f"{nm}-IN{t}", kind="LakeInflow", prio=2.5, fema_struct="", fema_ref="")
             print(f"   inflow {nm}-IN{t}: {A[i] * cell_ac:.0f} ac")
 
+    # ---- detention basins (scripts/14): a pinned point at each modelled basin outlet
+    det_rows = []
+    det_mask = np.zeros(nr * nc, bool)
+    if USE_DETENTION and DET_CSV.exists() and DET_GPKG.exists():
+        dt = pd.read_csv(DET_CSV)
+        dg = gpd.read_file(DET_GPKG, layer="basins").set_index("Basin")
+        for _, b in dt[dt.Modelled].iterrows():
+            poly = dg.loc[b.Basin].geometry
+            inside = rasterize([(poly, 1)], out_shape=F.shape, transform=tr, all_touched=True).astype(bool).ravel()
+            o = int(b.outlet_cell)
+            if not inws[o]:
+                continue
+            if o in pts:      # outlet shared with another point: use the basin's own inflow cell
+                cand = [c for c in np.flatnonzero(inside) if c != o and c not in pts]
+                if not cand:
+                    continue
+                o = max(cand, key=lambda c: A[c])
+            det_mask |= inside
+            pts[o] = dict(name=b.Basin, kind="Detention", prio=0.8, fema_struct="", fema_ref="")
+            det_rows.append(dict(Basin=b.Basin, Type=b.Type, Wet=bool(b.Wet), Area_ac=float(b.Area_ac),
+                                 DA_ac=float(A[o] * cell_ac), Outlet=b.Outlet, outlet_cell=int(o), geometry=poly))
+        print(f"detention basins placed: {len(det_rows)}")
+
     # ---- merge points that are close along the flow path
     def flow_dist_down(i, j_set, maxft):
         d, cur = 0.0, i
@@ -188,6 +254,8 @@ def main():
                     continue
                 j, d = r
                 pi, pj = pts[i], pts[j]
+                if pi["kind"] in PINNED or pj["kind"] in PINNED:
+                    continue
                 if pi["prio"] < pj["prio"]:          # keep the more important upstream point
                     pi["fema_ref"] = pi["fema_ref"] or pj["fema_ref"]
                     pi["fema_struct"] = pi["fema_struct"] or pj["fema_struct"]
@@ -261,9 +329,16 @@ def main():
     # ---- nothing but the lake outlet may sit inside a lake
     for i in [i for i in pts if lake_mask[i] and pts[i]["kind"] not in ("Lake", "Outlet", "LakeInflow")]:
         del pts[i]
+    # ---- and no confluence / split point inside a detention basin
+    for i in [i for i in pts if det_mask[i] and pts[i]["kind"] in ("Confluence", "Split")]:
+        del pts[i]
 
     ids, lab = relabel()
     areas = np.bincount(lab, minlength=len(ids) + 1) * cell_ac
+
+    # ---- keep confluence / split names stable across model versions: re-use the
+    # previous model's name for a point at the same place, number new ones after
+    stable_names(pts, ids, xy)
 
     # ---- topology: downstream point of each point
     idset = set(ids)
@@ -321,7 +396,8 @@ def main():
                               Outlet_Lat=[USER_LATLON[0]], Outlet_Lon=[USER_LATLON[1]]), geometry=[wsg], crs=crs)
     stream = inws & (A >= STREAM_AC / cell_ac)
     sidx = np.flatnonzero(stream)
-    segs = [LineString([xy(i), xy(down[i])]) for i in sidx if down[i] >= 0 and stream[down[i]]]
+    segs = [LineString([xy(i), xy(down[i])]) for i in sidx
+            if down[i] >= 0 and stream[down[i]] and step[i] < 1.5]   # skip sewer-link jumps
     from shapely.ops import linemerge
     merged = linemerge(segs)
     lines = list(merged.geoms) if hasattr(merged, "geoms") else [merged]
@@ -339,6 +415,12 @@ def main():
         jmap = {int(c): n for n, c in zip(J.Junction, J.cell)}
         LK["Junction"] = [jmap.get(int(c), "") for c in LK.outlet_cell]
         LK.to_file(OUT, layer="Lakes")
+    if det_rows:
+        DT = gpd.GeoDataFrame(det_rows, crs=crs)
+        jmap = {int(c): n for n, c in zip(J.Junction, J.cell)}
+        DT["Junction"] = [jmap.get(int(c), "") for c in DT.outlet_cell]
+        DT = DT[DT.Junction != ""]
+        DT.to_file(OUT, layer="Detention")
     prof = dict(driver="GTiff", height=nr, width=nc, count=1, crs=crs, transform=tr, compress="deflate",
                 dtype="int16", nodata=0)
     with rasterio.open(RAS / "subbasins_10ft.tif", "w", **prof) as d:

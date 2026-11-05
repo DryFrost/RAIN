@@ -1,0 +1,10 @@
+Q_cfs,Culvert_HW_ft,LakeStage_SillRating_ft,Culvert_controls
+50,1025.5,1027.74,False
+100,1025.87,1028.23,False
+150,1026.17,1028.54,False
+300,1026.94,1029.14,False
+648,1028.36,1029.93,False
+1000,1029.57,1030.49,False
+1400,1031.22,1031.0,True
+1500,1031.64,1031.11,True
+2000,1034.18,1031.64,True
