@@ -102,7 +102,7 @@ def main():
     cs10 = tr10.a
     ac10 = cs10 ** 2 / 43560.0
     # terrain D8 + storm-sewer inlet links (scripts/02b) -- same graph as script 04
-    down, step, order, A10 = sewer.flow_graph(F10, cs10, use_sewer=True)
+    down, step, order, A10 = sewer.flow_graph(F10, cs10, use_sewer=True, use_detention=True)
     up_ptr, up_idx = hydro.upstream_csr(down)
     labf = lab10.ravel()
 

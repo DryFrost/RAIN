@@ -4,14 +4,19 @@ Source polygons: City of Raymore storm GIS layer strm_detetion
 (GIS/Raymore_StormGIS.gpkg, scripts/12).  For each basin in the watershed:
 
   * duplicates (two vintages of the same basin, > 50 % overlap) are merged;
-  * outlet = highest-accumulation cell within 15 ft of the basin on the
-    terrain + storm-sewer flow graph (GIS/rasters/acc_sewer_10ft.tif);
-    drainage area (DA) is the accumulation there (includes upstream basins);
+  * outlet = highest-accumulation cell inside the footprint on the terrain +
+    storm-sewer flow graph (GIS/rasters/acc_sewer_10ft.tif);
+  * drainage area (DA) = every cell whose flow enters the footprint (includes
+    upstream basins).  On a flat pool D8 can leave the footprint by a second
+    cell; capture links (HMS/parameters/detention_links.csv, used by scripts
+    04 and 05) send those cells to the outlet;
   * wet vs dry: lidar water surfaces are flat -- if >= 25 % of the basin's 1 m
     cells lie within 0.1 ft of the most common elevation, the basin is WET
     with a permanent pool at that elevation (storage counted above it);
   * bottom = pool (wet) or the 2nd percentile ground elevation (dry);
-  * spill (rim) = lowest ground on a ring 10 ft outside the basin;
+  * spill (rim): overflow has to cross every ring 10, 20 and 30 ft outside the
+    basin, so the spill is the highest of the rings' lowest points (an inflow
+    swale dips the 10 ft ring but rises again further out);
   * storage(E) = volume of 1 m cells below E, connected to the basin, within
     60 ft of it, above the pool / bottom;
   * outflow(E), ASSUMED unless an as-built outlet is entered in
@@ -20,9 +25,20 @@ Source polygons: City of Raymore storm GIS layer strm_detetion
         3.0 cfs per acre of drainage area at the spill elevation, rising as an
         orifice (Q ~ sqrt(head)) from the bottom / pool;
       - plus overtopping of the rim: broad-crested weir (C = 2.6) integrated
-        along the 10 ft ring wherever ground < E.
-    As-built outlets: orifices (diameter, invert), rectangular weirs (length,
-    crest) and an optional overflow weir; the rim term is always added.
+        along each ring wherever ground < E; the ring that passes the least
+        flow controls.
+    As-built outlets (one row per element):
+      orifice   Size = diameter, Invert = invert
+      weir      Size = crest length, Invert = crest (riser window / notch, C = 3.0)
+      vnotch    Size = included angle (deg), Invert = vertex, Top_ft = top of
+                the notch (constant width above it)
+      overflow  Size = crest length, Invert = crest (emergency spillway, C = 2.6)
+      barrel    Size = diameter, Invert = invert: caps the flow of the
+                orifices, weirs and V-notches that discharge through it
+      pool      Invert = design normal (permanent) pool.  Below a lidar water
+                surface the storage is extended with the pool area; the rating
+                then starts at the design pool.
+    The rim term is always added.
 
 Wet ponds shallower than 1 ft (pool at about the rim) get no assumed
 structure: they spill over their natural outlet (rim weir only), as the lakes do.
@@ -47,12 +63,17 @@ import rasterio
 from rasterio.features import rasterize
 from scipy import ndimage
 from shapely.geometry import Point
+import sys
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "scripts"))
+import hydro  # noqa: E402
+import sewer  # noqa: E402
 STORM = ROOT / "GIS/Raymore_StormGIS.gpkg"
 HMSG = ROOT / "GIS/HMS_Raymore.gpkg"
 DEM1M = ROOT / "Resources/2D_Raymore/Terrain/FinalTerrain.hydroDEM.tif"
 ACC = ROOT / "GIS/rasters/acc_sewer_10ft.tif"
+FDIR = ROOT / "GIS/rasters/fdir_10ft.tif"
 PAR = ROOT / "HMS/parameters"
 RAT = PAR / "detention_ratings"
 ASBUILT = PAR / "detention_outlets_asbuilt.csv"
@@ -60,12 +81,15 @@ OUT = ROOT / "GIS/Detention.gpkg"
 CRS = (ROOT / "Resources/2D_Raymore/Projection/Projection.prj").read_text()
 
 RELEASE_CFS_PER_AC = 3.0     # KC APWA 5600 100-yr comprehensive control
-C_WEIR = 2.6
+C_WEIR = 2.6                 # broad-crested: rim overtopping, emergency spillways
+C_WEIR_STRUCT = 3.0          # riser windows / sharp-crested weirs
+CD_VNOTCH = 0.58
 C_ORIFICE = 0.6
-RING_FT = 10.0
+RINGS_FT = (10.0, 20.0, 30.0)
 STORAGE_REACH_FT = 60.0
 DE = 0.25
 ABOVE_RIM_FT = 3.0
+AB_COLS = ["Basin", "Kind", "Size_ft", "Invert_ft", "Top_ft", "Source", "Note"]
 MIN_STORAGE_IN = 0.05        # dry basins storing less runoff than this over their DA are ignored
 TYPE_RANK = {"Detention": 0, "Retention": 1, "Pond": 2, "Lake": 3, "Stream/Pond": 4, "Treatment": 5, "Wet Soil": 6}
 NOT_MODELLED_TYPES = {"Wet Soil", "Treatment", "Lake"}
@@ -97,19 +121,37 @@ def orifice(Q_design, head_design, head):
     return Q_design * np.sqrt(h / max(head_design, 0.1))
 
 
+def _orifice_full(d, inv, E):
+    return C_ORIFICE * np.pi * (d / 2) ** 2 * np.sqrt(2 * 32.2 * np.clip(E - (inv + d / 2), 0, None))
+
+
+def _vnotch(theta_deg, h):
+    return 8 / 15 * CD_VNOTCH * np.sqrt(2 * 32.2) * np.tan(np.radians(theta_deg) / 2) * np.clip(h, 0, None) ** 2.5
+
+
 def asbuilt_outflow(rows, E):
+    """Structure outflow (without the rim) from as-built rows; see the module doc."""
     q = np.zeros_like(E)
+    over = np.zeros_like(E)
     for _, r in rows.iterrows():
         if r.Kind == "orifice":
-            a = np.pi * (r.Size_ft / 2) ** 2
-            hc = E - (r.Invert_ft + r.Size_ft / 2)
-            full = C_ORIFICE * a * np.sqrt(2 * 32.2 * np.clip(hc, 0, None))
+            full = _orifice_full(r.Size_ft, r.Invert_ft, E)
             # partially submerged: weir over the opening below its crown
             part = C_WEIR * r.Size_ft * np.clip(E - r.Invert_ft, 0, None) ** 1.5
-            q += np.where(E >= r.Invert_ft + r.Size_ft, full, np.minimum(part, full + 1e9))
-        elif r.Kind in ("weir", "overflow"):
-            q += C_WEIR * r.Size_ft * np.clip(E - r.Invert_ft, 0, None) ** 1.5
-    return q
+            q += np.where(E >= r.Invert_ft + r.Size_ft, full, part)
+        elif r.Kind == "weir":
+            q += C_WEIR_STRUCT * r.Size_ft * np.clip(E - r.Invert_ft, 0, None) ** 1.5
+        elif r.Kind == "vnotch":
+            h = E - r.Invert_ft
+            top = r.get("Top_ft", np.nan)
+            hv = (top - r.Invert_ft) if pd.notna(top) else np.inf
+            # width stays at the notch's top width above Top_ft
+            q += _vnotch(r.Size_ft, h) - (_vnotch(r.Size_ft, h - hv) if np.isfinite(hv) else 0.0)
+        elif r.Kind == "overflow":
+            over += C_WEIR * r.Size_ft * np.clip(E - r.Invert_ft, 0, None) ** 1.5
+    for _, r in rows[rows.Kind == "barrel"].iterrows():
+        q = np.minimum(q, _orifice_full(r.Size_ft, r.Invert_ft, E))
+    return q + over
 
 
 def main():
@@ -119,13 +161,18 @@ def main():
     lakes = gpd.read_file(HMSG, layer="Lakes")
     lake_u = lakes.geometry.union_all()
     sb = gpd.read_file(HMSG, layer="Subbasins")[["Subbasin", "geometry"]]
-    ab = pd.read_csv(ASBUILT) if ASBUILT.exists() else pd.DataFrame(columns=["Basin", "Kind", "Size_ft", "Invert_ft", "Source"])
+    ab = pd.read_csv(ASBUILT) if ASBUILT.exists() else pd.DataFrame(columns=AB_COLS)
 
     acc = rasterio.open(ACC)
     A = acc.read(1)
     tr10 = acc.transform
     ac10 = tr10.a ** 2 / 43560.0
     dem = rasterio.open(DEM1M)
+    with rasterio.open(FDIR) as s_:
+        F = s_.read(1)
+    down, _step, order, _acc = sewer.flow_graph(F, tr10.a, use_sewer=True)
+    nc10 = A.shape[1]
+    capture = {}
 
     d["Area_ac"] = d.area / 43560.0
     d = d.sort_values("Area_ac", ascending=False).reset_index(drop=True)
@@ -141,7 +188,10 @@ def main():
         idx = np.flatnonzero(m10.ravel())
         oc = int(idx[np.argmax(A.ravel()[idx])])
         ox, oy = tr10 * ((oc % A.shape[1]) + 0.5, (oc // A.shape[1]) + 0.5)
-        da = float(A.ravel()[oc] * ac10)
+        # drainage area = everything that enters the footprint: on a flat pool
+        # D8 can leave by a second cell, but in reality all of it passes the outlet
+        da = float(hydro.drains_into(down, order, m10.ravel()).sum() * ac10)
+        capture[bid] = (idx, oc)
         # ---- 1 m terrain window
         xmin, ymin, xmax, ymax = poly.buffer(STORAGE_REACH_FT + 20).bounds
         win = rasterio.windows.from_bounds(xmin, ymin, xmax, ymax, transform=dem.transform).round_offsets().round_lengths()
@@ -158,12 +208,14 @@ def main():
         flat_frac = float(np.mean(np.abs(zi - mode) <= 0.1))
         wet = flat_frac >= 0.25
         bottom = mode if wet else float(np.percentile(zi, 2))
-        ring = poly.buffer(RING_FT).exterior if poly.geom_type == "Polygon" else poly.buffer(RING_FT).boundary
-        dist = np.arange(0, ring.length, t1.a)
-        rp = [ring.interpolate(s_) for s_ in dist]
-        zr = np.array([v[0] for v in dem.sample([(p.x, p.y) for p in rp])], float)
-        zr = np.where(zr > -9000, zr, np.nan)
-        rim = float(np.nanmin(zr))
+        zrs = []
+        for rf in RINGS_FT:
+            rb = poly.buffer(rf)
+            ring = rb.exterior if rb.geom_type == "Polygon" else rb.boundary
+            rp = [ring.interpolate(s_) for s_ in np.arange(0, ring.length, t1.a)]
+            zr = np.array([v[0] for v in dem.sample([(p.x, p.y) for p in rp])], float)
+            zrs.append(np.where(zr > -9000, zr, np.nan))
+        rim = float(max(np.nanmin(z) for z in zrs))
         if not np.isfinite(rim) or rim <= bottom + 0.3:
             rim = bottom + 0.3
         depth = rim - bottom
@@ -179,12 +231,30 @@ def main():
             comp = np.isin(lab, ids[ids > 0])
             sto.append(float(np.clip(e - np.maximum(Z[comp], bottom), 0, None).sum() * a1 / 43560.0))
         sto = np.array(sto)
+        lidar_bottom = bottom
+        mine = ab[ab.Basin == bid] if len(ab) else ab
+        pool_rows = mine[mine.Kind == "pool"] if len(mine) else mine
+        if len(pool_rows):
+            # design normal pool: below a lidar water surface, add the pool's own storage
+            pv = float(pool_rows.Invert_ft.iloc[0])
+            if pv < bottom:
+                a_pool = float(seed.sum() * a1 / 43560.0)
+                ext = np.round(np.arange(pv, bottom - 1e-6, DE), 3)
+                sto = np.concatenate([a_pool * (ext - pv), sto + a_pool * (bottom - pv)])
+                E = np.concatenate([ext, E])
+            else:
+                sto = np.clip(sto - np.interp(pv, E, sto), 0, None)
+                keep = E >= pv
+                E, sto = np.concatenate([[pv], E[keep & (E > pv)]]), np.concatenate([[0.0], sto[keep & (E > pv)]])
+            bottom = pv
+            depth = rim - bottom
         s_rim = float(np.interp(rim, E, sto))
         # ---- outflow
         q_rim = RELEASE_CFS_PER_AC * da
-        zr_eff = np.maximum(zr, bottom)   # nothing drains below the pool / basin bottom
-        q_ring = np.array([np.nansum(C_WEIR * t1.a * np.clip(e - zr_eff, 0, None) ** 1.5) for e in E])
-        mine = ab[ab.Basin == bid] if len(ab) else ab
+        # rim overtopping: every ring must pass the flow, the tightest controls;
+        # nothing drains below the (lidar) pool / basin bottom
+        q_ring = np.min([[np.nansum(C_WEIR * t1.a * np.clip(e - np.maximum(z, lidar_bottom), 0, None) ** 1.5)
+                          for e in E] for z in zrs], axis=0)
         shallow_pond = wet and depth < 1.0
         if len(mine):
             q_out = asbuilt_outflow(mine, E)
@@ -208,17 +278,37 @@ def main():
                                                   ("storage<0.05in over DA", negligible),
                                                   (f"type {r.Type}", r.Type in NOT_MODELLED_TYPES)) if c]
         rows.append(dict(Basin=bid, City_OBJECTIDs=r.City_OBJECTIDs, Type=r.Type, Area_ac=r.Area_ac,
-                         Subbasin=sbn.iloc[0] if len(sbn) else "", DA_ac=da, Wet=wet, Pool_or_Bottom_ft=bottom,
+                         Subbasin=sbn.iloc[0] if len(sbn) else "", DA_ac=da, Wet=wet, Lidar_pool_or_bottom_ft=lidar_bottom,
+                         Pool_or_Bottom_ft=bottom,
                          Spill_ft=rim, Depth_ft=depth, Storage_at_spill_acft=s_rim, Q_at_spill_cfs=float(np.interp(rim, E, q)),
                          Outlet=source, Modelled=modelled, Not_modelled_because=";".join(why),
                          Outlet_x=ox, Outlet_y=oy, outlet_cell=oc, geometry=poly))
         pd.DataFrame(dict(Elev_ft=E, Storage_acft=sto, Outflow_cfs=q)).round(4).to_csv(RAT / f"{bid}.csv", index=False)
     g = gpd.GeoDataFrame(rows, crs=CRS)
+    # capture links for modelled basins: footprint cells whose D8 flow leaves the
+    # footprint go to the basin outlet (read by sewer.flow_graph in scripts 04/05)
+    down2 = down.copy()
+    lk = []
+    inside = np.zeros(down.size, bool)
+    for bid in g.Basin[g.Modelled]:
+        idx, oc = capture[bid]
+        inside[:] = False
+        inside[idx] = True
+        for j in idx:
+            d_ = down2[j]
+            if j == oc or (d_ >= 0 and inside[d_]):
+                continue
+            if hydro.on_downstream_path(oc, int(j), down2, down.size):
+                continue            # would close a cycle through the outlet
+            down2[j] = oc
+            lk.append((bid, int(j), int(oc)))
+    pd.DataFrame(lk, columns=["Basin", "ic", "oc"]).to_csv(sewer.DET_LINKS_CSV, index=False)
+    print(f"detention capture links: {len(lk)} -> {sewer.DET_LINKS_CSV.relative_to(ROOT)}")
     OUT.unlink(missing_ok=True)
     g.to_file(OUT, layer="basins")
     g.drop(columns="geometry").round(3).to_csv(PAR / "detention_basins.csv", index=False)
     if not ASBUILT.exists():
-        pd.DataFrame(columns=["Basin", "Kind", "Size_ft", "Invert_ft", "Source", "Note"]).to_csv(ASBUILT, index=False)
+        pd.DataFrame(columns=AB_COLS).to_csv(ASBUILT, index=False)
     mod = g[g.Modelled]
     print(f"{len(g)} basins after merging duplicates; {len(mod)} modelled "
           f"(wet {int(mod.Wet.sum())}, dry {int((~mod.Wet).sum())})")

@@ -129,7 +129,7 @@ def main():
     cs = tr.a
     cell_ac = cs * cs / 43560.0
     # terrain D8 + City of Raymore storm-sewer inlet links (scripts/02b, sewer.py)
-    down, step, order, A = sewer.flow_graph(F, tr.a, use_sewer=USE_SEWER)
+    down, step, order, A = sewer.flow_graph(F, tr.a, use_sewer=USE_SEWER, use_detention=USE_DETENTION)
 
     def xy(i):
         return tr * ((i % nc) + 0.5, (i // nc) + 0.5)

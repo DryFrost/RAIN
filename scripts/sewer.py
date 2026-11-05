@@ -163,13 +163,30 @@ def load_links():
     return d.ic.to_numpy(np.int64), d.oc.to_numpy(np.int64)
 
 
-def flow_graph(F, cellsize, use_sewer=True):
+DET_LINKS_CSV = ROOT / "HMS/parameters/detention_links.csv"
+
+
+def load_detention_links():
+    """(ic, oc) arrays from HMS/parameters/detention_links.csv (scripts/14):
+    cells of a modelled detention basin whose D8 flow leaves the footprint
+    are sent to the basin outlet, so everything entering a pond passes its outlet."""
+    if not DET_LINKS_CSV.exists():
+        return np.zeros(0, np.int64), np.zeros(0, np.int64)
+    d = pd.read_csv(DET_LINKS_CSV)
+    return d.ic.to_numpy(np.int64), d.oc.to_numpy(np.int64)
+
+
+def flow_graph(F, cellsize, use_sewer=True, use_detention=False):
     """down, step (cell units), order and accumulation for the terrain graph
-    with (optionally) the storm-sewer links applied."""
+    with (optionally) the storm-sewer links and detention-capture links applied."""
     nr, nc = F.shape
     down, step = hydro.downstream_index(F)
     if use_sewer:
         ic, oc = load_links()
+        if ic.size:
+            down, step = hydro.apply_links(down, step, ic, oc, cellsize, nc)
+    if use_detention:
+        ic, oc = load_detention_links()
         if ic.size:
             down, step = hydro.apply_links(down, step, ic, oc, cellsize, nc)
     order = hydro.topo_order(down)

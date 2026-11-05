@@ -1,1 +1,6 @@
-Basin,Kind,Size_ft,Invert_ft,Source,Note
+Basin,Kind,Size_ft,Invert_ft,Top_ft,Source,Note
+DET006,pool,,1008.0,,Good Ranch Dean Ave and Regional Detention No. 1 (S Dean Ave) sheet 13,wet basin elevation 1008.0 = V-notch vertex (lidar water surface 1009.2)
+DET006,vnotch,45,1008.0,1012.5,Good Ranch Dean Ave and Regional Detention No. 1 (S Dean Ave) sheet 13,45-deg V-notch in the 7 x 7 ft outlet box; 44.7 in wide at the box top 1012.50
+DET006,weir,12.0,1010.0,,Good Ranch Dean Ave and Regional Detention No. 1 (S Dean Ave) sheet 13,two 72-in windows with debris bars in the box side walls; crest 1010.00
+DET006,weir,12.3,1012.5,,Good Ranch Dean Ave and Regional Detention No. 1 (S Dean Ave) sheet 13,grate on the box top 1012.50 (perimeter not taken by the notch and windows)
+DET006,barrel,4.0,1002.23,,Good Ranch Dean Ave and Regional Detention No. 1 (S Dean Ave) sheet 13,outlet pipe invert 1002.23; 48 in scaled from the structure detail
