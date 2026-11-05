@@ -1,0 +1,14 @@
+# Python 3.11+ ; used by scripts/01-08
+numpy
+pandas
+scipy
+numba
+h5py
+rasterio
+geopandas
+shapely>=2
+pyproj
+fiona
+pysheds==0.5
+matplotlib
+hecdss          # HEC's official DSS wrapper (reads/writes DSS 7)

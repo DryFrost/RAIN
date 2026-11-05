@@ -1,0 +1,31 @@
+Paired Data Manager: Raymore_Trib12
+     Version: 4.14
+     Filepath Separator: \
+End:
+
+Table: LK1 Storage-Outflow
+     Table Type: Storage-Outflow
+     Description: LK1 terrain-derived level pool above normal pool (see HMS/parameters)
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 03:46:23
+     X-Units: ACRE-FT
+     Y-Units: CFS
+     Use External DSS File: NO
+     DSS File: Raymore_Trib12.dss
+     Pathname: //LK1 Storage-Outflow/STORAGE-FLOW///TABLE/
+     Interpolation: Linear Interpolation
+End:
+
+Table: LK2 Storage-Outflow
+     Table Type: Storage-Outflow
+     Description: LK2 terrain-derived level pool above normal pool (see HMS/parameters)
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 03:46:23
+     X-Units: ACRE-FT
+     Y-Units: CFS
+     Use External DSS File: NO
+     DSS File: Raymore_Trib12.dss
+     Pathname: //LK2 Storage-Outflow/STORAGE-FLOW///TABLE/
+     Interpolation: Linear Interpolation
+End:
+

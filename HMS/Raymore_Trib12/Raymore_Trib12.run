@@ -1,0 +1,192 @@
+Run: FEMA_10yr
+     Description: FEMA RoG precipitation (78% ARF) - 10yr
+     Log File: FEMA_10yr.log
+     DSS File: results\FEMA_10yr.dss
+     Is Save Spatial Results: No
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 03:46:23
+     Basin: Existing FEMA-Consistent
+     Precip: FEMA_10yr
+     Control: 48hr_1min
+     Save State Type: None
+     Time-Series Output: Save All
+     Time Series Results Manager Start:
+     Time Series Results Manager End:
+End:
+
+Run: FEMA_25yr
+     Description: FEMA RoG precipitation (78% ARF) - 25yr
+     Log File: FEMA_25yr.log
+     DSS File: results\FEMA_25yr.dss
+     Is Save Spatial Results: No
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 03:46:23
+     Basin: Existing FEMA-Consistent
+     Precip: FEMA_25yr
+     Control: 48hr_1min
+     Save State Type: None
+     Time-Series Output: Save All
+     Time Series Results Manager Start:
+     Time Series Results Manager End:
+End:
+
+Run: FEMA_50yr
+     Description: FEMA RoG precipitation (78% ARF) - 50yr
+     Log File: FEMA_50yr.log
+     DSS File: results\FEMA_50yr.dss
+     Is Save Spatial Results: No
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 03:46:23
+     Basin: Existing FEMA-Consistent
+     Precip: FEMA_50yr
+     Control: 48hr_1min
+     Save State Type: None
+     Time-Series Output: Save All
+     Time Series Results Manager Start:
+     Time Series Results Manager End:
+End:
+
+Run: FEMA_100yr
+     Description: FEMA RoG precipitation (78% ARF) - 100yr
+     Log File: FEMA_100yr.log
+     DSS File: results\FEMA_100yr.dss
+     Is Save Spatial Results: No
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 03:46:23
+     Basin: Existing FEMA-Consistent
+     Precip: FEMA_100yr
+     Control: 48hr_1min
+     Save State Type: None
+     Time-Series Output: Save All
+     Time Series Results Manager Start:
+     Time Series Results Manager End:
+End:
+
+Run: FEMA_100yr_plus
+     Description: FEMA RoG precipitation (78% ARF) - 100yr_plus
+     Log File: FEMA_100yr_plus.log
+     DSS File: results\FEMA_100yr_plus.dss
+     Is Save Spatial Results: No
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 03:46:23
+     Basin: Existing FEMA-Consistent
+     Precip: FEMA_100yr_plus
+     Control: 48hr_1min
+     Save State Type: None
+     Time-Series Output: Save All
+     Time Series Results Manager Start:
+     Time Series Results Manager End:
+End:
+
+Run: FEMA_500yr
+     Description: FEMA RoG precipitation (78% ARF) - 500yr
+     Log File: FEMA_500yr.log
+     DSS File: results\FEMA_500yr.dss
+     Is Save Spatial Results: No
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 03:46:23
+     Basin: Existing FEMA-Consistent
+     Precip: FEMA_500yr
+     Control: 48hr_1min
+     Save State Type: None
+     Time-Series Output: Save All
+     Time Series Results Manager Start:
+     Time Series Results Manager End:
+End:
+
+Run: Point_10yr
+     Description: Atlas 14 point precipitation (no ARF) - 10yr
+     Log File: Point_10yr.log
+     DSS File: results\Point_10yr.dss
+     Is Save Spatial Results: No
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 03:46:23
+     Basin: Existing FEMA-Consistent
+     Precip: Point_10yr
+     Control: 48hr_1min
+     Save State Type: None
+     Time-Series Output: Save All
+     Time Series Results Manager Start:
+     Time Series Results Manager End:
+End:
+
+Run: Point_25yr
+     Description: Atlas 14 point precipitation (no ARF) - 25yr
+     Log File: Point_25yr.log
+     DSS File: results\Point_25yr.dss
+     Is Save Spatial Results: No
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 03:46:23
+     Basin: Existing FEMA-Consistent
+     Precip: Point_25yr
+     Control: 48hr_1min
+     Save State Type: None
+     Time-Series Output: Save All
+     Time Series Results Manager Start:
+     Time Series Results Manager End:
+End:
+
+Run: Point_50yr
+     Description: Atlas 14 point precipitation (no ARF) - 50yr
+     Log File: Point_50yr.log
+     DSS File: results\Point_50yr.dss
+     Is Save Spatial Results: No
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 03:46:23
+     Basin: Existing FEMA-Consistent
+     Precip: Point_50yr
+     Control: 48hr_1min
+     Save State Type: None
+     Time-Series Output: Save All
+     Time Series Results Manager Start:
+     Time Series Results Manager End:
+End:
+
+Run: Point_100yr
+     Description: Atlas 14 point precipitation (no ARF) - 100yr
+     Log File: Point_100yr.log
+     DSS File: results\Point_100yr.dss
+     Is Save Spatial Results: No
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 03:46:23
+     Basin: Existing FEMA-Consistent
+     Precip: Point_100yr
+     Control: 48hr_1min
+     Save State Type: None
+     Time-Series Output: Save All
+     Time Series Results Manager Start:
+     Time Series Results Manager End:
+End:
+
+Run: Point_100yr_plus
+     Description: Atlas 14 point precipitation (no ARF) - 100yr_plus
+     Log File: Point_100yr_plus.log
+     DSS File: results\Point_100yr_plus.dss
+     Is Save Spatial Results: No
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 03:46:23
+     Basin: Existing FEMA-Consistent
+     Precip: Point_100yr_plus
+     Control: 48hr_1min
+     Save State Type: None
+     Time-Series Output: Save All
+     Time Series Results Manager Start:
+     Time Series Results Manager End:
+End:
+
+Run: Point_500yr
+     Description: Atlas 14 point precipitation (no ARF) - 500yr
+     Log File: Point_500yr.log
+     DSS File: results\Point_500yr.dss
+     Is Save Spatial Results: No
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 03:46:23
+     Basin: Existing FEMA-Consistent
+     Precip: Point_500yr
+     Control: 48hr_1min
+     Save State Type: None
+     Time-Series Output: Save All
+     Time Series Results Manager Start:
+     Time Series Results Manager End:
+End:
+
