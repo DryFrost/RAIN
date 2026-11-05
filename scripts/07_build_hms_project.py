@@ -2,7 +2,8 @@
 29037ECT030 (Raymore, Cass County, MO) and run the Python QA/QC engine.
 
 Project: HMS/Raymore_Trib12/
-  Basin      Existing (FEMA-consistent)   62 subbasins, 2 lakes
+  Basin      Existing (FEMA-consistent): subbasins, 2 lakes, detention basins
+             (scripts/14) as level-pool Modified Puls elements D-DET###
   Met        FEMA_<freq>    FEMA RoG hyetographs as-is (Atlas 14 x 0.782 ARF)
              Point_<freq>   same hyetographs scaled to Atlas 14 point depth
   Control    48hr_1min      01Jan2030 00:00 - 03Jan2030 00:00, 1 min
@@ -86,7 +87,11 @@ def build_model():
     rp = pd.read_csv(PAR / "reach_parameters.csv", index_col=0)
     ratings = json.loads((PAR / "lake_ratings.json").read_text())
 
-    lake_j = {f"J-{n}": n for n in LK.Lake}
+    try:
+        DT = gpd.read_file(GPKG, layer="Detention")
+    except Exception:
+        DT = gpd.GeoDataFrame(columns=["Basin", "Junction", "geometry"], geometry="geometry", crs=LK.crs)
+    lake_j = {f"J-{n}": n for n in list(LK.Lake) + list(DT.Basin)}
     kind = dict(zip(J.Junction, J.PointKind))
     jxy = {r.Junction: (r.geometry.x, r.geometry.y) for _, r in J.iterrows()}
     reach_from = {r.FromJ: r for _, r in R.iterrows()}
@@ -101,6 +106,15 @@ def build_model():
                                  lake=l.Lake, table=f"{l.Lake} Storage-Outflow",
                                  desc=f"Level-pool (Modified Puls) routing through {l.Lake}; terrain-derived "
                                       f"storage-outflow, sill {ratings[l.Lake]['crest']:.2f} ft")
+    for _, d in DT.iterrows():
+        c = d.geometry.representative_point()
+        pool = f"J-{d.Basin}-Pool"
+        el[pool] = dict(type="Junction", downstream=f"D-{d.Basin}", xy=(c.x, c.y),
+                        desc=f"{d.Basin} pool inflow point ({d.Area_ac:.2f} ac {d.Type or 'basin'}, "
+                             f"{'wet' if d.Wet else 'dry'})")
+        el[f"D-{d.Basin}"] = dict(type="Lake", downstream=f"J-{d.Basin}", xy=jxy[f"J-{d.Basin}"], from_xy=(c.x, c.y),
+                                  lake=d.Basin, table=f"{d.Basin} Storage-Outflow",
+                                  desc=f"Detention {d.Basin} (city storm GIS), level pool; outlet {d.Outlet}")
     for _, j in J.iterrows():
         name = j.Junction
         k = j.PointKind
@@ -108,7 +122,8 @@ def build_model():
                 "Structure": f"FEMA crossing {j.FEMA_Struct}",
                 "RefLine": f"FEMA reference line {j.FEMA_RefLine}",
                 "Confluence": "Stream confluence", "Split": "Main-stem break",
-                "Lake": "Lake outlet (spill sill)", "LakeInflow": "Tributary inflow to lake"}[k]
+                "Lake": "Lake outlet (spill sill)", "LakeInflow": "Tributary inflow to lake",
+                "Detention": "Detention basin outlet"}[k]
         if j.FEMA_RefLine and k != "RefLine":
             desc += f"; FEMA reference line {j.FEMA_RefLine}"
         if k == "LakeInflow":
@@ -186,8 +201,12 @@ def run_engine(el, ups, order, p_inc, lake_tables):
     return Q
 
 
+def rating_file(name):
+    return PAR / f"lake_{name}_rating.csv" if name.startswith("LK") else PAR / "detention_ratings" / f"{name}.csv"
+
+
 def lake_table(name):
-    df = pd.read_csv(PAR / f"lake_{name}_rating.csv")
+    df = pd.read_csv(rating_file(name))
     s, q = df.Storage_acft.values, df.Outflow_cfs.values
     # HMS needs strictly increasing outflow: keep the first zero-flow row, then
     # give dead storage up to the sill a tiny flow so the table stays monotonic
@@ -463,7 +482,7 @@ def main():
         results[run] = Q
         for k, e in el.items():
             if e["type"] == "Lake":
-                rt = pd.read_csv(PAR / f"lake_{e['lake']}_rating.csv")
+                rt = pd.read_csv(rating_file(e["lake"]))
                 smax = float(e["_stor"].max())
                 lrows.append(dict(Run=run, Lake=e["lake"], PeakInflow_cfs=e["_inflow_peak"],
                                   PeakOutflow_cfs=float(Q[k].max()), MaxStorage_acft=smax,

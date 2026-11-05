@@ -172,6 +172,11 @@ def main():
     except Exception:
         LK = gpd.GeoDataFrame(columns=["Lake", "Junction", "geometry"], geometry="geometry", crs=crs)
     lake_of_sub = {"SB-" + j[2:]: g for j, g in zip(LK.Junction, LK.geometry)}
+    try:   # detention basins: runoff only has to reach the pool, as for the lakes
+        DT = gpd.read_file(GPKG, layer="Detention")
+        lake_of_sub.update({"SB-" + j[2:]: g for j, g in zip(DT.Junction, DT.geometry)})
+    except Exception:
+        pass
 
     lfp_rows, tc_rows = [], []
     for _, s in S.iterrows():

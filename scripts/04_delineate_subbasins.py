@@ -43,6 +43,10 @@ MERGE_FT = 250.0     # merge points closer than this along the flow path
 MAX_AC = 260.0       # split subbasins larger than this along the main stem
 MIN_LOCAL_AC = 8.0   # drop confluence/split points whose local area is smaller
 USE_SEWER = True     # route inlet capture through the city storm sewer (scripts/02b)
+USE_DETENTION = True # add modelled detention basins (scripts/14) as level-pool elements
+PINNED = {"Detention"}   # never merged away
+DET_CSV = ROOT / "HMS/parameters/detention_basins.csv"
+DET_GPKG = ROOT / "GIS/Detention.gpkg"
 LAKE_MIN_AC = 5.0    # open-water bodies on the stream network at least this big become lakes
 LAKE_TRIB_AC = 40.0  # tributaries entering a lake with at least this area get their own subbasin
 LAKE_BUF_FT = 25.0   # dissolve distance for water polygons split by causeways / bridges
@@ -202,6 +206,29 @@ def main():
             pts[i] = dict(name=f"{nm}-IN{t}", kind="LakeInflow", prio=2.5, fema_struct="", fema_ref="")
             print(f"   inflow {nm}-IN{t}: {A[i] * cell_ac:.0f} ac")
 
+    # ---- detention basins (scripts/14): a pinned point at each modelled basin outlet
+    det_rows = []
+    det_mask = np.zeros(nr * nc, bool)
+    if USE_DETENTION and DET_CSV.exists() and DET_GPKG.exists():
+        dt = pd.read_csv(DET_CSV)
+        dg = gpd.read_file(DET_GPKG, layer="basins").set_index("Basin")
+        for _, b in dt[dt.Modelled].iterrows():
+            poly = dg.loc[b.Basin].geometry
+            inside = rasterize([(poly, 1)], out_shape=F.shape, transform=tr, all_touched=True).astype(bool).ravel()
+            o = int(b.outlet_cell)
+            if not inws[o]:
+                continue
+            if o in pts:      # outlet shared with another point: use the basin's own inflow cell
+                cand = [c for c in np.flatnonzero(inside) if c != o and c not in pts]
+                if not cand:
+                    continue
+                o = max(cand, key=lambda c: A[c])
+            det_mask |= inside
+            pts[o] = dict(name=b.Basin, kind="Detention", prio=0.8, fema_struct="", fema_ref="")
+            det_rows.append(dict(Basin=b.Basin, Type=b.Type, Wet=bool(b.Wet), Area_ac=float(b.Area_ac),
+                                 DA_ac=float(A[o] * cell_ac), Outlet=b.Outlet, outlet_cell=int(o), geometry=poly))
+        print(f"detention basins placed: {len(det_rows)}")
+
     # ---- merge points that are close along the flow path
     def flow_dist_down(i, j_set, maxft):
         d, cur = 0.0, i
@@ -227,6 +254,8 @@ def main():
                     continue
                 j, d = r
                 pi, pj = pts[i], pts[j]
+                if pi["kind"] in PINNED or pj["kind"] in PINNED:
+                    continue
                 if pi["prio"] < pj["prio"]:          # keep the more important upstream point
                     pi["fema_ref"] = pi["fema_ref"] or pj["fema_ref"]
                     pi["fema_struct"] = pi["fema_struct"] or pj["fema_struct"]
@@ -299,6 +328,9 @@ def main():
 
     # ---- nothing but the lake outlet may sit inside a lake
     for i in [i for i in pts if lake_mask[i] and pts[i]["kind"] not in ("Lake", "Outlet", "LakeInflow")]:
+        del pts[i]
+    # ---- and no confluence / split point inside a detention basin
+    for i in [i for i in pts if det_mask[i] and pts[i]["kind"] in ("Confluence", "Split")]:
         del pts[i]
 
     ids, lab = relabel()
@@ -383,6 +415,12 @@ def main():
         jmap = {int(c): n for n, c in zip(J.Junction, J.cell)}
         LK["Junction"] = [jmap.get(int(c), "") for c in LK.outlet_cell]
         LK.to_file(OUT, layer="Lakes")
+    if det_rows:
+        DT = gpd.GeoDataFrame(det_rows, crs=crs)
+        jmap = {int(c): n for n, c in zip(J.Junction, J.cell)}
+        DT["Junction"] = [jmap.get(int(c), "") for c in DT.outlet_cell]
+        DT = DT[DT.Junction != ""]
+        DT.to_file(OUT, layer="Detention")
     prof = dict(driver="GTiff", height=nr, width=nc, count=1, crs=crs, transform=tr, compress="deflate",
                 dtype="int16", nodata=0)
     with rasterio.open(RAS / "subbasins_10ft.tif", "w", **prof) as d:

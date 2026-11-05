@@ -7,7 +7,7 @@ Table: LK1 Storage-Outflow
      Table Type: Storage-Outflow
      Description: LK1 terrain-derived level pool above normal pool (see HMS/parameters)
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:54:52
+     Last Modified Time: 05:09:45
      X-Units: ACRE-FT
      Y-Units: CFS
      Use External DSS File: NO
@@ -20,12 +20,311 @@ Table: LK2 Storage-Outflow
      Table Type: Storage-Outflow
      Description: LK2 terrain-derived level pool above normal pool (see HMS/parameters)
      Last Modified Date: 5 November 2026
-     Last Modified Time: 04:54:52
+     Last Modified Time: 05:09:45
      X-Units: ACRE-FT
      Y-Units: CFS
      Use External DSS File: NO
      DSS File: Raymore_Trib12.dss
      Pathname: //LK2 Storage-Outflow/STORAGE-FLOW///TABLE/
+     Interpolation: Linear Interpolation
+End:
+
+Table: DET003 Storage-Outflow
+     Table Type: Storage-Outflow
+     Description: DET003 terrain-derived level pool above normal pool (see HMS/parameters)
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:09:45
+     X-Units: ACRE-FT
+     Y-Units: CFS
+     Use External DSS File: NO
+     DSS File: Raymore_Trib12.dss
+     Pathname: //DET003 Storage-Outflow/STORAGE-FLOW///TABLE/
+     Interpolation: Linear Interpolation
+End:
+
+Table: DET006 Storage-Outflow
+     Table Type: Storage-Outflow
+     Description: DET006 terrain-derived level pool above normal pool (see HMS/parameters)
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:09:45
+     X-Units: ACRE-FT
+     Y-Units: CFS
+     Use External DSS File: NO
+     DSS File: Raymore_Trib12.dss
+     Pathname: //DET006 Storage-Outflow/STORAGE-FLOW///TABLE/
+     Interpolation: Linear Interpolation
+End:
+
+Table: DET007 Storage-Outflow
+     Table Type: Storage-Outflow
+     Description: DET007 terrain-derived level pool above normal pool (see HMS/parameters)
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:09:45
+     X-Units: ACRE-FT
+     Y-Units: CFS
+     Use External DSS File: NO
+     DSS File: Raymore_Trib12.dss
+     Pathname: //DET007 Storage-Outflow/STORAGE-FLOW///TABLE/
+     Interpolation: Linear Interpolation
+End:
+
+Table: DET008 Storage-Outflow
+     Table Type: Storage-Outflow
+     Description: DET008 terrain-derived level pool above normal pool (see HMS/parameters)
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:09:45
+     X-Units: ACRE-FT
+     Y-Units: CFS
+     Use External DSS File: NO
+     DSS File: Raymore_Trib12.dss
+     Pathname: //DET008 Storage-Outflow/STORAGE-FLOW///TABLE/
+     Interpolation: Linear Interpolation
+End:
+
+Table: DET011 Storage-Outflow
+     Table Type: Storage-Outflow
+     Description: DET011 terrain-derived level pool above normal pool (see HMS/parameters)
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:09:45
+     X-Units: ACRE-FT
+     Y-Units: CFS
+     Use External DSS File: NO
+     DSS File: Raymore_Trib12.dss
+     Pathname: //DET011 Storage-Outflow/STORAGE-FLOW///TABLE/
+     Interpolation: Linear Interpolation
+End:
+
+Table: DET012 Storage-Outflow
+     Table Type: Storage-Outflow
+     Description: DET012 terrain-derived level pool above normal pool (see HMS/parameters)
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:09:45
+     X-Units: ACRE-FT
+     Y-Units: CFS
+     Use External DSS File: NO
+     DSS File: Raymore_Trib12.dss
+     Pathname: //DET012 Storage-Outflow/STORAGE-FLOW///TABLE/
+     Interpolation: Linear Interpolation
+End:
+
+Table: DET016 Storage-Outflow
+     Table Type: Storage-Outflow
+     Description: DET016 terrain-derived level pool above normal pool (see HMS/parameters)
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:09:45
+     X-Units: ACRE-FT
+     Y-Units: CFS
+     Use External DSS File: NO
+     DSS File: Raymore_Trib12.dss
+     Pathname: //DET016 Storage-Outflow/STORAGE-FLOW///TABLE/
+     Interpolation: Linear Interpolation
+End:
+
+Table: DET017 Storage-Outflow
+     Table Type: Storage-Outflow
+     Description: DET017 terrain-derived level pool above normal pool (see HMS/parameters)
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:09:45
+     X-Units: ACRE-FT
+     Y-Units: CFS
+     Use External DSS File: NO
+     DSS File: Raymore_Trib12.dss
+     Pathname: //DET017 Storage-Outflow/STORAGE-FLOW///TABLE/
+     Interpolation: Linear Interpolation
+End:
+
+Table: DET021 Storage-Outflow
+     Table Type: Storage-Outflow
+     Description: DET021 terrain-derived level pool above normal pool (see HMS/parameters)
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:09:45
+     X-Units: ACRE-FT
+     Y-Units: CFS
+     Use External DSS File: NO
+     DSS File: Raymore_Trib12.dss
+     Pathname: //DET021 Storage-Outflow/STORAGE-FLOW///TABLE/
+     Interpolation: Linear Interpolation
+End:
+
+Table: DET023 Storage-Outflow
+     Table Type: Storage-Outflow
+     Description: DET023 terrain-derived level pool above normal pool (see HMS/parameters)
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:09:45
+     X-Units: ACRE-FT
+     Y-Units: CFS
+     Use External DSS File: NO
+     DSS File: Raymore_Trib12.dss
+     Pathname: //DET023 Storage-Outflow/STORAGE-FLOW///TABLE/
+     Interpolation: Linear Interpolation
+End:
+
+Table: DET025 Storage-Outflow
+     Table Type: Storage-Outflow
+     Description: DET025 terrain-derived level pool above normal pool (see HMS/parameters)
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:09:45
+     X-Units: ACRE-FT
+     Y-Units: CFS
+     Use External DSS File: NO
+     DSS File: Raymore_Trib12.dss
+     Pathname: //DET025 Storage-Outflow/STORAGE-FLOW///TABLE/
+     Interpolation: Linear Interpolation
+End:
+
+Table: DET027 Storage-Outflow
+     Table Type: Storage-Outflow
+     Description: DET027 terrain-derived level pool above normal pool (see HMS/parameters)
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:09:45
+     X-Units: ACRE-FT
+     Y-Units: CFS
+     Use External DSS File: NO
+     DSS File: Raymore_Trib12.dss
+     Pathname: //DET027 Storage-Outflow/STORAGE-FLOW///TABLE/
+     Interpolation: Linear Interpolation
+End:
+
+Table: DET030 Storage-Outflow
+     Table Type: Storage-Outflow
+     Description: DET030 terrain-derived level pool above normal pool (see HMS/parameters)
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:09:45
+     X-Units: ACRE-FT
+     Y-Units: CFS
+     Use External DSS File: NO
+     DSS File: Raymore_Trib12.dss
+     Pathname: //DET030 Storage-Outflow/STORAGE-FLOW///TABLE/
+     Interpolation: Linear Interpolation
+End:
+
+Table: DET031 Storage-Outflow
+     Table Type: Storage-Outflow
+     Description: DET031 terrain-derived level pool above normal pool (see HMS/parameters)
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:09:45
+     X-Units: ACRE-FT
+     Y-Units: CFS
+     Use External DSS File: NO
+     DSS File: Raymore_Trib12.dss
+     Pathname: //DET031 Storage-Outflow/STORAGE-FLOW///TABLE/
+     Interpolation: Linear Interpolation
+End:
+
+Table: DET032 Storage-Outflow
+     Table Type: Storage-Outflow
+     Description: DET032 terrain-derived level pool above normal pool (see HMS/parameters)
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:09:45
+     X-Units: ACRE-FT
+     Y-Units: CFS
+     Use External DSS File: NO
+     DSS File: Raymore_Trib12.dss
+     Pathname: //DET032 Storage-Outflow/STORAGE-FLOW///TABLE/
+     Interpolation: Linear Interpolation
+End:
+
+Table: DET033 Storage-Outflow
+     Table Type: Storage-Outflow
+     Description: DET033 terrain-derived level pool above normal pool (see HMS/parameters)
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:09:45
+     X-Units: ACRE-FT
+     Y-Units: CFS
+     Use External DSS File: NO
+     DSS File: Raymore_Trib12.dss
+     Pathname: //DET033 Storage-Outflow/STORAGE-FLOW///TABLE/
+     Interpolation: Linear Interpolation
+End:
+
+Table: DET044 Storage-Outflow
+     Table Type: Storage-Outflow
+     Description: DET044 terrain-derived level pool above normal pool (see HMS/parameters)
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:09:45
+     X-Units: ACRE-FT
+     Y-Units: CFS
+     Use External DSS File: NO
+     DSS File: Raymore_Trib12.dss
+     Pathname: //DET044 Storage-Outflow/STORAGE-FLOW///TABLE/
+     Interpolation: Linear Interpolation
+End:
+
+Table: DET049 Storage-Outflow
+     Table Type: Storage-Outflow
+     Description: DET049 terrain-derived level pool above normal pool (see HMS/parameters)
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:09:45
+     X-Units: ACRE-FT
+     Y-Units: CFS
+     Use External DSS File: NO
+     DSS File: Raymore_Trib12.dss
+     Pathname: //DET049 Storage-Outflow/STORAGE-FLOW///TABLE/
+     Interpolation: Linear Interpolation
+End:
+
+Table: DET050 Storage-Outflow
+     Table Type: Storage-Outflow
+     Description: DET050 terrain-derived level pool above normal pool (see HMS/parameters)
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:09:45
+     X-Units: ACRE-FT
+     Y-Units: CFS
+     Use External DSS File: NO
+     DSS File: Raymore_Trib12.dss
+     Pathname: //DET050 Storage-Outflow/STORAGE-FLOW///TABLE/
+     Interpolation: Linear Interpolation
+End:
+
+Table: DET053 Storage-Outflow
+     Table Type: Storage-Outflow
+     Description: DET053 terrain-derived level pool above normal pool (see HMS/parameters)
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:09:45
+     X-Units: ACRE-FT
+     Y-Units: CFS
+     Use External DSS File: NO
+     DSS File: Raymore_Trib12.dss
+     Pathname: //DET053 Storage-Outflow/STORAGE-FLOW///TABLE/
+     Interpolation: Linear Interpolation
+End:
+
+Table: DET060 Storage-Outflow
+     Table Type: Storage-Outflow
+     Description: DET060 terrain-derived level pool above normal pool (see HMS/parameters)
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:09:45
+     X-Units: ACRE-FT
+     Y-Units: CFS
+     Use External DSS File: NO
+     DSS File: Raymore_Trib12.dss
+     Pathname: //DET060 Storage-Outflow/STORAGE-FLOW///TABLE/
+     Interpolation: Linear Interpolation
+End:
+
+Table: DET061 Storage-Outflow
+     Table Type: Storage-Outflow
+     Description: DET061 terrain-derived level pool above normal pool (see HMS/parameters)
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:09:45
+     X-Units: ACRE-FT
+     Y-Units: CFS
+     Use External DSS File: NO
+     DSS File: Raymore_Trib12.dss
+     Pathname: //DET061 Storage-Outflow/STORAGE-FLOW///TABLE/
+     Interpolation: Linear Interpolation
+End:
+
+Table: DET072 Storage-Outflow
+     Table Type: Storage-Outflow
+     Description: DET072 terrain-derived level pool above normal pool (see HMS/parameters)
+     Last Modified Date: 5 November 2026
+     Last Modified Time: 05:09:45
+     X-Units: ACRE-FT
+     Y-Units: CFS
+     Use External DSS File: NO
+     DSS File: Raymore_Trib12.dss
+     Pathname: //DET072 Storage-Outflow/STORAGE-FLOW///TABLE/
      Interpolation: Linear Interpolation
 End:
 
